@@ -1,3 +1,5 @@
+## directory Instructions
+
 *.int --> all interface of file(*.ind)
 
 *.ints --> function declation of file(*.c) which is analysed 
