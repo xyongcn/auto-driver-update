@@ -10,15 +10,42 @@ from subprocess import check_output
 
 EXT0 = '.ind' # AST file
 EXT2 = '.int' #interface file
+SOURCE_PATH0 = '/tmp/linux-3.5.4'
 
+def mergeCallAndMacro(call_list,macro_list):
+  #this function to merge call and macro info 
+  lena=len(call_list)
+  lenb = len(macro_list)
+  cm_list = []
+  i=j=0
+  while(i<lena and j<lenb):
+    clist=call_list[i].split()[-1]
+    mlist=macro_list[j].split()[-2]
+    flag = cmp(clist,mlist)
+    if(flag < 0):
+      cm_list.append(call_list[i])
+      i+=1
+    elif (flag == 0):
+      cm_list.append(macro_list[j])
+      i+=1;j+=1
+    else:
+      cm_list.append(macro_list[j])
+      j+=1
+  while (i<lena):
+	  cm_list.append(call_list[i])
+	  i+=1
+  while (j<lenb):
+	  cm_list.append(macro_list[j])
+	  j+=1
+  return cm_list
+  
 def processFuncDecl(fp, outFname, sline,count_dict):
   ext0 = EXT0
   startLineNo = count_dict['lineNo']
   # get function name,filename and start-end lineno as follows
-  nodeNo,tree_type,fnName,tfnFile,tfnSEno=sline.lstrip().split()   
-  fnFile=tfnFile.split(':')[0]
-  fnSEno=tfnFile.split(':')[1]+":"+tfnFile.split(':')[2]
-  fnSEno=fnSEno+" "+tfnSEno.split(':')[1]+":"+tfnSEno.split(':')[2]
+  nodeNo,tree_type,fnName,tfnFileSno,tfnEno=sline.lstrip().split()   
+  fnFileSno=tfnFileSno[len(SOURCE_PATH0)+1:]
+  fnEno=':'.join(tfnEno.split(':')[1:])
   # get function return type as follows 
   while sline and ("result_decl" not in sline):  
     sline=fp.readline(); count_dict['lineNo'] += 1 #skip line
@@ -55,66 +82,63 @@ def processFuncDecl(fp, outFname, sline,count_dict):
       fnPara = fnPara+','+rty
     fnPara = fnPara.rstrip()
   else:
-    fnPara = '' 
-                    
-  # print function declation info as follows
-  print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFile,fnSEno,startLineNo)
+    fnPara = ''                   
   
   # get function call info as follows
-  call_lists = []
-  macro_lists = []
+  call_list = []
+  macro_list = []
+  file_list = []
   while sline and (sline[0] == ' ' or sline[0] == '\t') and ("function_decl" not in sline):         
     # get Macro Expansion Info    
-    if (("bind_expr" in sline) or ("nop_expr" in sline)):      
+    if ("_expr" in sline):      
       if (sline.lstrip().split()[-1] != '()'):
-        list_sline = sline.lstrip().split()[-2]+' '+sline.lstrip().split()[-1][:-1]        
-        if list_sline not in macro_lists:        	
-          macro_lists.append(list_sline)      
-    
+        tlist=sline.lstrip().split()
+        mlist_sline = fnName+': '+tlist[-2]+' '+tlist[-1][:-1][len(SOURCE_PATH0)+1:]
+        if mlist_sline not in macro_list:        	
+          macro_list.append(mlist_sline) 
+        tmfloc = tlist[-3].split('(')[-1].split(':')[:-1]
+        mfloc = tlist[-2]+' '+tmfloc[0][len(SOURCE_PATH0)+1:]+':'+tmfloc[-1]
+        if mfloc not in file_list:        	
+          file_list.append(mfloc)                 
     if ("call_expr" in sline): # find call location    
-      #slen = len(sline) - len(sline.lstrip()) # indent len of call_expr line   
       sline_list = sline.lstrip().split()
       fcLoc = sline_list[2]
-      #eflg =sline_list[3]
       while sline and ("identifier_node" not in sline): 
          sline=fp.readline();count_dict['lineNo'] += 1 #skip lines      
       nodeNo,tree_type,fcName=sline.lstrip().split()      
-      call_lists.append(fcName+' '+fcLoc)    
-  
+      tempstr=fnName+': '+fcName+' '+fcLoc[len(SOURCE_PATH0)+1:]
+      if tempstr not in call_list:
+        call_list.append(tempstr)      
     sline=fp.readline();count_dict['lineNo'] += 1
-  '''
-  count_dict['call_count'] += len(call_lists)
-  print >> outFname,'func_call: {}'.format(len(call_lists))
-  for clist in call_lists:
-    print >> outFname,'  {}: {}'.format(fnName,clist)
-  ''' 
-  if (fnFile.endswith(fp.name[:-len(ext0)])):     
-    sopath = outFname.name+'s'
-    with open(sopath, 'a') as out:
-      print >> out,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFile,fnSEno,startLineNo)       
-    
-    copath = outFname.name+'c'    
-    with open(copath, 'a') as out:
-      #print >> out,'func_call: {}'.format(len(call_lists))
-      for clist in call_lists:
-        print >> out,'{}: {}'.format(fnName,clist)
-      #print >> out,'macro_info: {}'.format(len(macro_lists))
-      for mlist in macro_lists:
-        tmlist=mlist.split()
-        print >> out,'{}: {} {}'.format(fnName,tmlist[-2],tmlist[-1])
-    
-    bopath=os.path.dirname(outFname.name)+'/cm.txt'
-    with open(bopath, 'a') as out:
-      if len(call_lists) > 0:
-        print >> out,'===================call_list======================'
-        for clist in call_lists:
-          print >> out,clist            
-      if len(macro_lists) > 0:
-        print >> out,'===================macro_lists===================='
-        for mlist in macro_lists:
-          print >> out,mlist       
-        
-  count_dict['call_count'] += len(call_lists) + len(macro_lists)
+
+  # print function declation info 
+  flag = 1;
+  for mlist in macro_list:
+     if(mlist.find(fnFileSno) != -1):
+       flag = 0;
+       break;
+  if (flag == 1):
+    count_dict['fndl_count'] += 1
+    print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo)    
+  copath=os.path.dirname(outFname.name)+'/macro_list.txt'
+  with open(copath, 'a') as out:
+    for mlist in macro_list:
+      print >> out,mlist
+  copath=os.path.dirname(outFname.name)+'/call_list.txt'
+  with open(copath, 'a') as out:
+    for clist in call_list:
+      print >> out,clist
+  cm_list = mergeCallAndMacro(call_list,macro_list)  
+  copath=os.path.dirname(outFname.name)+'/cm_list.txt'
+  with open(copath, 'a') as out:
+    for cmlist in cm_list:
+      print >> out,cmlist
+  copath=os.path.dirname(outFname.name)+'/file_list.txt'
+  with open(copath, 'a') as out:
+    for flist in file_list:
+      print >> out,flist
+                  
+  count_dict['call_count'] += len(cm_list)
   fp.seek(-len(sline),1); count_dict['lineNo'] -= 1 #back to last line
   return count_dict
   
@@ -125,7 +149,6 @@ def collectIntFmfile(path,outFname):
       while sline:        
         if ((sline[0] != ' ' and sline[0] != '\t') and ("function_decl" in sline)):
           count_dict=processFuncDecl(fp, outFname, sline,count_dict)
-          count_dict['fndl_count'] += 1
         sline=fp.readline();count_dict['lineNo'] += 1
       else:
         count_dict['lineNo'] -= 1
@@ -137,33 +160,20 @@ def collectInt(prefix,outDir):
   ext2=EXT2
   
   global V0_MANIFEST
-  V0_MANIFEST = outDir+'V-'+os.path.split(prefix.strip('/'))[-1]
+  #V0_MANIFEST = outDir+'V-'+os.path.split(prefix.strip('/'))[-1]
+  V0_MANIFEST = outDir+os.path.split(prefix.strip('/'))[-1]
   
   if os.path.isfile(V0_CODE):
     assert V0_CODE.endswith(ext0),'file not found with ext *.'+ext0
     print "\ncollect interface info from file-->",os.getcwd()+'/'+V0_CODE
     V0_MANIFEST = V0_MANIFEST[:-len(ext0)]+ext2 
     with open(V0_MANIFEST, 'w') as outFname: #outFname is filename to save func interface
-      sopath = outFname.name+'s'
-      if os.path.isfile(sopath): # if file exist then del
-        os.remove(sopath)
-      copath = outFname.name+'c'
-      if os.path.isfile(copath): # if file exist then del
-        os.remove(copath)
-        
       collectIntFmfile(V0_CODE,outFname)
     print 'Done.\n'  
   elif os.path.isdir(V0_CODE):
     print "\ncollect interface info from path-->",os.getcwd()+'/'+V0_CODE        
     V0_MANIFEST = V0_MANIFEST+ext2 
     with open(V0_MANIFEST, 'w') as outFname: #outFname is filename to save func interface
-      opath = outFname.name+'s'
-      if os.path.isfile(opath): # if file exist then del
-        os.remove(opath)
-      copath = outFname.name+'c'
-      if os.path.isfile(copath): # if file exist then del
-        os.remove(copath)
-        
       path_list = check_output(['find',prefix,'-name','*'+ext0,'-print0']).rstrip('\0').split('\0')
       fcount = 0
       fncount = 0
@@ -192,8 +202,18 @@ def task_collect():
     V0_MANIFEST = 'target/'   
     print "\ntarget path to save info-->",os.getcwd()+'/'+V0_MANIFEST
     # call function to collect interface infomattion
-    if os.path.exists(V0_CODE): 
-        collectInt(V0_CODE,V0_MANIFEST)         
+    if os.path.exists(V0_CODE):
+        if os.path.isfile(V0_MANIFEST+'func_list.txt'): # if file exist then del
+            os.remove(V0_MANIFEST+'func_list.txt') 
+        if os.path.isfile(V0_MANIFEST+'macro_list.txt'): # if file exist then del
+            os.remove(V0_MANIFEST+'macro_list.txt')
+        if os.path.isfile(V0_MANIFEST+'call_list.txt'): # if file exist then del
+            os.remove(V0_MANIFEST+'call_list.txt')
+        if os.path.isfile(V0_MANIFEST+'cm_list.txt'): # if file exist then del
+            os.remove(V0_MANIFEST+'cm_list.txt')
+        if os.path.isfile(V0_MANIFEST+'file_list.txt'): # if file exist then del
+            os.remove(V0_MANIFEST+'file_list.txt')
+        collectInt(V0_CODE,V0_MANIFEST)       
     else:
         print "cannot find path or file",V0_CODE
   
