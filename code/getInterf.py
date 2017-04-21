@@ -12,6 +12,35 @@ EXT0 = '.ind' # AST file
 EXT2 = '.int' #interface file
 SOURCE_PATH0 = '/tmp/linux-3.5.4'
 
+def delSelfFuncCall(outFname,count_dict):
+ #del self-decl-func call 
+  crpath=os.path.dirname(outFname.name)+'/cm_list.txt'
+  frpath=os.path.dirname(outFname.name)+'/func_list.txt'
+  func_list=[]
+  cm_list=[]
+  
+  with open(frpath) as fp:
+   for line in fp.readlines():
+     line = line.rstrip("\n")
+     func_list.append(line)
+  with open(crpath) as fp:
+   for line in fp.readlines():
+     line = line.rstrip("\n")
+     cm_list.append(line)
+  temp_list = []
+  count = 0
+  for cmlist in cm_list:
+    funcName=cmlist.split()[1]
+    if(funcName not in func_list):
+      temp_list.append(cmlist)
+    else:
+      count += 1
+  count_dict['call_count'] -= count
+  with open(crpath,'w') as out:
+    for tmlist in temp_list:
+      print >> out,tmlist
+	
+  return count_dict
 def mergeCallAndMacro(call_list,macro_list):
   #this function to merge call and macro info 
   lena=len(call_list)
@@ -38,7 +67,30 @@ def mergeCallAndMacro(call_list,macro_list):
 	  cm_list.append(macro_list[j])
 	  j+=1
   return cm_list
+
+def printToFile(outFname,count_dict,call_list,macro_list,file_list,isCount):
+  copath=os.path.dirname(outFname.name)+'/macro_list.txt'
+  with open(copath, 'a') as out:
+    for mlist in macro_list:
+      print >> out,mlist
+  copath=os.path.dirname(outFname.name)+'/call_list.txt'
+  with open(copath, 'a') as out:
+    for clist in call_list:
+      print >> out,clist
+  cm_list = mergeCallAndMacro(call_list,macro_list)  #  merge call and micro
+  copath=os.path.dirname(outFname.name)+'/cm_list.txt'
+  with open(copath, 'a') as out:
+    for cmlist in cm_list:
+      print >> out,cmlist
+  copath=os.path.dirname(outFname.name)+'/file_list.txt'
+  with open(copath, 'a') as out:
+    for flist in file_list:
+      print >> out,flist
+  if (isCount == 1):
+    count_dict['call_count'] += len(cm_list) #count call without pre-complier headfile call
   
+  return count_dict
+    
 def processFuncDecl(fp, outFname, sline,count_dict):
   ext0 = EXT0
   startLineNo = count_dict['lineNo']
@@ -112,33 +164,24 @@ def processFuncDecl(fp, outFname, sline,count_dict):
     sline=fp.readline();count_dict['lineNo'] += 1
 
   # print function declation info 
-  flag = 1;
+  flag = 1;isCount = 0;
   for mlist in macro_list:
      if(mlist.find(fnFileSno) != -1):
        flag = 0;
        break;
   if (flag == 1):
-    count_dict['fndl_count'] += 1
-    print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo)    
-  copath=os.path.dirname(outFname.name)+'/macro_list.txt'
-  with open(copath, 'a') as out:
-    for mlist in macro_list:
-      print >> out,mlist
-  copath=os.path.dirname(outFname.name)+'/call_list.txt'
-  with open(copath, 'a') as out:
-    for clist in call_list:
-      print >> out,clist
-  cm_list = mergeCallAndMacro(call_list,macro_list)  
-  copath=os.path.dirname(outFname.name)+'/cm_list.txt'
-  with open(copath, 'a') as out:
-    for cmlist in cm_list:
-      print >> out,cmlist
-  copath=os.path.dirname(outFname.name)+'/file_list.txt'
-  with open(copath, 'a') as out:
-    for flist in file_list:
-      print >> out,flist
+    #count_dict['fndl_count'] += 1
+    print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo)
+    fnFile=fnFileSno.split(':')[0]
+    if (fnFile.endswith(fp.name[:-len(ext0)])):
+      isCount = 1
+      fcopath=os.path.dirname(outFname.name)+'/func_list.txt' 
+      count_dict['fndl_count'] += 1
+      with open(fcopath, 'a') as out:
+         print >> out,'{}'.format(fnName) 
+  # print call info
+  count_dict=printToFile(outFname,count_dict,call_list,macro_list,file_list,isCount)
                   
-  count_dict['call_count'] += len(cm_list)
   fp.seek(-len(sline),1); count_dict['lineNo'] -= 1 #back to last line
   return count_dict
   
@@ -152,13 +195,13 @@ def collectIntFmfile(path,outFname):
         sline=fp.readline();count_dict['lineNo'] += 1
       else:
         count_dict['lineNo'] -= 1
+    count_dict=delSelfFuncCall(outFname,count_dict)	##del self-func call 
     print path,'-->\n\ttotal line',count_dict['lineNo'],'\n\ttotal function decl',count_dict['fndl_count'],'\n\ttotal function call',count_dict['call_count']
     return count_dict['fndl_count']
 
 def collectInt(prefix,outDir):
   ext0=EXT0
-  ext2=EXT2
-  
+  ext2=EXT2 
   global V0_MANIFEST
   #V0_MANIFEST = outDir+'V-'+os.path.split(prefix.strip('/'))[-1]
   V0_MANIFEST = outDir+os.path.split(prefix.strip('/'))[-1]
@@ -168,7 +211,7 @@ def collectInt(prefix,outDir):
     print "\ncollect interface info from file-->",os.getcwd()+'/'+V0_CODE
     V0_MANIFEST = V0_MANIFEST[:-len(ext0)]+ext2 
     with open(V0_MANIFEST, 'w') as outFname: #outFname is filename to save func interface
-      collectIntFmfile(V0_CODE,outFname)
+      collectIntFmfile(V0_CODE,outFname)   
     print 'Done.\n'  
   elif os.path.isdir(V0_CODE):
     print "\ncollect interface info from path-->",os.getcwd()+'/'+V0_CODE        
@@ -182,11 +225,9 @@ def collectInt(prefix,outDir):
         fcount += 1
         path_code = path[:-len(ext0)]
         filename = path[len(prefix):-len(ext0)].lstrip('/')
-        fncount += collectIntFmfile(path,outFname)  
+        fncount += collectIntFmfile(path,outFname) 
     print prefix,"-->\n\ttotal .ind file",fcount,"\n\ttotal function decl",fncount 
     print 'Done.\n' 
-  
-  
   
 def task_collect():
     ext0=EXT0
@@ -213,12 +254,12 @@ def task_collect():
             os.remove(V0_MANIFEST+'cm_list.txt')
         if os.path.isfile(V0_MANIFEST+'file_list.txt'): # if file exist then del
             os.remove(V0_MANIFEST+'file_list.txt')
+        if os.path.isfile(V0_MANIFEST+'func_list.txt'): # if file exist then del
+            os.remove(V0_MANIFEST+'func_list.txt')
         collectInt(V0_CODE,V0_MANIFEST)       
     else:
         print "cannot find path or file",V0_CODE
-  
-
-
+ 
 def main():
     task_collect()
   
