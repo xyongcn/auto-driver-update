@@ -32,6 +32,7 @@ __swahb32p: __swahb32 include/linux/swab.h:209:9
 le16_add_cpu: cpu_to_le16 include/linux/byteorder/generic.h:145:9
 le16_add_cpu: le16_to_cpu include/linux/byteorder/generic.h:145:21
 le32_add_cpu: cpu_to_le32 include/linux/byteorder/generic.h:150:9
+le32_add_cpu: le32_to_cpu include/linux/byteorder/generic.h:150:21
 le64_add_cpu: cpu_to_le64 include/linux/byteorder/generic.h:155:9
 le64_add_cpu: le64_to_cpu include/linux/byteorder/generic.h:155:21
 be16_add_cpu: cpu_to_be16 include/linux/byteorder/generic.h:160:9
@@ -52,8 +53,11 @@ hex_byte_pack: hex_asc_hi include/linux/kernel.h:402:11
 hex_byte_pack: hex_asc_lo include/linux/kernel.h:403:11
 clear_page: memset arch/x86/include/asm/page_32.h:41:2
 copy_page: memcpy arch/x86/include/asm/page_32.h:46:2
+instruction_pointer: GET_IP include/asm-generic/ptrace.h:24:9
 instruction_pointer_set: SET_IP include/asm-generic/ptrace.h:29:2
+user_stack_pointer: GET_USP include/asm-generic/ptrace.h:46:9
 user_stack_pointer_set: SET_USP include/asm-generic/ptrace.h:51:2
+frame_pointer: GET_FP include/asm-generic/ptrace.h:64:9
 frame_pointer_set: SET_FP include/asm-generic/ptrace.h:69:2
 regs_get_register: unlikely arch/x86/include/asm/ptrace.h:247:6
 x86_this_cpu_constant_test_bit: __this_cpu_read_4 arch/x86/include/asm/percpu.h:510:42
@@ -284,12 +288,18 @@ sysv_valid_dev: MINOR include/linux/kdev_t.h:72:33
 sysv_encode_dev: MINOR include/linux/kdev_t.h:77:9
 sysv_encode_dev: MAJOR include/linux/kdev_t.h:77:23
 __list_add_rcu: rcu_assign_pointer include/linux/rculist.h:39:2
+__list_add_rcu: list_next_rcu include/linux/rculist.h:39:21
 list_replace_rcu: rcu_assign_pointer include/linux/rculist.h:161:2
+list_replace_rcu: list_next_rcu include/linux/rculist.h:161:21
 list_splice_init_rcu: rcu_assign_pointer include/linux/rculist.h:216:2
+list_splice_init_rcu: list_next_rcu include/linux/rculist.h:216:21
 hlist_replace_rcu: rcu_assign_pointer include/linux/rculist.h:359:2
 hlist_add_head_rcu: rcu_assign_pointer include/linux/rculist.h:398:2
+hlist_add_head_rcu: hlist_first_rcu include/linux/rculist.h:398:21
 hlist_add_before_rcu: rcu_assign_pointer include/linux/rculist.h:426:2
+hlist_add_before_rcu: hlist_pprev_rcu include/linux/rculist.h:426:21
 hlist_add_after_rcu: rcu_assign_pointer include/linux/rculist.h:453:2
+hlist_add_after_rcu: hlist_next_rcu include/linux/rculist.h:453:21
 bit_spin_lock: __acquire include/linux/bit_spinlock.h:34:2
 bit_spin_trylock: __acquire include/linux/bit_spinlock.h:49:2
 bit_spin_unlock: __release include/linux/bit_spinlock.h:65:2
@@ -297,6 +307,7 @@ __bit_spin_unlock: __release include/linux/bit_spinlock.h:82:2
 hlist_bl_set_first_rcu: rcu_assign_pointer include/linux/rculist_bl.h:16:2
 hlist_bl_first_rcu: rcu_dereference include/linux/rculist_bl.h:23:19
 __d_rcu_to_refcount: assert_spin_locked include/linux/dcache.h:315:2
+d_unlinked: IS_ROOT include/linux/dcache.h:382:32
 radix_tree_deref_slot: rcu_dereference include/linux/radix-tree.h:152:9
 radix_tree_deref_slot_protected: rcu_dereference_protected include/linux/radix-tree.h:168:9
 radix_tree_deref_retry: unlikely include/linux/radix-tree.h:180:9
@@ -541,6 +552,7 @@ lowmem_page_address: page_to_pfn include/linux/mm.h:741:23
 page_mapping: VM_BUG_ON include/linux/mm.h:794:2
 page_mapping: unlikely include/linux/mm.h:795:6
 page_index: unlikely include/linux/mm.h:819:6
+page_index: page_private include/linux/mm.h:820:10
 get_mm_hiwater_rss: max include/linux/mm.h:1099:9
 get_mm_hiwater_vm: max include/linux/mm.h:1104:9
 pud_alloc: unlikely include/linux/mm.h:1181:10
@@ -551,6 +563,8 @@ vga_mm_w_fast: VGA_OUT16VAL include/video/vga.h:231:10
 write_vga: raw_spin_lock_irqsave drivers/video/console/vgacon.c:160:2
 write_vga: raw_spin_unlock_irqrestore drivers/video/console/vgacon.c:173:2
 vgacon_startup: VGA_MAP_MEM drivers/video/console/vgacon.c:504:18
+vgacon_startup: scr_readw drivers/video/console/vgacon.c:512:11
+vgacon_startup: scr_readw drivers/video/console/vgacon.c:513:11
 vgacon_startup: scr_writew drivers/video/console/vgacon.c:514:2
 vgacon_startup: scr_writew drivers/video/console/vgacon.c:515:2
 vgacon_startup: scr_readw drivers/video/console/vgacon.c:516:6
@@ -572,6 +586,7 @@ vgacon_set_cursor_size: raw_spin_unlock_irqrestore drivers/video/console/vgacon.
 vgacon_doresize: raw_spin_lock_irqsave drivers/video/console/vgacon.c:760:2
 vgacon_doresize: raw_spin_unlock_irqrestore drivers/video/console/vgacon.c:811:2
 vgacon_switch: scr_memcpyw drivers/video/console/vgacon.c:833:3
+vgacon_set_palette: CON_IS_VISIBLE drivers/video/console/vgacon.c:865:10
 vga_vesa_blank: raw_spin_lock_irq drivers/video/console/vgacon.c:894:3
 vga_vesa_blank: raw_spin_unlock_irq drivers/video/console/vgacon.c:898:3
 vga_vesa_blank: raw_spin_lock_irq drivers/video/console/vgacon.c:921:2
@@ -583,7 +598,9 @@ vgacon_do_font_op: VGA_MAP_MEM drivers/video/console/vgacon.c:1076:22
 vgacon_do_font_op: raw_spin_lock_irq drivers/video/console/vgacon.c:1107:2
 vgacon_do_font_op: raw_spin_unlock_irq drivers/video/console/vgacon.c:1123:2
 vgacon_do_font_op: vga_writeb drivers/video/console/vgacon.c:1128:5
+vgacon_do_font_op: vga_readb drivers/video/console/vgacon.c:1131:14
 vgacon_do_font_op: vga_writeb drivers/video/console/vgacon.c:1143:6
+vgacon_do_font_op: vga_readb drivers/video/console/vgacon.c:1146:15
 vgacon_do_font_op: raw_spin_lock_irq drivers/video/console/vgacon.c:1150:2
 vgacon_do_font_op: raw_spin_unlock_irq drivers/video/console/vgacon.c:1189:2
 vgacon_adjust_height: raw_spin_lock_irq drivers/video/console/vgacon.c:1214:2

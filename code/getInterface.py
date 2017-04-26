@@ -95,14 +95,14 @@ def getFuncCallDict(targetPath,path):
       fcName=sline.split()[1]
       fcLoc =sline.split()[2]
       if fcLoc.split(':')[0].endswith(filename):
-		    if fnName not in fnCall_dict:
-		      fnCall_dict[fnName]=OrderedDict()
-		      fnCall_dict[fnName][fcName]=[fcLoc]
+		    if fcName not in fnCall_dict:
+		      fnCall_dict[fcName]=OrderedDict()
+		      fnCall_dict[fcName][fnName]=[fcLoc]
 		    else:
-		      if fcName not in fnCall_dict[fnName]:
-		        fnCall_dict[fnName][fcName]=[fcLoc]
+		      if fnName not in fnCall_dict[fcName]:
+		        fnCall_dict[fcName][fnName]=[fcLoc]
 		      else:
-		        fnCall_dict[fnName][fcName].append(fcLoc)
+		        fnCall_dict[fcName][fnName].append(fcLoc)
       sline=fp.readline();
   return fnCall_dict
 
@@ -178,7 +178,7 @@ def processFuncDecl(fp, outFname, sline,count_dict):
   file_list = []
   while sline and (sline[0] == ' ' or sline[0] == '\t') and ("function_decl" not in sline):         
     # get Macro Expansion Info    
-    if ("_expr" in sline):      
+    if ("_expr" in sline or "indirect_ref" in sline):      
       if (sline.lstrip().split()[-1] != '()'):
         tlist=sline.lstrip().split()
         mlist_sline = fnName+': '+tlist[-2]+' '+tlist[-1][:-1][len(SOURCE_PATH0)+1:]

@@ -29,6 +29,7 @@ __swahb32 include/linux/swab.h:142
 cpu_to_le16 include/linux/byteorder/generic.h:89
 le16_to_cpu include/linux/byteorder/generic.h:90
 cpu_to_le32 include/linux/byteorder/generic.h:87
+le32_to_cpu include/linux/byteorder/generic.h:88
 cpu_to_le64 include/linux/byteorder/generic.h:85
 le64_to_cpu include/linux/byteorder/generic.h:86
 cpu_to_be16 include/linux/byteorder/generic.h:95
@@ -49,8 +50,11 @@ hex_asc_hi include/linux/kernel.h:398
 hex_asc_lo include/linux/kernel.h:397
 memset arch/x86/include/asm/string_32.h:325
 memcpy arch/x86/include/asm/string_32.h:182
+GET_IP arch/x86/include/asm/ptrace.h:224
 SET_IP include/asm-generic/ptrace.h:19
+GET_USP arch/x86/include/asm/ptrace.h:226
 SET_USP include/asm-generic/ptrace.h:41
+GET_FP arch/x86/include/asm/ptrace.h:225
 SET_FP include/asm-generic/ptrace.h:59
 unlikely include/linux/compiler.h:147
 __this_cpu_read_4 arch/x86/include/asm/percpu.h:366
@@ -163,8 +167,13 @@ MAJOR include/linux/kdev_t.h:7
 MINOR include/linux/kdev_t.h:8
 MKDEV include/linux/kdev_t.h:9
 rcu_assign_pointer include/linux/rcupdate.h:871
+list_next_rcu include/linux/rculist.h:25
+hlist_first_rcu include/linux/rculist.h:368
+hlist_pprev_rcu include/linux/rculist.h:370
+hlist_next_rcu include/linux/rculist.h:369
 rcu_dereference include/linux/rcupdate.h:664
 assert_spin_locked include/linux/spinlock.h:378
+IS_ROOT include/linux/dcache.h:26
 rcu_dereference_protected include/linux/rcupdate.h:655
 CAP_BOP_ALL include/linux/capability.h:440
 CAP_BOP_ALL include/linux/capability.h:441
@@ -304,6 +313,7 @@ __this_cpu_add include/linux/percpu.h:585
 this_cpu_add include/linux/percpu.h:331
 PFN_PHYS include/linux/pfn.h:11
 page_to_pfn include/asm-generic/memory_model.h:72
+page_private include/linux/mm.h:249
 max include/linux/kernel.h:566
 max include/linux/kernel.h:567
 max include/linux/kernel.h:568
@@ -318,4 +328,5 @@ scr_readw include/linux/vt_buffer.h:23
 CON_IS_VISIBLE include/linux/console_struct.h:137
 scr_memcpyw include/linux/vt_buffer.h:24
 vga_writeb arch/x86/include/asm/vga.h:18
+vga_readb arch/x86/include/asm/vga.h:17
 scr_memmovew include/linux/vt_buffer.h:25
