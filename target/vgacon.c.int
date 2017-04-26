@@ -1173,6 +1173,18 @@ void early_reserve_e820_mpc_new () arch/x86/include/asm/mpspec.h:88:20 88:1 4247
 int physids_coerce (physid_mask_t *) arch/x86/include/asm/mpspec.h:149:29 152:1 42481
 void physids_promote (long unsigned int,physid_mask_t *) arch/x86/include/asm/mpspec.h:154:20 158:1 42501
 void physid_set_mask_of_physid (int,physid_mask_t *) arch/x86/include/asm/mpspec.h:160:20 164:1 42538
+char readb (void *) arch/x86/include/asm/io.h:53:1 53:1 42579
+int readw (void *) arch/x86/include/asm/io.h:54:1 54:1 42617
+int readl (void *) arch/x86/include/asm/io.h:55:1 55:1 42655
+char __readb (void *) arch/x86/include/asm/io.h:57:1 57:1 42693
+int __readw (void *) arch/x86/include/asm/io.h:58:1 58:1 42730
+int __readl (void *) arch/x86/include/asm/io.h:59:1 59:1 42767
+void writeb (unsigned char,void *) arch/x86/include/asm/io.h:61:1 61:1 42804
+void writew (short unsigned int,void *) arch/x86/include/asm/io.h:62:1 62:1 42835
+void writel (unsigned int,void *) arch/x86/include/asm/io.h:63:1 63:1 42866
+void __writeb (unsigned char,void *) arch/x86/include/asm/io.h:65:1 65:1 42897
+void __writew (short unsigned int,void *) arch/x86/include/asm/io.h:66:1 66:1 42927
+void __writel (unsigned int,void *) arch/x86/include/asm/io.h:67:1 67:1 42957
 phys_addr_t virt_to_phys (void *) arch/x86/include/asm/io.h:111:27 114:1 42987
 void * phys_to_virt (phys_addr_t) arch/x86/include/asm/io.h:129:21 132:1 43005
 int isa_virt_to_bus (void *) arch/x86/include/asm/io.h:144:28 147:1 43023
@@ -1185,6 +1197,24 @@ void memcpy_fromio (void *,void *,size_t) arch/x86/include/asm/io.h:209:1 212:1 
 void memcpy_toio (void *,void *,size_t) arch/x86/include/asm/io.h:215:1 218:1 43175
 void flush_write_buffers () arch/x86/include/asm/io.h:238:20 243:1 43202
 void slow_down_io () arch/x86/include/asm/io.h:256:20 264:1 43208
+void outb (unsigned char,int) arch/x86/include/asm/io.h:308:1 308:1 43217
+char inb (int) arch/x86/include/asm/io.h:308:1 308:1 43244
+void outb_p (unsigned char,int) arch/x86/include/asm/io.h:308:1 308:1 43278
+char inb_p (int) arch/x86/include/asm/io.h:308:1 308:1 43303
+void outsb (int,void *,long unsigned int) arch/x86/include/asm/io.h:308:1 308:1 43325
+void insb (int,void *,long unsigned int) arch/x86/include/asm/io.h:308:1 308:1 43361
+void outw (short unsigned int,int) arch/x86/include/asm/io.h:309:1 309:1 43397
+int inw (int) arch/x86/include/asm/io.h:309:1 309:1 43424
+void outw_p (short unsigned int,int) arch/x86/include/asm/io.h:309:1 309:1 43458
+int inw_p (int) arch/x86/include/asm/io.h:309:1 309:1 43483
+void outsw (int,void *,long unsigned int) arch/x86/include/asm/io.h:309:1 309:1 43505
+void insw (int,void *,long unsigned int) arch/x86/include/asm/io.h:309:1 309:1 43541
+void outl (unsigned int,int) arch/x86/include/asm/io.h:310:1 310:1 43577
+int inl (int) arch/x86/include/asm/io.h:310:1 310:1 43604
+void outl_p (unsigned int,int) arch/x86/include/asm/io.h:310:1 310:1 43638
+int inl_p (int) arch/x86/include/asm/io.h:310:1 310:1 43662
+void outsl (int,void *,long unsigned int) arch/x86/include/asm/io.h:310:1 310:1 43684
+void insl (int,void *,long unsigned int) arch/x86/include/asm/io.h:310:1 310:1 43720
 void acpi_noirq_set () arch/x86/include/asm/acpi.h:175:20 175:1 43756
 void acpi_disable_pci () arch/x86/include/asm/acpi.h:176:20 176:1 43762
 void disable_acpi () arch/x86/include/asm/acpi.h:177:20 177:1 43768
@@ -1239,10 +1269,113 @@ int pmd_none_or_trans_huge_or_clear_bad (pmd_t *) include/asm-generic/pgtable.h:
 int pmd_trans_unstable (pmd_t *) include/asm-generic/pgtable.h:524:19 531:1 45115
 int is_linear_pfn_mapping (structBUG vm_area_struct *) include/linux/mm.h:169:19 172:1 45128
 int is_pfn_mapping (structBUG vm_area_struct *) include/linux/mm.h:174:19 177:1 45150
+int PageLocked (structBUG page *) include/linux/page-flags.h:197:1 197:1 45172
+int PageError (structBUG page *) include/linux/page-flags.h:198:1 198:1 45197
+void SetPageError (structBUG page *) include/linux/page-flags.h:198:1 198:1 45222
+void ClearPageError (structBUG page *) include/linux/page-flags.h:198:1 198:1 45244
+int TestClearPageError (structBUG page *) include/linux/page-flags.h:198:24 198:24 45266
+int PageReferenced (structBUG page *) include/linux/page-flags.h:199:1 199:1 45291
+void SetPageReferenced (structBUG page *) include/linux/page-flags.h:199:1 199:1 45316
+void ClearPageReferenced (structBUG page *) include/linux/page-flags.h:199:1 199:1 45338
+int TestClearPageReferenced (structBUG page *) include/linux/page-flags.h:199:34 199:34 45360
+int PageDirty (structBUG page *) include/linux/page-flags.h:200:1 200:1 45385
+void SetPageDirty (structBUG page *) include/linux/page-flags.h:200:1 200:1 45410
+void ClearPageDirty (structBUG page *) include/linux/page-flags.h:200:1 200:1 45432
+int TestSetPageDirty (structBUG page *) include/linux/page-flags.h:200:24 200:24 45454
+int TestClearPageDirty (structBUG page *) include/linux/page-flags.h:200:24 200:24 45479
+void __ClearPageDirty (structBUG page *) include/linux/page-flags.h:200:49 200:49 45504
+int PageLRU (structBUG page *) include/linux/page-flags.h:201:1 201:1 45526
+void SetPageLRU (structBUG page *) include/linux/page-flags.h:201:1 201:1 45551
+void ClearPageLRU (structBUG page *) include/linux/page-flags.h:201:1 201:1 45573
+void __ClearPageLRU (structBUG page *) include/linux/page-flags.h:201:20 201:20 45595
+int PageActive (structBUG page *) include/linux/page-flags.h:202:1 202:1 45617
+void SetPageActive (structBUG page *) include/linux/page-flags.h:202:1 202:1 45642
+void ClearPageActive (structBUG page *) include/linux/page-flags.h:202:1 202:1 45664
+void __ClearPageActive (structBUG page *) include/linux/page-flags.h:202:26 202:26 45686
+int TestClearPageActive (structBUG page *) include/linux/page-flags.h:203:2 203:2 45708
+int PageSlab (structBUG page *) include/linux/page-flags.h:204:1 204:1 45733
+void __SetPageSlab (structBUG page *) include/linux/page-flags.h:204:1 204:1 45758
+void __ClearPageSlab (structBUG page *) include/linux/page-flags.h:204:1 204:1 45780
+int PageChecked (structBUG page *) include/linux/page-flags.h:205:1 205:1 45802
+void SetPageChecked (structBUG page *) include/linux/page-flags.h:205:1 205:1 45827
+void ClearPageChecked (structBUG page *) include/linux/page-flags.h:205:1 205:1 45849
+int PagePinned (structBUG page *) include/linux/page-flags.h:206:1 206:1 45871
+void SetPagePinned (structBUG page *) include/linux/page-flags.h:206:1 206:1 45896
+void ClearPagePinned (structBUG page *) include/linux/page-flags.h:206:1 206:1 45918
+int TestSetPagePinned (structBUG page *) include/linux/page-flags.h:206:26 206:26 45940
+int TestClearPagePinned (structBUG page *) include/linux/page-flags.h:206:26 206:26 45965
+int PageSavePinned (structBUG page *) include/linux/page-flags.h:207:1 207:1 45990
+void SetPageSavePinned (structBUG page *) include/linux/page-flags.h:207:1 207:1 46015
+void ClearPageSavePinned (structBUG page *) include/linux/page-flags.h:207:1 207:1 46037
+int PageReserved (structBUG page *) include/linux/page-flags.h:208:1 208:1 46059
+void SetPageReserved (structBUG page *) include/linux/page-flags.h:208:1 208:1 46084
+void ClearPageReserved (structBUG page *) include/linux/page-flags.h:208:1 208:1 46106
+void __ClearPageReserved (structBUG page *) include/linux/page-flags.h:208:30 208:30 46128
+int PageSwapBacked (structBUG page *) include/linux/page-flags.h:209:1 209:1 46150
+void SetPageSwapBacked (structBUG page *) include/linux/page-flags.h:209:1 209:1 46175
+void ClearPageSwapBacked (structBUG page *) include/linux/page-flags.h:209:1 209:1 46197
+void __ClearPageSwapBacked (structBUG page *) include/linux/page-flags.h:209:34 209:34 46219
+int PageSlobFree (structBUG page *) include/linux/page-flags.h:211:1 211:1 46241
+void __SetPageSlobFree (structBUG page *) include/linux/page-flags.h:211:1 211:1 46266
+void __ClearPageSlobFree (structBUG page *) include/linux/page-flags.h:211:1 211:1 46288
+int PagePrivate (structBUG page *) include/linux/page-flags.h:218:1 218:1 46310
+void SetPagePrivate (structBUG page *) include/linux/page-flags.h:218:1 218:1 46335
+void ClearPagePrivate (structBUG page *) include/linux/page-flags.h:218:1 218:1 46357
+void __SetPagePrivate (structBUG page *) include/linux/page-flags.h:218:28 218:28 46379
+void __ClearPagePrivate (structBUG page *) include/linux/page-flags.h:219:2 219:2 46401
+int PagePrivate2 (structBUG page *) include/linux/page-flags.h:220:1 220:1 46423
+void SetPagePrivate2 (structBUG page *) include/linux/page-flags.h:220:1 220:1 46448
+void ClearPagePrivate2 (structBUG page *) include/linux/page-flags.h:220:1 220:1 46470
+int TestSetPagePrivate2 (structBUG page *) include/linux/page-flags.h:220:31 220:31 46492
+int TestClearPagePrivate2 (structBUG page *) include/linux/page-flags.h:220:31 220:31 46517
+int PageOwnerPriv1 (structBUG page *) include/linux/page-flags.h:221:1 221:1 46542
+void SetPageOwnerPriv1 (structBUG page *) include/linux/page-flags.h:221:1 221:1 46567
+void ClearPageOwnerPriv1 (structBUG page *) include/linux/page-flags.h:221:1 221:1 46589
+int TestClearPageOwnerPriv1 (structBUG page *) include/linux/page-flags.h:221:36 221:36 46611
+int PageWriteback (structBUG page *) include/linux/page-flags.h:227:1 227:1 46636
+int TestSetPageWriteback (structBUG page *) include/linux/page-flags.h:227:36 227:36 46661
+int TestClearPageWriteback (structBUG page *) include/linux/page-flags.h:227:36 227:36 46686
+int PageMappedToDisk (structBUG page *) include/linux/page-flags.h:228:1 228:1 46711
+void SetPageMappedToDisk (structBUG page *) include/linux/page-flags.h:228:1 228:1 46736
+void ClearPageMappedToDisk (structBUG page *) include/linux/page-flags.h:228:1 228:1 46758
+int PageReclaim (structBUG page *) include/linux/page-flags.h:231:1 231:1 46780
+void SetPageReclaim (structBUG page *) include/linux/page-flags.h:231:1 231:1 46805
+void ClearPageReclaim (structBUG page *) include/linux/page-flags.h:231:1 231:1 46827
+int TestClearPageReclaim (structBUG page *) include/linux/page-flags.h:231:28 231:28 46849
+int PageReadahead (structBUG page *) include/linux/page-flags.h:232:1 232:1 46874
+void SetPageReadahead (structBUG page *) include/linux/page-flags.h:232:1 232:1 46899
+void ClearPageReadahead (structBUG page *) include/linux/page-flags.h:232:1 232:1 46921
+int PageSwapCache (structBUG page *) include/linux/page-flags.h:247:1 247:1 46943
+void SetPageSwapCache (structBUG page *) include/linux/page-flags.h:248:2 248:2 46956
+void ClearPageSwapCache (structBUG page *) include/linux/page-flags.h:248:30 248:30 46966
+int PageUnevictable (structBUG page *) include/linux/page-flags.h:251:1 251:1 46976
+void SetPageUnevictable (structBUG page *) include/linux/page-flags.h:251:1 251:1 47001
+void ClearPageUnevictable (structBUG page *) include/linux/page-flags.h:251:1 251:1 47023
+void __ClearPageUnevictable (structBUG page *) include/linux/page-flags.h:251:36 251:36 47045
+int TestClearPageUnevictable (structBUG page *) include/linux/page-flags.h:252:2 252:2 47067
+int PageMlocked (structBUG page *) include/linux/page-flags.h:255:1 255:1 47092
+void SetPageMlocked (structBUG page *) include/linux/page-flags.h:255:1 255:1 47117
+void ClearPageMlocked (structBUG page *) include/linux/page-flags.h:255:1 255:1 47139
+void __ClearPageMlocked (structBUG page *) include/linux/page-flags.h:255:28 255:28 47161
+int TestSetPageMlocked (structBUG page *) include/linux/page-flags.h:256:2 256:2 47183
+int TestClearPageMlocked (structBUG page *) include/linux/page-flags.h:256:2 256:2 47208
+int __TestClearPageMlocked (structBUG page *) include/linux/page-flags.h:256:31 256:31 47233
+int PageUncached (structBUG page *) include/linux/page-flags.h:263:1 263:1 47258
+void SetPageUncached (structBUG page *) include/linux/page-flags.h:263:1 263:1 47283
+void ClearPageUncached (structBUG page *) include/linux/page-flags.h:263:1 263:1 47305
+int PageHWPoison (structBUG page *) include/linux/page-flags.h:273:1 273:1 47327
 int PageUptodate (structBUG page *) include/linux/page-flags.h:279:19 295:1 47340
 void __SetPageUptodate (structBUG page *) include/linux/page-flags.h:297:20 301:1 47372
 void SetPageUptodate (structBUG page *) include/linux/page-flags.h:303:20 320:1 47402
+void ClearPageUptodate (structBUG page *) include/linux/page-flags.h:322:1 322:1 47432
 void set_page_writeback (structBUG page *) include/linux/page-flags.h:329:20 332:1 47454
+int PageHead (structBUG page *) include/linux/page-flags.h:341:1 341:1 47469
+void __SetPageHead (structBUG page *) include/linux/page-flags.h:341:1 341:1 47494
+void __ClearPageHead (structBUG page *) include/linux/page-flags.h:341:1 341:1 47516
+void ClearPageHead (structBUG page *) include/linux/page-flags.h:341:24 341:24 47538
+int PageTail (structBUG page *) include/linux/page-flags.h:342:1 342:1 47560
+void __SetPageTail (structBUG page *) include/linux/page-flags.h:342:1 342:1 47585
+void __ClearPageTail (structBUG page *) include/linux/page-flags.h:342:1 342:1 47607
 int PageCompound (structBUG page *) include/linux/page-flags.h:344:19 348:1 47629
 int PageTransHuge (structBUG page *) include/linux/page-flags.h:440:19 443:1 47650
 int PageTransCompound (structBUG page *) include/linux/page-flags.h:445:19 448:1 47663
