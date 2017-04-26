@@ -201,20 +201,21 @@ def processFuncDecl(fp, outFname, sline,count_dict):
 
   # print function declation info 
   flag = 1;isCount = 0;
-  for mlist in macro_list:
-     if(mlist.find(fnFileSno) != -1):
-       flag = 0;
-       break;
-  if (flag == 1):
-    #count_dict['fndl_count'] += 1
-    print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo)
-    fnFile=fnFileSno.split(':')[0]
-    if (fnFile.endswith(fp.name[:-len(ext0)])):
-      isCount = 1
-      fcopath=os.path.dirname(outFname.name)+'/func_list.txt' 
-      count_dict['fndl_count'] += 1
-      with open(fcopath, 'a') as out:
-         print >> out,'{}'.format(fnName) 
+  fnFile=fnFileSno.split(':')[0]
+  if (fnFile.endswith(fp.name[:-len(ext0)])):
+    isCount = 1
+    for mlist in macro_list:
+      if(mlist.find(fnFileSno) != -1):
+        flag = 0;
+        break;
+    if (flag == 1):
+      print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo)    
+    fcopath=os.path.dirname(outFname.name)+'/func_list.txt' 
+    count_dict['fndl_count'] += 1
+    with open(fcopath, 'a') as out:
+      print >> out,'{}'.format(fnName) 
+  else:
+    print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo) 
   # print call info
   count_dict=printToFile(outFname,count_dict,call_list,macro_list,file_list,isCount)                
   
