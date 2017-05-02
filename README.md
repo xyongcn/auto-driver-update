@@ -8,3 +8,5 @@ Auto updating for Linux driver
 * [source](https://github.com/xyongcn/auto-driver-update/tree/master/source) --> source code to analyse
 
 * [target](https://github.com/xyongcn/auto-driver-update/tree/master/target) --> analyse result
+
+* [验证](https://github.com/xyongcn/auto-driver-update/tree/master/验证) --> analyse result Verification

@@ -775,10 +775,6 @@ pfn_pte: massage_pgprot arch/x86/include/asm/pgtable.h:310:22
 pte_modify: massage_pgprot arch/x86/include/asm/pgtable.h:328:23
 pte_modify: native_make_pte arch/x86/include/asm/pgtable.h:330:9
 pmd_modify: massage_pgprot arch/x86/include/asm/pgtable.h:338:23
-is_new_memtype_allowed: x86_platform arch/x86/include/asm/pgtable.h:363:41
-get_smp_config: x86_init arch/x86/include/asm/mpspec.h:62:33
-early_get_smp_config: x86_init arch/x86/include/asm/mpspec.h:67:33
-find_smp_config: x86_init arch/x86/include/asm/mpspec.h:72:34
 physids_promote: bitmap_zero arch/x86/include/asm/mpspec.h:156:2
 physid_set_mask_of_physid: bitmap_zero arch/x86/include/asm/mpspec.h:162:2
 physid_set_mask_of_physid: set_bit arch/x86/include/asm/mpspec.h:163:2
@@ -1086,7 +1082,6 @@ write_vga: arch_local_irq_restore drivers/video/console/vgacon.c:173:2
 vga_set_mem_top: write_vga drivers/video/console/vgacon.c:178:11
 vgacon_restore_screen: vgacon_scrolldelta drivers/video/console/vgacon.c:333:21
 vgacon_scrolldelta: vga_set_mem_top drivers/video/console/vgacon.c:363:17
-vgacon_startup: conswitchp drivers/video/console/vgacon.c:379:33
 vgacon_startup: request_resource drivers/video/console/vgacon.c:414:20
 vgacon_startup: request_resource drivers/video/console/vgacon.c:424:20
 vgacon_startup: request_resource drivers/video/console/vgacon.c:426:20
@@ -1272,7 +1267,6 @@ vgacon_adjust_height: outb_p drivers/video/console/vgacon.c:1230:8
 vgacon_adjust_height: outb_p drivers/video/console/vgacon.c:1231:8
 vgacon_adjust_height: outb_p drivers/video/console/vgacon.c:1232:8
 vgacon_adjust_height: arch_local_irq_enable drivers/video/console/vgacon.c:1233:2
-vgacon_adjust_height: c drivers/video/console/vgacon.c:1244:25
 vgacon_adjust_height: vc_resize drivers/video/console/vgacon.c:1247:13
 vgacon_font_set: vgacon_do_font_op drivers/video/console/vgacon.c:1265:24
 vgacon_font_set: vgacon_adjust_height drivers/video/console/vgacon.c:1270:28

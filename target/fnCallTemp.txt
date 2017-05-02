@@ -16,9 +16,6 @@ raw_spin_unlock_irqrestore
     drivers/video/console/vgacon.c:685:2
   vgacon_doresize:
     drivers/video/console/vgacon.c:811:2
-conswitchp
-  vgacon_startup:
-    drivers/video/console/vgacon.c:379:33
 request_resource
   vgacon_startup:
     drivers/video/console/vgacon.c:414:20
@@ -284,9 +281,6 @@ vga_wattr
   vgacon_do_font_op:
     drivers/video/console/vgacon.c:1183:12
     drivers/video/console/vgacon.c:1187:12
-c
-  vgacon_adjust_height:
-    drivers/video/console/vgacon.c:1244:25
 scr_memmovew
   vgacon_scroll:
     drivers/video/console/vgacon.c:1372:4

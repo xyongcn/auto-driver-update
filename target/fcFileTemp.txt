@@ -1,0 +1,26 @@
+raw_spin_lock_irqsave include/linux/spinlock.h
+outw ['arch/x86/include/asm/io.h:309:1', '309:1']
+raw_spin_unlock_irqrestore include/linux/spinlock.h
+request_resource []
+inb_p ['arch/x86/include/asm/io.h:308:1', '308:1']
+outb_p ['arch/x86/include/asm/io.h:308:1', '308:1']
+VGA_MAP_MEM arch/x86/include/asm/vga.h
+scr_readw include/linux/vt_buffer.h
+scr_writew include/linux/vt_buffer.h
+vc_resize []
+con_free_unimap []
+con_set_default_unimap []
+CON_IS_VISIBLE include/linux/console_struct.h
+scr_memcpyw include/linux/vt_buffer.h
+vga_w ['include/video/vga.h:242:20', '248:1']
+raw_spin_lock_irq include/linux/spinlock.h
+vga_r ['include/video/vga.h:234:29', '240:1']
+raw_spin_unlock_irq include/linux/spinlock.h
+vga_rseq ['include/video/vga.h:318:29', '322:1']
+vga_wseq ['include/video/vga.h:324:20', '332:1']
+scr_memsetw ['include/linux/vt_buffer.h:31:20', '36:1']
+vga_wgfx ['include/video/vga.h:376:20', '384:1']
+vga_writeb arch/x86/include/asm/vga.h
+vga_readb arch/x86/include/asm/vga.h
+vga_wattr ['include/video/vga.h:429:20', '433:1']
+scr_memmovew include/linux/vt_buffer.h

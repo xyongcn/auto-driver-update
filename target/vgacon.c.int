@@ -532,8 +532,8 @@ void __add_wait_queue_exclusive (wait_queue_head_t *,wait_queue_t *) include/lin
 void __add_wait_queue_tail (wait_queue_head_t *,wait_queue_t *) include/linux/wait.h:136:20 140:1 20351
 void __add_wait_queue_tail_exclusive (wait_queue_head_t *,wait_queue_t *) include/linux/wait.h:142:20 147:1 20382
 void __remove_wait_queue (wait_queue_head_t *,wait_queue_t *) include/linux/wait.h:149:20 153:1 20419
-int wait_on_bit (void *,int,void void * int (inplace) *,unsigned int) include/linux/wait.h:634:19 640:1 20443
-int wait_on_bit_lock (void *,int,void void * int (inplace) *,unsigned int) include/linux/wait.h:658:19 664:1 20520
+int wait_on_bit (void *,int,void void * int *,unsigned int) include/linux/wait.h:634:19 640:1 20443
+int wait_on_bit_lock (void *,int,void void * int *,unsigned int) include/linux/wait.h:658:19 664:1 20520
 void __node_set (int,nodemask_t *) include/linux/nodemask.h:102:20 105:1 20576
 void __node_clear (int,nodemask_t *) include/linux/nodemask.h:108:20 111:1 20603
 void __nodes_setall (nodemask_t *,int) include/linux/nodemask.h:114:20 117:1 20629
@@ -617,7 +617,7 @@ void rcu_barrier () include/linux/rcutiny.h:51:20 54:1 22831
 void synchronize_rcu_bh () include/linux/rcutiny.h:67:20 70:1 22840
 void synchronize_rcu_bh_expedited () include/linux/rcutiny.h:72:20 75:1 22849
 void synchronize_sched_expedited () include/linux/rcutiny.h:77:20 80:1 22858
-void kfree_call_rcu (structBUG rcu_head *,void structBUG rcu_head * void (inplace) *) include/linux/rcutiny.h:82:20 86:1 22867
+void kfree_call_rcu (structBUG rcu_head *,void structBUG rcu_head * void *) include/linux/rcutiny.h:82:20 86:1 22867
 void rcu_preempt_note_context_switch () include/linux/rcutiny.h:90:20 92:1 22892
 int rcu_needs_cpu (int,long unsigned int *) include/linux/rcutiny.h:94:19 98:1 22898
 void rcu_note_context_switch (int) include/linux/rcutiny.h:113:20 117:1 22920
@@ -659,8 +659,8 @@ ktime_t ktime_sub_us (ktime_t,u64) include/linux/ktime.h:314:23 317:1 23490
 ktime_t ns_to_ktime (u64) include/linux/ktime.h:336:23 340:1 23508
 void destroy_timer_on_stack (structBUG timer_list *) include/linux/timer.h:157:20 157:50 23528
 void init_timer_on_stack_key (structBUG timer_list *,char *,structBUG lock_class_key *) include/linux/timer.h:158:20 163:1 23538
-void setup_timer_key (structBUG timer_list *,char *,structBUG lock_class_key *,void long unsigned int void (inplace) *,long unsigned int) include/linux/timer.h:166:20 175:1 23565
-void setup_timer_on_stack_key (structBUG timer_list *,char *,structBUG lock_class_key *,void long unsigned int void (inplace) *,long unsigned int) include/linux/timer.h:177:20 186:1 23621
+void setup_timer_key (structBUG timer_list *,char *,structBUG lock_class_key *,void long unsigned int void *,long unsigned int) include/linux/timer.h:166:20 175:1 23565
+void setup_timer_on_stack_key (structBUG timer_list *,char *,structBUG lock_class_key *,void long unsigned int void *,long unsigned int) include/linux/timer.h:177:20 186:1 23621
 int timer_pending (structBUG timer_list *) include/linux/timer.h:204:19 207:1 23677
 void init_timer_stats () include/linux/timer.h:262:20 264:1 23700
 void timer_stats_timer_set_start_info (structBUG timer_list *) include/linux/timer.h:266:20 268:1 23706
@@ -671,7 +671,7 @@ void destroy_work_on_stack (structBUG work_struct *) include/linux/workqueue.h:1
 int work_static (structBUG work_struct *) include/linux/workqueue.h:165:28 165:47 23776
 bool cancel_delayed_work (structBUG delayed_work *) include/linux/workqueue.h:410:20 418:1 23789
 bool __cancel_delayed_work (structBUG delayed_work *) include/linux/workqueue.h:425:20 433:1 23845
-int work_on_cpu (unsigned int,void void * long int (inplace) *,void *) include/linux/workqueue.h:436:20 439:1 23901
+int work_on_cpu (unsigned int,void void * long int *,void *) include/linux/workqueue.h:436:20 439:1 23901
 int srcu_read_lock_held (structBUG srcu_struct *) include/linux/srcu.h:149:19 152:1 23929
 int srcu_read_lock (structBUG srcu_struct *) include/linux/srcu.h:200:19 208:1 23942
 void srcu_read_unlock (structBUG srcu_struct *,int) include/linux/srcu.h:217:20 224:1 23961
@@ -784,14 +784,14 @@ int elf_coredump_extra_notes_size () include/linux/elf.h:441:19 441:1 27535
 int elf_coredump_extra_notes_write (structBUG file *,loff_t *) include/linux/elf.h:442:19 443:4 27544
 void kref_init (structBUG kref *) include/linux/kref.h:30:20 33:1 27561
 void kref_get (structBUG kref *) include/linux/kref.h:39:20 43:1 27582
-int kref_sub (structBUG kref *,unsigned int,void structBUG kref * void (inplace) *) include/linux/kref.h:63:19 73:1 27644
-int kref_put (structBUG kref *,void structBUG kref * void (inplace) *) include/linux/kref.h:92:19 95:1 27738
+int kref_sub (structBUG kref *,unsigned int,void structBUG kref * void *) include/linux/kref.h:63:19 73:1 27644
+int kref_put (structBUG kref *,void structBUG kref * void *) include/linux/kref.h:92:19 95:1 27738
 char * kobject_name (structBUG kobject *) include/linux/kobject.h:80:27 83:1 27767
 kset * to_kset (structBUG kobject *) include/linux/kobject.h:173:28 176:1 27787
 kset * kset_get (structBUG kset *) include/linux/kobject.h:178:28 181:1 27822
 void kset_put (structBUG kset *) include/linux/kobject.h:183:20 186:1 27856
 kobj_type * get_ktype (structBUG kobject *) include/linux/kobject.h:188:33 191:1 27876
-int __check_old_set_param (void structBUG kernel_param * char * int (inplace) *) include/linux/moduleparam.h:199:1 202:1 27895
+int __check_old_set_param (void structBUG kernel_param * char * int *) include/linux/moduleparam.h:199:1 202:1 27895
 int module_param_sysfs_setup (structBUG module *,structBUG kernel_param *,unsigned int) include/linux/moduleparam.h:455:19 460:1 27914
 void module_param_sysfs_remove (structBUG module *) include/linux/moduleparam.h:462:20 463:1 27934
 void jump_label_init () include/linux/jump_label.h:147:29 149:1 27944
@@ -822,7 +822,7 @@ int lookup_module_symbol_name (long unsigned int,char *) include/linux/module.h:
 int lookup_module_symbol_attrs (long unsigned int,long unsigned int *,long unsigned int *,char *,char *) include/linux/module.h:573:19 576:1 28377
 int module_get_kallsym (unsigned int,long unsigned int *,char *,char *,char *,int *) include/linux/module.h:578:19 583:1 28405
 int module_kallsyms_lookup_name (char *) include/linux/module.h:585:29 588:1 28437
-int module_kallsyms_on_each_symbol (void long unsigned int structBUG module * char * void * int (inplace) *,void *) include/linux/module.h:590:19 596:1 28450
+int module_kallsyms_on_each_symbol (void long unsigned int structBUG module * char * void * int *,void *) include/linux/module.h:590:19 596:1 28450
 int register_module_notifier (structBUG notifier_block *) include/linux/module.h:598:19 602:1 28476
 int unregister_module_notifier (structBUG notifier_block *) include/linux/module.h:604:19 607:1 28489
 void print_modules () include/linux/module.h:611:20 613:1 28502
@@ -847,7 +847,7 @@ void list_add_tail_rcu (structBUG list_head *,structBUG list_head *) include/lin
 void list_del_rcu (structBUG list_head *) include/linux/rculist.h:114:20 118:1 28919
 void hlist_del_init_rcu (structBUG hlist_node *) include/linux/rculist.h:140:20 146:1 28943
 void list_replace_rcu (structBUG list_head *,structBUG list_head *) include/linux/rculist.h:156:20 164:1 28978
-void list_splice_init_rcu (structBUG list_head *,structBUG list_head *,void void (inplace) *) include/linux/rculist.h:183:20 219:1 29065
+void list_splice_init_rcu (structBUG list_head *,structBUG list_head *,void void *) include/linux/rculist.h:183:20 219:1 29065
 void hlist_del_rcu (structBUG hlist_node *) include/linux/rculist.h:339:20 343:1 29171
 void hlist_replace_rcu (structBUG hlist_node *,structBUG hlist_node *) include/linux/rculist.h:352:20 363:1 29195
 void hlist_add_head_rcu (structBUG hlist_node *,structBUG hlist_head *) include/linux/rculist.h:391:20 401:1 29291

@@ -1,0 +1,87 @@
+=======header--file========
+linux/module.h
+linux/types.h	   (no)
+linux/fs.h
+linux/kernel.h
+linux/console.h   (no)
+linux/string.h
+linux/kd.h   (no)
+linux/slab.h
+linux/vt_kern.h
+linux/selection.h   (no)
+linux/spinlock.h
+linux/ioport.h
+linux/init.h   (no)
+linux/screen_info.h   (no)
+video/vga.h
+asm/io.h 
+
+=======function--list========
+bool vgacon_text_force(void)
+static int __init text_mode(char *str)
+static int __init no_scroll(char *str)
+static inline void write_vga(unsigned char reg, unsigned int val)
+static inline void vga_set_mem_top(struct vc_data *c)
+
+#ifdef
+static void vgacon_scrollback_init(int pitch)			
+static void vgacon_scrollback_startup(void)				
+static void vgacon_scrollback_update(struct vc_data *c, int t, int count)				
+static void vgacon_restore_screen(struct vc_data *c)
+static int vgacon_scrolldelta(struct vc_data *c, int lines)
+#else		(====>select this)
+#define vgacon_scrollback_startup(...) do { } while (0)	【此种情况插件没有编译出来】
+#define vgacon_scrollback_init(...)    do { } while (0)
+#define vgacon_scrollback_update(...)  do { } while (0)
+static void vgacon_restore_screen(struct vc_data *c)
+static int vgacon_scrolldelta(struct vc_data *c, int lines)
+#endif
+
+static const char *vgacon_startup(void)
+static void vgacon_init(struct vc_data *c, int init)
+static void vgacon_deinit(struct vc_data *c)
+static u8 vgacon_build_attr(struct vc_data *c, u8 color, u8 intensity,u8 blink, u8 underline, u8 reverse, u8 italic)
+static void vgacon_invert_region(struct vc_data *c, u16 * p, int count)
+static void vgacon_set_cursor_size(int xpos, int from, int to)
+static void vgacon_cursor(struct vc_data *c, int mode)
+static int vgacon_doresize(struct vc_data *c,	unsigned int width, unsigned int height)
+static int vgacon_switch(struct vc_data *c)
+static void vga_set_palette(struct vc_data *vc, unsigned char *table)
+static int vgacon_set_palette(struct vc_data *vc, unsigned char *table)
+static void vga_vesa_blank(struct vgastate *state, int mode)
+static void vga_vesa_unblank(struct vgastate *state)
+static void vga_pal_blank(struct vgastate *state)
+static int vgacon_blank(struct vc_data *c, int blank, int mode_switch)
+static int vgacon_do_font_op(struct vgastate *state,char *arg,int set,int ch512)
+static int vgacon_adjust_height(struct vc_data *vc, unsigned fontheight)
+static int vgacon_font_set(struct vc_data *c, struct console_font *font, unsigned flags)
+static int vgacon_font_get(struct vc_data *c, struct console_font *font)
+static int vgacon_resize(struct vc_data *c, unsigned int width, unsigned int height, unsigned int user)
+static int vgacon_set_origin(struct vc_data *c)
+static void vgacon_save_screen(struct vc_data *c)
+static int vgacon_scroll(struct vc_data *c, int t, int b, int dir, int lines)
+static int vgacon_dummy(struct vc_data *c)
+
+=======call-function--list========
+
+53		static DEFINE_RAW_SPINLOCK(vga_lock)(no)
+120		EXPORT_SYMBOL(vgacon_text_force);	(no)
+129		__setup("no-scroll", no_scroll);	(no)
+142		__setup()							(no)
+
+#ifdef CONFIG_VGACON_SOFT_SCROLLBACK
+#else	(编译此项)
+#define vgacon_scrollback_startup(...) do { } while (0)		【没有导出此类情况的函数声明语法树】
+#define vgacon_scrollback_init(...)    do { } while (0)
+#define vgacon_scrollback_update(...)  do { } while (0)
+#endif 
+
+【忽略结构体指针函数引用函数】
+379		return conswitchp->con_startup()	(error，.ind yes)【call_expr-component_ref-indirect_ref情况，结构体指针引用结构体内部函数指针】
+1244	c->vc_sw->con_cursor(c, CM_DRAW)	(error，.ind yes)【call_expr-component_ref-indirect_ref情况，结构体指针引用结构体内部函数指针】
+	
+546		vgacon_scrollback_startup()			(no)		【调用自定义#define函数】
+642		u16 a = scr_readw(p);				(no)
+844 	vgacon_scrollback_init()			(no)			【调用自定义#define函数】
+1358	vgacon_scrollback_update()			(no)			【调用自定义#define函数】
+1427 	MODULE_LICENSE()					(no)
