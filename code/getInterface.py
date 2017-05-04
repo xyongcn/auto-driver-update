@@ -45,13 +45,13 @@ def getFuncAndFile():
 def getFuncCallDict(filename):
   #get func-call-dict like {'fdA':{'fcB':['loc1','loc2']}}
   #filename = os.path.basename(path)[:-len(EXT2)]
-  crpath=TARGET_PATH+'/cm_list.txt'
+  crpath=TARGET_PATH+'cm_list.txt'
   fnCall_dict = OrderedDict()
   with open(crpath) as fp:
     sline=fp.readline();
     while sline:
       fnName,fcName,fcLoc=sline.split()
-      if fcLoc.split(':')[0].endswith(filename):
+      if fcLoc.split(':')[0].endswith(os.path.basename(filename)):
 		    if fcName not in fnCall_dict:
 		      fnCall_dict[fcName]=OrderedDict()
 		      fnCall_dict[fcName][fnName]=[fcLoc]
@@ -65,8 +65,8 @@ def getFuncCallDict(filename):
 
 def delSelfFuncCall(count_dict):
  #del self-decl-func call 
-  crpath=TARGET_PATH+'/cm_list.txt'
-  frpath=TARGET_PATH+'/func_list.txt'
+  crpath=TARGET_PATH+'cm_list.txt'
+  frpath=TARGET_PATH+'func_list.txt'
   func_list=[]
   cm_list=[]
   
@@ -139,14 +139,14 @@ def printMethod(listname,copath):
       print >> out,tlist
             
 def printToFile(count_dict,call_list,macro_list,file_list,isCount):
-  copath=TARGET_PATH+'/macro_list.txt'
+  copath=TARGET_PATH+'macro_list.txt'
   printMethod(macro_list,copath)
-  copath=TARGET_PATH+'/call_list.txt'
+  copath=TARGET_PATH+'call_list.txt'
   printMethod(call_list,copath)
-  copath=TARGET_PATH+'/macfile_list.txt'
+  copath=TARGET_PATH+'macfile_list.txt'
   printMethod(file_list,copath)
   delDuplicateLine(copath)
-  copath=TARGET_PATH+'/cm_list.txt'
+  copath=TARGET_PATH+'cm_list.txt'
   cm_list = mergeCallAndMacro(call_list,macro_list)  #  merge call and micro
   printMethod(cm_list,copath) 
    
@@ -234,7 +234,7 @@ def processFuncDecl(fp, outFname, sline,count_dict):
   # print function declation info 
   flag = 1;isCount = 0;
   fnFile=fnFileSno.split(':')[0]
-  if (fnFile.endswith(fp.name[:-len(ext0)])):
+  if (fnFile.endswith(os.path.basename(fp.name)[:-len(ext0)])):
     isCount = 1
     for mlist in macro_list:
       if(mlist.find(fnFileSno) != -1):
@@ -242,7 +242,7 @@ def processFuncDecl(fp, outFname, sline,count_dict):
         break;
     if (flag == 1):
       print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo)    
-    fcopath=TARGET_PATH+'/func_list.txt' 
+    fcopath=TARGET_PATH+'func_list.txt' 
     count_dict['fndl_count'] += 1
     with open(fcopath, 'a') as out:
       print >> out,'{}'.format(fnName) 
@@ -276,7 +276,7 @@ def collectInt(prefix,outDir):
   global V0_MANIFEST
   #V0_MANIFEST = outDir+'V-'+os.path.split(prefix.strip('/'))[-1]
   V0_MANIFEST = outDir+os.path.split(prefix.strip('/'))[-1]
-  
+  print 'collectInt():V0_MANIFEST-->',V0_MANIFEST
   if os.path.isfile(V0_CODE):
     assert V0_CODE.endswith(ext0),'file not found with ext *.'+ext0
     print "\ncollect interface info from file-->",os.getcwd()+'/'+V0_CODE
@@ -345,7 +345,7 @@ def code_diff():
     for (k,v) in fnFile_dict.items():
       print >> out,v,k
   #------------------------------------------------
-  fnCallPath = TARGET_PATH + '/fnCallTemp.txt'
+  fnCallPath = TARGET_PATH + 'fnCallTemp.txt'
   with open(fnCallPath,'w') as out:
 		for fnName,fcName_dict in fnCall_dict.items():
 		  print >> out,fnName
