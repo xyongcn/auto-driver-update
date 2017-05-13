@@ -4,7 +4,7 @@
 
 #define MAX_LEN 1024
 
-char outHeadFname[50] = "target/hdFileList.txt";
+char outHeadFname[50] = "target/hfileList.txt";
 /**
 this code is to process one input file
 */

@@ -8,7 +8,7 @@ from collections import OrderedDict
 
 EXT0 = '.ind' # AST file
 EXT2 = '.int' #interface file
-SOURCE_PATH0 = '/tmp/linux-3.5.4'
+SOURCE_PATH0 = '/tmp/linux-3.5.4/'
 TARGET_PATH = 'target/' #path to save target file
 V0_CODE=sys.argv[1]			#python run param 
 FILE_TO_PROCESS = 'console/vgacon.c'
@@ -88,13 +88,16 @@ def printListMethod(listname,copath):
     for tlist in listname:
       print >> out,tlist
             
-def printToFile(count_dict,call_list,macro_list,file_list,isCount):
+def printToFile(count_dict,call_list,macro_list,file_list,sfile_list,isCount):
   copath=TARGET_PATH+'macro_list.txt'
   printListMethod(macro_list,copath)
   copath=TARGET_PATH+'call_list.txt'
   printListMethod(call_list,copath)
   copath=TARGET_PATH+'macfile_list.txt'
   printListMethod(file_list,copath)
+  delDuplicateLine(copath)
+  copath=TARGET_PATH+'sfile_list.txt'
+  printListMethod(sfile_list,copath)
   delDuplicateLine(copath)
   copath=TARGET_PATH+'cm_list.txt'
   cm_list = mergeCallAndMacro(call_list,macro_list)  #  merge call and micro
@@ -109,7 +112,7 @@ def processFuncDecl(fp, outFname, sline,count_dict):
   startLineNo = count_dict['lineNo']
   # get function name,filename and start-end lineno as follows
   nodeNo,tree_type,fnName,tfnFileSno,tfnEno=sline.lstrip().split()   
-  fnFileSno=tfnFileSno[len(SOURCE_PATH0)+1:]
+  fnFileSno=tfnFileSno[len(SOURCE_PATH0):]
   fnEno=':'.join(tfnEno.split(':')[1:])
   # get function return type as follows 
   while sline and ("result_decl" not in sline):  
@@ -154,21 +157,29 @@ def processFuncDecl(fp, outFname, sline,count_dict):
     fnPara = ''                   
   
   # get function call info as follows
-  call_list = []
-  macro_list = []
-  file_list = []
+  call_list = []  # restore called-function
+  macro_list = [] # restore called-macro
+  file_list = []  # restore called-macro and its file relationship
+  sfile_list = [] # restore .h of which self-called-macro in
   while sline and (sline[0] == ' ' or sline[0] == '\t') and ("function_decl" not in sline):         
     # get Macro Expansion Info    
     if ("_expr" in sline or "indirect_ref" in sline):      
       if (sline.lstrip().split()[-1] != '()'):
         tlist=sline.lstrip().split()
-        mlist_sline = fnName+': '+tlist[-2]+' '+tlist[-1][:-1][len(SOURCE_PATH0)+1:]
+        mlist_sline = fnName+': '+tlist[-2]+' '+tlist[-1][:-1][len(SOURCE_PATH0):]
         if mlist_sline not in macro_list:        	
           macro_list.append(mlist_sline) 
         tmfloc = tlist[-3].split('(')[-1].split(':')[:-1]
-        mfloc = tlist[-2]+' '+tmfloc[0][len(SOURCE_PATH0)+1:]
+        mfloc = tlist[-2]+' '+tmfloc[0][len(SOURCE_PATH0):]
         if mfloc not in file_list:        	
-          file_list.append(mfloc)                 
+          file_list.append(mfloc) 
+        # get .h of which self-called-macro in
+        fnFile=fnFileSno.split(':')[0]
+        if (fnFile.endswith(os.path.basename(fp.name)[:-len(ext0)])):
+           smfloc = tmfloc[0][len(SOURCE_PATH0):]
+           if smfloc not in sfile_list:
+             sfile_list.append(smfloc) 
+        #end              
     if ("call_expr" in sline): # find call location    
       sline_list = sline.lstrip().split()
       fcLoc = sline_list[2]
@@ -179,7 +190,7 @@ def processFuncDecl(fp, outFname, sline,count_dict):
       while sline and ("identifier_node" not in sline): 
          sline=fp.readline();count_dict['lineNo'] += 1 #skip lines      
       nodeNo,tree_type,fcName=sline.lstrip().split()      
-      tempstr=fnName+': '+fcName+' '+fcLoc[len(SOURCE_PATH0)+1:]
+      tempstr=fnName+': '+fcName+' '+fcLoc[len(SOURCE_PATH0):]
       if mflag and (tempstr not in call_list):
         call_list.append(tempstr)      
     sline=fp.readline();count_dict['lineNo'] += 1
@@ -201,9 +212,9 @@ def processFuncDecl(fp, outFname, sline,count_dict):
       print >> out,'{}'.format(fnName) 
   else:
     print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo) 
-  # print call info
-  count_dict=printToFile(count_dict,call_list,macro_list,file_list,isCount)                
   
+  # print call info
+  count_dict=printToFile(count_dict,call_list,macro_list,file_list,sfile_list,isCount)                
   fp.seek(-len(sline),1); count_dict['lineNo'] -= 1 #back to last line
   return count_dict
   
@@ -250,6 +261,34 @@ def collectInt(prefix,outDir):
         filename = path[len(prefix):-len(ext0)].lstrip('/')
         fncount += collectIntFmfile(path,outFname) 
     print prefix,"-->\n\ttotal .ind file",fcount,"\n\ttotal function decl",fncount 
+
+def reviseHdFile():
+  outpath = TARGET_PATH+'hfileList.txt'
+  inpath = TARGET_PATH+'sfile_list.txt'
+  
+  str1 = 'arch/x86/include/'
+  str2 = 'include/'
+  
+  hfile_list = [] #
+  with open(outpath) as fp:
+    for line in fp.readlines():
+      line = line.rstrip('\n')
+      hfile_list.append(line)
+  with open(inpath) as fp:
+    for line in fp.readlines():
+      line = line.rstrip('\n')
+      if line.startswith('arch'):
+        line = line[len(str1):]
+      else:
+        line = line[len(str2):] 
+      if line not in  hfile_list:
+        hfile_list.append(line)
+  with open(outpath,'w') as out:
+    for tlist in hfile_list:
+      print >> out,tlist
+  if os.path.isfile(inpath):
+    os.remove(inpath)
+  print 'revise hfileList.txt successful.'
   
 def info_collect():
     ext0=EXT0
@@ -279,6 +318,7 @@ def main():
     print '\npython file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]
     info_collect()
+    reviseHdFile()
     print 'Done'
   
 if __name__ == '__main__':

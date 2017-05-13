@@ -6,8 +6,8 @@ import sys
 from subprocess import check_output
 from collections import OrderedDict
 
-SOURCE_PATH0 = '/home/ryyan/SOURCE/linux-3.5.4/'
-SOURCE_PATH1 = '/home/ryyan/SOURCE/linux-3.8.13/'
+SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.4/'
+SOURCE_PATH1 = os.environ['HOME']+'/SOURCE/linux-3.8.13/'
 TARGET_PATH = 'target/'
 #FILE_TO_INPUT = 'source/console/vgacon.c'
 CTAGSFILE_EXT = '_ctags.txt'

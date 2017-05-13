@@ -8,7 +8,7 @@ from collections import OrderedDict
 
 EXT0 = '.ind' # AST file
 EXT2 = '.int' #interface file
-SOURCE_PATH0 = '/tmp/linux-3.5.4'
+SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.4/'
 TARGET_PATH = 'target/' #path to save target file
 FILE_TO_PROCESS = sys.argv[1]
 CTAGSFILE_EXT = '_ctags.txt'
@@ -36,7 +36,7 @@ def printToFile(fnFile_dict,fnCall_dict,fcFile_dict):
   fcFilePath = TARGET_PATH + 'fcFileTemp.txt'
   printDictMethod(fcFile_dict,fcFilePath)
   print 'generated file:',fcFilePath
-
+'''
 def getMacAndFile():
   #get macro-file like {'macroName':['file:sloc']}}
   rpath = TARGET_PATH+'macfile_list.txt'
@@ -49,7 +49,7 @@ def getMacAndFile():
         macFile_dict[macName] = macFile
       sline=fp.readline();
   return macFile_dict
-  
+''' 
 def getFuncAndFile():
   #get func-file like {'fnName':['file:sloc','eloc','.ind--lineNo']}}
   #V0_MANIFEST
@@ -108,7 +108,7 @@ def getCtagsFileDict(vers):
 
 def prosTargetf():
   fnFile_dict = getFuncAndFile()
-  macFile_dict= getMacAndFile()
+  #macFile_dict= getMacAndFile()
   fnCall_dict = getFuncCallDict(FILE_TO_PROCESS)
   
   v0ctags_dict = getCtagsFileDict('0')
@@ -120,14 +120,17 @@ def prosTargetf():
     if fnName in v0ctags_dict:
       fcFile_dict[fnName] = v0ctags_dict[fnName]
     elif fnName in fnFile_dict:
-      fcFile_dict[fnName] = fnFile_dict[fnName]
-    elif fnName in macFile_dict:
-      fcFile_dict[fnName] = ['macro']+[macFile_dict[fnName]]
+      # macro define function
+      tlist = fnFile_dict[fnName][0].split(':')
+      fileph = SOURCE_PATH0+tlist[0]
+      rows =  tlist[1]
+      tstr=check_output(['sed','-n',rows+'p',fileph]).strip()
+      fcFile_dict[fnName] =['macfun'] + tlist[:-1] + [tstr]
     else:
       fcFile_dict[fnName] = []
   #print To File
   printToFile(fnFile_dict,fnCall_dict,fcFile_dict)
-  return fnFile_dict,macFile_dict,fnCall_dict,fcFile_dict
+ # return fnFile_dict,macFile_dict,fnCall_dict,fcFile_dict
 
 #def code_Diff():
   

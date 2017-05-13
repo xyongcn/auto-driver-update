@@ -27,21 +27,21 @@ else
   exit 1
 fi
 
-#run python file --> code/prosHdfile.py
-tgfnm1=$rootDir/target/hdFileList.txt 
-python code/prosHdfile.py $tgfnm1
-if [ $? -eq 0 ];then
-  echo "python code/prosHdfile.py $tgfnm1 runnning successful."
-else
-  echo "python code/prosHdfile.py $tgfnm1 runnning faild."
-fi
-
-#run python file --> code/prosInter.py
+#run python file to get interface info--> code/prosInter.py
 python code/prosInter.py $sourceDir/$filename".ind"
 if [ $? -eq 0 ];then
   echo "python code/prosInter.py $sourceDir/$filename.ind runnning successful."
 else
   echo "python code/prosInter.py $sourceDir/$filename.ind runnning faild."
+fi
+
+#run python file to get process headfile --> code/prosHdfile.py
+tgfnm1=$rootDir/target/hfileList.txt 
+python code/prosHdfile.py $tgfnm1
+if [ $? -eq 0 ];then
+  echo "python code/prosHdfile.py $tgfnm1 runnning successful."
+else
+  echo "python code/prosHdfile.py $tgfnm1 runnning faild."
 fi
 
 #run python file --> code/prosDiff.py
