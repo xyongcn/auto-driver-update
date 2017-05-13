@@ -1,0 +1,1745 @@
+_LINUX_MODULE_H  macro  include/linux/module.h  2  #define _LINUX_MODULE_H
+MODULE_SUPPORTED_DEVICE  macro  include/linux/module.h  25  #define MODULE_SUPPORTED_DEVICE(name)
+MODULE_NAME_LEN  macro  include/linux/module.h  27  #define MODULE_NAME_LEN MAX_PARAM_PREFIX_LEN
+__modver_version_show  prototype  include/linux/module.h  62  extern ssize_t __modver_version_show(struct module_attribute *,struct module_kobject *, char *);
+init_module  prototype  include/linux/module.h  67  extern int init_module(void);
+cleanup_module  prototype  include/linux/module.h  68  extern void cleanup_module(void);
+search_extable  prototype  include/linux/module.h  76  search_extable(const struct exception_table_entry *first,const struct exception_table_entry *last,unsigned long value);
+sort_extable  prototype  include/linux/module.h  78  void sort_extable(struct exception_table_entry *start,struct exception_table_entry *finish);
+sort_main_extable  prototype  include/linux/module.h  79  void sort_main_extable(void);
+trim_init_extable  prototype  include/linux/module.h  80  void trim_init_extable(struct module *m);
+MODULE_GENERIC_TABLE  macro  include/linux/module.h  88  #define MODULE_GENERIC_TABLE(gtype,name)
+MODULE_INFO  macro  include/linux/module.h  92  #define MODULE_INFO(tag, info) __MODULE_INFO(tag, tag, info)
+MODULE_ALIAS  macro  include/linux/module.h  95  #define MODULE_ALIAS(_alias) MODULE_INFO(alias, _alias)
+MODULE_LICENSE  macro  include/linux/module.h  125  #define MODULE_LICENSE(_license) MODULE_INFO(license, _license)
+MODULE_AUTHOR  macro  include/linux/module.h  131  #define MODULE_AUTHOR(_author) MODULE_INFO(author, _author)
+MODULE_DESCRIPTION  macro  include/linux/module.h  134  #define MODULE_DESCRIPTION(_description) MODULE_INFO(description, _description)
+MODULE_DEVICE_TABLE  macro  include/linux/module.h  136  #define MODULE_DEVICE_TABLE(type,name) \
+MODULE_VERSION  macro  include/linux/module.h  157  #define MODULE_VERSION(_version) \
+MODULE_FIRMWARE  macro  include/linux/module.h  177  #define MODULE_FIRMWARE(_firmware) MODULE_INFO(firmware, _firmware)
+search_exception_tables  prototype  include/linux/module.h  180  const struct exception_table_entry *search_exception_tables(unsigned long add);
+__symbol_get  prototype  include/linux/module.h  188  void *__symbol_get(const char *symbol);
+__symbol_get_gpl  prototype  include/linux/module.h  189  void *__symbol_get_gpl(const char *symbol);
+symbol_get  macro  include/linux/module.h  539  #define symbol_get(x) ({ extern typeof(x) x __attribute__((weak)); &(x); })
+__attribute  prototype  include/linux/module.h  218  } __attribute((aligned(2 * sizeof(unsigned long))));
+MODULE_ARCH_INIT  macro  include/linux/module.h  372  #define MODULE_ARCH_INIT {}
+module_is_live  function  include/linux/module.h  380  static inline int module_is_live(struct module *mod)
+__module_text_address  function  include/linux/module.h  518  static inline struct module *__module_text_address(unsigned long addr)
+__module_address  function  include/linux/module.h  513  static inline struct module *__module_address(unsigned long addr)
+is_module_address  function  include/linux/module.h  523  static inline bool is_module_address(unsigned long addr)
+is_module_percpu_address  function  include/linux/module.h  528  static inline bool is_module_percpu_address(unsigned long addr)
+is_module_text_address  function  include/linux/module.h  533  static inline bool is_module_text_address(unsigned long addr)
+within_module_core  function  include/linux/module.h  391  static inline int within_module_core(unsigned long addr, struct module *mod)
+within_module_init  function  include/linux/module.h  397  static inline int within_module_init(unsigned long addr, struct module *mod)
+find_module  prototype  include/linux/module.h  404  struct module *find_module(const char *name);
+find_symbol  prototype  include/linux/module.h  422  const struct kernel_symbol *find_symbol(const char *name,struct module **owner,const unsigned long **crc,bool gplok,bool warn);
+each_symbol_section  prototype  include/linux/module.h  427  bool each_symbol_section(bool (*fn)(const struct symsearch *arr,struct module *owner,void *data), void *data);
+module_get_kallsym  function  include/linux/module.h  580  static inline int module_get_kallsym(unsigned int symnum, unsigned long *value,char *type, char *name,char *module_name, int *exported)
+module_kallsyms_lookup_name  function  include/linux/module.h  585  static inline unsigned long module_kallsyms_lookup_name(const char *name)
+module_kallsyms_on_each_symbol  function  include/linux/module.h  593  static inline int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,struct module *,unsigned long),void *data)
+__module_put_and_exit  prototype  include/linux/module.h  441  extern void __module_put_and_exit(struct module *mod, long code)
+module_put_and_exit  macro  include/linux/module.h  609  #define module_put_and_exit(code) do_exit(code)
+module_refcount  prototype  include/linux/module.h  446  unsigned long module_refcount(struct module *mod);
+__symbol_put  prototype  include/linux/module.h  447  void __symbol_put(const char *symbol);
+symbol_put  macro  include/linux/module.h  540  #define symbol_put(x) do { } while(0)
+symbol_put_addr  macro  include/linux/module.h  541  #define symbol_put_addr(x) do { } while(0)
+__module_get  function  include/linux/module.h  543  static inline void __module_get(struct module *module)
+try_module_get  function  include/linux/module.h  547  static inline int try_module_get(struct module *module)
+module_put  function  include/linux/module.h  552  static inline void module_put(struct module *module)
+ref_module  prototype  include/linux/module.h  476  int ref_module(struct module *a, struct module *b);
+module_name  macro  include/linux/module.h  556  #define module_name(mod) "kernel"
+module_address_lookup  function  include/linux/module.h  563  static inline const char *module_address_lookup(unsigned long addr,unsigned long *symbolsize,unsigned long *offset,char **modname,char *namebuf)
+lookup_module_symbol_name  function  include/linux/module.h  568  static inline int lookup_module_symbol_name(unsigned long addr, char *symname)
+lookup_module_symbol_attrs  function  include/linux/module.h  573  static inline int lookup_module_symbol_attrs(unsigned long addr, unsigned long *size, unsigned long *offset, char *modname, char *name)
+search_module_extables  function  include/linux/module.h  508  search_module_extables(unsigned long addr)
+register_module_notifier  function  include/linux/module.h  598  static inline int register_module_notifier(struct notifier_block * nb)
+unregister_module_notifier  function  include/linux/module.h  604  static inline int unregister_module_notifier(struct notifier_block * nb)
+print_modules  function  include/linux/module.h  611  static inline void print_modules(void)
+symbol_request  macro  include/linux/module.h  622  #define symbol_request(x) try_then_request_module(symbol_get(x), "symbol:" #x)
+__MODULE_STRING  macro  include/linux/module.h  626  #define __MODULE_STRING(x) __stringify(x)
+set_all_modules_text_rw  function  include/linux/module.h  632  static inline void set_all_modules_text_rw(void) { }
+set_all_modules_text_ro  function  include/linux/module.h  633  static inline void set_all_modules_text_ro(void) { }
+module_bug_finalize  function  include/linux/module.h  645  static inline void module_bug_finalize(const Elf_Ehdr *hdr,const Elf_Shdr *sechdrs,struct module *mod)
+module_bug_cleanup  function  include/linux/module.h  648  static inline void module_bug_cleanup(struct module *mod) {}
+_LINUX_TYPES_H  macro  include/linux/types.h  2  #define _LINUX_TYPES_H
+DECLARE_BITMAP  macro  include/linux/types.h  9  #define DECLARE_BITMAP(name,bits) \
+_SIZE_T  macro  include/linux/types.h  62  #define _SIZE_T
+_SSIZE_T  macro  include/linux/types.h  67  #define _SSIZE_T
+_PTRDIFF_T  macro  include/linux/types.h  72  #define _PTRDIFF_T
+_TIME_T  macro  include/linux/types.h  77  #define _TIME_T
+_CLOCK_T  macro  include/linux/types.h  82  #define _CLOCK_T
+_CADDR_T  macro  include/linux/types.h  87  #define _CADDR_T
+__BIT_TYPES_DEFINED__  macro  include/linux/types.h  104  #define __BIT_TYPES_DEFINED__
+aligned_u64  macro  include/linux/types.h  126  #define aligned_u64 __u64 __attribute__((aligned(8)))
+aligned_be64  macro  include/linux/types.h  127  #define aligned_be64 __be64 __attribute__((aligned(8)))
+aligned_le64  macro  include/linux/types.h  128  #define aligned_le64 __le64 __attribute__((aligned(8)))
+pgoff_t  macro  include/linux/types.h  151  #define pgoff_t unsigned long
+__bitwise__  macro  include/linux/types.h  170  #define __bitwise__
+__bitwise  macro  include/linux/types.h  175  #define __bitwise
+__aligned_u64  macro  include/linux/types.h  197  #define __aligned_u64 __u64 __attribute__((aligned(8)))
+__aligned_be64  macro  include/linux/types.h  198  #define __aligned_be64 __be64 __attribute__((aligned(8)))
+__aligned_le64  macro  include/linux/types.h  199  #define __aligned_le64 __le64 __attribute__((aligned(8)))
+_LINUX_FS_H  macro  include/linux/fs.h  2  #define _LINUX_FS_H
+NR_OPEN  macro  include/linux/fs.h  25  #undef NR_OPEN
+INR_OPEN_CUR  macro  include/linux/fs.h  26  #define INR_OPEN_CUR 1024 /* Initial setting for nfile rlimits */
+INR_OPEN_MAX  macro  include/linux/fs.h  27  #define INR_OPEN_MAX 4096 /* Hard limit for nfile rlimits */
+BLOCK_SIZE_BITS  macro  include/linux/fs.h  29  #define BLOCK_SIZE_BITS 10
+BLOCK_SIZE  macro  include/linux/fs.h  30  #define BLOCK_SIZE (1<<BLOCK_SIZE_BITS)
+SEEK_SET  macro  include/linux/fs.h  32  #define SEEK_SET 0 /* seek relative to beginning of file */
+SEEK_CUR  macro  include/linux/fs.h  33  #define SEEK_CUR 1 /* seek relative to current file position */
+SEEK_END  macro  include/linux/fs.h  34  #define SEEK_END 2 /* seek relative to end of file */
+SEEK_DATA  macro  include/linux/fs.h  35  #define SEEK_DATA 3 /* seek to the next data */
+SEEK_HOLE  macro  include/linux/fs.h  36  #define SEEK_HOLE 4 /* seek to the next hole */
+SEEK_MAX  macro  include/linux/fs.h  37  #define SEEK_MAX SEEK_HOLE
+NR_FILE  macro  include/linux/fs.h  59  #define NR_FILE 8192 /* this can well be larger on a larger system */
+MAY_EXEC  macro  include/linux/fs.h  61  #define MAY_EXEC 0x00000001
+MAY_WRITE  macro  include/linux/fs.h  62  #define MAY_WRITE 0x00000002
+MAY_READ  macro  include/linux/fs.h  63  #define MAY_READ 0x00000004
+MAY_APPEND  macro  include/linux/fs.h  64  #define MAY_APPEND 0x00000008
+MAY_ACCESS  macro  include/linux/fs.h  65  #define MAY_ACCESS 0x00000010
+MAY_OPEN  macro  include/linux/fs.h  66  #define MAY_OPEN 0x00000020
+MAY_CHDIR  macro  include/linux/fs.h  67  #define MAY_CHDIR 0x00000040
+MAY_NOT_BLOCK  macro  include/linux/fs.h  69  #define MAY_NOT_BLOCK 0x00000080
+FMODE_READ  macro  include/linux/fs.h  77  #define FMODE_READ ((__force fmode_t)0x1)
+FMODE_WRITE  macro  include/linux/fs.h  79  #define FMODE_WRITE ((__force fmode_t)0x2)
+FMODE_LSEEK  macro  include/linux/fs.h  81  #define FMODE_LSEEK ((__force fmode_t)0x4)
+FMODE_PREAD  macro  include/linux/fs.h  83  #define FMODE_PREAD ((__force fmode_t)0x8)
+FMODE_PWRITE  macro  include/linux/fs.h  85  #define FMODE_PWRITE ((__force fmode_t)0x10)
+FMODE_EXEC  macro  include/linux/fs.h  87  #define FMODE_EXEC ((__force fmode_t)0x20)
+FMODE_NDELAY  macro  include/linux/fs.h  89  #define FMODE_NDELAY ((__force fmode_t)0x40)
+FMODE_EXCL  macro  include/linux/fs.h  91  #define FMODE_EXCL ((__force fmode_t)0x80)
+FMODE_WRITE_IOCTL  macro  include/linux/fs.h  94  #define FMODE_WRITE_IOCTL ((__force fmode_t)0x100)
+FMODE_32BITHASH  macro  include/linux/fs.h  96  #define FMODE_32BITHASH ((__force fmode_t)0x200)
+FMODE_64BITHASH  macro  include/linux/fs.h  98  #define FMODE_64BITHASH ((__force fmode_t)0x400)
+FMODE_NOCMTIME  macro  include/linux/fs.h  106  #define FMODE_NOCMTIME ((__force fmode_t)0x800)
+FMODE_RANDOM  macro  include/linux/fs.h  109  #define FMODE_RANDOM ((__force fmode_t)0x1000)
+FMODE_UNSIGNED_OFFSET  macro  include/linux/fs.h  112  #define FMODE_UNSIGNED_OFFSET ((__force fmode_t)0x2000)
+FMODE_PATH  macro  include/linux/fs.h  115  #define FMODE_PATH ((__force fmode_t)0x4000)
+FMODE_NONOTIFY  macro  include/linux/fs.h  118  #define FMODE_NONOTIFY ((__force fmode_t)0x1000000)
+RW_MASK  macro  include/linux/fs.h  162  #define RW_MASK REQ_WRITE
+RWA_MASK  macro  include/linux/fs.h  163  #define RWA_MASK REQ_RAHEAD
+READ  macro  include/linux/fs.h  165  #define READ 0
+WRITE  macro  include/linux/fs.h  166  #define WRITE RW_MASK
+READA  macro  include/linux/fs.h  167  #define READA RWA_MASK
+READ_SYNC  macro  include/linux/fs.h  169  #define READ_SYNC (READ | REQ_SYNC)
+WRITE_SYNC  macro  include/linux/fs.h  170  #define WRITE_SYNC (WRITE | REQ_SYNC | REQ_NOIDLE)
+WRITE_ODIRECT  macro  include/linux/fs.h  171  #define WRITE_ODIRECT (WRITE | REQ_SYNC)
+WRITE_FLUSH  macro  include/linux/fs.h  172  #define WRITE_FLUSH (WRITE | REQ_SYNC | REQ_NOIDLE | REQ_FLUSH)
+WRITE_FUA  macro  include/linux/fs.h  173  #define WRITE_FUA (WRITE | REQ_SYNC | REQ_NOIDLE | REQ_FUA)
+WRITE_FLUSH_FUA  macro  include/linux/fs.h  174  #define WRITE_FLUSH_FUA (WRITE | REQ_SYNC | REQ_NOIDLE | REQ_FLUSH | REQ_FUA)
+CHECK_IOVEC_ONLY  macro  include/linux/fs.h  183  #define CHECK_IOVEC_ONLY -1
+SEL_IN  macro  include/linux/fs.h  185  #define SEL_IN 1
+SEL_OUT  macro  include/linux/fs.h  186  #define SEL_OUT 2
+SEL_EX  macro  include/linux/fs.h  187  #define SEL_EX 4
+FS_REQUIRES_DEV  macro  include/linux/fs.h  190  #define FS_REQUIRES_DEV 1
+FS_BINARY_MOUNTDATA  macro  include/linux/fs.h  191  #define FS_BINARY_MOUNTDATA 2
+FS_HAS_SUBTYPE  macro  include/linux/fs.h  192  #define FS_HAS_SUBTYPE 4
+FS_REVAL_DOT  macro  include/linux/fs.h  193  #define FS_REVAL_DOT 16384 /* Check the paths ".", ".." for staleness */
+FS_RENAME_DOES_D_MOVE  macro  include/linux/fs.h  194  #define FS_RENAME_DOES_D_MOVE 32768 /* FS will handle d_move()
+MS_RDONLY  macro  include/linux/fs.h  201  #define MS_RDONLY 1 /* Mount read-only */
+MS_NOSUID  macro  include/linux/fs.h  202  #define MS_NOSUID 2 /* Ignore suid and sgid bits */
+MS_NODEV  macro  include/linux/fs.h  203  #define MS_NODEV 4 /* Disallow access to device special files */
+MS_NOEXEC  macro  include/linux/fs.h  204  #define MS_NOEXEC 8 /* Disallow program execution */
+MS_SYNCHRONOUS  macro  include/linux/fs.h  205  #define MS_SYNCHRONOUS 16 /* Writes are synced at once */
+MS_REMOUNT  macro  include/linux/fs.h  206  #define MS_REMOUNT 32 /* Alter flags of a mounted FS */
+MS_MANDLOCK  macro  include/linux/fs.h  207  #define MS_MANDLOCK 64 /* Allow mandatory locks on an FS */
+MS_DIRSYNC  macro  include/linux/fs.h  208  #define MS_DIRSYNC 128 /* Directory modifications are synchronous */
+MS_NOATIME  macro  include/linux/fs.h  209  #define MS_NOATIME 1024 /* Do not update access times. */
+MS_NODIRATIME  macro  include/linux/fs.h  210  #define MS_NODIRATIME 2048 /* Do not update directory access times */
+MS_BIND  macro  include/linux/fs.h  211  #define MS_BIND 4096
+MS_MOVE  macro  include/linux/fs.h  212  #define MS_MOVE 8192
+MS_REC  macro  include/linux/fs.h  213  #define MS_REC 16384
+MS_VERBOSE  macro  include/linux/fs.h  214  #define MS_VERBOSE 32768 /* War is peace. Verbosity is silence.
+MS_SILENT  macro  include/linux/fs.h  216  #define MS_SILENT 32768
+MS_POSIXACL  macro  include/linux/fs.h  217  #define MS_POSIXACL (1<<16) /* VFS does not apply the umask */
+MS_UNBINDABLE  macro  include/linux/fs.h  218  #define MS_UNBINDABLE (1<<17) /* change to unbindable */
+MS_PRIVATE  macro  include/linux/fs.h  219  #define MS_PRIVATE (1<<18) /* change to private */
+MS_SLAVE  macro  include/linux/fs.h  220  #define MS_SLAVE (1<<19) /* change to slave */
+MS_SHARED  macro  include/linux/fs.h  221  #define MS_SHARED (1<<20) /* change to shared */
+MS_RELATIME  macro  include/linux/fs.h  222  #define MS_RELATIME (1<<21) /* Update atime relative to mtime/ctime. */
+MS_KERNMOUNT  macro  include/linux/fs.h  223  #define MS_KERNMOUNT (1<<22) /* this is a kern_mount call */
+MS_I_VERSION  macro  include/linux/fs.h  224  #define MS_I_VERSION (1<<23) /* Update inode I_version field */
+MS_STRICTATIME  macro  include/linux/fs.h  225  #define MS_STRICTATIME (1<<24) /* Always perform atime updates */
+MS_NOSEC  macro  include/linux/fs.h  226  #define MS_NOSEC (1<<28)
+MS_BORN  macro  include/linux/fs.h  227  #define MS_BORN (1<<29)
+MS_ACTIVE  macro  include/linux/fs.h  228  #define MS_ACTIVE (1<<30)
+MS_NOUSER  macro  include/linux/fs.h  229  #define MS_NOUSER (1<<31)
+MS_RMT_MASK  macro  include/linux/fs.h  234  #define MS_RMT_MASK (MS_RDONLY|MS_SYNCHRONOUS|MS_MANDLOCK|MS_I_VERSION)
+MS_MGC_VAL  macro  include/linux/fs.h  239  #define MS_MGC_VAL 0xC0ED0000
+MS_MGC_MSK  macro  include/linux/fs.h  240  #define MS_MGC_MSK 0xffff0000
+S_SYNC  macro  include/linux/fs.h  244  #define S_SYNC 1 /* Writes are synced at once */
+S_NOATIME  macro  include/linux/fs.h  245  #define S_NOATIME 2 /* Do not update access times */
+S_APPEND  macro  include/linux/fs.h  246  #define S_APPEND 4 /* Append-only file */
+S_IMMUTABLE  macro  include/linux/fs.h  247  #define S_IMMUTABLE 8 /* Immutable file */
+S_DEAD  macro  include/linux/fs.h  248  #define S_DEAD 16 /* removed, but still open directory */
+S_NOQUOTA  macro  include/linux/fs.h  249  #define S_NOQUOTA 32 /* Inode is not counted to quota */
+S_DIRSYNC  macro  include/linux/fs.h  250  #define S_DIRSYNC 64 /* Directory modifications are synchronous */
+S_NOCMTIME  macro  include/linux/fs.h  251  #define S_NOCMTIME 128 /* Do not update file c/mtime */
+S_SWAPFILE  macro  include/linux/fs.h  252  #define S_SWAPFILE 256 /* Do not truncate: swapon got its bmaps */
+S_PRIVATE  macro  include/linux/fs.h  253  #define S_PRIVATE 512 /* Inode is fs-internal */
+S_IMA  macro  include/linux/fs.h  254  #define S_IMA 1024 /* Inode has an associated IMA struct */
+S_AUTOMOUNT  macro  include/linux/fs.h  255  #define S_AUTOMOUNT 2048 /* Automount/referral quasi-directory */
+S_NOSEC  macro  include/linux/fs.h  256  #define S_NOSEC 4096 /* no suid or xattr security attributes */
+__IS_FLG  macro  include/linux/fs.h  271  #define __IS_FLG(inode,flg) ((inode)->i_sb->s_flags & (flg))
+IS_RDONLY  macro  include/linux/fs.h  273  #define IS_RDONLY(inode) ((inode)->i_sb->s_flags & MS_RDONLY)
+IS_SYNC  macro  include/linux/fs.h  274  #define IS_SYNC(inode) (__IS_FLG(inode, MS_SYNCHRONOUS) || \
+IS_DIRSYNC  macro  include/linux/fs.h  276  #define IS_DIRSYNC(inode) (__IS_FLG(inode, MS_SYNCHRONOUS|MS_DIRSYNC) || \
+IS_MANDLOCK  macro  include/linux/fs.h  278  #define IS_MANDLOCK(inode) __IS_FLG(inode, MS_MANDLOCK)
+IS_NOATIME  macro  include/linux/fs.h  279  #define IS_NOATIME(inode) __IS_FLG(inode, MS_RDONLY|MS_NOATIME)
+IS_I_VERSION  macro  include/linux/fs.h  280  #define IS_I_VERSION(inode) __IS_FLG(inode, MS_I_VERSION)
+IS_NOQUOTA  macro  include/linux/fs.h  282  #define IS_NOQUOTA(inode) ((inode)->i_flags & S_NOQUOTA)
+IS_APPEND  macro  include/linux/fs.h  283  #define IS_APPEND(inode) ((inode)->i_flags & S_APPEND)
+IS_IMMUTABLE  macro  include/linux/fs.h  284  #define IS_IMMUTABLE(inode) ((inode)->i_flags & S_IMMUTABLE)
+IS_POSIXACL  macro  include/linux/fs.h  285  #define IS_POSIXACL(inode) __IS_FLG(inode, MS_POSIXACL)
+IS_DEADDIR  macro  include/linux/fs.h  287  #define IS_DEADDIR(inode) ((inode)->i_flags & S_DEAD)
+IS_NOCMTIME  macro  include/linux/fs.h  288  #define IS_NOCMTIME(inode) ((inode)->i_flags & S_NOCMTIME)
+IS_SWAPFILE  macro  include/linux/fs.h  289  #define IS_SWAPFILE(inode) ((inode)->i_flags & S_SWAPFILE)
+IS_PRIVATE  macro  include/linux/fs.h  290  #define IS_PRIVATE(inode) ((inode)->i_flags & S_PRIVATE)
+IS_IMA  macro  include/linux/fs.h  291  #define IS_IMA(inode) ((inode)->i_flags & S_IMA)
+IS_AUTOMOUNT  macro  include/linux/fs.h  292  #define IS_AUTOMOUNT(inode) ((inode)->i_flags & S_AUTOMOUNT)
+IS_NOSEC  macro  include/linux/fs.h  293  #define IS_NOSEC(inode) ((inode)->i_flags & S_NOSEC)
+BLKROSET  macro  include/linux/fs.h  298  #define BLKROSET _IO(0x12,93) /* set device read-only (0 = read-write) */
+BLKROGET  macro  include/linux/fs.h  299  #define BLKROGET _IO(0x12,94) /* get read-only status (0 = read_write) */
+BLKRRPART  macro  include/linux/fs.h  300  #define BLKRRPART _IO(0x12,95) /* re-read partition table */
+BLKGETSIZE  macro  include/linux/fs.h  301  #define BLKGETSIZE _IO(0x12,96) /* return device size /512 (long *arg) */
+BLKFLSBUF  macro  include/linux/fs.h  302  #define BLKFLSBUF _IO(0x12,97) /* flush buffer cache */
+BLKRASET  macro  include/linux/fs.h  303  #define BLKRASET _IO(0x12,98) /* set read ahead for block device */
+BLKRAGET  macro  include/linux/fs.h  304  #define BLKRAGET _IO(0x12,99) /* get current read ahead setting */
+BLKFRASET  macro  include/linux/fs.h  305  #define BLKFRASET _IO(0x12,100)/* set filesystem (mm/filemap.c) read-ahead */
+BLKFRAGET  macro  include/linux/fs.h  306  #define BLKFRAGET _IO(0x12,101)/* get filesystem (mm/filemap.c) read-ahead */
+BLKSECTSET  macro  include/linux/fs.h  307  #define BLKSECTSET _IO(0x12,102)/* set max sectors per request (ll_rw_blk.c) */
+BLKSECTGET  macro  include/linux/fs.h  308  #define BLKSECTGET _IO(0x12,103)/* get max sectors per request (ll_rw_blk.c) */
+BLKSSZGET  macro  include/linux/fs.h  309  #define BLKSSZGET _IO(0x12,104)/* get block device sector size */
+BLKBSZGET  macro  include/linux/fs.h  321  #define BLKBSZGET _IOR(0x12,112,size_t)
+BLKBSZSET  macro  include/linux/fs.h  322  #define BLKBSZSET _IOW(0x12,113,size_t)
+BLKGETSIZE64  macro  include/linux/fs.h  323  #define BLKGETSIZE64 _IOR(0x12,114,size_t) /* return device size in bytes (u64 *arg) */
+BLKTRACESETUP  macro  include/linux/fs.h  324  #define BLKTRACESETUP _IOWR(0x12,115,struct blk_user_trace_setup)
+BLKTRACESTART  macro  include/linux/fs.h  325  #define BLKTRACESTART _IO(0x12,116)
+BLKTRACESTOP  macro  include/linux/fs.h  326  #define BLKTRACESTOP _IO(0x12,117)
+BLKTRACETEARDOWN  macro  include/linux/fs.h  327  #define BLKTRACETEARDOWN _IO(0x12,118)
+BLKDISCARD  macro  include/linux/fs.h  328  #define BLKDISCARD _IO(0x12,119)
+BLKIOMIN  macro  include/linux/fs.h  329  #define BLKIOMIN _IO(0x12,120)
+BLKIOOPT  macro  include/linux/fs.h  330  #define BLKIOOPT _IO(0x12,121)
+BLKALIGNOFF  macro  include/linux/fs.h  331  #define BLKALIGNOFF _IO(0x12,122)
+BLKPBSZGET  macro  include/linux/fs.h  332  #define BLKPBSZGET _IO(0x12,123)
+BLKDISCARDZEROES  macro  include/linux/fs.h  333  #define BLKDISCARDZEROES _IO(0x12,124)
+BLKSECDISCARD  macro  include/linux/fs.h  334  #define BLKSECDISCARD _IO(0x12,125)
+BLKROTATIONAL  macro  include/linux/fs.h  335  #define BLKROTATIONAL _IO(0x12,126)
+BMAP_IOCTL  macro  include/linux/fs.h  337  #define BMAP_IOCTL 1 /* obsolete - kept for compatibility */
+FIBMAP  macro  include/linux/fs.h  338  #define FIBMAP _IO(0x00,1) /* bmap access */
+FIGETBSZ  macro  include/linux/fs.h  339  #define FIGETBSZ _IO(0x00,2) /* get the block size used for bmap */
+FIFREEZE  macro  include/linux/fs.h  340  #define FIFREEZE _IOWR('X', 119, int) /* Freeze */
+FITHAW  macro  include/linux/fs.h  341  #define FITHAW _IOWR('X', 120, int) /* Thaw */
+FITRIM  macro  include/linux/fs.h  342  #define FITRIM _IOWR('X', 121, struct fstrim_range) /* Trim */
+FS_IOC_GETFLAGS  macro  include/linux/fs.h  344  #define FS_IOC_GETFLAGS _IOR('f', 1, long)
+FS_IOC_SETFLAGS  macro  include/linux/fs.h  345  #define FS_IOC_SETFLAGS _IOW('f', 2, long)
+FS_IOC_GETVERSION  macro  include/linux/fs.h  346  #define FS_IOC_GETVERSION _IOR('v', 1, long)
+FS_IOC_SETVERSION  macro  include/linux/fs.h  347  #define FS_IOC_SETVERSION _IOW('v', 2, long)
+FS_IOC_FIEMAP  macro  include/linux/fs.h  348  #define FS_IOC_FIEMAP _IOWR('f', 11, struct fiemap)
+FS_IOC32_GETFLAGS  macro  include/linux/fs.h  349  #define FS_IOC32_GETFLAGS _IOR('f', 1, int)
+FS_IOC32_SETFLAGS  macro  include/linux/fs.h  350  #define FS_IOC32_SETFLAGS _IOW('f', 2, int)
+FS_IOC32_GETVERSION  macro  include/linux/fs.h  351  #define FS_IOC32_GETVERSION _IOR('v', 1, int)
+FS_IOC32_SETVERSION  macro  include/linux/fs.h  352  #define FS_IOC32_SETVERSION _IOW('v', 2, int)
+FS_SECRM_FL  macro  include/linux/fs.h  357  #define FS_SECRM_FL 0x00000001 /* Secure deletion */
+FS_UNRM_FL  macro  include/linux/fs.h  358  #define FS_UNRM_FL 0x00000002 /* Undelete */
+FS_COMPR_FL  macro  include/linux/fs.h  359  #define FS_COMPR_FL 0x00000004 /* Compress file */
+FS_SYNC_FL  macro  include/linux/fs.h  360  #define FS_SYNC_FL 0x00000008 /* Synchronous updates */
+FS_IMMUTABLE_FL  macro  include/linux/fs.h  361  #define FS_IMMUTABLE_FL 0x00000010 /* Immutable file */
+FS_APPEND_FL  macro  include/linux/fs.h  362  #define FS_APPEND_FL 0x00000020 /* writes to file may only append */
+FS_NODUMP_FL  macro  include/linux/fs.h  363  #define FS_NODUMP_FL 0x00000040 /* do not dump file */
+FS_NOATIME_FL  macro  include/linux/fs.h  364  #define FS_NOATIME_FL 0x00000080 /* do not update atime */
+FS_DIRTY_FL  macro  include/linux/fs.h  366  #define FS_DIRTY_FL 0x00000100
+FS_COMPRBLK_FL  macro  include/linux/fs.h  367  #define FS_COMPRBLK_FL 0x00000200 /* One or more compressed clusters */
+FS_NOCOMP_FL  macro  include/linux/fs.h  368  #define FS_NOCOMP_FL 0x00000400 /* Don't compress */
+FS_ECOMPR_FL  macro  include/linux/fs.h  369  #define FS_ECOMPR_FL 0x00000800 /* Compression error */
+FS_BTREE_FL  macro  include/linux/fs.h  371  #define FS_BTREE_FL 0x00001000 /* btree format dir */
+FS_INDEX_FL  macro  include/linux/fs.h  372  #define FS_INDEX_FL 0x00001000 /* hash-indexed directory */
+FS_IMAGIC_FL  macro  include/linux/fs.h  373  #define FS_IMAGIC_FL 0x00002000 /* AFS directory */
+FS_JOURNAL_DATA_FL  macro  include/linux/fs.h  374  #define FS_JOURNAL_DATA_FL 0x00004000 /* Reserved for ext3 */
+FS_NOTAIL_FL  macro  include/linux/fs.h  375  #define FS_NOTAIL_FL 0x00008000 /* file tail should not be merged */
+FS_DIRSYNC_FL  macro  include/linux/fs.h  376  #define FS_DIRSYNC_FL 0x00010000 /* dirsync behaviour (directories only) */
+FS_TOPDIR_FL  macro  include/linux/fs.h  377  #define FS_TOPDIR_FL 0x00020000 /* Top of directory hierarchies*/
+FS_EXTENT_FL  macro  include/linux/fs.h  378  #define FS_EXTENT_FL 0x00080000 /* Extents */
+FS_DIRECTIO_FL  macro  include/linux/fs.h  379  #define FS_DIRECTIO_FL 0x00100000 /* Use direct i/o */
+FS_NOCOW_FL  macro  include/linux/fs.h  380  #define FS_NOCOW_FL 0x00800000 /* Do not cow file */
+FS_RESERVED_FL  macro  include/linux/fs.h  381  #define FS_RESERVED_FL 0x80000000 /* reserved for ext2 lib */
+FS_FL_USER_VISIBLE  macro  include/linux/fs.h  383  #define FS_FL_USER_VISIBLE 0x0003DFFF /* User visible flags */
+FS_FL_USER_MODIFIABLE  macro  include/linux/fs.h  384  #define FS_FL_USER_MODIFIABLE 0x000380FF /* User modifiable flags */
+SYNC_FILE_RANGE_WAIT_BEFORE  macro  include/linux/fs.h  387  #define SYNC_FILE_RANGE_WAIT_BEFORE 1
+SYNC_FILE_RANGE_WRITE  macro  include/linux/fs.h  388  #define SYNC_FILE_RANGE_WRITE 2
+SYNC_FILE_RANGE_WAIT_AFTER  macro  include/linux/fs.h  389  #define SYNC_FILE_RANGE_WAIT_AFTER 4
+inode_init  prototype  include/linux/fs.h  431  extern void __init inode_init(void);
+inode_init_early  prototype  include/linux/fs.h  432  extern void __init inode_init_early(void);
+files_init  prototype  include/linux/fs.h  433  extern void __init files_init(unsigned long);
+get_max_files  prototype  include/linux/fs.h  436  extern unsigned long get_max_files(void);
+ATTR_MODE  macro  include/linux/fs.h  452  #define ATTR_MODE (1 << 0)
+ATTR_UID  macro  include/linux/fs.h  453  #define ATTR_UID (1 << 1)
+ATTR_GID  macro  include/linux/fs.h  454  #define ATTR_GID (1 << 2)
+ATTR_SIZE  macro  include/linux/fs.h  455  #define ATTR_SIZE (1 << 3)
+ATTR_ATIME  macro  include/linux/fs.h  456  #define ATTR_ATIME (1 << 4)
+ATTR_MTIME  macro  include/linux/fs.h  457  #define ATTR_MTIME (1 << 5)
+ATTR_CTIME  macro  include/linux/fs.h  458  #define ATTR_CTIME (1 << 6)
+ATTR_ATIME_SET  macro  include/linux/fs.h  459  #define ATTR_ATIME_SET (1 << 7)
+ATTR_MTIME_SET  macro  include/linux/fs.h  460  #define ATTR_MTIME_SET (1 << 8)
+ATTR_FORCE  macro  include/linux/fs.h  461  #define ATTR_FORCE (1 << 9) /* Not a change, but a change it */
+ATTR_ATTR_FLAG  macro  include/linux/fs.h  462  #define ATTR_ATTR_FLAG (1 << 10)
+ATTR_KILL_SUID  macro  include/linux/fs.h  463  #define ATTR_KILL_SUID (1 << 11)
+ATTR_KILL_SGID  macro  include/linux/fs.h  464  #define ATTR_KILL_SGID (1 << 12)
+ATTR_FILE  macro  include/linux/fs.h  465  #define ATTR_FILE (1 << 13)
+ATTR_KILL_PRIV  macro  include/linux/fs.h  466  #define ATTR_KILL_PRIV (1 << 14)
+ATTR_OPEN  macro  include/linux/fs.h  467  #define ATTR_OPEN (1 << 15) /* Truncating from open(O_TRUNC) */
+ATTR_TIMES_SET  macro  include/linux/fs.h  468  #define ATTR_TIMES_SET (1 << 16)
+AOP_FLAG_UNINTERRUPTIBLE  macro  include/linux/fs.h  533  #define AOP_FLAG_UNINTERRUPTIBLE 0x0001 /* will not do a short write */
+AOP_FLAG_CONT_EXPAND  macro  include/linux/fs.h  534  #define AOP_FLAG_CONT_EXPAND 0x0002 /* called from cont_expand */
+AOP_FLAG_NOFS  macro  include/linux/fs.h  535  #define AOP_FLAG_NOFS 0x0004 /* used by filesystem to direct
+iov_iter_copy_from_user_atomic  prototype  include/linux/fs.h  554  size_t iov_iter_copy_from_user_atomic(struct page *page,struct iov_iter *i, unsigned long offset, size_t bytes);
+iov_iter_copy_from_user  prototype  include/linux/fs.h  556  size_t iov_iter_copy_from_user(struct page *page,struct iov_iter *i, unsigned long offset, size_t bytes);
+iov_iter_advance  prototype  include/linux/fs.h  557  void iov_iter_advance(struct iov_iter *i, size_t bytes);
+iov_iter_fault_in_readable  prototype  include/linux/fs.h  558  int iov_iter_fault_in_readable(struct iov_iter *i, size_t bytes);
+iov_iter_single_seg_count  prototype  include/linux/fs.h  559  size_t iov_iter_single_seg_count(struct iov_iter *i);
+iov_iter_init  function  include/linux/fs.h  563  static inline void iov_iter_init(struct iov_iter *i,const struct iovec *iov, unsigned long nr_segs,size_t count, size_t written)
+iov_iter_count  function  include/linux/fs.h  573  static inline size_t iov_iter_count(struct iov_iter *i)
+pagecache_write_begin  prototype  include/linux/fs.h  649  int pagecache_write_begin(struct file *, struct address_space *mapping,loff_t pos, unsigned len, unsigned flags,struct page **pagep, void **fsdata);
+pagecache_write_end  prototype  include/linux/fs.h  653  int pagecache_write_end(struct file *, struct address_space *mapping,loff_t pos, unsigned len, unsigned copied,struct page *page, void *fsdata);
+PAGECACHE_TAG_DIRTY  macro  include/linux/fs.h  722  #define PAGECACHE_TAG_DIRTY 0
+PAGECACHE_TAG_WRITEBACK  macro  include/linux/fs.h  723  #define PAGECACHE_TAG_WRITEBACK 1
+PAGECACHE_TAG_TOWRITE  macro  include/linux/fs.h  724  #define PAGECACHE_TAG_TOWRITE 2
+mapping_tagged  prototype  include/linux/fs.h  726  int mapping_tagged(struct address_space *mapping, int tag);
+mapping_mapped  function  include/linux/fs.h  731  static inline int mapping_mapped(struct address_space *mapping)
+mapping_writably_mapped  function  include/linux/fs.h  743  static inline int mapping_writably_mapped(struct address_space *mapping)
+__NEED_I_SIZE_ORDERED  macro  include/linux/fs.h  753  #define __NEED_I_SIZE_ORDERED
+i_size_ordered_init  macro  include/linux/fs.h  756  #define i_size_ordered_init(inode) do { } while (0)
+ACL_NOT_CACHED  macro  include/linux/fs.h  760  #define ACL_NOT_CACHED ((void *)(-1))
+IOP_FASTPERM  macro  include/linux/fs.h  762  #define IOP_FASTPERM 0x0001
+IOP_LOOKUP  macro  include/linux/fs.h  763  #define IOP_LOOKUP 0x0002
+IOP_NOFOLLOW  macro  include/linux/fs.h  764  #define IOP_NOFOLLOW 0x0004
+inode_unhashed  function  include/linux/fs.h  862  static inline int inode_unhashed(struct inode *inode)
+i_size_read  function  include/linux/fs.h  897  static inline loff_t i_size_read(const struct inode *inode)
+i_size_write  function  include/linux/fs.h  925  static inline void i_size_write(struct inode *inode, loff_t i_size)
+i_uid_read  function  include/linux/fs.h  945  static inline uid_t i_uid_read(const struct inode *inode)
+i_gid_read  function  include/linux/fs.h  950  static inline gid_t i_gid_read(const struct inode *inode)
+i_uid_write  function  include/linux/fs.h  955  static inline void i_uid_write(struct inode *inode, uid_t uid)
+i_gid_write  function  include/linux/fs.h  960  static inline void i_gid_write(struct inode *inode, gid_t gid)
+iminor  function  include/linux/fs.h  965  static inline unsigned iminor(const struct inode *inode)
+imajor  function  include/linux/fs.h  970  static inline unsigned imajor(const struct inode *inode)
+I_BDEV  prototype  include/linux/fs.h  975  extern struct block_device *I_BDEV(struct inode *inode);
+ra_has_index  function  include/linux/fs.h  1002  static inline int ra_has_index(struct file_ra_state *ra, pgoff_t index)
+FILE_MNT_WRITE_TAKEN  macro  include/linux/fs.h  1008  #define FILE_MNT_WRITE_TAKEN 1
+FILE_MNT_WRITE_RELEASED  macro  include/linux/fs.h  1009  #define FILE_MNT_WRITE_RELEASED 2
+f_dentry  macro  include/linux/fs.h  1021  #define f_dentry f_path.dentry
+f_vfsmnt  macro  include/linux/fs.h  1022  #define f_vfsmnt f_path.mnt
+get_file  macro  include/linux/fs.h  1066  #define get_file(x) atomic_long_inc(&(x)->f_count)
+fput_atomic  macro  include/linux/fs.h  1067  #define fput_atomic(x) atomic_long_add_unless(&(x)->f_count, -1, 1)
+file_count  macro  include/linux/fs.h  1068  #define file_count(x) atomic_long_read(&(x)->f_count)
+file_take_write  function  include/linux/fs.h  1103  static inline void file_take_write(struct file *filp) {}
+file_release_write  function  include/linux/fs.h  1104  static inline void file_release_write(struct file *filp) {}
+file_reset_write  function  include/linux/fs.h  1105  static inline void file_reset_write(struct file *filp) {}
+file_check_state  function  include/linux/fs.h  1106  static inline void file_check_state(struct file *filp) {}
+file_check_writeable  function  include/linux/fs.h  1107  static inline int file_check_writeable(struct file *filp)
+MAX_NON_LFS  macro  include/linux/fs.h  1113  #define MAX_NON_LFS ((1UL<<31) - 1)
+MAX_LFS_FILESIZE  macro  include/linux/fs.h  1120  #define MAX_LFS_FILESIZE 0x7fffffffffffffffUL
+FL_POSIX  macro  include/linux/fs.h  1123  #define FL_POSIX 1
+FL_FLOCK  macro  include/linux/fs.h  1124  #define FL_FLOCK 2
+FL_ACCESS  macro  include/linux/fs.h  1125  #define FL_ACCESS 8 /* not trying to lock, just looking */
+FL_EXISTS  macro  include/linux/fs.h  1126  #define FL_EXISTS 16 /* when unlocking, test for existence */
+FL_LEASE  macro  include/linux/fs.h  1127  #define FL_LEASE 32 /* lease held on this file */
+FL_CLOSE  macro  include/linux/fs.h  1128  #define FL_CLOSE 64 /* unlock on close */
+FL_SLEEP  macro  include/linux/fs.h  1129  #define FL_SLEEP 128 /* A blocking lock */
+FL_DOWNGRADE_PENDING  macro  include/linux/fs.h  1130  #define FL_DOWNGRADE_PENDING 256 /* Lease is being downgraded */
+FL_UNLOCK_PENDING  macro  include/linux/fs.h  1131  #define FL_UNLOCK_PENDING 512 /* Lease is being broken */
+FILE_LOCK_DEFERRED  macro  include/linux/fs.h  1137  #define FILE_LOCK_DEFERRED 1
+locks_start_grace  prototype  include/linux/fs.h  1166  void locks_start_grace(struct lock_manager *);
+locks_end_grace  prototype  include/linux/fs.h  1167  void locks_end_grace(struct lock_manager *);
+locks_in_grace  prototype  include/linux/fs.h  1168  int locks_in_grace(void);
+INT_LIMIT  macro  include/linux/fs.h  1206  #define INT_LIMIT(x) (~((x)1 << (sizeof(x)*8 - 1)))
+OFFSET_MAX  macro  include/linux/fs.h  1207  #define OFFSET_MAX INT_LIMIT(loff_t)
+OFFT_OFFSET_MAX  macro  include/linux/fs.h  1208  #define OFFT_OFFSET_MAX INT_LIMIT(off_t)
+send_sigio  prototype  include/linux/fs.h  1213  extern void send_sigio(struct fown_struct *fown, int fd, int band);
+fcntl_getlk  function  include/linux/fs.h  1257  static inline int fcntl_getlk(struct file *file, struct flock __user *user)
+fcntl_setlk  function  include/linux/fs.h  1263  static inline int fcntl_setlk(unsigned int fd, struct file *file,unsigned int cmd, struct flock __user *user)
+fcntl_getlk64  function  include/linux/fs.h  1269  static inline int fcntl_getlk64(struct file *file, struct flock64 __user *user)
+fcntl_setlk64  function  include/linux/fs.h  1275  static inline int fcntl_setlk64(unsigned int fd, struct file *file,unsigned int cmd, struct flock64 __user *user)
+fcntl_setlease  function  include/linux/fs.h  1280  static inline int fcntl_setlease(unsigned int fd, struct file *filp, long arg)
+fcntl_getlease  function  include/linux/fs.h  1285  static inline int fcntl_getlease(struct file *filp)
+locks_free_lock  prototype  include/linux/fs.h  1230  void locks_free_lock(struct file_lock *fl);
+locks_init_lock  function  include/linux/fs.h  1290  static inline void locks_init_lock(struct file_lock *fl)
+locks_alloc_lock  prototype  include/linux/fs.h  1232  extern struct file_lock * locks_alloc_lock(void);
+locks_copy_lock  function  include/linux/fs.h  1300  static inline void locks_copy_lock(struct file_lock *new, struct file_lock *fl)
+__locks_copy_lock  function  include/linux/fs.h  1295  static inline void __locks_copy_lock(struct file_lock *new, struct file_lock *fl)
+locks_remove_posix  function  include/linux/fs.h  1305  static inline void locks_remove_posix(struct file *filp, fl_owner_t owner)
+locks_remove_flock  function  include/linux/fs.h  1310  static inline void locks_remove_flock(struct file *filp)
+locks_release_private  prototype  include/linux/fs.h  1237  extern void locks_release_private(struct file_lock *);
+posix_test_lock  function  include/linux/fs.h  1315  static inline void posix_test_lock(struct file *filp, struct file_lock *fl)
+posix_lock_file  function  include/linux/fs.h  1321  static inline int posix_lock_file(struct file *filp, struct file_lock *fl,struct file_lock *conflock)
+posix_lock_file_wait  function  include/linux/fs.h  1326  static inline int posix_lock_file_wait(struct file *filp, struct file_lock *fl)
+posix_unblock_lock  function  include/linux/fs.h  1332  static inline int posix_unblock_lock(struct file *filp,struct file_lock *waiter)
+vfs_test_lock  function  include/linux/fs.h  1337  static inline int vfs_test_lock(struct file *filp, struct file_lock *fl)
+vfs_lock_file  function  include/linux/fs.h  1343  static inline int vfs_lock_file(struct file *filp, unsigned int cmd,struct file_lock *fl, struct file_lock *conf)
+vfs_cancel_lock  function  include/linux/fs.h  1348  static inline int vfs_cancel_lock(struct file *filp, struct file_lock *fl)
+flock_lock_file_wait  function  include/linux/fs.h  1354  static inline int flock_lock_file_wait(struct file *filp,struct file_lock *request)
+__break_lease  function  include/linux/fs.h  1359  static inline int __break_lease(struct inode *inode, unsigned int mode)
+lease_get_mtime  function  include/linux/fs.h  1364  static inline void lease_get_mtime(struct inode *inode, struct timespec *time)
+generic_setlease  function  include/linux/fs.h  1370  static inline int generic_setlease(struct file *filp, long arg,struct file_lock **flp)
+vfs_setlease  function  include/linux/fs.h  1376  static inline int vfs_setlease(struct file *filp, long arg,struct file_lock **lease)
+lease_modify  function  include/linux/fs.h  1381  static inline int lease_modify(struct file_lock **before, int arg)
+lock_may_read  function  include/linux/fs.h  1387  static inline int lock_may_read(struct inode *inode, loff_t start,unsigned long len)
+lock_may_write  function  include/linux/fs.h  1393  static inline int lock_may_write(struct inode *inode, loff_t start,unsigned long len)
+locks_delete_block  function  include/linux/fs.h  1398  static inline void locks_delete_block(struct file_lock *waiter)
+lock_flocks  function  include/linux/fs.h  1402  static inline void lock_flocks(void)
+unlock_flocks  function  include/linux/fs.h  1406  static inline void unlock_flocks(void)
+FASYNC_MAGIC  macro  include/linux/fs.h  1422  #define FASYNC_MAGIC 0x4601
+fasync_helper  prototype  include/linux/fs.h  1425  extern int fasync_helper(int, struct file *, int, struct fasync_struct **);
+fasync_insert_entry  prototype  include/linux/fs.h  1426  extern struct fasync_struct *fasync_insert_entry(int, struct file *, struct fasync_struct **, struct fasync_struct *);
+fasync_remove_entry  prototype  include/linux/fs.h  1427  extern int fasync_remove_entry(struct file *, struct fasync_struct **);
+fasync_alloc  prototype  include/linux/fs.h  1428  extern struct fasync_struct *fasync_alloc(void);
+fasync_free  prototype  include/linux/fs.h  1429  extern void fasync_free(struct fasync_struct *);
+kill_fasync  prototype  include/linux/fs.h  1432  extern void kill_fasync(struct fasync_struct **, int, int);
+__f_setown  prototype  include/linux/fs.h  1434  extern int __f_setown(struct file *filp, struct pid *, enum pid_type, int force);
+f_setown  prototype  include/linux/fs.h  1435  extern int f_setown(struct file *filp, unsigned long arg, int force);
+f_delown  prototype  include/linux/fs.h  1436  extern void f_delown(struct file *filp);
+f_getown  prototype  include/linux/fs.h  1437  extern pid_t f_getown(struct file *filp);
+send_sigurg  prototype  include/linux/fs.h  1438  extern int send_sigurg(struct fown_struct *fown);
+MNT_FORCE  macro  include/linux/fs.h  1444  #define MNT_FORCE 0x00000001 /* Attempt to forcibily umount */
+MNT_DETACH  macro  include/linux/fs.h  1445  #define MNT_DETACH 0x00000002 /* Just detach from the tree */
+MNT_EXPIRE  macro  include/linux/fs.h  1446  #define MNT_EXPIRE 0x00000004 /* Mark for expiry */
+UMOUNT_NOFOLLOW  macro  include/linux/fs.h  1447  #define UMOUNT_NOFOLLOW 0x00000008 /* Don't follow symlink on umount */
+UMOUNT_UNUSED  macro  include/linux/fs.h  1448  #define UMOUNT_UNUSED 0x80000000 /* Flag guaranteed to be unused */
+prune_icache_sb  prototype  include/linux/fs.h  1548  extern void prune_icache_sb(struct super_block *sb, int nr_to_scan);
+prune_dcache_sb  prototype  include/linux/fs.h  1549  extern void prune_dcache_sb(struct super_block *sb, int nr_to_scan);
+current_fs_time  prototype  include/linux/fs.h  1551  extern struct timespec current_fs_time(struct super_block *sb);
+vfs_check_frozen  macro  include/linux/fs.h  1562  #define vfs_check_frozen(sb, level) \
+inode_owner_or_capable  prototype  include/linux/fs.h  1565  extern bool inode_owner_or_capable(const struct inode *inode);
+lock_super  prototype  include/linux/fs.h  1568  extern void lock_super(struct super_block *);
+unlock_super  prototype  include/linux/fs.h  1569  extern void unlock_super(struct super_block *);
+vfs_create  prototype  include/linux/fs.h  1574  extern int vfs_create(struct inode *, struct dentry *, umode_t, struct nameidata *);
+vfs_mkdir  prototype  include/linux/fs.h  1575  extern int vfs_mkdir(struct inode *, struct dentry *, umode_t);
+vfs_mknod  prototype  include/linux/fs.h  1576  extern int vfs_mknod(struct inode *, struct dentry *, umode_t, dev_t);
+vfs_symlink  prototype  include/linux/fs.h  1577  extern int vfs_symlink(struct inode *, struct dentry *, const char *);
+vfs_link  prototype  include/linux/fs.h  1578  extern int vfs_link(struct dentry *, struct inode *, struct dentry *);
+vfs_rmdir  prototype  include/linux/fs.h  1579  extern int vfs_rmdir(struct inode *, struct dentry *);
+vfs_unlink  prototype  include/linux/fs.h  1580  extern int vfs_unlink(struct inode *, struct dentry *);
+vfs_rename  prototype  include/linux/fs.h  1581  extern int vfs_rename(struct inode *, struct dentry *, struct inode *, struct dentry *);
+dentry_unhash  prototype  include/linux/fs.h  1586  extern void dentry_unhash(struct dentry *dentry);
+inode_init_owner  prototype  include/linux/fs.h  1592  extern void inode_init_owner(struct inode *inode, const struct inode *dir,umode_t mode);
+fiemap_fill_next_extent  prototype  include/linux/fs.h  1604  int fiemap_fill_next_extent(struct fiemap_extent_info *info, u64 logical,u64 phys, u64 len, u32 flags);
+fiemap_check_flags  prototype  include/linux/fs.h  1605  int fiemap_check_flags(struct fiemap_extent_info *fieinfo, u32 fs_flags);
+DT_UNKNOWN  macro  include/linux/fs.h  1613  #define DT_UNKNOWN 0
+DT_FIFO  macro  include/linux/fs.h  1614  #define DT_FIFO 1
+DT_CHR  macro  include/linux/fs.h  1615  #define DT_CHR 2
+DT_DIR  macro  include/linux/fs.h  1616  #define DT_DIR 4
+DT_BLK  macro  include/linux/fs.h  1617  #define DT_BLK 6
+DT_REG  macro  include/linux/fs.h  1618  #define DT_REG 8
+DT_LNK  macro  include/linux/fs.h  1619  #define DT_LNK 10
+DT_SOCK  macro  include/linux/fs.h  1620  #define DT_SOCK 12
+DT_WHT  macro  include/linux/fs.h  1621  #define DT_WHT 14
+HAVE_COMPAT_IOCTL  macro  include/linux/fs.h  1635  #define HAVE_COMPAT_IOCTL 1
+HAVE_UNLOCKED_IOCTL  macro  include/linux/fs.h  1636  #define HAVE_UNLOCKED_IOCTL 1
+rw_copy_check_uvector  prototype  include/linux/fs.h  1703  ssize_t rw_copy_check_uvector(int type, const struct iovec __user * uvector,unsigned long nr_segs, unsigned long fast_segs,struct iovec *fast_pointer,struct iovec **ret_pointer);
+vfs_read  prototype  include/linux/fs.h  1705  extern ssize_t vfs_read(struct file *, char __user *, size_t, loff_t *);
+vfs_write  prototype  include/linux/fs.h  1706  extern ssize_t vfs_write(struct file *, const char __user *, size_t, loff_t *);
+vfs_readv  prototype  include/linux/fs.h  1708  extern ssize_t vfs_readv(struct file *, const struct iovec __user *,unsigned long, loff_t *);
+vfs_writev  prototype  include/linux/fs.h  1710  extern ssize_t vfs_writev(struct file *, const struct iovec __user *,unsigned long, loff_t *);
+I_DIRTY_SYNC  macro  include/linux/fs.h  1795  #define I_DIRTY_SYNC (1 << 0)
+I_DIRTY_DATASYNC  macro  include/linux/fs.h  1796  #define I_DIRTY_DATASYNC (1 << 1)
+I_DIRTY_PAGES  macro  include/linux/fs.h  1797  #define I_DIRTY_PAGES (1 << 2)
+__I_NEW  macro  include/linux/fs.h  1798  #define __I_NEW 3
+I_NEW  macro  include/linux/fs.h  1799  #define I_NEW (1 << __I_NEW)
+I_WILL_FREE  macro  include/linux/fs.h  1800  #define I_WILL_FREE (1 << 4)
+I_FREEING  macro  include/linux/fs.h  1801  #define I_FREEING (1 << 5)
+I_CLEAR  macro  include/linux/fs.h  1802  #define I_CLEAR (1 << 6)
+__I_SYNC  macro  include/linux/fs.h  1803  #define __I_SYNC 7
+I_SYNC  macro  include/linux/fs.h  1804  #define I_SYNC (1 << __I_SYNC)
+I_REFERENCED  macro  include/linux/fs.h  1805  #define I_REFERENCED (1 << 8)
+__I_DIO_WAKEUP  macro  include/linux/fs.h  1806  #define __I_DIO_WAKEUP 9
+I_DIO_WAKEUP  macro  include/linux/fs.h  1807  #define I_DIO_WAKEUP (1 << I_DIO_WAKEUP)
+I_DIRTY  macro  include/linux/fs.h  1809  #define I_DIRTY (I_DIRTY_SYNC | I_DIRTY_DATASYNC | I_DIRTY_PAGES)
+__mark_inode_dirty  prototype  include/linux/fs.h  1811  extern void __mark_inode_dirty(struct inode *, int);
+mark_inode_dirty  function  include/linux/fs.h  1812  static inline void mark_inode_dirty(struct inode *inode)
+mark_inode_dirty_sync  function  include/linux/fs.h  1817  static inline void mark_inode_dirty_sync(struct inode *inode)
+inc_nlink  prototype  include/linux/fs.h  1822  extern void inc_nlink(struct inode *inode);
+drop_nlink  prototype  include/linux/fs.h  1823  extern void drop_nlink(struct inode *inode);
+clear_nlink  prototype  include/linux/fs.h  1824  extern void clear_nlink(struct inode *inode);
+set_nlink  prototype  include/linux/fs.h  1825  extern void set_nlink(struct inode *inode, unsigned int nlink);
+inode_inc_link_count  function  include/linux/fs.h  1827  static inline void inode_inc_link_count(struct inode *inode)
+inode_dec_link_count  function  include/linux/fs.h  1833  static inline void inode_dec_link_count(struct inode *inode)
+inode_inc_iversion  function  include/linux/fs.h  1847  static inline void inode_inc_iversion(struct inode *inode)
+touch_atime  prototype  include/linux/fs.h  1861  extern void touch_atime(struct path *);
+file_accessed  function  include/linux/fs.h  1862  static inline void file_accessed(struct file *file)
+sync_inode  prototype  include/linux/fs.h  1868  int sync_inode(struct inode *inode, struct writeback_control *wbc);
+sync_inode_metadata  prototype  include/linux/fs.h  1869  int sync_inode_metadata(struct inode *inode, int wait);
+mount_ns  prototype  include/linux/fs.h  1891  extern struct dentry *mount_ns(struct file_system_type *fs_type, int flags,void *data, int (*fill_super)(struct super_block *, void *, int));
+mount_bdev  prototype  include/linux/fs.h  1894  extern struct dentry *mount_bdev(struct file_system_type *fs_type,int flags, const char *dev_name, void *data,int (*fill_super)(struct super_block *, void *, int));
+mount_single  prototype  include/linux/fs.h  1897  extern struct dentry *mount_single(struct file_system_type *fs_type,int flags, void *data,int (*fill_super)(struct super_block *, void *, int));
+mount_nodev  prototype  include/linux/fs.h  1900  extern struct dentry *mount_nodev(struct file_system_type *fs_type,int flags, void *data,int (*fill_super)(struct super_block *, void *, int));
+mount_subtree  prototype  include/linux/fs.h  1901  extern struct dentry *mount_subtree(struct vfsmount *mnt, const char *path);
+generic_shutdown_super  prototype  include/linux/fs.h  1902  void generic_shutdown_super(struct super_block *sb);
+kill_block_super  prototype  include/linux/fs.h  1903  void kill_block_super(struct super_block *sb);
+kill_anon_super  prototype  include/linux/fs.h  1904  void kill_anon_super(struct super_block *sb);
+kill_litter_super  prototype  include/linux/fs.h  1905  void kill_litter_super(struct super_block *sb);
+deactivate_super  prototype  include/linux/fs.h  1906  void deactivate_super(struct super_block *sb);
+deactivate_locked_super  prototype  include/linux/fs.h  1907  void deactivate_locked_super(struct super_block *sb);
+set_anon_super  prototype  include/linux/fs.h  1908  int set_anon_super(struct super_block *s, void *data);
+get_anon_bdev  prototype  include/linux/fs.h  1909  int get_anon_bdev(dev_t *);
+free_anon_bdev  prototype  include/linux/fs.h  1910  void free_anon_bdev(dev_t);
+sget  prototype  include/linux/fs.h  1914  struct super_block *sget(struct file_system_type *type,int (*test)(struct super_block *,void *),int (*set)(struct super_block *,void *),void *data);
+mount_pseudo  prototype  include/linux/fs.h  1918  extern struct dentry *mount_pseudo(struct file_system_type *, char *,const struct super_operations *ops,const struct dentry_operations *dops,unsigned long);
+fops_get  macro  include/linux/fs.h  1921  #define fops_get(fops) \
+fops_put  macro  include/linux/fs.h  1923  #define fops_put(fops) \
+register_filesystem  prototype  include/linux/fs.h  1926  extern int register_filesystem(struct file_system_type *);
+unregister_filesystem  prototype  include/linux/fs.h  1927  extern int unregister_filesystem(struct file_system_type *);
+kern_mount_data  prototype  include/linux/fs.h  1928  extern struct vfsmount *kern_mount_data(struct file_system_type *, void *data);
+kern_mount  macro  include/linux/fs.h  1929  #define kern_mount(type) kern_mount_data(type, NULL)
+kern_unmount  prototype  include/linux/fs.h  1930  extern void kern_unmount(struct vfsmount *mnt);
+may_umount_tree  prototype  include/linux/fs.h  1931  extern int may_umount_tree(struct vfsmount *);
+may_umount  prototype  include/linux/fs.h  1932  extern int may_umount(struct vfsmount *);
+do_mount  prototype  include/linux/fs.h  1933  extern long do_mount(char *, char *, char *, unsigned long, void *);
+collect_mounts  prototype  include/linux/fs.h  1934  extern struct vfsmount *collect_mounts(struct path *);
+drop_collected_mounts  prototype  include/linux/fs.h  1935  extern void drop_collected_mounts(struct vfsmount *);
+iterate_mounts  prototype  include/linux/fs.h  1937  extern int iterate_mounts(int (*)(struct vfsmount *, void *), void *,struct vfsmount *);
+vfs_statfs  prototype  include/linux/fs.h  1938  extern int vfs_statfs(struct path *, struct kstatfs *);
+user_statfs  prototype  include/linux/fs.h  1939  extern int user_statfs(const char __user *, struct kstatfs *);
+fd_statfs  prototype  include/linux/fs.h  1940  extern int fd_statfs(int, struct kstatfs *);
+vfs_ustat  prototype  include/linux/fs.h  1941  extern int vfs_ustat(dev_t, struct kstatfs *);
+freeze_super  prototype  include/linux/fs.h  1942  extern int freeze_super(struct super_block *super);
+thaw_super  prototype  include/linux/fs.h  1943  extern int thaw_super(struct super_block *super);
+our_mnt  prototype  include/linux/fs.h  1944  extern bool our_mnt(struct vfsmount *mnt);
+current_umask  prototype  include/linux/fs.h  1946  extern int current_umask(void);
+MAX_RW_COUNT  macro  include/linux/fs.h  1951  #define MAX_RW_COUNT (INT_MAX & PAGE_CACHE_MASK)
+rw_verify_area  prototype  include/linux/fs.h  1952  extern int rw_verify_area(int, struct file *, loff_t *, size_t);
+FLOCK_VERIFY_READ  macro  include/linux/fs.h  1954  #define FLOCK_VERIFY_READ 1
+FLOCK_VERIFY_WRITE  macro  include/linux/fs.h  1955  #define FLOCK_VERIFY_WRITE 2
+locks_mandatory_locked  function  include/linux/fs.h  2009  static inline int locks_mandatory_locked(struct inode *inode)
+locks_mandatory_area  function  include/linux/fs.h  2016  static inline int locks_mandatory_area(int rw, struct inode *inode,struct file *filp, loff_t offset,size_t count)
+__mandatory_lock  function  include/linux/fs.h  2021  static inline int __mandatory_lock(struct inode *inode)
+mandatory_lock  function  include/linux/fs.h  2026  static inline int mandatory_lock(struct inode *inode)
+locks_verify_locked  function  include/linux/fs.h  2031  static inline int locks_verify_locked(struct inode *inode)
+locks_verify_truncate  function  include/linux/fs.h  2037  static inline int locks_verify_truncate(struct inode *inode, struct file *filp,size_t size)
+break_lease  function  include/linux/fs.h  2042  static inline int break_lease(struct inode *inode, unsigned int mode)
+do_truncate  prototype  include/linux/fs.h  2052  extern int do_truncate(struct dentry *, loff_t start, unsigned int time_attrs,struct file *filp);
+do_fallocate  prototype  include/linux/fs.h  2054  extern int do_fallocate(struct file *file, int mode, loff_t offset,loff_t len);
+do_sys_open  prototype  include/linux/fs.h  2056  extern long do_sys_open(int dfd, const char __user *filename, int flags,umode_t mode);
+filp_open  prototype  include/linux/fs.h  2057  extern struct file *filp_open(const char *, int, umode_t);
+file_open_root  prototype  include/linux/fs.h  2059  extern struct file *file_open_root(struct dentry *, struct vfsmount *,const char *, int);
+dentry_open  prototype  include/linux/fs.h  2061  extern struct file * dentry_open(struct dentry *, struct vfsmount *, int,const struct cred *);
+filp_close  prototype  include/linux/fs.h  2062  extern int filp_close(struct file *, fl_owner_t id);
+getname  prototype  include/linux/fs.h  2063  extern char * getname(const char __user *);
+ioctl_preallocate  prototype  include/linux/fs.h  2067  extern int ioctl_preallocate(struct file *filp, void __user *argp);
+vfs_caches_init_early  prototype  include/linux/fs.h  2070  extern void __init vfs_caches_init_early(void);
+vfs_caches_init  prototype  include/linux/fs.h  2071  extern void __init vfs_caches_init(unsigned long);
+__getname_gfp  macro  include/linux/fs.h  2075  #define __getname_gfp(gfp) kmem_cache_alloc(names_cachep, (gfp))
+__getname  macro  include/linux/fs.h  2076  #define __getname() __getname_gfp(GFP_KERNEL)
+__putname  macro  include/linux/fs.h  2077  #define __putname(name) kmem_cache_free(names_cachep, (void *)(name))
+putname  prototype  include/linux/fs.h  2081  extern void putname(const char *name);
+register_blkdev  prototype  include/linux/fs.h  2085  extern int register_blkdev(unsigned int, const char *);
+unregister_blkdev  prototype  include/linux/fs.h  2086  extern void unregister_blkdev(unsigned int, const char *);
+bdget  prototype  include/linux/fs.h  2087  extern struct block_device *bdget(dev_t);
+bdgrab  prototype  include/linux/fs.h  2088  extern struct block_device *bdgrab(struct block_device *bdev);
+bd_set_size  prototype  include/linux/fs.h  2089  extern void bd_set_size(struct block_device *, loff_t size);
+blkdev_max_block  prototype  include/linux/fs.h  2090  extern sector_t blkdev_max_block(struct block_device *bdev);
+bd_forget  function  include/linux/fs.h  2101  static inline void bd_forget(struct inode *inode) {}
+bdput  prototype  include/linux/fs.h  2092  extern void bdput(struct block_device *);
+invalidate_bdev  function  include/linux/fs.h  2104  static inline void invalidate_bdev(struct block_device *bdev) {}
+sync_blockdev  function  include/linux/fs.h  2102  static inline int sync_blockdev(struct block_device *bdev) { return 0; }
+kill_bdev  function  include/linux/fs.h  2103  static inline void kill_bdev(struct block_device *bdev) {}
+freeze_bdev  function  include/linux/fs.h  2106  static inline struct super_block *freeze_bdev(struct block_device *sb)
+emergency_thaw_all  prototype  include/linux/fs.h  2097  extern void emergency_thaw_all(void);
+thaw_bdev  function  include/linux/fs.h  2111  static inline int thaw_bdev(struct block_device *bdev, struct super_block *sb)
+fsync_bdev  prototype  include/linux/fs.h  2099  extern int fsync_bdev(struct block_device *);
+sync_filesystem  prototype  include/linux/fs.h  2116  extern int sync_filesystem(struct super_block *);
+ioctl_by_bdev  prototype  include/linux/fs.h  2122  extern int ioctl_by_bdev(struct block_device *, unsigned, unsigned long);
+blkdev_ioctl  prototype  include/linux/fs.h  2123  extern int blkdev_ioctl(struct block_device *, fmode_t, unsigned, unsigned long);
+compat_blkdev_ioctl  prototype  include/linux/fs.h  2124  extern long compat_blkdev_ioctl(struct file *, unsigned, unsigned long);
+blkdev_get  prototype  include/linux/fs.h  2125  extern int blkdev_get(struct block_device *bdev, fmode_t mode, void *holder);
+blkdev_get_by_path  prototype  include/linux/fs.h  2127  extern struct block_device *blkdev_get_by_path(const char *path, fmode_t mode,void *holder);
+blkdev_get_by_dev  prototype  include/linux/fs.h  2129  extern struct block_device *blkdev_get_by_dev(dev_t dev, fmode_t mode,void *holder);
+blkdev_put  prototype  include/linux/fs.h  2130  extern int blkdev_put(struct block_device *bdev, fmode_t mode);
+bd_link_disk_holder  function  include/linux/fs.h  2137  static inline int bd_link_disk_holder(struct block_device *bdev,struct gendisk *disk)
+bd_unlink_disk_holder  function  include/linux/fs.h  2142  static inline void bd_unlink_disk_holder(struct block_device *bdev,struct gendisk *disk)
+CHRDEV_MAJOR_HASH_SIZE  macro  include/linux/fs.h  2149  #define CHRDEV_MAJOR_HASH_SIZE 255
+alloc_chrdev_region  prototype  include/linux/fs.h  2150  extern int alloc_chrdev_region(dev_t *, unsigned, unsigned, const char *);
+register_chrdev_region  prototype  include/linux/fs.h  2151  extern int register_chrdev_region(dev_t, unsigned, const char *);
+__register_chrdev  prototype  include/linux/fs.h  2154  extern int __register_chrdev(unsigned int major, unsigned int baseminor,unsigned int count, const char *name,const struct file_operations *fops);
+__unregister_chrdev  prototype  include/linux/fs.h  2156  extern void __unregister_chrdev(unsigned int major, unsigned int baseminor,unsigned int count, const char *name);
+unregister_chrdev_region  prototype  include/linux/fs.h  2157  extern void unregister_chrdev_region(dev_t, unsigned);
+chrdev_show  prototype  include/linux/fs.h  2158  extern void chrdev_show(struct seq_file *,off_t);
+register_chrdev  function  include/linux/fs.h  2161  static inline int register_chrdev(unsigned int major, const char *name,const struct file_operations *fops)
+unregister_chrdev  function  include/linux/fs.h  2166  static inline void unregister_chrdev(unsigned int major, const char *name)
+BDEVNAME_SIZE  macro  include/linux/fs.h  2172  #define BDEVNAME_SIZE 32 /* Largest string for a blockdev identifier */
+BDEVT_SIZE  macro  include/linux/fs.h  2173  #define BDEVT_SIZE 10 /* Largest string for MAJ:MIN for blkdev */
+BLKDEV_MAJOR_HASH_SIZE  macro  include/linux/fs.h  2183  #define BLKDEV_MAJOR_HASH_SIZE 0
+__bdevname  prototype  include/linux/fs.h  2177  extern const char *__bdevname(dev_t, char *buffer);
+bdevname  prototype  include/linux/fs.h  2178  extern const char *bdevname(struct block_device *bdev, char *buffer);
+lookup_bdev  prototype  include/linux/fs.h  2179  extern struct block_device *lookup_bdev(const char *);
+blkdev_show  prototype  include/linux/fs.h  2180  extern void blkdev_show(struct seq_file *,off_t);
+init_special_inode  prototype  include/linux/fs.h  2186  extern void init_special_inode(struct inode *, umode_t, dev_t);
+make_bad_inode  prototype  include/linux/fs.h  2189  extern void make_bad_inode(struct inode *);
+is_bad_inode  prototype  include/linux/fs.h  2190  extern int is_bad_inode(struct inode *);
+bio_rw  macro  include/linux/fs.h  2200  #define bio_rw(bio) ((bio)->bi_rw & (RW_MASK | RWA_MASK))
+bio_data_dir  macro  include/linux/fs.h  2205  #define bio_data_dir(bio) ((bio)->bi_rw & 1)
+check_disk_size_change  prototype  include/linux/fs.h  2208  extern void check_disk_size_change(struct gendisk *disk,struct block_device *bdev);
+revalidate_disk  prototype  include/linux/fs.h  2209  extern int revalidate_disk(struct gendisk *);
+check_disk_change  prototype  include/linux/fs.h  2210  extern int check_disk_change(struct block_device *);
+__invalidate_device  prototype  include/linux/fs.h  2211  extern int __invalidate_device(struct block_device *, bool);
+invalidate_partition  prototype  include/linux/fs.h  2212  extern int invalidate_partition(struct gendisk *, int);
+invalidate_mapping_pages  prototype  include/linux/fs.h  2215  unsigned long invalidate_mapping_pages(struct address_space *mapping,pgoff_t start, pgoff_t end);
+invalidate_remote_inode  function  include/linux/fs.h  2217  static inline void invalidate_remote_inode(struct inode *inode)
+invalidate_inode_pages2  prototype  include/linux/fs.h  2223  extern int invalidate_inode_pages2(struct address_space *mapping);
+invalidate_inode_pages2_range  prototype  include/linux/fs.h  2225  extern int invalidate_inode_pages2_range(struct address_space *mapping,pgoff_t start, pgoff_t end);
+write_inode_now  prototype  include/linux/fs.h  2226  extern int write_inode_now(struct inode *, int);
+filemap_fdatawrite  prototype  include/linux/fs.h  2227  extern int filemap_fdatawrite(struct address_space *);
+filemap_flush  prototype  include/linux/fs.h  2228  extern int filemap_flush(struct address_space *);
+filemap_fdatawait  prototype  include/linux/fs.h  2229  extern int filemap_fdatawait(struct address_space *);
+filemap_fdatawait_range  prototype  include/linux/fs.h  2231  extern int filemap_fdatawait_range(struct address_space *, loff_t lstart,loff_t lend);
+filemap_write_and_wait  prototype  include/linux/fs.h  2232  extern int filemap_write_and_wait(struct address_space *mapping);
+filemap_write_and_wait_range  prototype  include/linux/fs.h  2234  extern int filemap_write_and_wait_range(struct address_space *mapping,loff_t lstart, loff_t lend);
+__filemap_fdatawrite_range  prototype  include/linux/fs.h  2236  extern int __filemap_fdatawrite_range(struct address_space *mapping,loff_t start, loff_t end, int sync_mode);
+filemap_fdatawrite_range  prototype  include/linux/fs.h  2238  extern int filemap_fdatawrite_range(struct address_space *mapping,loff_t start, loff_t end);
+vfs_fsync_range  prototype  include/linux/fs.h  2241  extern int vfs_fsync_range(struct file *file, loff_t start, loff_t end,int datasync);
+vfs_fsync  prototype  include/linux/fs.h  2242  extern int vfs_fsync(struct file *file, int datasync);
+generic_write_sync  prototype  include/linux/fs.h  2243  extern int generic_write_sync(struct file *file, loff_t pos, loff_t count);
+sync_supers  prototype  include/linux/fs.h  2244  extern void sync_supers(void);
+emergency_sync  prototype  include/linux/fs.h  2245  extern void emergency_sync(void);
+emergency_remount  prototype  include/linux/fs.h  2246  extern void emergency_remount(void);
+bmap  prototype  include/linux/fs.h  2248  extern sector_t bmap(struct inode *, sector_t);
+notify_change  prototype  include/linux/fs.h  2250  extern int notify_change(struct dentry *, struct iattr *);
+inode_permission  prototype  include/linux/fs.h  2251  extern int inode_permission(struct inode *, int);
+generic_permission  prototype  include/linux/fs.h  2252  extern int generic_permission(struct inode *, int);
+execute_ok  function  include/linux/fs.h  2254  static inline bool execute_ok(struct inode *inode)
+get_write_access  function  include/linux/fs.h  2275  static inline int get_write_access(struct inode *inode)
+deny_write_access  function  include/linux/fs.h  2279  static inline int deny_write_access(struct file *file)
+put_write_access  function  include/linux/fs.h  2284  static inline void put_write_access(struct inode * inode)
+allow_write_access  function  include/linux/fs.h  2288  static inline void allow_write_access(struct file *file)
+i_readcount_dec  function  include/linux/fs.h  2304  static inline void i_readcount_dec(struct inode *inode)
+i_readcount_inc  function  include/linux/fs.h  2308  static inline void i_readcount_inc(struct inode *inode)
+do_pipe_flags  prototype  include/linux/fs.h  2313  extern int do_pipe_flags(int *, int);
+create_read_pipe  prototype  include/linux/fs.h  2314  extern struct file *create_read_pipe(struct file *f, int flags);
+create_write_pipe  prototype  include/linux/fs.h  2315  extern struct file *create_write_pipe(int flags);
+free_write_pipe  prototype  include/linux/fs.h  2316  extern void free_write_pipe(struct file *);
+kernel_read  prototype  include/linux/fs.h  2318  extern int kernel_read(struct file *, loff_t, char *, unsigned long);
+open_exec  prototype  include/linux/fs.h  2319  extern struct file * open_exec(const char *);
+is_subdir  prototype  include/linux/fs.h  2322  extern int is_subdir(struct dentry *, struct dentry *);
+path_is_under  prototype  include/linux/fs.h  2323  extern int path_is_under(struct path *, struct path *);
+find_inode_number  prototype  include/linux/fs.h  2324  extern ino_t find_inode_number(struct dentry *, struct qstr *);
+default_llseek  prototype  include/linux/fs.h  2329  extern loff_t default_llseek(struct file *file, loff_t offset, int origin);
+vfs_llseek  prototype  include/linux/fs.h  2331  extern loff_t vfs_llseek(struct file *file, loff_t offset, int origin);
+inode_init_always  prototype  include/linux/fs.h  2333  extern int inode_init_always(struct super_block *, struct inode *);
+inode_init_once  prototype  include/linux/fs.h  2334  extern void inode_init_once(struct inode *);
+address_space_init_once  prototype  include/linux/fs.h  2335  extern void address_space_init_once(struct address_space *mapping);
+ihold  prototype  include/linux/fs.h  2336  extern void ihold(struct inode * inode);
+iput  prototype  include/linux/fs.h  2337  extern void iput(struct inode *);
+igrab  prototype  include/linux/fs.h  2338  extern struct inode * igrab(struct inode *);
+iunique  prototype  include/linux/fs.h  2339  extern ino_t iunique(struct super_block *, ino_t);
+inode_needs_sync  prototype  include/linux/fs.h  2340  extern int inode_needs_sync(struct inode *inode);
+generic_delete_inode  prototype  include/linux/fs.h  2341  extern int generic_delete_inode(struct inode *inode);
+generic_drop_inode  function  include/linux/fs.h  2342  static inline int generic_drop_inode(struct inode *inode)
+ilookup5_nowait  prototype  include/linux/fs.h  2349  extern struct inode *ilookup5_nowait(struct super_block *sb,unsigned long hashval, int (*test)(struct inode *, void *),void *data);
+ilookup5  prototype  include/linux/fs.h  2351  extern struct inode *ilookup5(struct super_block *sb, unsigned long hashval,int (*test)(struct inode *, void *), void *data);
+ilookup  prototype  include/linux/fs.h  2352  extern struct inode *ilookup(struct super_block *sb, unsigned long ino);
+iget5_locked  prototype  include/linux/fs.h  2354  extern struct inode * iget5_locked(struct super_block *, unsigned long, int (*test)(struct inode *, void *), int (*set)(struct inode *, void *), void *);
+iget_locked  prototype  include/linux/fs.h  2355  extern struct inode * iget_locked(struct super_block *, unsigned long);
+insert_inode_locked4  prototype  include/linux/fs.h  2356  extern int insert_inode_locked4(struct inode *, unsigned long, int (*test)(struct inode *, void *), void *);
+insert_inode_locked  prototype  include/linux/fs.h  2357  extern int insert_inode_locked(struct inode *);
+lockdep_annotate_inode_mutex_key  function  include/linux/fs.h  2361  static inline void lockdep_annotate_inode_mutex_key(struct inode *inode) { };
+unlock_new_inode  prototype  include/linux/fs.h  2363  extern void unlock_new_inode(struct inode *);
+get_next_ino  prototype  include/linux/fs.h  2364  extern unsigned int get_next_ino(void);
+__iget  prototype  include/linux/fs.h  2366  extern void __iget(struct inode * inode);
+iget_failed  prototype  include/linux/fs.h  2367  extern void iget_failed(struct inode *);
+clear_inode  prototype  include/linux/fs.h  2368  extern void clear_inode(struct inode *);
+__destroy_inode  prototype  include/linux/fs.h  2369  extern void __destroy_inode(struct inode *);
+new_inode_pseudo  prototype  include/linux/fs.h  2370  extern struct inode *new_inode_pseudo(struct super_block *sb);
+new_inode  prototype  include/linux/fs.h  2371  extern struct inode *new_inode(struct super_block *sb);
+free_inode_nonrcu  prototype  include/linux/fs.h  2372  extern void free_inode_nonrcu(struct inode *inode);
+should_remove_suid  prototype  include/linux/fs.h  2373  extern int should_remove_suid(struct dentry *);
+file_remove_suid  prototype  include/linux/fs.h  2374  extern int file_remove_suid(struct file *);
+__insert_inode_hash  prototype  include/linux/fs.h  2376  extern void __insert_inode_hash(struct inode *, unsigned long hashval);
+insert_inode_hash  function  include/linux/fs.h  2377  static inline void insert_inode_hash(struct inode *inode)
+__remove_inode_hash  prototype  include/linux/fs.h  2382  extern void __remove_inode_hash(struct inode *);
+remove_inode_hash  function  include/linux/fs.h  2383  static inline void remove_inode_hash(struct inode *inode)
+inode_sb_list_add  prototype  include/linux/fs.h  2389  extern void inode_sb_list_add(struct inode *inode);
+submit_bio  prototype  include/linux/fs.h  2392  extern void submit_bio(int, struct bio *);
+bdev_read_only  prototype  include/linux/fs.h  2393  extern int bdev_read_only(struct block_device *);
+set_blocksize  prototype  include/linux/fs.h  2395  extern int set_blocksize(struct block_device *, int);
+sb_set_blocksize  prototype  include/linux/fs.h  2396  extern int sb_set_blocksize(struct super_block *, int);
+sb_min_blocksize  prototype  include/linux/fs.h  2397  extern int sb_min_blocksize(struct super_block *, int);
+generic_file_mmap  prototype  include/linux/fs.h  2399  extern int generic_file_mmap(struct file *, struct vm_area_struct *);
+generic_file_readonly_mmap  prototype  include/linux/fs.h  2400  extern int generic_file_readonly_mmap(struct file *, struct vm_area_struct *);
+file_read_actor  prototype  include/linux/fs.h  2401  extern int file_read_actor(read_descriptor_t * desc, struct page *page, unsigned long offset, unsigned long size);
+generic_write_checks  prototype  include/linux/fs.h  2402  int generic_write_checks(struct file *file, loff_t *pos, size_t *count, int isblk);
+generic_file_aio_read  prototype  include/linux/fs.h  2403  extern ssize_t generic_file_aio_read(struct kiocb *, const struct iovec *, unsigned long, loff_t);
+__generic_file_aio_write  prototype  include/linux/fs.h  2405  extern ssize_t __generic_file_aio_write(struct kiocb *, const struct iovec *, unsigned long,loff_t *);
+generic_file_aio_write  prototype  include/linux/fs.h  2406  extern ssize_t generic_file_aio_write(struct kiocb *, const struct iovec *, unsigned long, loff_t);
+generic_file_direct_write  prototype  include/linux/fs.h  2408  extern ssize_t generic_file_direct_write(struct kiocb *, const struct iovec *,unsigned long *, loff_t, loff_t *, size_t, size_t);
+generic_file_buffered_write  prototype  include/linux/fs.h  2410  extern ssize_t generic_file_buffered_write(struct kiocb *, const struct iovec *,unsigned long, loff_t, loff_t *, size_t, ssize_t);
+do_sync_read  prototype  include/linux/fs.h  2411  extern ssize_t do_sync_read(struct file *filp, char __user *buf, size_t len, loff_t *ppos);
+do_sync_write  prototype  include/linux/fs.h  2412  extern ssize_t do_sync_write(struct file *filp, const char __user *buf, size_t len, loff_t *ppos);
+generic_segment_checks  prototype  include/linux/fs.h  2414  extern int generic_segment_checks(const struct iovec *iov,unsigned long *nr_segs, size_t *count, int access_flags);
+blkdev_aio_write  prototype  include/linux/fs.h  2418  extern ssize_t blkdev_aio_write(struct kiocb *iocb, const struct iovec *iov,unsigned long nr_segs, loff_t pos);
+blkdev_fsync  prototype  include/linux/fs.h  2420  extern int blkdev_fsync(struct file *filp, loff_t start, loff_t end,int datasync);
+block_sync_page  prototype  include/linux/fs.h  2421  extern void block_sync_page(struct page *page);
+generic_file_splice_read  prototype  include/linux/fs.h  2425  extern ssize_t generic_file_splice_read(struct file *, loff_t *,struct pipe_inode_info *, size_t, unsigned int);
+default_file_splice_read  prototype  include/linux/fs.h  2427  extern ssize_t default_file_splice_read(struct file *, loff_t *,struct pipe_inode_info *, size_t, unsigned int);
+generic_file_splice_write  prototype  include/linux/fs.h  2429  extern ssize_t generic_file_splice_write(struct pipe_inode_info *,struct file *, loff_t *, size_t, unsigned int);
+generic_splice_sendpage  prototype  include/linux/fs.h  2431  extern ssize_t generic_splice_sendpage(struct pipe_inode_info *pipe,struct file *out, loff_t *, size_t len, unsigned int flags);
+do_splice_direct  prototype  include/linux/fs.h  2433  extern long do_splice_direct(struct file *in, loff_t *ppos, struct file *out,size_t len, unsigned int flags);
+file_ra_state_init  prototype  include/linux/fs.h  2436  file_ra_state_init(struct file_ra_state *ra, struct address_space *mapping);
+noop_llseek  prototype  include/linux/fs.h  2437  extern loff_t noop_llseek(struct file *file, loff_t offset, int origin);
+no_llseek  prototype  include/linux/fs.h  2438  extern loff_t no_llseek(struct file *file, loff_t offset, int origin);
+generic_file_llseek  prototype  include/linux/fs.h  2439  extern loff_t generic_file_llseek(struct file *file, loff_t offset, int origin);
+generic_file_llseek_size  prototype  include/linux/fs.h  2441  extern loff_t generic_file_llseek_size(struct file *file, loff_t offset,int origin, loff_t maxsize);
+generic_file_open  prototype  include/linux/fs.h  2442  extern int generic_file_open(struct inode * inode, struct file * filp);
+nonseekable_open  prototype  include/linux/fs.h  2443  extern int nonseekable_open(struct inode * inode, struct file * filp);
+xip_file_read  prototype  include/linux/fs.h  2447  extern ssize_t xip_file_read(struct file *filp, char __user *buf, size_t len,loff_t *ppos);
+xip_file_mmap  prototype  include/linux/fs.h  2448  extern int xip_file_mmap(struct file * file, struct vm_area_struct * vma);
+xip_file_write  prototype  include/linux/fs.h  2450  extern ssize_t xip_file_write(struct file *filp, const char __user *buf,size_t len, loff_t *ppos);
+xip_truncate_page  function  include/linux/fs.h  2453  static inline int xip_truncate_page(struct address_space *mapping, loff_t from)
+dio_end_io  prototype  include/linux/fs.h  2471  void dio_end_io(struct bio *bio, int error);
+__blockdev_direct_IO  prototype  include/linux/fs.h  2476  ssize_t __blockdev_direct_IO(int rw, struct kiocb *iocb, struct inode *inode,struct block_device *bdev, const struct iovec *iov, loff_t offset,unsigned long nr_segs, get_block_t get_block, dio_iodone_t end_io,dio_submit_t submit_io,	int flags);
+blockdev_direct_IO  function  include/linux/fs.h  2480  static inline ssize_t blockdev_direct_IO(int rw, struct kiocb *iocb,struct inode *inode, const struct iovec *iov, loff_t offset,unsigned long nr_segs, get_block_t get_block)
+inode_dio_wait  prototype  include/linux/fs.h  2488  void inode_dio_wait(struct inode *inode);
+inode_dio_done  prototype  include/linux/fs.h  2489  void inode_dio_done(struct inode *inode);
+special_file  macro  include/linux/fs.h  2493  #define special_file(m) (S_ISCHR(m)||S_ISBLK(m)||S_ISFIFO(m)||S_ISSOCK(m))
+vfs_readlink  prototype  include/linux/fs.h  2495  extern int vfs_readlink(struct dentry *, char __user *, int, const char *);
+vfs_follow_link  prototype  include/linux/fs.h  2496  extern int vfs_follow_link(struct nameidata *, const char *);
+page_readlink  prototype  include/linux/fs.h  2497  extern int page_readlink(struct dentry *, char __user *, int);
+page_follow_link_light  prototype  include/linux/fs.h  2498  extern void *page_follow_link_light(struct dentry *, struct nameidata *);
+page_put_link  prototype  include/linux/fs.h  2499  extern void page_put_link(struct dentry *, struct nameidata *, void *);
+__page_symlink  prototype  include/linux/fs.h  2501  extern int __page_symlink(struct inode *inode, const char *symname, int len,int nofs);
+page_symlink  prototype  include/linux/fs.h  2502  extern int page_symlink(struct inode *inode, const char *symname, int len);
+generic_readlink  prototype  include/linux/fs.h  2504  extern int generic_readlink(struct dentry *, char __user *, int);
+generic_fillattr  prototype  include/linux/fs.h  2505  extern void generic_fillattr(struct inode *, struct kstat *);
+vfs_getattr  prototype  include/linux/fs.h  2506  extern int vfs_getattr(struct vfsmount *, struct dentry *, struct kstat *);
+__inode_add_bytes  prototype  include/linux/fs.h  2507  void __inode_add_bytes(struct inode *inode, loff_t bytes);
+inode_add_bytes  prototype  include/linux/fs.h  2508  void inode_add_bytes(struct inode *inode, loff_t bytes);
+inode_sub_bytes  prototype  include/linux/fs.h  2509  void inode_sub_bytes(struct inode *inode, loff_t bytes);
+inode_get_bytes  prototype  include/linux/fs.h  2510  loff_t inode_get_bytes(struct inode *inode);
+inode_set_bytes  prototype  include/linux/fs.h  2511  void inode_set_bytes(struct inode *inode, loff_t bytes);
+vfs_readdir  prototype  include/linux/fs.h  2513  extern int vfs_readdir(struct file *, filldir_t, void *);
+vfs_stat  prototype  include/linux/fs.h  2515  extern int vfs_stat(const char __user *, struct kstat *);
+vfs_lstat  prototype  include/linux/fs.h  2516  extern int vfs_lstat(const char __user *, struct kstat *);
+vfs_fstat  prototype  include/linux/fs.h  2517  extern int vfs_fstat(unsigned int, struct kstat *);
+vfs_fstatat  prototype  include/linux/fs.h  2518  extern int vfs_fstatat(int , const char __user *, struct kstat *, int);
+do_vfs_ioctl  prototype  include/linux/fs.h  2521  extern int do_vfs_ioctl(struct file *filp, unsigned int fd, unsigned int cmd,unsigned long arg);
+__generic_block_fiemap  prototype  include/linux/fs.h  2525  extern int __generic_block_fiemap(struct inode *inode,struct fiemap_extent_info *fieinfo,loff_t start, loff_t len,get_block_t *get_block);
+generic_block_fiemap  prototype  include/linux/fs.h  2528  extern int generic_block_fiemap(struct inode *inode,struct fiemap_extent_info *fieinfo, u64 start,u64 len, get_block_t *get_block);
+get_filesystem  prototype  include/linux/fs.h  2530  extern void get_filesystem(struct file_system_type *fs);
+put_filesystem  prototype  include/linux/fs.h  2531  extern void put_filesystem(struct file_system_type *fs);
+get_fs_type  prototype  include/linux/fs.h  2532  extern struct file_system_type *get_fs_type(const char *name);
+get_super  prototype  include/linux/fs.h  2533  extern struct super_block *get_super(struct block_device *);
+get_super_thawed  prototype  include/linux/fs.h  2534  extern struct super_block *get_super_thawed(struct block_device *);
+get_active_super  prototype  include/linux/fs.h  2535  extern struct super_block *get_active_super(struct block_device *bdev);
+drop_super  prototype  include/linux/fs.h  2536  extern void drop_super(struct super_block *sb);
+iterate_supers  prototype  include/linux/fs.h  2537  extern void iterate_supers(void (*)(struct super_block *, void *), void *);
+iterate_supers_type  prototype  include/linux/fs.h  2539  extern void iterate_supers_type(struct file_system_type *,void (*)(struct super_block *, void *), void *);
+dcache_dir_open  prototype  include/linux/fs.h  2541  extern int dcache_dir_open(struct inode *, struct file *);
+dcache_dir_close  prototype  include/linux/fs.h  2542  extern int dcache_dir_close(struct inode *, struct file *);
+dcache_dir_lseek  prototype  include/linux/fs.h  2543  extern loff_t dcache_dir_lseek(struct file *, loff_t, int);
+dcache_readdir  prototype  include/linux/fs.h  2544  extern int dcache_readdir(struct file *, void *, filldir_t);
+simple_setattr  prototype  include/linux/fs.h  2545  extern int simple_setattr(struct dentry *, struct iattr *);
+simple_getattr  prototype  include/linux/fs.h  2546  extern int simple_getattr(struct vfsmount *, struct dentry *, struct kstat *);
+simple_statfs  prototype  include/linux/fs.h  2547  extern int simple_statfs(struct dentry *, struct kstatfs *);
+simple_open  prototype  include/linux/fs.h  2548  extern int simple_open(struct inode *inode, struct file *file);
+simple_link  prototype  include/linux/fs.h  2549  extern int simple_link(struct dentry *, struct inode *, struct dentry *);
+simple_unlink  prototype  include/linux/fs.h  2550  extern int simple_unlink(struct inode *, struct dentry *);
+simple_rmdir  prototype  include/linux/fs.h  2551  extern int simple_rmdir(struct inode *, struct dentry *);
+simple_rename  prototype  include/linux/fs.h  2552  extern int simple_rename(struct inode *, struct dentry *, struct inode *, struct dentry *);
+noop_fsync  prototype  include/linux/fs.h  2553  extern int noop_fsync(struct file *, loff_t, loff_t, int);
+simple_empty  prototype  include/linux/fs.h  2554  extern int simple_empty(struct dentry *);
+simple_readpage  prototype  include/linux/fs.h  2555  extern int simple_readpage(struct file *file, struct page *page);
+simple_write_begin  prototype  include/linux/fs.h  2558  extern int simple_write_begin(struct file *file, struct address_space *mapping,loff_t pos, unsigned len, unsigned flags,struct page **pagep, void **fsdata);
+simple_write_end  prototype  include/linux/fs.h  2561  extern int simple_write_end(struct file *file, struct address_space *mapping,loff_t pos, unsigned len, unsigned copied,struct page *page, void *fsdata);
+simple_lookup  prototype  include/linux/fs.h  2563  extern struct dentry *simple_lookup(struct inode *, struct dentry *, struct nameidata *);
+generic_read_dir  prototype  include/linux/fs.h  2564  extern ssize_t generic_read_dir(struct file *, char __user *, size_t, loff_t *);
+d_alloc_name  prototype  include/linux/fs.h  2568  struct dentry *d_alloc_name(struct dentry *, const char *);
+simple_fill_super  prototype  include/linux/fs.h  2569  extern int simple_fill_super(struct super_block *, unsigned long, struct tree_descr *);
+simple_pin_fs  prototype  include/linux/fs.h  2570  extern int simple_pin_fs(struct file_system_type *, struct vfsmount **mount, int *count);
+simple_release_fs  prototype  include/linux/fs.h  2571  extern void simple_release_fs(struct vfsmount **mount, int *count);
+simple_read_from_buffer  prototype  include/linux/fs.h  2574  extern ssize_t simple_read_from_buffer(void __user *to, size_t count,loff_t *ppos, const void *from, size_t available);
+simple_write_to_buffer  prototype  include/linux/fs.h  2576  extern ssize_t simple_write_to_buffer(void *to, size_t available, loff_t *ppos,const void __user *from, size_t count);
+generic_file_fsync  prototype  include/linux/fs.h  2578  extern int generic_file_fsync(struct file *, loff_t, loff_t, int);
+generic_check_addressable  prototype  include/linux/fs.h  2580  extern int generic_check_addressable(unsigned, u64);
+buffer_migrate_page  macro  include/linux/fs.h  2587  #define buffer_migrate_page NULL
+inode_change_ok  prototype  include/linux/fs.h  2590  extern int inode_change_ok(const struct inode *, struct iattr *);
+inode_newsize_ok  prototype  include/linux/fs.h  2591  extern int inode_newsize_ok(const struct inode *, loff_t offset);
+setattr_copy  prototype  include/linux/fs.h  2592  extern void setattr_copy(struct inode *inode, const struct iattr *attr);
+file_update_time  prototype  include/linux/fs.h  2594  extern int file_update_time(struct file *file);
+generic_show_options  prototype  include/linux/fs.h  2596  extern int generic_show_options(struct seq_file *m, struct dentry *root);
+save_mount_options  prototype  include/linux/fs.h  2597  extern void save_mount_options(struct super_block *sb, char *options);
+replace_mount_options  prototype  include/linux/fs.h  2598  extern void replace_mount_options(struct super_block *sb, char *options);
+parent_ino  function  include/linux/fs.h  2600  static inline ino_t parent_ino(struct dentry *dentry)
+SIMPLE_TRANSACTION_LIMIT  macro  include/linux/fs.h  2625  #define SIMPLE_TRANSACTION_LIMIT (PAGE_SIZE - sizeof(struct simple_transaction_argresp))
+simple_transaction_get  prototype  include/linux/fs.h  2628  char *simple_transaction_get(struct file *file, const char __user *buf,size_t size);
+simple_transaction_read  prototype  include/linux/fs.h  2630  ssize_t simple_transaction_read(struct file *file, char __user *buf,size_t size, loff_t *pos);
+simple_transaction_release  prototype  include/linux/fs.h  2631  int simple_transaction_release(struct inode *inode, struct file *file);
+simple_transaction_set  prototype  include/linux/fs.h  2633  void simple_transaction_set(struct file *file, size_t n);
+DEFINE_SIMPLE_ATTRIBUTE  macro  include/linux/fs.h  2651  #define DEFINE_SIMPLE_ATTRIBUTE(__fops, __get, __set, __fmt) \
+__simple_attr_check_format  function  include/linux/fs.h  2667  void __simple_attr_check_format(const char *fmt, ...)
+simple_attr_open  prototype  include/linux/fs.h  2674  int simple_attr_open(struct inode *inode, struct file *file,int (*get)(void *, u64 *), int (*set)(void *, u64),const char *fmt);
+simple_attr_release  prototype  include/linux/fs.h  2675  int simple_attr_release(struct inode *inode, struct file *file);
+simple_attr_read  prototype  include/linux/fs.h  2677  ssize_t simple_attr_read(struct file *file, char __user *buf,size_t len, loff_t *ppos);
+simple_attr_write  prototype  include/linux/fs.h  2679  ssize_t simple_attr_write(struct file *file, const char __user *buf,size_t len, loff_t *ppos);
+proc_nr_files  prototype  include/linux/fs.h  2683  int proc_nr_files(struct ctl_table *table, int write,void __user *buffer, size_t *lenp, loff_t *ppos);
+proc_nr_dentry  prototype  include/linux/fs.h  2685  int proc_nr_dentry(struct ctl_table *table, int write,void __user *buffer, size_t *lenp, loff_t *ppos);
+proc_nr_inodes  prototype  include/linux/fs.h  2687  int proc_nr_inodes(struct ctl_table *table, int write,void __user *buffer, size_t *lenp, loff_t *ppos);
+get_filesystem_list  prototype  include/linux/fs.h  2688  int __init get_filesystem_list(char *buf);
+__FMODE_EXEC  macro  include/linux/fs.h  2690  #define __FMODE_EXEC ((__force int) FMODE_EXEC)
+__FMODE_NONOTIFY  macro  include/linux/fs.h  2691  #define __FMODE_NONOTIFY ((__force int) FMODE_NONOTIFY)
+ACC_MODE  macro  include/linux/fs.h  2693  #define ACC_MODE(x) ("\004\002\006\006"[(x)&O_ACCMODE])
+OPEN_FMODE  macro  include/linux/fs.h  2694  #define OPEN_FMODE(flag) ((__force fmode_t)(((flag + 1) & O_ACCMODE) | \
+is_sxid  function  include/linux/fs.h  2697  static inline int is_sxid(umode_t mode)
+inode_has_no_xattr  function  include/linux/fs.h  2702  static inline void inode_has_no_xattr(struct inode *inode)
+_LINUX_KERNEL_H  macro  include/linux/kernel.h  2  #define _LINUX_KERNEL_H
+__ALIGN_KERNEL  macro  include/linux/kernel.h  9  #define __ALIGN_KERNEL(x, a) __ALIGN_KERNEL_MASK(x, (typeof(x))(a) - 1)
+__ALIGN_KERNEL_MASK  macro  include/linux/kernel.h  10  #define __ALIGN_KERNEL_MASK(x, mask) (((x) + (mask)) & ~(mask))
+USHRT_MAX  macro  include/linux/kernel.h  26  #define USHRT_MAX ((u16)(~0U))
+SHRT_MAX  macro  include/linux/kernel.h  27  #define SHRT_MAX ((s16)(USHRT_MAX>>1))
+SHRT_MIN  macro  include/linux/kernel.h  28  #define SHRT_MIN ((s16)(-SHRT_MAX - 1))
+INT_MAX  macro  include/linux/kernel.h  29  #define INT_MAX ((int)(~0U>>1))
+INT_MIN  macro  include/linux/kernel.h  30  #define INT_MIN (-INT_MAX - 1)
+UINT_MAX  macro  include/linux/kernel.h  31  #define UINT_MAX (~0U)
+LONG_MAX  macro  include/linux/kernel.h  32  #define LONG_MAX ((long)(~0UL>>1))
+LONG_MIN  macro  include/linux/kernel.h  33  #define LONG_MIN (-LONG_MAX - 1)
+ULONG_MAX  macro  include/linux/kernel.h  34  #define ULONG_MAX (~0UL)
+LLONG_MAX  macro  include/linux/kernel.h  35  #define LLONG_MAX ((long long)(~0ULL>>1))
+LLONG_MIN  macro  include/linux/kernel.h  36  #define LLONG_MIN (-LLONG_MAX - 1)
+ULLONG_MAX  macro  include/linux/kernel.h  37  #define ULLONG_MAX (~0ULL)
+SIZE_MAX  macro  include/linux/kernel.h  38  #define SIZE_MAX (~(size_t)0)
+STACK_MAGIC  macro  include/linux/kernel.h  40  #define STACK_MAGIC 0xdeadbeef
+REPEAT_BYTE  macro  include/linux/kernel.h  42  #define REPEAT_BYTE(x) ((~0ul / 0xff) * (x))
+ALIGN  macro  include/linux/kernel.h  44  #define ALIGN(x, a) __ALIGN_KERNEL((x), (a))
+__ALIGN_MASK  macro  include/linux/kernel.h  45  #define __ALIGN_MASK(x, mask) __ALIGN_KERNEL_MASK((x), (mask))
+PTR_ALIGN  macro  include/linux/kernel.h  46  #define PTR_ALIGN(p, a) ((typeof(p))ALIGN((unsigned long)(p), (a)))
+IS_ALIGNED  macro  include/linux/kernel.h  47  #define IS_ALIGNED(x, a) (((x) & ((typeof(x))(a) - 1)) == 0)
+ARRAY_SIZE  macro  include/linux/kernel.h  49  #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))
+__round_mask  macro  include/linux/kernel.h  57  #define __round_mask(x, y) ((__typeof__(x))((y)-1))
+round_up  macro  include/linux/kernel.h  58  #define round_up(x, y) ((((x)-1) | __round_mask(x, y))+1)
+round_down  macro  include/linux/kernel.h  59  #define round_down(x, y) ((x) & ~__round_mask(x, y))
+FIELD_SIZEOF  macro  include/linux/kernel.h  61  #define FIELD_SIZEOF(t, f) (sizeof(((t*)0)->f))
+DIV_ROUND_UP  macro  include/linux/kernel.h  62  #define DIV_ROUND_UP(n,d) (((n) + (d) - 1) / (d))
+DIV_ROUND_UP_ULL  macro  include/linux/kernel.h  63  #define DIV_ROUND_UP_ULL(ll,d) \
+DIV_ROUND_UP_SECTOR_T  macro  include/linux/kernel.h  69  # define DIV_ROUND_UP_SECTOR_T(ll,d) DIV_ROUND_UP(ll,d)
+roundup  macro  include/linux/kernel.h  73  #define roundup(x, y) ( \
+rounddown  macro  include/linux/kernel.h  79  #define rounddown(x, y) ( \
+DIV_ROUND_CLOSEST  macro  include/linux/kernel.h  85  #define DIV_ROUND_CLOSEST(x, divisor)( \
+mult_frac  macro  include/linux/kernel.h  96  #define mult_frac(x, numer, denom)( \
+_RET_IP_  macro  include/linux/kernel.h  105  #define _RET_IP_ (unsigned long)__builtin_return_address(0)
+_THIS_IP_  macro  include/linux/kernel.h  106  #define _THIS_IP_ ({ __label__ __here; __here: (unsigned long)&&__here; })
+sector_div  macro  include/linux/kernel.h  112  # define sector_div(n, b)( \
+upper_32_bits  macro  include/linux/kernel.h  130  #define upper_32_bits(n) ((u32)(((n) >> 16) >> 16))
+lower_32_bits  macro  include/linux/kernel.h  136  #define lower_32_bits(n) ((u32)(n))
+_cond_resched  prototype  include/linux/kernel.h  143  extern int _cond_resched(void);
+might_resched  macro  include/linux/kernel.h  146  # define might_resched() do { } while (0)
+__might_sleep  function  include/linux/kernel.h  165  static inline void __might_sleep(const char *file, int line,int preempt_offset) { }
+might_sleep  macro  include/linux/kernel.h  166  # define might_sleep() do { might_resched(); } while (0)
+might_sleep_if  macro  include/linux/kernel.h  169  #define might_sleep_if(cond) do { if (cond) might_sleep(); } while (0)
+abs  macro  include/linux/kernel.h  177  #define abs(x) ({ \
+abs64  macro  include/linux/kernel.h  189  #define abs64(x) ({ \
+might_fault  function  include/linux/kernel.h  197  static inline void might_fault(void)
+oops_enter  prototype  include/linux/kernel.h  208  extern void oops_enter(void);
+oops_exit  prototype  include/linux/kernel.h  209  extern void oops_exit(void);
+print_oops_end_marker  prototype  include/linux/kernel.h  210  void print_oops_end_marker(void);
+oops_may_print  prototype  include/linux/kernel.h  211  extern int oops_may_print(void);
+_kstrtoul  prototype  include/linux/kernel.h  218  int __must_check _kstrtoul(const char *s, unsigned int base, unsigned long *res);
+_kstrtol  prototype  include/linux/kernel.h  219  int __must_check _kstrtol(const char *s, unsigned int base, long *res);
+kstrtoull  prototype  include/linux/kernel.h  221  int __must_check kstrtoull(const char *s, unsigned int base, unsigned long long *res);
+kstrtoll  prototype  include/linux/kernel.h  222  int __must_check kstrtoll(const char *s, unsigned int base, long long *res);
+kstrtoul  function  include/linux/kernel.h  223  static inline int __must_check kstrtoul(const char *s, unsigned int base, unsigned long *res)
+kstrtol  function  include/linux/kernel.h  236  static inline int __must_check kstrtol(const char *s, unsigned int base, long *res)
+kstrtouint  prototype  include/linux/kernel.h  249  int __must_check kstrtouint(const char *s, unsigned int base, unsigned int *res);
+kstrtoint  prototype  include/linux/kernel.h  250  int __must_check kstrtoint(const char *s, unsigned int base, int *res);
+kstrtou64  function  include/linux/kernel.h  252  static inline int __must_check kstrtou64(const char *s, unsigned int base, u64 *res)
+kstrtos64  function  include/linux/kernel.h  257  static inline int __must_check kstrtos64(const char *s, unsigned int base, s64 *res)
+kstrtou32  function  include/linux/kernel.h  262  static inline int __must_check kstrtou32(const char *s, unsigned int base, u32 *res)
+kstrtos32  function  include/linux/kernel.h  267  static inline int __must_check kstrtos32(const char *s, unsigned int base, s32 *res)
+kstrtou16  prototype  include/linux/kernel.h  272  int __must_check kstrtou16(const char *s, unsigned int base, u16 *res);
+kstrtos16  prototype  include/linux/kernel.h  273  int __must_check kstrtos16(const char *s, unsigned int base, s16 *res);
+kstrtou8  prototype  include/linux/kernel.h  274  int __must_check kstrtou8(const char *s, unsigned int base, u8 *res);
+kstrtos8  prototype  include/linux/kernel.h  275  int __must_check kstrtos8(const char *s, unsigned int base, s8 *res);
+kstrtoull_from_user  prototype  include/linux/kernel.h  277  int __must_check kstrtoull_from_user(const char __user *s, size_t count, unsigned int base, unsigned long long *res);
+kstrtoll_from_user  prototype  include/linux/kernel.h  278  int __must_check kstrtoll_from_user(const char __user *s, size_t count, unsigned int base, long long *res);
+kstrtoul_from_user  prototype  include/linux/kernel.h  279  int __must_check kstrtoul_from_user(const char __user *s, size_t count, unsigned int base, unsigned long *res);
+kstrtol_from_user  prototype  include/linux/kernel.h  280  int __must_check kstrtol_from_user(const char __user *s, size_t count, unsigned int base, long *res);
+kstrtouint_from_user  prototype  include/linux/kernel.h  281  int __must_check kstrtouint_from_user(const char __user *s, size_t count, unsigned int base, unsigned int *res);
+kstrtoint_from_user  prototype  include/linux/kernel.h  282  int __must_check kstrtoint_from_user(const char __user *s, size_t count, unsigned int base, int *res);
+kstrtou16_from_user  prototype  include/linux/kernel.h  283  int __must_check kstrtou16_from_user(const char __user *s, size_t count, unsigned int base, u16 *res);
+kstrtos16_from_user  prototype  include/linux/kernel.h  284  int __must_check kstrtos16_from_user(const char __user *s, size_t count, unsigned int base, s16 *res);
+kstrtou8_from_user  prototype  include/linux/kernel.h  285  int __must_check kstrtou8_from_user(const char __user *s, size_t count, unsigned int base, u8 *res);
+kstrtos8_from_user  prototype  include/linux/kernel.h  286  int __must_check kstrtos8_from_user(const char __user *s, size_t count, unsigned int base, s8 *res);
+kstrtou64_from_user  function  include/linux/kernel.h  288  static inline int __must_check kstrtou64_from_user(const char __user *s, size_t count, unsigned int base, u64 *res)
+kstrtos64_from_user  function  include/linux/kernel.h  293  static inline int __must_check kstrtos64_from_user(const char __user *s, size_t count, unsigned int base, s64 *res)
+kstrtou32_from_user  function  include/linux/kernel.h  298  static inline int __must_check kstrtou32_from_user(const char __user *s, size_t count, unsigned int base, u32 *res)
+kstrtos32_from_user  function  include/linux/kernel.h  303  static inline int __must_check kstrtos32_from_user(const char __user *s, size_t count, unsigned int base, s32 *res)
+simple_strtoul  prototype  include/linux/kernel.h  310  extern unsigned long simple_strtoul(const char *,char **,unsigned int);
+simple_strtol  prototype  include/linux/kernel.h  311  extern long simple_strtol(const char *,char **,unsigned int);
+simple_strtoull  prototype  include/linux/kernel.h  312  extern unsigned long long simple_strtoull(const char *,char **,unsigned int);
+simple_strtoll  prototype  include/linux/kernel.h  313  extern long long simple_strtoll(const char *,char **,unsigned int);
+strict_strtoul  macro  include/linux/kernel.h  314  #define strict_strtoul kstrtoul
+strict_strtol  macro  include/linux/kernel.h  315  #define strict_strtol kstrtol
+strict_strtoull  macro  include/linux/kernel.h  316  #define strict_strtoull kstrtoull
+strict_strtoll  macro  include/linux/kernel.h  317  #define strict_strtoll kstrtoll
+num_to_str  prototype  include/linux/kernel.h  319  extern int num_to_str(char *buf, int size, unsigned long long num);
+sprintf  prototype  include/linux/kernel.h  323  extern __printf(2, 3) int sprintf(char *buf, const char * fmt, ...);
+vsprintf  prototype  include/linux/kernel.h  324  extern __printf(2, 0) int vsprintf(char *buf, const char *, va_list);
+snprintf  prototype  include/linux/kernel.h  326  int snprintf(char *buf, size_t size, const char *fmt, ...);
+vsnprintf  prototype  include/linux/kernel.h  328  int vsnprintf(char *buf, size_t size, const char *fmt, va_list args);
+scnprintf  prototype  include/linux/kernel.h  330  int scnprintf(char *buf, size_t size, const char *fmt, ...);
+vscnprintf  prototype  include/linux/kernel.h  332  int vscnprintf(char *buf, size_t size, const char *fmt, va_list args);
+kasprintf  prototype  include/linux/kernel.h  334  char *kasprintf(gfp_t gfp, const char *fmt, ...);
+kvasprintf  prototype  include/linux/kernel.h  335  extern char *kvasprintf(gfp_t gfp, const char *fmt, va_list args);
+sscanf  prototype  include/linux/kernel.h  338  int sscanf(const char *, const char *, ...);
+vsscanf  prototype  include/linux/kernel.h  340  int vsscanf(const char *, const char *, va_list);
+get_option  prototype  include/linux/kernel.h  342  extern int get_option(char **str, int *pint);
+get_options  prototype  include/linux/kernel.h  343  extern char *get_options(const char *str, int nints, int *ints);
+memparse  prototype  include/linux/kernel.h  344  extern unsigned long long memparse(const char *ptr, char **retptr);
+core_kernel_text  prototype  include/linux/kernel.h  346  extern int core_kernel_text(unsigned long addr);
+core_kernel_data  prototype  include/linux/kernel.h  347  extern int core_kernel_data(unsigned long addr);
+__kernel_text_address  prototype  include/linux/kernel.h  348  extern int __kernel_text_address(unsigned long addr);
+kernel_text_address  prototype  include/linux/kernel.h  349  extern int kernel_text_address(unsigned long addr);
+func_ptr_is_kernel_text  prototype  include/linux/kernel.h  350  extern int func_ptr_is_kernel_text(void *ptr);
+session_of_pgrp  prototype  include/linux/kernel.h  353  extern struct pid *session_of_pgrp(struct pid *pgrp);
+int_sqrt  prototype  include/linux/kernel.h  355  unsigned long int_sqrt(unsigned long);
+bust_spinlocks  prototype  include/linux/kernel.h  357  extern void bust_spinlocks(int yes);
+wake_up_klogd  prototype  include/linux/kernel.h  358  extern void wake_up_klogd(void);
+print_tainted  prototype  include/linux/kernel.h  365  extern const char *print_tainted(void);
+add_taint  prototype  include/linux/kernel.h  366  extern void add_taint(unsigned flag);
+test_taint  prototype  include/linux/kernel.h  367  extern int test_taint(unsigned flag);
+get_taint  prototype  include/linux/kernel.h  368  extern unsigned long get_taint(void);
+TAINT_PROPRIETARY_MODULE  macro  include/linux/kernel.h  382  #define TAINT_PROPRIETARY_MODULE 0
+TAINT_FORCED_MODULE  macro  include/linux/kernel.h  383  #define TAINT_FORCED_MODULE 1
+TAINT_UNSAFE_SMP  macro  include/linux/kernel.h  384  #define TAINT_UNSAFE_SMP 2
+TAINT_FORCED_RMMOD  macro  include/linux/kernel.h  385  #define TAINT_FORCED_RMMOD 3
+TAINT_MACHINE_CHECK  macro  include/linux/kernel.h  386  #define TAINT_MACHINE_CHECK 4
+TAINT_BAD_PAGE  macro  include/linux/kernel.h  387  #define TAINT_BAD_PAGE 5
+TAINT_USER  macro  include/linux/kernel.h  388  #define TAINT_USER 6
+TAINT_DIE  macro  include/linux/kernel.h  389  #define TAINT_DIE 7
+TAINT_OVERRIDDEN_ACPI_TABLE  macro  include/linux/kernel.h  390  #define TAINT_OVERRIDDEN_ACPI_TABLE 8
+TAINT_WARN  macro  include/linux/kernel.h  391  #define TAINT_WARN 9
+TAINT_CRAP  macro  include/linux/kernel.h  392  #define TAINT_CRAP 10
+TAINT_FIRMWARE_WORKAROUND  macro  include/linux/kernel.h  393  #define TAINT_FIRMWARE_WORKAROUND 11
+TAINT_OOT_MODULE  macro  include/linux/kernel.h  394  #define TAINT_OOT_MODULE 12
+hex_asc_lo  macro  include/linux/kernel.h  397  #define hex_asc_lo(x) hex_asc[((x) & 0x0f)]
+hex_asc_hi  macro  include/linux/kernel.h  398  #define hex_asc_hi(x) hex_asc[((x) & 0xf0) >> 4]
+hex_byte_pack  function  include/linux/kernel.h  400  static inline char *hex_byte_pack(char *buf, u8 byte)
+pack_hex_byte  function  include/linux/kernel.h  407  static inline char * __deprecated pack_hex_byte(char *buf, u8 byte)
+hex_to_bin  prototype  include/linux/kernel.h  412  extern int hex_to_bin(char ch);
+hex2bin  prototype  include/linux/kernel.h  413  extern int __must_check hex2bin(u8 *dst, const char *src, size_t count);
+tracing_off_permanent  function  include/linux/kernel.h  438  static inline void tracing_off_permanent(void) { }
+tracing_on  function  include/linux/kernel.h  538  static inline void tracing_on(void) { }
+tracing_off  function  include/linux/kernel.h  539  static inline void tracing_off(void) { }
+tracing_is_on  function  include/linux/kernel.h  540  static inline int tracing_is_on(void) { return 0; }
+tracing_start  function  include/linux/kernel.h  533  static inline void tracing_start(void) { }
+tracing_stop  function  include/linux/kernel.h  534  static inline void tracing_stop(void) { }
+ftrace_off_permanent  function  include/linux/kernel.h  535  static inline void ftrace_off_permanent(void) { }
+____trace_printk_check_format  function  include/linux/kernel.h  457  void ____trace_printk_check_format(const char *fmt, ...)
+__trace_printk_check_format  macro  include/linux/kernel.h  460  #define __trace_printk_check_format(fmt, args...) \
+trace_printk  function  include/linux/kernel.h  543  trace_printk(const char *fmt, ...)
+__trace_bprintk  prototype  include/linux/kernel.h  498  int __trace_bprintk(unsigned long ip, const char *fmt, ...);
+__trace_printk  prototype  include/linux/kernel.h  501  int __trace_printk(unsigned long ip, const char *fmt, ...);
+trace_dump_stack  function  include/linux/kernel.h  536  static inline void trace_dump_stack(void) { }
+ftrace_vprintk  function  include/linux/kernel.h  548  ftrace_vprintk(const char *fmt, va_list ap)
+__ftrace_vbprintk  prototype  include/linux/kernel.h  523  __ftrace_vbprintk(unsigned long ip, const char *fmt, va_list ap);
+__ftrace_vprintk  prototype  include/linux/kernel.h  526  __ftrace_vprintk(unsigned long ip, const char *fmt, va_list ap);
+ftrace_dump  function  include/linux/kernel.h  552  static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }
+min  macro  include/linux/kernel.h  560  #define min(x, y) ({ \
+max  macro  include/linux/kernel.h  566  #define max(x, y) ({ \
+min3  macro  include/linux/kernel.h  572  #define min3(x, y, z) ({ \
+max3  macro  include/linux/kernel.h  581  #define max3(x, y, z) ({ \
+min_not_zero  macro  include/linux/kernel.h  595  #define min_not_zero(x, y) ({ \
+clamp  macro  include/linux/kernel.h  609  #define clamp(val, min, max) ({ \
+min_t  macro  include/linux/kernel.h  624  #define min_t(type, x, y) ({ \
+max_t  macro  include/linux/kernel.h  629  #define max_t(type, x, y) ({ \
+clamp_t  macro  include/linux/kernel.h  644  #define clamp_t(type, val, min, max) ({ \
+clamp_val  macro  include/linux/kernel.h  662  #define clamp_val(val, min, max) ({ \
+swap  macro  include/linux/kernel.h  673  #define swap(a, b) \
+container_of  macro  include/linux/kernel.h  683  #define container_of(ptr, type, member) ({ \
+__FUNCTION__  macro  include/linux/kernel.h  688  #define __FUNCTION__ (__func__)
+NUMA_BUILD  macro  include/linux/kernel.h  694  #define NUMA_BUILD 0
+COMPACTION_BUILD  macro  include/linux/kernel.h  701  #define COMPACTION_BUILD 0
+REBUILD_DUE_TO_FTRACE_MCOUNT_RECORD  macro  include/linux/kernel.h  706  # define REBUILD_DUE_TO_FTRACE_MCOUNT_RECORD
+do_sysinfo  prototype  include/linux/kernel.h  709  extern int do_sysinfo(struct sysinfo *info);
+_LINUX_CONSOLE_H_  macro  include/linux/console.h  15  #define _LINUX_CONSOLE_H_ 1
+VT100ID  macro  include/linux/console.h  28  #define VT100ID "\033[?1;2c"
+VT102ID  macro  include/linux/console.h  29  #define VT102ID "\033[?6c"
+con_is_bound  prototype  include/linux/console.h  77  int con_is_bound(const struct consw *csw);
+register_con_driver  prototype  include/linux/console.h  78  int register_con_driver(const struct consw *csw, int first, int last);
+unregister_con_driver  prototype  include/linux/console.h  79  int unregister_con_driver(const struct consw *csw);
+take_over_console  prototype  include/linux/console.h  80  int take_over_console(const struct consw *sw, int first, int last, int deflt);
+give_up_console  prototype  include/linux/console.h  81  void give_up_console(const struct consw *sw);
+con_debug_enter  macro  include/linux/console.h  86  #define con_debug_enter(vc) (0)
+con_debug_leave  macro  include/linux/console.h  87  #define con_debug_leave() (0)
+SM_UP  macro  include/linux/console.h  91  #define SM_UP (1)
+SM_DOWN  macro  include/linux/console.h  92  #define SM_DOWN (2)
+CM_DRAW  macro  include/linux/console.h  95  #define CM_DRAW (1)
+CM_ERASE  macro  include/linux/console.h  96  #define CM_ERASE (2)
+CM_MOVE  macro  include/linux/console.h  97  #define CM_MOVE (3)
+CON_PRINTBUFFER  macro  include/linux/console.h  107  #define CON_PRINTBUFFER (1)
+CON_CONSDEV  macro  include/linux/console.h  108  #define CON_CONSDEV (2) /* Last on the command line */
+CON_ENABLED  macro  include/linux/console.h  109  #define CON_ENABLED (4)
+CON_BOOT  macro  include/linux/console.h  110  #define CON_BOOT (8)
+CON_ANYTIME  macro  include/linux/console.h  111  #define CON_ANYTIME (16) /* Safe to call when cpu is offline */
+CON_BRL  macro  include/linux/console.h  112  #define CON_BRL (32) /* Used for a braille device */
+for_each_console  macro  include/linux/console.h  132  #define for_each_console(con) \
+add_preferred_console  prototype  include/linux/console.h  137  extern int add_preferred_console(char *name, int idx, char *options);
+update_console_cmdline  prototype  include/linux/console.h  138  extern int update_console_cmdline(char *name, int idx, char *name_new, int idx_new, char *options);
+register_console  prototype  include/linux/console.h  139  extern void register_console(struct console *);
+unregister_console  prototype  include/linux/console.h  140  extern int unregister_console(struct console *);
+console_lock  prototype  include/linux/console.h  142  extern void console_lock(void);
+console_trylock  prototype  include/linux/console.h  143  extern int console_trylock(void);
+console_unlock  prototype  include/linux/console.h  144  extern void console_unlock(void);
+console_conditional_schedule  prototype  include/linux/console.h  145  extern void console_conditional_schedule(void);
+console_unblank  prototype  include/linux/console.h  146  extern void console_unblank(void);
+console_device  prototype  include/linux/console.h  147  extern struct tty_driver *console_device(int *);
+console_stop  prototype  include/linux/console.h  148  extern void console_stop(struct console *);
+console_start  prototype  include/linux/console.h  149  extern void console_start(struct console *);
+is_console_locked  prototype  include/linux/console.h  150  extern int is_console_locked(void);
+braille_register_console  prototype  include/linux/console.h  152  extern int braille_register_console(struct console *, int index,char *console_options, char *braille_options);
+braille_unregister_console  prototype  include/linux/console.h  153  extern int braille_unregister_console(struct console *);
+console_sysfs_notify  prototype  include/linux/console.h  154  extern void console_sysfs_notify(void);
+suspend_console  prototype  include/linux/console.h  158  extern void suspend_console(void);
+resume_console  prototype  include/linux/console.h  159  extern void resume_console(void);
+mda_console_init  prototype  include/linux/console.h  161  int mda_console_init(void);
+prom_con_init  prototype  include/linux/console.h  162  void prom_con_init(void);
+vcs_make_sysfs  prototype  include/linux/console.h  164  void vcs_make_sysfs(int index);
+vcs_remove_sysfs  prototype  include/linux/console.h  165  void vcs_remove_sysfs(int index);
+WARN_CONSOLE_UNLOCKED  macro  include/linux/console.h  171  #define WARN_CONSOLE_UNLOCKED()
+VESA_NO_BLANKING  macro  include/linux/console.h  175  #define VESA_NO_BLANKING 0
+VESA_VSYNC_SUSPEND  macro  include/linux/console.h  176  #define VESA_VSYNC_SUSPEND 1
+VESA_HSYNC_SUSPEND  macro  include/linux/console.h  177  #define VESA_HSYNC_SUSPEND 2
+VESA_POWERDOWN  macro  include/linux/console.h  178  #define VESA_POWERDOWN 3
+vgacon_text_force  prototype  include/linux/console.h  181  extern bool vgacon_text_force(void);
+_LINUX_STRING_H_  macro  include/linux/string.h  2  #define _LINUX_STRING_H_
+strndup_user  prototype  include/linux/string.h  15  extern char *strndup_user(const char __user *, long);
+memdup_user  prototype  include/linux/string.h  16  extern void *memdup_user(const void __user *, size_t);
+strcpy  prototype  include/linux/string.h  24  extern char * strcpy(char *,const char *);
+strncpy  prototype  include/linux/string.h  27  extern char * strncpy(char *,const char *, __kernel_size_t);
+strlcpy  prototype  include/linux/string.h  30  size_t strlcpy(char *, const char *, size_t);
+strcat  prototype  include/linux/string.h  33  extern char * strcat(char *, const char *);
+strncat  prototype  include/linux/string.h  36  extern char * strncat(char *, const char *, __kernel_size_t);
+strlcat  prototype  include/linux/string.h  39  extern size_t strlcat(char *, const char *, __kernel_size_t);
+strcmp  prototype  include/linux/string.h  42  extern int strcmp(const char *,const char *);
+strncmp  prototype  include/linux/string.h  45  extern int strncmp(const char *,const char *,__kernel_size_t);
+strnicmp  prototype  include/linux/string.h  48  extern int strnicmp(const char *, const char *, __kernel_size_t);
+strcasecmp  prototype  include/linux/string.h  51  extern int strcasecmp(const char *s1, const char *s2);
+strncasecmp  prototype  include/linux/string.h  54  extern int strncasecmp(const char *s1, const char *s2, size_t n);
+strchr  prototype  include/linux/string.h  57  extern char * strchr(const char *,int);
+strnchr  prototype  include/linux/string.h  60  extern char * strnchr(const char *, size_t, int);
+strrchr  prototype  include/linux/string.h  63  extern char * strrchr(const char *,int);
+skip_spaces  prototype  include/linux/string.h  65  extern char * __must_check skip_spaces(const char *);
+strim  prototype  include/linux/string.h  67  extern char *strim(char *);
+strstrip  function  include/linux/string.h  69  static inline __must_check char *strstrip(char *str)
+strstr  prototype  include/linux/string.h  75  extern char * strstr(const char *, const char *);
+strnstr  prototype  include/linux/string.h  78  extern char * strnstr(const char *, const char *, size_t);
+strlen  prototype  include/linux/string.h  81  extern __kernel_size_t strlen(const char *);
+strnlen  prototype  include/linux/string.h  84  extern __kernel_size_t strnlen(const char *,__kernel_size_t);
+strpbrk  prototype  include/linux/string.h  87  extern char * strpbrk(const char *,const char *);
+strsep  prototype  include/linux/string.h  90  extern char * strsep(char **,const char *);
+strspn  prototype  include/linux/string.h  93  extern __kernel_size_t strspn(const char *,const char *);
+strcspn  prototype  include/linux/string.h  96  extern __kernel_size_t strcspn(const char *,const char *);
+memset  prototype  include/linux/string.h  100  extern void * memset(void *,int,__kernel_size_t);
+memcpy  prototype  include/linux/string.h  103  extern void * memcpy(void *,const void *,__kernel_size_t);
+memmove  prototype  include/linux/string.h  106  extern void * memmove(void *,const void *,__kernel_size_t);
+memscan  prototype  include/linux/string.h  109  extern void * memscan(void *,int,__kernel_size_t);
+memcmp  prototype  include/linux/string.h  112  extern int memcmp(const void *,const void *,__kernel_size_t);
+memchr  prototype  include/linux/string.h  115  extern void * memchr(const void *,int,__kernel_size_t);
+memchr_inv  prototype  include/linux/string.h  117  void *memchr_inv(const void *s, int c, size_t n);
+kstrdup  prototype  include/linux/string.h  119  extern char *kstrdup(const char *s, gfp_t gfp);
+kstrndup  prototype  include/linux/string.h  120  extern char *kstrndup(const char *s, size_t len, gfp_t gfp);
+kmemdup  prototype  include/linux/string.h  121  extern void *kmemdup(const void *src, size_t len, gfp_t gfp);
+argv_split  prototype  include/linux/string.h  123  extern char **argv_split(gfp_t gfp, const char *str, int *argcp);
+argv_free  prototype  include/linux/string.h  124  extern void argv_free(char **argv);
+sysfs_streq  prototype  include/linux/string.h  126  extern bool sysfs_streq(const char *s1, const char *s2);
+strtobool  prototype  include/linux/string.h  127  extern int strtobool(const char *s, bool *res);
+vbin_printf  prototype  include/linux/string.h  130  int vbin_printf(u32 *bin_buf, size_t size, const char *fmt, va_list args);
+bstr_printf  prototype  include/linux/string.h  131  int bstr_printf(char *buf, size_t size, const char *fmt, const u32 *bin_buf);
+memory_read_from_buffer  prototype  include/linux/string.h  136  extern ssize_t memory_read_from_buffer(void *to, size_t count, loff_t *ppos,const void *from, size_t available);
+strstarts  function  include/linux/string.h  143  static inline bool strstarts(const char *str, const char *prefix)
+_LINUX_KD_H  macro  include/linux/kd.h  2  #define _LINUX_KD_H
+GIO_FONT  macro  include/linux/kd.h  8  #define GIO_FONT 0x4B60 /* gets font in expanded form */
+PIO_FONT  macro  include/linux/kd.h  9  #define PIO_FONT 0x4B61 /* use font in expanded form */
+GIO_FONTX  macro  include/linux/kd.h  11  #define GIO_FONTX 0x4B6B /* get font using struct consolefontdesc */
+PIO_FONTX  macro  include/linux/kd.h  12  #define PIO_FONTX 0x4B6C /* set font using struct consolefontdesc */
+PIO_FONTRESET  macro  include/linux/kd.h  19  #define PIO_FONTRESET 0x4B6D /* reset to default font */
+GIO_CMAP  macro  include/linux/kd.h  21  #define GIO_CMAP 0x4B70 /* gets colour palette on VGA+ */
+PIO_CMAP  macro  include/linux/kd.h  22  #define PIO_CMAP 0x4B71 /* sets colour palette on VGA+ */
+KIOCSOUND  macro  include/linux/kd.h  24  #define KIOCSOUND 0x4B2F /* start sound generation (0 for off) */
+KDMKTONE  macro  include/linux/kd.h  25  #define KDMKTONE 0x4B30 /* generate tone */
+KDGETLED  macro  include/linux/kd.h  27  #define KDGETLED 0x4B31 /* return current led state */
+KDSETLED  macro  include/linux/kd.h  28  #define KDSETLED 0x4B32 /* set led state [lights, not flags] */
+LED_SCR  macro  include/linux/kd.h  29  #define LED_SCR 0x01 /* scroll lock led */
+LED_NUM  macro  include/linux/kd.h  30  #define LED_NUM 0x02 /* num lock led */
+LED_CAP  macro  include/linux/kd.h  31  #define LED_CAP 0x04 /* caps lock led */
+KDGKBTYPE  macro  include/linux/kd.h  33  #define KDGKBTYPE 0x4B33 /* get keyboard type */
+KB_84  macro  include/linux/kd.h  34  #define KB_84 0x01
+KB_101  macro  include/linux/kd.h  35  #define KB_101 0x02 /* this is what we always answer */
+KB_OTHER  macro  include/linux/kd.h  36  #define KB_OTHER 0x03
+KDADDIO  macro  include/linux/kd.h  38  #define KDADDIO 0x4B34 /* add i/o port as valid */
+KDDELIO  macro  include/linux/kd.h  39  #define KDDELIO 0x4B35 /* del i/o port as valid */
+KDENABIO  macro  include/linux/kd.h  40  #define KDENABIO 0x4B36 /* enable i/o to video board */
+KDDISABIO  macro  include/linux/kd.h  41  #define KDDISABIO 0x4B37 /* disable i/o to video board */
+KDSETMODE  macro  include/linux/kd.h  43  #define KDSETMODE 0x4B3A /* set text/graphics mode */
+KD_TEXT  macro  include/linux/kd.h  44  #define KD_TEXT 0x00
+KD_GRAPHICS  macro  include/linux/kd.h  45  #define KD_GRAPHICS 0x01
+KD_TEXT0  macro  include/linux/kd.h  46  #define KD_TEXT0 0x02 /* obsolete */
+KD_TEXT1  macro  include/linux/kd.h  47  #define KD_TEXT1 0x03 /* obsolete */
+KDGETMODE  macro  include/linux/kd.h  48  #define KDGETMODE 0x4B3B /* get current mode */
+KDMAPDISP  macro  include/linux/kd.h  50  #define KDMAPDISP 0x4B3C /* map display into address space */
+KDUNMAPDISP  macro  include/linux/kd.h  51  #define KDUNMAPDISP 0x4B3D /* unmap display from address space */
+E_TABSZ  macro  include/linux/kd.h  54  #define E_TABSZ 256
+GIO_SCRNMAP  macro  include/linux/kd.h  55  #define GIO_SCRNMAP 0x4B40 /* get screen mapping from kernel */
+PIO_SCRNMAP  macro  include/linux/kd.h  56  #define PIO_SCRNMAP 0x4B41 /* put screen mapping table in kernel */
+GIO_UNISCRNMAP  macro  include/linux/kd.h  57  #define GIO_UNISCRNMAP 0x4B69 /* get full Unicode screen mapping */
+PIO_UNISCRNMAP  macro  include/linux/kd.h  58  #define PIO_UNISCRNMAP 0x4B6A /* set full Unicode screen mapping */
+GIO_UNIMAP  macro  include/linux/kd.h  60  #define GIO_UNIMAP 0x4B66 /* get unicode-to-font mapping from kernel */
+PIO_UNIMAP  macro  include/linux/kd.h  69  #define PIO_UNIMAP 0x4B67 /* put unicode-to-font mapping in kernel */
+PIO_UNIMAPCLR  macro  include/linux/kd.h  70  #define PIO_UNIMAPCLR 0x4B68 /* clear table, possibly advise hash algorithm */
+UNI_DIRECT_BASE  macro  include/linux/kd.h  77  #define UNI_DIRECT_BASE 0xF000 /* start of Direct Font Region */
+UNI_DIRECT_MASK  macro  include/linux/kd.h  78  #define UNI_DIRECT_MASK 0x01FF /* Direct Font Region bitmask */
+K_RAW  macro  include/linux/kd.h  80  #define K_RAW 0x00
+K_XLATE  macro  include/linux/kd.h  81  #define K_XLATE 0x01
+K_MEDIUMRAW  macro  include/linux/kd.h  82  #define K_MEDIUMRAW 0x02
+K_UNICODE  macro  include/linux/kd.h  83  #define K_UNICODE 0x03
+K_OFF  macro  include/linux/kd.h  84  #define K_OFF 0x04
+KDGKBMODE  macro  include/linux/kd.h  85  #define KDGKBMODE 0x4B44 /* gets current keyboard mode */
+KDSKBMODE  macro  include/linux/kd.h  86  #define KDSKBMODE 0x4B45 /* sets current keyboard mode */
+K_METABIT  macro  include/linux/kd.h  88  #define K_METABIT 0x03
+K_ESCPREFIX  macro  include/linux/kd.h  89  #define K_ESCPREFIX 0x04
+KDGKBMETA  macro  include/linux/kd.h  90  #define KDGKBMETA 0x4B62 /* gets meta key handling mode */
+KDSKBMETA  macro  include/linux/kd.h  91  #define KDSKBMETA 0x4B63 /* sets meta key handling mode */
+K_SCROLLLOCK  macro  include/linux/kd.h  93  #define K_SCROLLLOCK 0x01
+K_NUMLOCK  macro  include/linux/kd.h  94  #define K_NUMLOCK 0x02
+K_CAPSLOCK  macro  include/linux/kd.h  95  #define K_CAPSLOCK 0x04
+KDGKBLED  macro  include/linux/kd.h  96  #define KDGKBLED 0x4B64 /* get led flags (not lights) */
+KDSKBLED  macro  include/linux/kd.h  97  #define KDSKBLED 0x4B65 /* set led flags (not lights) */
+K_NORMTAB  macro  include/linux/kd.h  104  #define K_NORMTAB 0x00
+K_SHIFTTAB  macro  include/linux/kd.h  105  #define K_SHIFTTAB 0x01
+K_ALTTAB  macro  include/linux/kd.h  106  #define K_ALTTAB 0x02
+K_ALTSHIFTTAB  macro  include/linux/kd.h  107  #define K_ALTSHIFTTAB 0x03
+KDGKBENT  macro  include/linux/kd.h  109  #define KDGKBENT 0x4B46 /* gets one entry in translation table */
+KDSKBENT  macro  include/linux/kd.h  110  #define KDSKBENT 0x4B47 /* sets one entry in translation table */
+KDGKBSENT  macro  include/linux/kd.h  116  #define KDGKBSENT 0x4B48 /* gets one function key string entry */
+KDSKBSENT  macro  include/linux/kd.h  117  #define KDSKBSENT 0x4B49 /* sets one function key string entry */
+KDGKBDIACR  macro  include/linux/kd.h  126  #define KDGKBDIACR 0x4B4A /* read kernel accent table */
+KDSKBDIACR  macro  include/linux/kd.h  127  #define KDSKBDIACR 0x4B4B /* write kernel accent table */
+KDGKBDIACRUC  macro  include/linux/kd.h  136  #define KDGKBDIACRUC 0x4BFA /* read kernel accent table - UCS */
+KDSKBDIACRUC  macro  include/linux/kd.h  137  #define KDSKBDIACRUC 0x4BFB /* write kernel accent table - UCS */
+KDGETKEYCODE  macro  include/linux/kd.h  142  #define KDGETKEYCODE 0x4B4C /* read kernel keycode table entry */
+KDSETKEYCODE  macro  include/linux/kd.h  143  #define KDSETKEYCODE 0x4B4D /* write kernel keycode table entry */
+KDSIGACCEPT  macro  include/linux/kd.h  145  #define KDSIGACCEPT 0x4B4E /* accept kbd generated signals */
+KDKBDREP  macro  include/linux/kd.h  153  #define KDKBDREP 0x4B52 /* set keyboard delay/repeat rate;
+KDFONTOP  macro  include/linux/kd.h  156  #define KDFONTOP 0x4B72 /* font operations */
+KD_FONT_OP_SET  macro  include/linux/kd.h  172  #define KD_FONT_OP_SET 0 /* Set font */
+KD_FONT_OP_GET  macro  include/linux/kd.h  173  #define KD_FONT_OP_GET 1 /* Get font */
+KD_FONT_OP_SET_DEFAULT  macro  include/linux/kd.h  174  #define KD_FONT_OP_SET_DEFAULT 2 /* Set font to default, data points to name / NULL */
+KD_FONT_OP_COPY  macro  include/linux/kd.h  175  #define KD_FONT_OP_COPY 3 /* Copy from another console */
+KD_FONT_FLAG_DONT_RECALC  macro  include/linux/kd.h  177  #define KD_FONT_FLAG_DONT_RECALC 1 /* Don't recalculate hw charcell size [compat] */
+KD_FONT_FLAG_OLD  macro  include/linux/kd.h  179  #define KD_FONT_FLAG_OLD 0x80000000 /* Invoked via old interface [compat] */
+_LINUX_SLAB_H  macro  include/linux/slab.h  10  #define _LINUX_SLAB_H
+SLAB_DEBUG_FREE  macro  include/linux/slab.h  19  #define SLAB_DEBUG_FREE 0x00000100UL /* DEBUG: Perform (expensive) checks on free */
+SLAB_RED_ZONE  macro  include/linux/slab.h  20  #define SLAB_RED_ZONE 0x00000400UL /* DEBUG: Red zone objs in a cache */
+SLAB_POISON  macro  include/linux/slab.h  21  #define SLAB_POISON 0x00000800UL /* DEBUG: Poison objects */
+SLAB_HWCACHE_ALIGN  macro  include/linux/slab.h  22  #define SLAB_HWCACHE_ALIGN 0x00002000UL /* Align objs on cache lines */
+SLAB_CACHE_DMA  macro  include/linux/slab.h  23  #define SLAB_CACHE_DMA 0x00004000UL /* Use GFP_DMA memory */
+SLAB_STORE_USER  macro  include/linux/slab.h  24  #define SLAB_STORE_USER 0x00010000UL /* DEBUG: Store the last owner for bug hunting */
+SLAB_PANIC  macro  include/linux/slab.h  25  #define SLAB_PANIC 0x00040000UL /* Panic if kmem_cache_create() fails */
+SLAB_DESTROY_BY_RCU  macro  include/linux/slab.h  54  #define SLAB_DESTROY_BY_RCU 0x00080000UL /* Defer freeing slabs to RCU */
+SLAB_MEM_SPREAD  macro  include/linux/slab.h  55  #define SLAB_MEM_SPREAD 0x00100000UL /* Spread some memory over cpuset */
+SLAB_TRACE  macro  include/linux/slab.h  56  #define SLAB_TRACE 0x00200000UL /* Trace allocations and frees */
+SLAB_DEBUG_OBJECTS  macro  include/linux/slab.h  62  # define SLAB_DEBUG_OBJECTS 0x00000000UL
+SLAB_NOLEAKTRACE  macro  include/linux/slab.h  65  #define SLAB_NOLEAKTRACE 0x00800000UL /* Avoid kmemleak tracing */
+SLAB_NOTRACK  macro  include/linux/slab.h  71  # define SLAB_NOTRACK 0x00000000UL
+SLAB_FAILSLAB  macro  include/linux/slab.h  76  # define SLAB_FAILSLAB 0x00000000UL
+SLAB_RECLAIM_ACCOUNT  macro  include/linux/slab.h  80  #define SLAB_RECLAIM_ACCOUNT 0x00020000UL /* Objects are reclaimable */
+SLAB_TEMPORARY  macro  include/linux/slab.h  81  #define SLAB_TEMPORARY SLAB_RECLAIM_ACCOUNT /* Objects are short-lived */
+ZERO_SIZE_PTR  macro  include/linux/slab.h  90  #define ZERO_SIZE_PTR ((void *)16)
+ZERO_OR_NULL_PTR  macro  include/linux/slab.h  92  #define ZERO_OR_NULL_PTR(x) ((unsigned long)(x) <= \
+kmem_cache_init  prototype  include/linux/slab.h  98  void __init kmem_cache_init(void);
+slab_is_available  prototype  include/linux/slab.h  99  int slab_is_available(void);
+kmem_cache_create  prototype  include/linux/slab.h  103  struct kmem_cache *kmem_cache_create(const char *, size_t, size_t,unsigned long,void (*)(void *));
+kmem_cache_destroy  prototype  include/linux/slab.h  104  void kmem_cache_destroy(struct kmem_cache *);
+kmem_cache_shrink  prototype  include/linux/slab.h  105  int kmem_cache_shrink(struct kmem_cache *);
+kmem_cache_free  prototype  include/linux/slab.h  106  void kmem_cache_free(struct kmem_cache *, void *);
+kmem_cache_size  prototype  include/linux/slab.h  107  unsigned int kmem_cache_size(struct kmem_cache *);
+KMEM_CACHE  macro  include/linux/slab.h  117  #define KMEM_CACHE(__struct, __flags) kmem_cache_create(#__struct,\
+KMALLOC_SHIFT_HIGH  macro  include/linux/slab.h  130  #define KMALLOC_SHIFT_HIGH ((MAX_ORDER + PAGE_SHIFT - 1) <= 25 ? \
+KMALLOC_MAX_SIZE  macro  include/linux/slab.h  133  #define KMALLOC_MAX_SIZE (1UL << KMALLOC_SHIFT_HIGH)
+KMALLOC_MAX_ORDER  macro  include/linux/slab.h  134  #define KMALLOC_MAX_ORDER (KMALLOC_SHIFT_HIGH - PAGE_SHIFT)
+ARCH_KMALLOC_MINALIGN  macro  include/linux/slab.h  144  #define ARCH_KMALLOC_MINALIGN __alignof__(unsigned long long)
+ARCH_SLAB_MINALIGN  macro  include/linux/slab.h  153  #define ARCH_SLAB_MINALIGN __alignof__(unsigned long long)
+__krealloc  prototype  include/linux/slab.h  159  void * __must_check __krealloc(const void *, size_t, gfp_t);
+krealloc  prototype  include/linux/slab.h  160  void * __must_check krealloc(const void *, size_t, gfp_t);
+kfree  prototype  include/linux/slab.h  161  void kfree(const void *);
+kzfree  prototype  include/linux/slab.h  162  void kzfree(const void *);
+ksize  prototype  include/linux/slab.h  163  size_t ksize(const void *);
+kmalloc_array  function  include/linux/slab.h  243  static inline void *kmalloc_array(size_t n, size_t size, gfp_t flags)
+kcalloc  function  include/linux/slab.h  256  static inline void *kcalloc(size_t n, size_t size, gfp_t flags)
+kmalloc_node  function  include/linux/slab.h  272  static inline void *kmalloc_node(size_t size, gfp_t flags, int node)
+__kmalloc_node  function  include/linux/slab.h  277  static inline void *__kmalloc_node(size_t size, gfp_t flags, int node)
+kmem_cache_alloc  prototype  include/linux/slab.h  282  void *kmem_cache_alloc(struct kmem_cache *, gfp_t);
+kmem_cache_alloc_node  function  include/linux/slab.h  285  static inline void *kmem_cache_alloc_node(struct kmem_cache *cachep,gfp_t flags, int node)
+__kmalloc_track_caller  prototype  include/linux/slab.h  301  extern void *__kmalloc_track_caller(size_t, gfp_t, unsigned long);
+kmalloc_track_caller  macro  include/linux/slab.h  305  #define kmalloc_track_caller(size, flags) \
+__kmalloc_node_track_caller  prototype  include/linux/slab.h  320  extern void *__kmalloc_node_track_caller(size_t, gfp_t, int, unsigned long);
+kmalloc_node_track_caller  macro  include/linux/slab.h  331  #define kmalloc_node_track_caller(size, flags, node) \
+kmem_cache_zalloc  function  include/linux/slab.h  339  static inline void *kmem_cache_zalloc(struct kmem_cache *k, gfp_t flags)
+kzalloc  function  include/linux/slab.h  349  static inline void *kzalloc(size_t size, gfp_t flags)
+kzalloc_node  function  include/linux/slab.h  360  static inline void *kzalloc_node(size_t size, gfp_t flags, int node)
+kmem_cache_init_late  prototype  include/linux/slab.h  365  void __init kmem_cache_init_late(void);
+_VT_KERN_H  macro  include/linux/vt_kern.h  2  #define _VT_KERN_H
+BROKEN_GRAPHICS_PROGRAMS  macro  include/linux/vt_kern.h  27  #define BROKEN_GRAPHICS_PROGRAMS 1
+kd_mksound  prototype  include/linux/vt_kern.h  30  extern void kd_mksound(unsigned int hz, unsigned int ticks);
+kbd_rate  prototype  include/linux/vt_kern.h  31  extern int kbd_rate(struct kbd_repeat *rep);
+vc_allocate  prototype  include/linux/vt_kern.h  36  int vc_allocate(unsigned int console);
+vc_cons_allocated  prototype  include/linux/vt_kern.h  37  int vc_cons_allocated(unsigned int console);
+vc_resize  prototype  include/linux/vt_kern.h  38  int vc_resize(struct vc_data *vc, unsigned int cols, unsigned int lines);
+vc_deallocate  prototype  include/linux/vt_kern.h  39  void vc_deallocate(unsigned int console);
+reset_palette  prototype  include/linux/vt_kern.h  40  void reset_palette(struct vc_data *vc);
+do_blank_screen  prototype  include/linux/vt_kern.h  41  void do_blank_screen(int entering_gfx);
+do_unblank_screen  prototype  include/linux/vt_kern.h  42  void do_unblank_screen(int leaving_gfx);
+unblank_screen  prototype  include/linux/vt_kern.h  43  void unblank_screen(void);
+poke_blanked_console  prototype  include/linux/vt_kern.h  44  void poke_blanked_console(void);
+con_font_op  prototype  include/linux/vt_kern.h  45  int con_font_op(struct vc_data *vc, struct console_font_op *op);
+con_set_cmap  prototype  include/linux/vt_kern.h  46  int con_set_cmap(unsigned char __user *cmap);
+con_get_cmap  prototype  include/linux/vt_kern.h  47  int con_get_cmap(unsigned char __user *cmap);
+scrollback  prototype  include/linux/vt_kern.h  48  void scrollback(struct vc_data *vc, int lines);
+scrollfront  prototype  include/linux/vt_kern.h  49  void scrollfront(struct vc_data *vc, int lines);
+update_region  prototype  include/linux/vt_kern.h  50  void update_region(struct vc_data *vc, unsigned long start, int count);
+redraw_screen  prototype  include/linux/vt_kern.h  51  void redraw_screen(struct vc_data *vc, int is_switch);
+update_screen  macro  include/linux/vt_kern.h  52  #define update_screen(x) redraw_screen(x, 0)
+switch_screen  macro  include/linux/vt_kern.h  53  #define switch_screen(x) redraw_screen(x, 1)
+tioclinux  prototype  include/linux/vt_kern.h  56  int tioclinux(struct tty_struct *tty, unsigned long arg);
+con_set_trans_old  function  include/linux/vt_kern.h  78  static inline int con_set_trans_old(unsigned char __user *table)
+con_get_trans_old  function  include/linux/vt_kern.h  82  static inline int con_get_trans_old(unsigned char __user *table)
+con_set_trans_new  function  include/linux/vt_kern.h  86  static inline int con_set_trans_new(unsigned short __user *table)
+con_get_trans_new  function  include/linux/vt_kern.h  90  static inline int con_get_trans_new(unsigned short __user *table)
+con_clear_unimap  function  include/linux/vt_kern.h  94  static inline int con_clear_unimap(struct vc_data *vc, struct unimapinit *ui)
+con_set_unimap  function  include/linux/vt_kern.h  99  int con_set_unimap(struct vc_data *vc, ushort ct, struct unipair __user *list)
+con_get_unimap  function  include/linux/vt_kern.h  105  int con_get_unimap(struct vc_data *vc, ushort ct, ushort __user *uct,struct unipair __user *list)
+con_set_default_unimap  function  include/linux/vt_kern.h  109  static inline int con_set_default_unimap(struct vc_data *vc)
+con_free_unimap  function  include/linux/vt_kern.h  113  static inline void con_free_unimap(struct vc_data *vc)
+con_copy_unimap  function  include/linux/vt_kern.h  120  int con_copy_unimap(struct vc_data *dst_vc, struct vc_data *src_vc)
+vc_translate  macro  include/linux/vt_kern.h  125  #define vc_translate(vc, c) (c)
+con_protect_unimap  function  include/linux/vt_kern.h  116  static inline void con_protect_unimap(struct vc_data *vc, int rdonly)
+vt_event_post  prototype  include/linux/vt_kern.h  129  void vt_event_post(unsigned int event, unsigned int old, unsigned int new);
+vt_waitactive  prototype  include/linux/vt_kern.h  130  int vt_waitactive(int n);
+change_console  prototype  include/linux/vt_kern.h  131  void change_console(struct vc_data *new_vc);
+reset_vc  prototype  include/linux/vt_kern.h  132  void reset_vc(struct vc_data *vc);
+unbind_con_driver  prototype  include/linux/vt_kern.h  134  extern int unbind_con_driver(const struct consw *csw, int first, int last,int deflt);
+vty_init  prototype  include/linux/vt_kern.h  135  int vty_init(const struct file_operations *console_fops);
+vt_force_oops_output  function  include/linux/vt_kern.h  137  static inline bool vt_force_oops_output(struct vc_data *vc)
+vt_move_to_console  prototype  include/linux/vt_kern.h  155  extern int vt_move_to_console(unsigned int vt, int alloc);
+register_vt_notifier  prototype  include/linux/vt_kern.h  164  extern int register_vt_notifier(struct notifier_block *nb);
+unregister_vt_notifier  prototype  include/linux/vt_kern.h  165  extern int unregister_vt_notifier(struct notifier_block *nb);
+hide_boot_cursor  prototype  include/linux/vt_kern.h  167  extern void hide_boot_cursor(bool hide);
+vt_do_diacrit  prototype  include/linux/vt_kern.h  170  extern int vt_do_diacrit(unsigned int cmd, void __user *up, int eperm);
+vt_do_kdskbmode  prototype  include/linux/vt_kern.h  171  extern int vt_do_kdskbmode(int console, unsigned int arg);
+vt_do_kdskbmeta  prototype  include/linux/vt_kern.h  172  extern int vt_do_kdskbmeta(int console, unsigned int arg);
+vt_do_kbkeycode_ioctl  prototype  include/linux/vt_kern.h  174  extern int vt_do_kbkeycode_ioctl(int cmd, struct kbkeycode __user *user_kbkc,int perm);
+vt_do_kdsk_ioctl  prototype  include/linux/vt_kern.h  176  extern int vt_do_kdsk_ioctl(int cmd, struct kbentry __user *user_kbe,int perm, int console);
+vt_do_kdgkb_ioctl  prototype  include/linux/vt_kern.h  178  extern int vt_do_kdgkb_ioctl(int cmd, struct kbsentry __user *user_kdgkb,int perm);
+vt_do_kdskled  prototype  include/linux/vt_kern.h  179  extern int vt_do_kdskled(int console, int cmd, unsigned long arg, int perm);
+vt_do_kdgkbmode  prototype  include/linux/vt_kern.h  180  extern int vt_do_kdgkbmode(int console);
+vt_do_kdgkbmeta  prototype  include/linux/vt_kern.h  181  extern int vt_do_kdgkbmeta(int console);
+vt_reset_unicode  prototype  include/linux/vt_kern.h  182  extern void vt_reset_unicode(int console);
+vt_get_shift_state  prototype  include/linux/vt_kern.h  183  extern int vt_get_shift_state(void);
+vt_reset_keyboard  prototype  include/linux/vt_kern.h  184  extern void vt_reset_keyboard(int console);
+vt_get_leds  prototype  include/linux/vt_kern.h  185  extern int vt_get_leds(int console, int flag);
+vt_get_kbd_mode_bit  prototype  include/linux/vt_kern.h  186  extern int vt_get_kbd_mode_bit(int console, int bit);
+vt_set_kbd_mode_bit  prototype  include/linux/vt_kern.h  187  extern void vt_set_kbd_mode_bit(int console, int bit);
+vt_clr_kbd_mode_bit  prototype  include/linux/vt_kern.h  188  extern void vt_clr_kbd_mode_bit(int console, int bit);
+vt_set_led_state  prototype  include/linux/vt_kern.h  190  extern void vt_set_led_state(int console, int leds);
+vt_kbd_con_start  prototype  include/linux/vt_kern.h  191  extern void vt_kbd_con_start(int console);
+vt_kbd_con_stop  prototype  include/linux/vt_kern.h  192  extern void vt_kbd_con_stop(int console);
+_LINUX_SELECTION_H_  macro  include/linux/selection.h  8  #define _LINUX_SELECTION_H_
+clear_selection  prototype  include/linux/selection.h  18  extern void clear_selection(void);
+set_selection  prototype  include/linux/selection.h  19  extern int set_selection(const struct tiocl_selection __user *sel, struct tty_struct *tty);
+paste_selection  prototype  include/linux/selection.h  20  extern int paste_selection(struct tty_struct *tty);
+sel_loadlut  prototype  include/linux/selection.h  21  extern int sel_loadlut(char __user *p);
+mouse_reporting  prototype  include/linux/selection.h  22  extern int mouse_reporting(void);
+mouse_report  prototype  include/linux/selection.h  23  extern void mouse_report(struct tty_struct * tty, int butt, int mrx, int mry);
+screen_pos  prototype  include/linux/selection.h  32  extern unsigned short *screen_pos(struct vc_data *vc, int w_offset, int viewed);
+screen_glyph  prototype  include/linux/selection.h  33  extern u16 screen_glyph(struct vc_data *vc, int offset);
+complement_pos  prototype  include/linux/selection.h  34  extern void complement_pos(struct vc_data *vc, int offset);
+invert_screen  prototype  include/linux/selection.h  35  extern void invert_screen(struct vc_data *vc, int offset, int count, int shift);
+getconsxy  prototype  include/linux/selection.h  37  extern void getconsxy(struct vc_data *vc, unsigned char *p);
+putconsxy  prototype  include/linux/selection.h  38  extern void putconsxy(struct vc_data *vc, unsigned char *p);
+vcs_scr_readw  prototype  include/linux/selection.h  40  extern u16 vcs_scr_readw(struct vc_data *vc, const u16 *org);
+vcs_scr_writew  prototype  include/linux/selection.h  41  extern void vcs_scr_writew(struct vc_data *vc, u16 val, u16 *org);
+vcs_scr_updated  prototype  include/linux/selection.h  42  extern void vcs_scr_updated(struct vc_data *vc);
+__LINUX_SPINLOCK_H  macro  include/linux/spinlock.h  2  #define __LINUX_SPINLOCK_H
+LOCK_SECTION_NAME  macro  include/linux/spinlock.h  64  #define LOCK_SECTION_NAME ".text..lock."KBUILD_BASENAME
+LOCK_SECTION_START  macro  include/linux/spinlock.h  66  #define LOCK_SECTION_START(extra) \
+LOCK_SECTION_END  macro  include/linux/spinlock.h  73  #define LOCK_SECTION_END \
+__lockfunc  macro  include/linux/spinlock.h  76  #define __lockfunc __attribute__((section(".spinlock.text")))
+__raw_spin_lock_init  prototype  include/linux/spinlock.h  94  extern void __raw_spin_lock_init(raw_spinlock_t *lock, const char *name,struct lock_class_key *key);
+raw_spin_lock_init  macro  include/linux/spinlock.h  103  # define raw_spin_lock_init(lock) \
+raw_spin_is_locked  macro  include/linux/spinlock.h  107  #define raw_spin_is_locked(lock) arch_spin_is_locked(&(lock)->raw_lock)
+raw_spin_is_contended  macro  include/linux/spinlock.h  116  #define raw_spin_is_contended(lock) (((void)(lock), 0))
+smp_mb__after_lock  function  include/linux/spinlock.h  122  static inline void smp_mb__after_lock(void) { smp_mb(); }
+raw_spin_unlock_wait  macro  include/linux/spinlock.h  129  #define raw_spin_unlock_wait(lock) arch_spin_unlock_wait(&(lock)->raw_lock)
+do_raw_spin_lock_flags  macro  include/linux/spinlock.h  133  #define do_raw_spin_lock_flags(lock, flags) do_raw_spin_lock(lock)
+do_raw_spin_trylock  function  include/linux/spinlock.h  150  static inline int do_raw_spin_trylock(raw_spinlock_t *lock)
+__acquires  function  include/linux/spinlock.h  144  do_raw_spin_lock_flags(raw_spinlock_t *lock, unsigned long *flags) __acquires(lock)
+__releases  function  include/linux/spinlock.h  155  static inline void do_raw_spin_unlock(raw_spinlock_t *lock) __releases(lock)
+raw_spin_trylock  macro  include/linux/spinlock.h  168  #define raw_spin_trylock(lock) __cond_lock(lock, _raw_spin_trylock(lock))
+raw_spin_lock  macro  include/linux/spinlock.h  170  #define raw_spin_lock(lock) _raw_spin_lock(lock)
+raw_spin_lock_nested  macro  include/linux/spinlock.h  182  # define raw_spin_lock_nested(lock, subclass) _raw_spin_lock(lock)
+raw_spin_lock_nest_lock  macro  include/linux/spinlock.h  183  # define raw_spin_lock_nest_lock(lock, nest_lock) _raw_spin_lock(lock)
+raw_spin_lock_irqsave  macro  include/linux/spinlock.h  210  #define raw_spin_lock_irqsave(lock, flags) \
+raw_spin_lock_irqsave_nested  macro  include/linux/spinlock.h  216  #define raw_spin_lock_irqsave_nested(lock, flags, subclass) \
+raw_spin_lock_irq  macro  include/linux/spinlock.h  221  #define raw_spin_lock_irq(lock) _raw_spin_lock_irq(lock)
+raw_spin_lock_bh  macro  include/linux/spinlock.h  222  #define raw_spin_lock_bh(lock) _raw_spin_lock_bh(lock)
+raw_spin_unlock  macro  include/linux/spinlock.h  223  #define raw_spin_unlock(lock) _raw_spin_unlock(lock)
+raw_spin_unlock_irq  macro  include/linux/spinlock.h  224  #define raw_spin_unlock_irq(lock) _raw_spin_unlock_irq(lock)
+raw_spin_unlock_irqrestore  macro  include/linux/spinlock.h  226  #define raw_spin_unlock_irqrestore(lock, flags) \
+raw_spin_unlock_bh  macro  include/linux/spinlock.h  231  #define raw_spin_unlock_bh(lock) _raw_spin_unlock_bh(lock)
+raw_spin_trylock_bh  macro  include/linux/spinlock.h  233  #define raw_spin_trylock_bh(lock) \
+raw_spin_trylock_irq  macro  include/linux/spinlock.h  236  #define raw_spin_trylock_irq(lock) \
+raw_spin_trylock_irqsave  macro  include/linux/spinlock.h  243  #define raw_spin_trylock_irqsave(lock, flags) \
+raw_spin_can_lock  macro  include/linux/spinlock.h  254  #define raw_spin_can_lock(lock) (!raw_spin_is_locked(lock))
+spinlock_check  function  include/linux/spinlock.h  272  static inline raw_spinlock_t *spinlock_check(spinlock_t *lock)
+spin_lock_init  macro  include/linux/spinlock.h  277  #define spin_lock_init(_lock) \
+spin_lock  function  include/linux/spinlock.h  283  static inline void spin_lock(spinlock_t *lock)
+spin_lock_bh  function  include/linux/spinlock.h  288  static inline void spin_lock_bh(spinlock_t *lock)
+spin_trylock  function  include/linux/spinlock.h  293  static inline int spin_trylock(spinlock_t *lock)
+spin_lock_nested  macro  include/linux/spinlock.h  298  #define spin_lock_nested(lock, subclass) \
+spin_lock_nest_lock  macro  include/linux/spinlock.h  303  #define spin_lock_nest_lock(lock, nest_lock) \
+spin_lock_irq  function  include/linux/spinlock.h  308  static inline void spin_lock_irq(spinlock_t *lock)
+spin_lock_irqsave  macro  include/linux/spinlock.h  313  #define spin_lock_irqsave(lock, flags) \
+spin_lock_irqsave_nested  macro  include/linux/spinlock.h  318  #define spin_lock_irqsave_nested(lock, flags, subclass) \
+spin_unlock  function  include/linux/spinlock.h  323  static inline void spin_unlock(spinlock_t *lock)
+spin_unlock_bh  function  include/linux/spinlock.h  328  static inline void spin_unlock_bh(spinlock_t *lock)
+spin_unlock_irq  function  include/linux/spinlock.h  333  static inline void spin_unlock_irq(spinlock_t *lock)
+spin_unlock_irqrestore  function  include/linux/spinlock.h  338  static inline void spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags)
+spin_trylock_bh  function  include/linux/spinlock.h  343  static inline int spin_trylock_bh(spinlock_t *lock)
+spin_trylock_irq  function  include/linux/spinlock.h  348  static inline int spin_trylock_irq(spinlock_t *lock)
+spin_trylock_irqsave  macro  include/linux/spinlock.h  353  #define spin_trylock_irqsave(lock, flags) \
+spin_unlock_wait  function  include/linux/spinlock.h  358  static inline void spin_unlock_wait(spinlock_t *lock)
+spin_is_locked  function  include/linux/spinlock.h  363  static inline int spin_is_locked(spinlock_t *lock)
+spin_is_contended  function  include/linux/spinlock.h  368  static inline int spin_is_contended(spinlock_t *lock)
+spin_can_lock  function  include/linux/spinlock.h  373  static inline int spin_can_lock(spinlock_t *lock)
+assert_spin_locked  macro  include/linux/spinlock.h  378  #define assert_spin_locked(lock) assert_raw_spin_locked(&(lock)->rlock)
+_atomic_dec_and_lock  prototype  include/linux/spinlock.h  393  extern int _atomic_dec_and_lock(atomic_t *atomic, spinlock_t *lock);
+atomic_dec_and_lock  macro  include/linux/spinlock.h  394  #define atomic_dec_and_lock(atomic, lock) \
+_LINUX_IOPORT_H  macro  include/linux/ioport.h  9  #define _LINUX_IOPORT_H
+IORESOURCE_BITS  macro  include/linux/ioport.h  29  #define IORESOURCE_BITS 0x000000ff /* Bus-specific bits */
+IORESOURCE_TYPE_BITS  macro  include/linux/ioport.h  31  #define IORESOURCE_TYPE_BITS 0x00001f00 /* Resource type */
+IORESOURCE_IO  macro  include/linux/ioport.h  32  #define IORESOURCE_IO 0x00000100
+IORESOURCE_MEM  macro  include/linux/ioport.h  33  #define IORESOURCE_MEM 0x00000200
+IORESOURCE_IRQ  macro  include/linux/ioport.h  34  #define IORESOURCE_IRQ 0x00000400
+IORESOURCE_DMA  macro  include/linux/ioport.h  35  #define IORESOURCE_DMA 0x00000800
+IORESOURCE_BUS  macro  include/linux/ioport.h  36  #define IORESOURCE_BUS 0x00001000
+IORESOURCE_PREFETCH  macro  include/linux/ioport.h  38  #define IORESOURCE_PREFETCH 0x00002000 /* No side effects */
+IORESOURCE_READONLY  macro  include/linux/ioport.h  39  #define IORESOURCE_READONLY 0x00004000
+IORESOURCE_CACHEABLE  macro  include/linux/ioport.h  40  #define IORESOURCE_CACHEABLE 0x00008000
+IORESOURCE_RANGELENGTH  macro  include/linux/ioport.h  41  #define IORESOURCE_RANGELENGTH 0x00010000
+IORESOURCE_SHADOWABLE  macro  include/linux/ioport.h  42  #define IORESOURCE_SHADOWABLE 0x00020000
+IORESOURCE_SIZEALIGN  macro  include/linux/ioport.h  44  #define IORESOURCE_SIZEALIGN 0x00040000 /* size indicates alignment */
+IORESOURCE_STARTALIGN  macro  include/linux/ioport.h  45  #define IORESOURCE_STARTALIGN 0x00080000 /* start field is alignment */
+IORESOURCE_MEM_64  macro  include/linux/ioport.h  47  #define IORESOURCE_MEM_64 0x00100000
+IORESOURCE_WINDOW  macro  include/linux/ioport.h  48  #define IORESOURCE_WINDOW 0x00200000 /* forwarded by bridge */
+IORESOURCE_MUXED  macro  include/linux/ioport.h  49  #define IORESOURCE_MUXED 0x00400000 /* Resource is software muxed */
+IORESOURCE_EXCLUSIVE  macro  include/linux/ioport.h  51  #define IORESOURCE_EXCLUSIVE 0x08000000 /* Userland may not map this resource */
+IORESOURCE_DISABLED  macro  include/linux/ioport.h  52  #define IORESOURCE_DISABLED 0x10000000
+IORESOURCE_UNSET  macro  include/linux/ioport.h  53  #define IORESOURCE_UNSET 0x20000000
+IORESOURCE_AUTO  macro  include/linux/ioport.h  54  #define IORESOURCE_AUTO 0x40000000
+IORESOURCE_BUSY  macro  include/linux/ioport.h  55  #define IORESOURCE_BUSY 0x80000000 /* Driver has marked this resource busy */
+IORESOURCE_IRQ_HIGHEDGE  macro  include/linux/ioport.h  58  #define IORESOURCE_IRQ_HIGHEDGE (1<<0)
+IORESOURCE_IRQ_LOWEDGE  macro  include/linux/ioport.h  59  #define IORESOURCE_IRQ_LOWEDGE (1<<1)
+IORESOURCE_IRQ_HIGHLEVEL  macro  include/linux/ioport.h  60  #define IORESOURCE_IRQ_HIGHLEVEL (1<<2)
+IORESOURCE_IRQ_LOWLEVEL  macro  include/linux/ioport.h  61  #define IORESOURCE_IRQ_LOWLEVEL (1<<3)
+IORESOURCE_IRQ_SHAREABLE  macro  include/linux/ioport.h  62  #define IORESOURCE_IRQ_SHAREABLE (1<<4)
+IORESOURCE_IRQ_OPTIONAL  macro  include/linux/ioport.h  63  #define IORESOURCE_IRQ_OPTIONAL (1<<5)
+IORESOURCE_DMA_TYPE_MASK  macro  include/linux/ioport.h  66  #define IORESOURCE_DMA_TYPE_MASK (3<<0)
+IORESOURCE_DMA_8BIT  macro  include/linux/ioport.h  67  #define IORESOURCE_DMA_8BIT (0<<0)
+IORESOURCE_DMA_8AND16BIT  macro  include/linux/ioport.h  68  #define IORESOURCE_DMA_8AND16BIT (1<<0)
+IORESOURCE_DMA_16BIT  macro  include/linux/ioport.h  69  #define IORESOURCE_DMA_16BIT (2<<0)
+IORESOURCE_DMA_MASTER  macro  include/linux/ioport.h  71  #define IORESOURCE_DMA_MASTER (1<<2)
+IORESOURCE_DMA_BYTE  macro  include/linux/ioport.h  72  #define IORESOURCE_DMA_BYTE (1<<3)
+IORESOURCE_DMA_WORD  macro  include/linux/ioport.h  73  #define IORESOURCE_DMA_WORD (1<<4)
+IORESOURCE_DMA_SPEED_MASK  macro  include/linux/ioport.h  75  #define IORESOURCE_DMA_SPEED_MASK (3<<6)
+IORESOURCE_DMA_COMPATIBLE  macro  include/linux/ioport.h  76  #define IORESOURCE_DMA_COMPATIBLE (0<<6)
+IORESOURCE_DMA_TYPEA  macro  include/linux/ioport.h  77  #define IORESOURCE_DMA_TYPEA (1<<6)
+IORESOURCE_DMA_TYPEB  macro  include/linux/ioport.h  78  #define IORESOURCE_DMA_TYPEB (2<<6)
+IORESOURCE_DMA_TYPEF  macro  include/linux/ioport.h  79  #define IORESOURCE_DMA_TYPEF (3<<6)
+IORESOURCE_MEM_WRITEABLE  macro  include/linux/ioport.h  82  #define IORESOURCE_MEM_WRITEABLE (1<<0) /* dup: IORESOURCE_READONLY */
+IORESOURCE_MEM_CACHEABLE  macro  include/linux/ioport.h  83  #define IORESOURCE_MEM_CACHEABLE (1<<1) /* dup: IORESOURCE_CACHEABLE */
+IORESOURCE_MEM_RANGELENGTH  macro  include/linux/ioport.h  84  #define IORESOURCE_MEM_RANGELENGTH (1<<2) /* dup: IORESOURCE_RANGELENGTH */
+IORESOURCE_MEM_TYPE_MASK  macro  include/linux/ioport.h  85  #define IORESOURCE_MEM_TYPE_MASK (3<<3)
+IORESOURCE_MEM_8BIT  macro  include/linux/ioport.h  86  #define IORESOURCE_MEM_8BIT (0<<3)
+IORESOURCE_MEM_16BIT  macro  include/linux/ioport.h  87  #define IORESOURCE_MEM_16BIT (1<<3)
+IORESOURCE_MEM_8AND16BIT  macro  include/linux/ioport.h  88  #define IORESOURCE_MEM_8AND16BIT (2<<3)
+IORESOURCE_MEM_32BIT  macro  include/linux/ioport.h  89  #define IORESOURCE_MEM_32BIT (3<<3)
+IORESOURCE_MEM_SHADOWABLE  macro  include/linux/ioport.h  90  #define IORESOURCE_MEM_SHADOWABLE (1<<5) /* dup: IORESOURCE_SHADOWABLE */
+IORESOURCE_MEM_EXPANSIONROM  macro  include/linux/ioport.h  91  #define IORESOURCE_MEM_EXPANSIONROM (1<<6)
+IORESOURCE_IO_16BIT_ADDR  macro  include/linux/ioport.h  94  #define IORESOURCE_IO_16BIT_ADDR (1<<0)
+IORESOURCE_IO_FIXED  macro  include/linux/ioport.h  95  #define IORESOURCE_IO_FIXED (1<<1)
+IORESOURCE_ROM_ENABLE  macro  include/linux/ioport.h  98  #define IORESOURCE_ROM_ENABLE (1<<0) /* ROM is enabled, same as PCI_ROM_ADDRESS_ENABLE */
+IORESOURCE_ROM_SHADOW  macro  include/linux/ioport.h  99  #define IORESOURCE_ROM_SHADOW (1<<1) /* ROM is copy at C000:0 */
+IORESOURCE_ROM_COPY  macro  include/linux/ioport.h  100  #define IORESOURCE_ROM_COPY (1<<2) /* ROM is alloc'd copy, resource field overlaid */
+IORESOURCE_ROM_BIOS_COPY  macro  include/linux/ioport.h  101  #define IORESOURCE_ROM_BIOS_COPY (1<<3) /* ROM is BIOS copy, resource field overlaid */
+IORESOURCE_PCI_FIXED  macro  include/linux/ioport.h  104  #define IORESOURCE_PCI_FIXED (1<<4) /* Do not move resource */
+DEFINE_RES_NAMED  macro  include/linux/ioport.h  108  #define DEFINE_RES_NAMED(_start, _size, _name, _flags) \
+DEFINE_RES_IO_NAMED  macro  include/linux/ioport.h  116  #define DEFINE_RES_IO_NAMED(_start, _size, _name) \
+DEFINE_RES_IO  macro  include/linux/ioport.h  118  #define DEFINE_RES_IO(_start, _size) \
+DEFINE_RES_MEM_NAMED  macro  include/linux/ioport.h  121  #define DEFINE_RES_MEM_NAMED(_start, _size, _name) \
+DEFINE_RES_MEM  macro  include/linux/ioport.h  123  #define DEFINE_RES_MEM(_start, _size) \
+DEFINE_RES_IRQ_NAMED  macro  include/linux/ioport.h  126  #define DEFINE_RES_IRQ_NAMED(_irq, _name) \
+DEFINE_RES_IRQ  macro  include/linux/ioport.h  128  #define DEFINE_RES_IRQ(_irq) \
+DEFINE_RES_DMA_NAMED  macro  include/linux/ioport.h  131  #define DEFINE_RES_DMA_NAMED(_dma, _name) \
+DEFINE_RES_DMA  macro  include/linux/ioport.h  133  #define DEFINE_RES_DMA(_dma) \
+request_resource_conflict  prototype  include/linux/ioport.h  140  extern struct resource *request_resource_conflict(struct resource *root, struct resource *new);
+request_resource  prototype  include/linux/ioport.h  141  extern int request_resource(struct resource *root, struct resource *new);
+release_resource  prototype  include/linux/ioport.h  142  extern int release_resource(struct resource *new);
+release_child_resources  prototype  include/linux/ioport.h  143  void release_child_resources(struct resource *new);
+reserve_region_with_split  prototype  include/linux/ioport.h  146  extern void reserve_region_with_split(struct resource *root,resource_size_t start, resource_size_t end,const char *name);
+insert_resource_conflict  prototype  include/linux/ioport.h  147  extern struct resource *insert_resource_conflict(struct resource *parent, struct resource *new);
+insert_resource  prototype  include/linux/ioport.h  148  extern int insert_resource(struct resource *parent, struct resource *new);
+insert_resource_expand_to_fit  prototype  include/linux/ioport.h  149  extern void insert_resource_expand_to_fit(struct resource *root, struct resource *new);
+arch_remove_reservations  prototype  include/linux/ioport.h  150  extern void arch_remove_reservations(struct resource *avail);
+allocate_resource  prototype  include/linux/ioport.h  158  extern int allocate_resource(struct resource *root, struct resource *new,resource_size_t size, resource_size_t min,resource_size_t max, resource_size_t align,resource_size_t (*alignf)(void *,const struct resource *,resource_size_t,resource_size_t),void *alignf_data);
+lookup_resource  prototype  include/linux/ioport.h  159  struct resource *lookup_resource(struct resource *root, resource_size_t start);
+adjust_resource  prototype  include/linux/ioport.h  161  int adjust_resource(struct resource *res, resource_size_t start,resource_size_t size);
+resource_alignment  prototype  include/linux/ioport.h  162  resource_size_t resource_alignment(struct resource *res);
+resource_size  function  include/linux/ioport.h  163  static inline resource_size_t resource_size(const struct resource *res)
+resource_type  function  include/linux/ioport.h  167  static inline unsigned long resource_type(const struct resource *res)
+request_region  macro  include/linux/ioport.h  173  #define request_region(start,n,name) __request_region(&ioport_resource, (start), (n), (name), 0)
+request_muxed_region  macro  include/linux/ioport.h  174  #define request_muxed_region(start,n,name) __request_region(&ioport_resource, (start), (n), (name), IORESOURCE_MUXED)
+__request_mem_region  macro  include/linux/ioport.h  175  #define __request_mem_region(start,n,name, excl) __request_region(&iomem_resource, (start), (n), (name), excl)
+request_mem_region  macro  include/linux/ioport.h  176  #define request_mem_region(start,n,name) __request_region(&iomem_resource, (start), (n), (name), 0)
+request_mem_region_exclusive  macro  include/linux/ioport.h  177  #define request_mem_region_exclusive(start,n,name) \
+rename_region  macro  include/linux/ioport.h  179  #define rename_region(region, newname) do { (region)->name = (newname); } while (0)
+__request_region  prototype  include/linux/ioport.h  184  extern struct resource * __request_region(struct resource *,resource_size_t start,resource_size_t n,const char *name, int flags);
+release_region  macro  include/linux/ioport.h  187  #define release_region(start,n) __release_region(&ioport_resource, (start), (n))
+check_mem_region  macro  include/linux/ioport.h  188  #define check_mem_region(start,n) __check_region(&iomem_resource, (start), (n))
+release_mem_region  macro  include/linux/ioport.h  189  #define release_mem_region(start,n) __release_region(&iomem_resource, (start), (n))
+__check_region  prototype  include/linux/ioport.h  191  extern int __check_region(struct resource *, resource_size_t, resource_size_t);
+__release_region  prototype  include/linux/ioport.h  193  extern void __release_region(struct resource *, resource_size_t,resource_size_t);
+check_region  function  include/linux/ioport.h  196  static inline int __deprecated check_region(resource_size_t s,resource_size_t n)
+devm_request_region  macro  include/linux/ioport.h  203  #define devm_request_region(dev,start,n,name) \
+devm_request_mem_region  macro  include/linux/ioport.h  205  #define devm_request_mem_region(dev,start,n,name) \
+__devm_request_region  prototype  include/linux/ioport.h  210  extern struct resource * __devm_request_region(struct device *dev,struct resource *parent, resource_size_t start,resource_size_t n, const char *name);
+devm_release_region  macro  include/linux/ioport.h  212  #define devm_release_region(dev, start, n) \
+devm_release_mem_region  macro  include/linux/ioport.h  214  #define devm_release_mem_region(dev, start, n) \
+__devm_release_region  prototype  include/linux/ioport.h  218  extern void __devm_release_region(struct device *dev, struct resource *parent,resource_size_t start, resource_size_t n);
+iomem_map_sanity_check  prototype  include/linux/ioport.h  219  extern int iomem_map_sanity_check(resource_size_t addr, unsigned long size);
+iomem_is_exclusive  prototype  include/linux/ioport.h  220  extern int iomem_is_exclusive(u64 addr);
+walk_system_ram_range  prototype  include/linux/ioport.h  224  walk_system_ram_range(unsigned long start_pfn, unsigned long nr_pages,void *arg, int (*func)(unsigned long, unsigned long, void *));
+resource_overlaps  function  include/linux/ioport.h  227  static inline bool resource_overlaps(struct resource *r1, struct resource *r2)
+_LINUX_INIT_H  macro  include/linux/init.h  2  #define _LINUX_INIT_H
+__init  macro  include/linux/init.h  44  #define __init __section(.init.text) __cold notrace
+__initdata  macro  include/linux/init.h  45  #define __initdata __section(.init.data)
+__initconst  macro  include/linux/init.h  46  #define __initconst __section(.init.rodata)
+__exitdata  macro  include/linux/init.h  47  #define __exitdata __section(.exit.data)
+__exit_call  macro  include/linux/init.h  48  #define __exit_call __used __section(.exitcall.exit)
+__ref  macro  include/linux/init.h  67  #define __ref __section(.ref.text) noinline
+__refdata  macro  include/linux/init.h  68  #define __refdata __section(.ref.data)
+__refconst  macro  include/linux/init.h  69  #define __refconst __section(.ref.rodata)
+__init_refok  macro  include/linux/init.h  72  #define __init_refok __ref
+__initdata_refok  macro  include/linux/init.h  73  #define __initdata_refok __refdata
+__exit_refok  macro  include/linux/init.h  74  #define __exit_refok __ref
+__exitused  macro  include/linux/init.h  80  #define __exitused __used
+__exit  macro  include/linux/init.h  83  #define __exit __section(.exit.text) __exitused __cold notrace
+__devinit  macro  include/linux/init.h  86  #define __devinit __section(.devinit.text) __cold notrace
+__devinitdata  macro  include/linux/init.h  87  #define __devinitdata __section(.devinit.data)
+__devinitconst  macro  include/linux/init.h  88  #define __devinitconst __section(.devinit.rodata)
+__devexit  macro  include/linux/init.h  89  #define __devexit __section(.devexit.text) __exitused __cold notrace
+__devexitdata  macro  include/linux/init.h  90  #define __devexitdata __section(.devexit.data)
+__devexitconst  macro  include/linux/init.h  91  #define __devexitconst __section(.devexit.rodata)
+__cpuinit  macro  include/linux/init.h  94  #define __cpuinit __section(.cpuinit.text) __cold notrace
+__cpuinitdata  macro  include/linux/init.h  95  #define __cpuinitdata __section(.cpuinit.data)
+__cpuinitconst  macro  include/linux/init.h  96  #define __cpuinitconst __section(.cpuinit.rodata)
+__cpuexit  macro  include/linux/init.h  97  #define __cpuexit __section(.cpuexit.text) __exitused __cold notrace
+__cpuexitdata  macro  include/linux/init.h  98  #define __cpuexitdata __section(.cpuexit.data)
+__cpuexitconst  macro  include/linux/init.h  99  #define __cpuexitconst __section(.cpuexit.rodata)
+__meminit  macro  include/linux/init.h  102  #define __meminit __section(.meminit.text) __cold notrace
+__meminitdata  macro  include/linux/init.h  103  #define __meminitdata __section(.meminit.data)
+__meminitconst  macro  include/linux/init.h  104  #define __meminitconst __section(.meminit.rodata)
+__memexit  macro  include/linux/init.h  105  #define __memexit __section(.memexit.text) __exitused __cold notrace
+__memexitdata  macro  include/linux/init.h  106  #define __memexitdata __section(.memexit.data)
+__memexitconst  macro  include/linux/init.h  107  #define __memexitconst __section(.memexit.rodata)
+__HEAD  macro  include/linux/init.h  110  #define __HEAD .section ".head.text","ax"
+__INIT  macro  include/linux/init.h  111  #define __INIT .section ".init.text","ax"
+__FINIT  macro  include/linux/init.h  112  #define __FINIT .previous
+__INITDATA  macro  include/linux/init.h  114  #define __INITDATA .section ".init.data","aw",%progbits
+__INITRODATA  macro  include/linux/init.h  115  #define __INITRODATA .section ".init.rodata","a",%progbits
+__FINITDATA  macro  include/linux/init.h  116  #define __FINITDATA .previous
+__DEVINIT  macro  include/linux/init.h  118  #define __DEVINIT .section ".devinit.text", "ax"
+__DEVINITDATA  macro  include/linux/init.h  119  #define __DEVINITDATA .section ".devinit.data", "aw"
+__DEVINITRODATA  macro  include/linux/init.h  120  #define __DEVINITRODATA .section ".devinit.rodata", "a"
+__CPUINIT  macro  include/linux/init.h  122  #define __CPUINIT .section ".cpuinit.text", "ax"
+__CPUINITDATA  macro  include/linux/init.h  123  #define __CPUINITDATA .section ".cpuinit.data", "aw"
+__CPUINITRODATA  macro  include/linux/init.h  124  #define __CPUINITRODATA .section ".cpuinit.rodata", "a"
+__MEMINIT  macro  include/linux/init.h  126  #define __MEMINIT .section ".meminit.text", "ax"
+__MEMINITDATA  macro  include/linux/init.h  127  #define __MEMINITDATA .section ".meminit.data", "aw"
+__MEMINITRODATA  macro  include/linux/init.h  128  #define __MEMINITRODATA .section ".meminit.rodata", "a"
+__REF  macro  include/linux/init.h  131  #define __REF .section ".ref.text", "ax"
+__REFDATA  macro  include/linux/init.h  132  #define __REFDATA .section ".ref.data", "aw"
+__REFCONST  macro  include/linux/init.h  133  #define __REFCONST .section ".ref.rodata", "a"
+do_one_initcall  prototype  include/linux/init.h  149  extern int do_one_initcall(initcall_t fn);
+setup_arch  prototype  include/linux/init.h  155  void setup_arch(char **);
+prepare_namespace  prototype  include/linux/init.h  156  void prepare_namespace(void);
+__define_initcall  macro  include/linux/init.h  178  #define __define_initcall(level,fn,id) \
+early_initcall  macro  include/linux/init.h  284  #define early_initcall(fn) module_init(fn)
+pure_initcall  macro  include/linux/init.h  195  #define pure_initcall(fn) __define_initcall("0",fn,0)
+core_initcall  macro  include/linux/init.h  285  #define core_initcall(fn) module_init(fn)
+core_initcall_sync  macro  include/linux/init.h  198  #define core_initcall_sync(fn) __define_initcall("1s",fn,1s)
+postcore_initcall  macro  include/linux/init.h  286  #define postcore_initcall(fn) module_init(fn)
+postcore_initcall_sync  macro  include/linux/init.h  200  #define postcore_initcall_sync(fn) __define_initcall("2s",fn,2s)
+arch_initcall  macro  include/linux/init.h  287  #define arch_initcall(fn) module_init(fn)
+arch_initcall_sync  macro  include/linux/init.h  202  #define arch_initcall_sync(fn) __define_initcall("3s",fn,3s)
+subsys_initcall  macro  include/linux/init.h  288  #define subsys_initcall(fn) module_init(fn)
+subsys_initcall_sync  macro  include/linux/init.h  204  #define subsys_initcall_sync(fn) __define_initcall("4s",fn,4s)
+fs_initcall  macro  include/linux/init.h  289  #define fs_initcall(fn) module_init(fn)
+fs_initcall_sync  macro  include/linux/init.h  206  #define fs_initcall_sync(fn) __define_initcall("5s",fn,5s)
+rootfs_initcall  macro  include/linux/init.h  207  #define rootfs_initcall(fn) __define_initcall("rootfs",fn,rootfs)
+device_initcall  macro  include/linux/init.h  290  #define device_initcall(fn) module_init(fn)
+device_initcall_sync  macro  include/linux/init.h  209  #define device_initcall_sync(fn) __define_initcall("6s",fn,6s)
+late_initcall  macro  include/linux/init.h  291  #define late_initcall(fn) module_init(fn)
+late_initcall_sync  macro  include/linux/init.h  211  #define late_initcall_sync(fn) __define_initcall("7s",fn,7s)
+__initcall  macro  include/linux/init.h  213  #define __initcall(fn) device_initcall(fn)
+__exitcall  macro  include/linux/init.h  215  #define __exitcall(fn) \
+console_initcall  macro  include/linux/init.h  218  #define console_initcall(fn) \
+security_initcall  macro  include/linux/init.h  293  #define security_initcall(fn) module_init(fn)
+__setup_param  macro  include/linux/init.h  307  #define __setup_param(str, unique_id, fn) /* nothing */
+__setup  macro  include/linux/init.h  308  #define __setup(str, func) /* nothing */
+early_param  macro  include/linux/init.h  251  #define early_param(str, fn) \
+parse_early_param  prototype  include/linux/init.h  255  void __init parse_early_param(void);
+parse_early_options  prototype  include/linux/init.h  256  void __init parse_early_options(char *cmdline);
+module_init  macro  include/linux/init.h  296  #define module_init(initfn) \
+module_exit  macro  include/linux/init.h  302  #define module_exit(exitfn) \
+__nosavedata  macro  include/linux/init.h  312  #define __nosavedata __section(.data..nosave)
+__init_or_module  macro  include/linux/init.h  324  #define __init_or_module __init
+__initdata_or_module  macro  include/linux/init.h  325  #define __initdata_or_module __initdata
+__initconst_or_module  macro  include/linux/init.h  326  #define __initconst_or_module __initconst
+__INIT_OR_MODULE  macro  include/linux/init.h  327  #define __INIT_OR_MODULE __INIT
+__INITDATA_OR_MODULE  macro  include/linux/init.h  328  #define __INITDATA_OR_MODULE __INITDATA
+__INITRODATA_OR_MODULE  macro  include/linux/init.h  329  #define __INITRODATA_OR_MODULE __INITRODATA
+__devexit_p  macro  include/linux/init.h  341  #define __devexit_p(x) NULL
+__exit_p  macro  include/linux/init.h  347  #define __exit_p(x) NULL
+_SCREEN_INFO_H  macro  include/linux/screen_info.h  2  #define _SCREEN_INFO_H
+VIDEO_TYPE_MDA  macro  include/linux/screen_info.h  49  #define VIDEO_TYPE_MDA 0x10 /* Monochrome Text Display */
+VIDEO_TYPE_CGA  macro  include/linux/screen_info.h  50  #define VIDEO_TYPE_CGA 0x11 /* CGA Display */
+VIDEO_TYPE_EGAM  macro  include/linux/screen_info.h  51  #define VIDEO_TYPE_EGAM 0x20 /* EGA/VGA in Monochrome Mode */
+VIDEO_TYPE_EGAC  macro  include/linux/screen_info.h  52  #define VIDEO_TYPE_EGAC 0x21 /* EGA in Color Mode */
+VIDEO_TYPE_VGAC  macro  include/linux/screen_info.h  53  #define VIDEO_TYPE_VGAC 0x22 /* VGA+ in Color Mode */
+VIDEO_TYPE_VLFB  macro  include/linux/screen_info.h  54  #define VIDEO_TYPE_VLFB 0x23 /* VESA VGA in graphic mode */
+VIDEO_TYPE_PICA_S3  macro  include/linux/screen_info.h  56  #define VIDEO_TYPE_PICA_S3 0x30 /* ACER PICA-61 local S3 video */
+VIDEO_TYPE_MIPS_G364  macro  include/linux/screen_info.h  57  #define VIDEO_TYPE_MIPS_G364 0x31 /* MIPS Magnum 4000 G364 video */
+VIDEO_TYPE_SGI  macro  include/linux/screen_info.h  58  #define VIDEO_TYPE_SGI 0x33 /* Various SGI graphics hardware */
+VIDEO_TYPE_TGAC  macro  include/linux/screen_info.h  60  #define VIDEO_TYPE_TGAC 0x40 /* DEC TGA */
+VIDEO_TYPE_SUN  macro  include/linux/screen_info.h  62  #define VIDEO_TYPE_SUN 0x50 /* Sun frame buffer. */
+VIDEO_TYPE_SUNPCI  macro  include/linux/screen_info.h  63  #define VIDEO_TYPE_SUNPCI 0x51 /* Sun PCI based frame buffer. */
+VIDEO_TYPE_PMAC  macro  include/linux/screen_info.h  65  #define VIDEO_TYPE_PMAC 0x60 /* PowerMacintosh frame buffer. */
+VIDEO_TYPE_EFI  macro  include/linux/screen_info.h  67  #define VIDEO_TYPE_EFI 0x70 /* EFI graphic mode */
+VIDEO_FLAGS_NOCURSOR  macro  include/linux/screen_info.h  69  #define VIDEO_FLAGS_NOCURSOR (1 << 0) /* The video mode has no cursor set */
+ORIG_X  macro  include/linux/screen_info.h  74  #define ORIG_X (screen_info.orig_x)
+ORIG_Y  macro  include/linux/screen_info.h  75  #define ORIG_Y (screen_info.orig_y)
+ORIG_VIDEO_MODE  macro  include/linux/screen_info.h  76  #define ORIG_VIDEO_MODE (screen_info.orig_video_mode)
+ORIG_VIDEO_COLS  macro  include/linux/screen_info.h  77  #define ORIG_VIDEO_COLS (screen_info.orig_video_cols)
+ORIG_VIDEO_EGA_BX  macro  include/linux/screen_info.h  78  #define ORIG_VIDEO_EGA_BX (screen_info.orig_video_ega_bx)
+ORIG_VIDEO_LINES  macro  include/linux/screen_info.h  79  #define ORIG_VIDEO_LINES (screen_info.orig_video_lines)
+ORIG_VIDEO_ISVGA  macro  include/linux/screen_info.h  80  #define ORIG_VIDEO_ISVGA (screen_info.orig_video_isVGA)
+ORIG_VIDEO_POINTS  macro  include/linux/screen_info.h  81  #define ORIG_VIDEO_POINTS (screen_info.orig_video_points)
+__linux_video_vga_h__  macro  include/video/vga.h  18  #define __linux_video_vga_h__
+VGA_CRT_DC  macro  include/video/vga.h  38  #define VGA_CRT_DC 0x3D5 /* CRT Controller Data Register - color emulation */
+VGA_CRT_DM  macro  include/video/vga.h  39  #define VGA_CRT_DM 0x3B5 /* CRT Controller Data Register - mono emulation */
+VGA_ATT_R  macro  include/video/vga.h  40  #define VGA_ATT_R 0x3C1 /* Attribute Controller Data Read Register */
+VGA_ATT_W  macro  include/video/vga.h  41  #define VGA_ATT_W 0x3C0 /* Attribute Controller Data Write Register */
+VGA_GFX_D  macro  include/video/vga.h  42  #define VGA_GFX_D 0x3CF /* Graphics Controller Data Register */
+VGA_SEQ_D  macro  include/video/vga.h  43  #define VGA_SEQ_D 0x3C5 /* Sequencer Data Register */
+VGA_MIS_R  macro  include/video/vga.h  44  #define VGA_MIS_R 0x3CC /* Misc Output Read Register */
+VGA_MIS_W  macro  include/video/vga.h  45  #define VGA_MIS_W 0x3C2 /* Misc Output Write Register */
+VGA_FTC_R  macro  include/video/vga.h  46  #define VGA_FTC_R 0x3CA /* Feature Control Read Register */
+VGA_IS1_RC  macro  include/video/vga.h  47  #define VGA_IS1_RC 0x3DA /* Input Status Register 1 - color emulation */
+VGA_IS1_RM  macro  include/video/vga.h  48  #define VGA_IS1_RM 0x3BA /* Input Status Register 1 - mono emulation */
+VGA_PEL_D  macro  include/video/vga.h  49  #define VGA_PEL_D 0x3C9 /* PEL Data Register */
+VGA_PEL_MSK  macro  include/video/vga.h  50  #define VGA_PEL_MSK 0x3C6 /* PEL mask register */
+EGA_GFX_E0  macro  include/video/vga.h  53  #define EGA_GFX_E0 0x3CC /* Graphics enable processor 0 */
+EGA_GFX_E1  macro  include/video/vga.h  54  #define EGA_GFX_E1 0x3CA /* Graphics enable processor 1 */
+VGA_CRT_IC  macro  include/video/vga.h  57  #define VGA_CRT_IC 0x3D4 /* CRT Controller Index - color emulation */
+VGA_CRT_IM  macro  include/video/vga.h  58  #define VGA_CRT_IM 0x3B4 /* CRT Controller Index - mono emulation */
+VGA_ATT_IW  macro  include/video/vga.h  59  #define VGA_ATT_IW 0x3C0 /* Attribute Controller Index & Data Write Register */
+VGA_GFX_I  macro  include/video/vga.h  60  #define VGA_GFX_I 0x3CE /* Graphics Controller Index */
+VGA_SEQ_I  macro  include/video/vga.h  61  #define VGA_SEQ_I 0x3C4 /* Sequencer Index */
+VGA_PEL_IW  macro  include/video/vga.h  62  #define VGA_PEL_IW 0x3C8 /* PEL Write Index */
+VGA_PEL_IR  macro  include/video/vga.h  63  #define VGA_PEL_IR 0x3C7 /* PEL Read Index */
+VGA_CRT_C  macro  include/video/vga.h  66  #define VGA_CRT_C 0x19 /* Number of CRT Controller Registers */
+VGA_ATT_C  macro  include/video/vga.h  67  #define VGA_ATT_C 0x15 /* Number of Attribute Controller Registers */
+VGA_GFX_C  macro  include/video/vga.h  68  #define VGA_GFX_C 0x09 /* Number of Graphics Controller Registers */
+VGA_SEQ_C  macro  include/video/vga.h  69  #define VGA_SEQ_C 0x05 /* Number of Sequencer Registers */
+VGA_MIS_C  macro  include/video/vga.h  70  #define VGA_MIS_C 0x01 /* Number of Misc Output Register */
+VGA_MIS_COLOR  macro  include/video/vga.h  73  #define VGA_MIS_COLOR 0x01
+VGA_MIS_ENB_MEM_ACCESS  macro  include/video/vga.h  74  #define VGA_MIS_ENB_MEM_ACCESS 0x02
+VGA_MIS_DCLK_28322_720  macro  include/video/vga.h  75  #define VGA_MIS_DCLK_28322_720 0x04
+VGA_MIS_ENB_PLL_LOAD  macro  include/video/vga.h  76  #define VGA_MIS_ENB_PLL_LOAD (0x04 | 0x08)
+VGA_MIS_SEL_HIGH_PAGE  macro  include/video/vga.h  77  #define VGA_MIS_SEL_HIGH_PAGE 0x20
+VGA_CRTC_H_TOTAL  macro  include/video/vga.h  80  #define VGA_CRTC_H_TOTAL 0
+VGA_CRTC_H_DISP  macro  include/video/vga.h  81  #define VGA_CRTC_H_DISP 1
+VGA_CRTC_H_BLANK_START  macro  include/video/vga.h  82  #define VGA_CRTC_H_BLANK_START 2
+VGA_CRTC_H_BLANK_END  macro  include/video/vga.h  83  #define VGA_CRTC_H_BLANK_END 3
+VGA_CRTC_H_SYNC_START  macro  include/video/vga.h  84  #define VGA_CRTC_H_SYNC_START 4
+VGA_CRTC_H_SYNC_END  macro  include/video/vga.h  85  #define VGA_CRTC_H_SYNC_END 5
+VGA_CRTC_V_TOTAL  macro  include/video/vga.h  86  #define VGA_CRTC_V_TOTAL 6
+VGA_CRTC_OVERFLOW  macro  include/video/vga.h  87  #define VGA_CRTC_OVERFLOW 7
+VGA_CRTC_PRESET_ROW  macro  include/video/vga.h  88  #define VGA_CRTC_PRESET_ROW 8
+VGA_CRTC_MAX_SCAN  macro  include/video/vga.h  89  #define VGA_CRTC_MAX_SCAN 9
+VGA_CRTC_CURSOR_START  macro  include/video/vga.h  90  #define VGA_CRTC_CURSOR_START 0x0A
+VGA_CRTC_CURSOR_END  macro  include/video/vga.h  91  #define VGA_CRTC_CURSOR_END 0x0B
+VGA_CRTC_START_HI  macro  include/video/vga.h  92  #define VGA_CRTC_START_HI 0x0C
+VGA_CRTC_START_LO  macro  include/video/vga.h  93  #define VGA_CRTC_START_LO 0x0D
+VGA_CRTC_CURSOR_HI  macro  include/video/vga.h  94  #define VGA_CRTC_CURSOR_HI 0x0E
+VGA_CRTC_CURSOR_LO  macro  include/video/vga.h  95  #define VGA_CRTC_CURSOR_LO 0x0F
+VGA_CRTC_V_SYNC_START  macro  include/video/vga.h  96  #define VGA_CRTC_V_SYNC_START 0x10
+VGA_CRTC_V_SYNC_END  macro  include/video/vga.h  97  #define VGA_CRTC_V_SYNC_END 0x11
+VGA_CRTC_V_DISP_END  macro  include/video/vga.h  98  #define VGA_CRTC_V_DISP_END 0x12
+VGA_CRTC_OFFSET  macro  include/video/vga.h  99  #define VGA_CRTC_OFFSET 0x13
+VGA_CRTC_UNDERLINE  macro  include/video/vga.h  100  #define VGA_CRTC_UNDERLINE 0x14
+VGA_CRTC_V_BLANK_START  macro  include/video/vga.h  101  #define VGA_CRTC_V_BLANK_START 0x15
+VGA_CRTC_V_BLANK_END  macro  include/video/vga.h  102  #define VGA_CRTC_V_BLANK_END 0x16
+VGA_CRTC_MODE  macro  include/video/vga.h  103  #define VGA_CRTC_MODE 0x17
+VGA_CRTC_LINE_COMPARE  macro  include/video/vga.h  104  #define VGA_CRTC_LINE_COMPARE 0x18
+VGA_CRTC_REGS  macro  include/video/vga.h  105  #define VGA_CRTC_REGS VGA_CRT_C
+VGA_CR11_LOCK_CR0_CR7  macro  include/video/vga.h  108  #define VGA_CR11_LOCK_CR0_CR7 0x80 /* lock writes to CR0 - CR7 */
+VGA_CR17_H_V_SIGNALS_ENABLED  macro  include/video/vga.h  109  #define VGA_CR17_H_V_SIGNALS_ENABLED 0x80
+VGA_ATC_PALETTE0  macro  include/video/vga.h  112  #define VGA_ATC_PALETTE0 0x00
+VGA_ATC_PALETTE1  macro  include/video/vga.h  113  #define VGA_ATC_PALETTE1 0x01
+VGA_ATC_PALETTE2  macro  include/video/vga.h  114  #define VGA_ATC_PALETTE2 0x02
+VGA_ATC_PALETTE3  macro  include/video/vga.h  115  #define VGA_ATC_PALETTE3 0x03
+VGA_ATC_PALETTE4  macro  include/video/vga.h  116  #define VGA_ATC_PALETTE4 0x04
+VGA_ATC_PALETTE5  macro  include/video/vga.h  117  #define VGA_ATC_PALETTE5 0x05
+VGA_ATC_PALETTE6  macro  include/video/vga.h  118  #define VGA_ATC_PALETTE6 0x06
+VGA_ATC_PALETTE7  macro  include/video/vga.h  119  #define VGA_ATC_PALETTE7 0x07
+VGA_ATC_PALETTE8  macro  include/video/vga.h  120  #define VGA_ATC_PALETTE8 0x08
+VGA_ATC_PALETTE9  macro  include/video/vga.h  121  #define VGA_ATC_PALETTE9 0x09
+VGA_ATC_PALETTEA  macro  include/video/vga.h  122  #define VGA_ATC_PALETTEA 0x0A
+VGA_ATC_PALETTEB  macro  include/video/vga.h  123  #define VGA_ATC_PALETTEB 0x0B
+VGA_ATC_PALETTEC  macro  include/video/vga.h  124  #define VGA_ATC_PALETTEC 0x0C
+VGA_ATC_PALETTED  macro  include/video/vga.h  125  #define VGA_ATC_PALETTED 0x0D
+VGA_ATC_PALETTEE  macro  include/video/vga.h  126  #define VGA_ATC_PALETTEE 0x0E
+VGA_ATC_PALETTEF  macro  include/video/vga.h  127  #define VGA_ATC_PALETTEF 0x0F
+VGA_ATC_MODE  macro  include/video/vga.h  128  #define VGA_ATC_MODE 0x10
+VGA_ATC_OVERSCAN  macro  include/video/vga.h  129  #define VGA_ATC_OVERSCAN 0x11
+VGA_ATC_PLANE_ENABLE  macro  include/video/vga.h  130  #define VGA_ATC_PLANE_ENABLE 0x12
+VGA_ATC_PEL  macro  include/video/vga.h  131  #define VGA_ATC_PEL 0x13
+VGA_ATC_COLOR_PAGE  macro  include/video/vga.h  132  #define VGA_ATC_COLOR_PAGE 0x14
+VGA_AR_ENABLE_DISPLAY  macro  include/video/vga.h  134  #define VGA_AR_ENABLE_DISPLAY 0x20
+VGA_SEQ_RESET  macro  include/video/vga.h  137  #define VGA_SEQ_RESET 0x00
+VGA_SEQ_CLOCK_MODE  macro  include/video/vga.h  138  #define VGA_SEQ_CLOCK_MODE 0x01
+VGA_SEQ_PLANE_WRITE  macro  include/video/vga.h  139  #define VGA_SEQ_PLANE_WRITE 0x02
+VGA_SEQ_CHARACTER_MAP  macro  include/video/vga.h  140  #define VGA_SEQ_CHARACTER_MAP 0x03
+VGA_SEQ_MEMORY_MODE  macro  include/video/vga.h  141  #define VGA_SEQ_MEMORY_MODE 0x04
+VGA_SR01_CHAR_CLK_8DOTS  macro  include/video/vga.h  144  #define VGA_SR01_CHAR_CLK_8DOTS 0x01 /* bit 0: character clocks 8 dots wide are generated */
+VGA_SR01_SCREEN_OFF  macro  include/video/vga.h  145  #define VGA_SR01_SCREEN_OFF 0x20 /* bit 5: Screen is off */
+VGA_SR02_ALL_PLANES  macro  include/video/vga.h  146  #define VGA_SR02_ALL_PLANES 0x0F /* bits 3-0: enable access to all planes */
+VGA_SR04_EXT_MEM  macro  include/video/vga.h  147  #define VGA_SR04_EXT_MEM 0x02 /* bit 1: allows complete mem access to 256K */
+VGA_SR04_SEQ_MODE  macro  include/video/vga.h  148  #define VGA_SR04_SEQ_MODE 0x04 /* bit 2: directs system to use a sequential addressing mode */
+VGA_SR04_CHN_4M  macro  include/video/vga.h  149  #define VGA_SR04_CHN_4M 0x08 /* bit 3: selects modulo 4 addressing for CPU access to display memory */
+VGA_GFX_SR_VALUE  macro  include/video/vga.h  152  #define VGA_GFX_SR_VALUE 0x00
+VGA_GFX_SR_ENABLE  macro  include/video/vga.h  153  #define VGA_GFX_SR_ENABLE 0x01
+VGA_GFX_COMPARE_VALUE  macro  include/video/vga.h  154  #define VGA_GFX_COMPARE_VALUE 0x02
+VGA_GFX_DATA_ROTATE  macro  include/video/vga.h  155  #define VGA_GFX_DATA_ROTATE 0x03
+VGA_GFX_PLANE_READ  macro  include/video/vga.h  156  #define VGA_GFX_PLANE_READ 0x04
+VGA_GFX_MODE  macro  include/video/vga.h  157  #define VGA_GFX_MODE 0x05
+VGA_GFX_MISC  macro  include/video/vga.h  158  #define VGA_GFX_MISC 0x06
+VGA_GFX_COMPARE_MASK  macro  include/video/vga.h  159  #define VGA_GFX_COMPARE_MASK 0x07
+VGA_GFX_BIT_MASK  macro  include/video/vga.h  160  #define VGA_GFX_BIT_MASK 0x08
+VGA_GR06_GRAPHICS_MODE  macro  include/video/vga.h  163  #define VGA_GR06_GRAPHICS_MODE 0x01
+VGA_OUT16VAL  macro  include/video/vga.h  167  #define VGA_OUT16VAL(v, r) (((v) << 8) | (r))
+VGA_OUTW_WRITE  macro  include/video/vga.h  171  #define VGA_OUTW_WRITE
+VGA_SAVE_FONT0  macro  include/video/vga.h  175  #define VGA_SAVE_FONT0 1 /* save/restore plane 2 fonts */
+VGA_SAVE_FONT1  macro  include/video/vga.h  176  #define VGA_SAVE_FONT1 2 /* save/restore plane 3 fonts */
+VGA_SAVE_TEXT  macro  include/video/vga.h  177  #define VGA_SAVE_TEXT 4 /* save/restore plane 0/1 fonts */
+VGA_SAVE_FONTS  macro  include/video/vga.h  178  #define VGA_SAVE_FONTS 7 /* save/restore all fonts */
+VGA_SAVE_MODE  macro  include/video/vga.h  179  #define VGA_SAVE_MODE 8 /* save/restore video mode */
+VGA_SAVE_CMAP  macro  include/video/vga.h  180  #define VGA_SAVE_CMAP 16 /* save/restore color map/DAC */
+save_vga  prototype  include/video/vga.h  195  extern int save_vga(struct vgastate *state);
+restore_vga  prototype  include/video/vga.h  196  extern int restore_vga(struct vgastate *state);
+vga_io_r  function  include/video/vga.h  202  static inline unsigned char vga_io_r (unsigned short port)
+vga_io_w  function  include/video/vga.h  207  static inline void vga_io_w (unsigned short port, unsigned char val)
+vga_io_w_fast  function  include/video/vga.h  213  static inline void vga_io_w_fast (unsigned short port, unsigned char reg,unsigned char val)
+vga_mm_r  function  include/video/vga.h  218  static inline unsigned char vga_mm_r (void __iomem *regbase, unsigned short port)
+vga_mm_w  function  include/video/vga.h  223  static inline void vga_mm_w (void __iomem *regbase, unsigned short port, unsigned char val)
+vga_mm_w_fast  function  include/video/vga.h  229  static inline void vga_mm_w_fast (void __iomem *regbase, unsigned short port,unsigned char reg, unsigned char val)
+vga_r  function  include/video/vga.h  234  static inline unsigned char vga_r (void __iomem *regbase, unsigned short port)
+vga_w  function  include/video/vga.h  242  static inline void vga_w (void __iomem *regbase, unsigned short port, unsigned char val)
+vga_w_fast  function  include/video/vga.h  252  static inline void vga_w_fast (void __iomem *regbase, unsigned short port,unsigned char reg, unsigned char val)
+vga_rcrt  function  include/video/vga.h  265  static inline unsigned char vga_rcrt (void __iomem *regbase, unsigned char reg)
+vga_wcrt  function  include/video/vga.h  271  static inline void vga_wcrt (void __iomem *regbase, unsigned char reg, unsigned char val)
+vga_io_rcrt  function  include/video/vga.h  281  static inline unsigned char vga_io_rcrt (unsigned char reg)
+vga_io_wcrt  function  include/video/vga.h  287  static inline void vga_io_wcrt (unsigned char reg, unsigned char val)
+vga_mm_rcrt  function  include/video/vga.h  297  static inline unsigned char vga_mm_rcrt (void __iomem *regbase, unsigned char reg)
+vga_mm_wcrt  function  include/video/vga.h  303  static inline void vga_mm_wcrt (void __iomem *regbase, unsigned char reg, unsigned char val)
+vga_rseq  function  include/video/vga.h  318  static inline unsigned char vga_rseq (void __iomem *regbase, unsigned char reg)
+vga_wseq  function  include/video/vga.h  324  static inline void vga_wseq (void __iomem *regbase, unsigned char reg, unsigned char val)
+vga_io_rseq  function  include/video/vga.h  334  static inline unsigned char vga_io_rseq (unsigned char reg)
+vga_io_wseq  function  include/video/vga.h  340  static inline void vga_io_wseq (unsigned char reg, unsigned char val)
+vga_mm_rseq  function  include/video/vga.h  350  static inline unsigned char vga_mm_rseq (void __iomem *regbase, unsigned char reg)
+vga_mm_wseq  function  include/video/vga.h  356  static inline void vga_mm_wseq (void __iomem *regbase, unsigned char reg, unsigned char val)
+vga_rgfx  function  include/video/vga.h  370  static inline unsigned char vga_rgfx (void __iomem *regbase, unsigned char reg)
+vga_wgfx  function  include/video/vga.h  376  static inline void vga_wgfx (void __iomem *regbase, unsigned char reg, unsigned char val)
+vga_io_rgfx  function  include/video/vga.h  386  static inline unsigned char vga_io_rgfx (unsigned char reg)
+vga_io_wgfx  function  include/video/vga.h  392  static inline void vga_io_wgfx (unsigned char reg, unsigned char val)
+vga_mm_rgfx  function  include/video/vga.h  402  static inline unsigned char vga_mm_rgfx (void __iomem *regbase, unsigned char reg)
+vga_mm_wgfx  function  include/video/vga.h  408  static inline void vga_mm_wgfx (void __iomem *regbase, unsigned char reg, unsigned char val)
+vga_rattr  function  include/video/vga.h  423  static inline unsigned char vga_rattr (void __iomem *regbase, unsigned char reg)
+vga_wattr  function  include/video/vga.h  429  static inline void vga_wattr (void __iomem *regbase, unsigned char reg, unsigned char val)
+vga_io_rattr  function  include/video/vga.h  435  static inline unsigned char vga_io_rattr (unsigned char reg)
+vga_io_wattr  function  include/video/vga.h  441  static inline void vga_io_wattr (unsigned char reg, unsigned char val)
+vga_mm_rattr  function  include/video/vga.h  447  static inline unsigned char vga_mm_rattr (void __iomem *regbase, unsigned char reg)
+vga_mm_wattr  function  include/video/vga.h  453  static inline void vga_mm_wattr (void __iomem *regbase, unsigned char reg, unsigned char val)
+_ASM_X86_IO_H  macro  arch/x86/include/asm/io.h  2  #define _ASM_X86_IO_H
+ARCH_HAS_IOREMAP_WC  macro  arch/x86/include/asm/io.h  37  #define ARCH_HAS_IOREMAP_WC
+build_mmio_read  macro  arch/x86/include/asm/io.h  43  #define build_mmio_read(name, size, type, reg, barrier) \
+build_mmio_write  macro  arch/x86/include/asm/io.h  48  #define build_mmio_write(name, size, type, reg, barrier) \
+readb_relaxed  macro  arch/x86/include/asm/io.h  69  #define readb_relaxed(a) __readb(a)
+readw_relaxed  macro  arch/x86/include/asm/io.h  70  #define readw_relaxed(a) __readw(a)
+readl_relaxed  macro  arch/x86/include/asm/io.h  71  #define readl_relaxed(a) __readl(a)
+__raw_readb  macro  arch/x86/include/asm/io.h  72  #define __raw_readb __readb
+__raw_readw  macro  arch/x86/include/asm/io.h  73  #define __raw_readw __readw
+__raw_readl  macro  arch/x86/include/asm/io.h  74  #define __raw_readl __readl
+__raw_writeb  macro  arch/x86/include/asm/io.h  76  #define __raw_writeb __writeb
+__raw_writew  macro  arch/x86/include/asm/io.h  77  #define __raw_writew __writew
+__raw_writel  macro  arch/x86/include/asm/io.h  78  #define __raw_writel __writel
+mmiowb  macro  arch/x86/include/asm/io.h  80  #define mmiowb() barrier()
+readq_relaxed  macro  arch/x86/include/asm/io.h  87  #define readq_relaxed(a) readq(a)
+__raw_readq  macro  arch/x86/include/asm/io.h  89  #define __raw_readq(a) readq(a)
+__raw_writeq  macro  arch/x86/include/asm/io.h  90  #define __raw_writeq(val, addr) writeq(val, addr)
+readq  macro  arch/x86/include/asm/io.h  93  #define readq readq
+writeq  macro  arch/x86/include/asm/io.h  94  #define writeq writeq
+virt_to_phys  function  arch/x86/include/asm/io.h  111  static inline phys_addr_t virt_to_phys(volatile void *address)
+phys_to_virt  function  arch/x86/include/asm/io.h  129  static inline void *phys_to_virt(phys_addr_t address)
+page_to_phys  macro  arch/x86/include/asm/io.h  137  #define page_to_phys(page) ((dma_addr_t)page_to_pfn(page) << PAGE_SHIFT)
+isa_virt_to_bus  function  arch/x86/include/asm/io.h  144  static inline unsigned int isa_virt_to_bus(volatile void *address)
+isa_page_to_bus  macro  arch/x86/include/asm/io.h  148  #define isa_page_to_bus(page) ((unsigned int)page_to_phys(page))
+isa_bus_to_virt  macro  arch/x86/include/asm/io.h  149  #define isa_bus_to_virt phys_to_virt
+virt_to_bus  macro  arch/x86/include/asm/io.h  157  #define virt_to_bus virt_to_phys
+bus_to_virt  macro  arch/x86/include/asm/io.h  158  #define bus_to_virt phys_to_virt
+ioremap_nocache  prototype  arch/x86/include/asm/io.h  174  extern void __iomem *ioremap_nocache(resource_size_t offset, unsigned long size);
+ioremap_cache  prototype  arch/x86/include/asm/io.h  175  extern void __iomem *ioremap_cache(resource_size_t offset, unsigned long size);
+ioremap_prot  prototype  arch/x86/include/asm/io.h  177  extern void __iomem *ioremap_prot(resource_size_t offset, unsigned long size,unsigned long prot_val);
+ioremap  function  arch/x86/include/asm/io.h  182  static inline void __iomem *ioremap(resource_size_t offset, unsigned long size)
+iounmap  prototype  arch/x86/include/asm/io.h  187  extern void iounmap(volatile void __iomem *addr);
+set_iounmap_nonlazy  prototype  arch/x86/include/asm/io.h  189  extern void set_iounmap_nonlazy(void);
+xlate_dev_kmem_ptr  macro  arch/x86/include/asm/io.h  200  #define xlate_dev_kmem_ptr(p) p
+memset_io  function  arch/x86/include/asm/io.h  203  memset_io(volatile void __iomem *addr, unsigned char val, size_t count)
+memcpy_fromio  function  arch/x86/include/asm/io.h  209  memcpy_fromio(void *dst, const volatile void __iomem *src, size_t count)
+memcpy_toio  function  arch/x86/include/asm/io.h  215  memcpy_toio(volatile void __iomem *dst, const void *src, size_t count)
+__ISA_IO_base  macro  arch/x86/include/asm/io.h  228  #define __ISA_IO_base ((char __iomem *)(PAGE_OFFSET))
+flush_write_buffers  function  arch/x86/include/asm/io.h  238  static inline void flush_write_buffers(void)
+native_io_delay  prototype  arch/x86/include/asm/io.h  247  extern void native_io_delay(void);
+io_delay_init  prototype  arch/x86/include/asm/io.h  250  extern void io_delay_init(void);
+slow_down_io  function  arch/x86/include/asm/io.h  256  static inline void slow_down_io(void)
+BUILDIO  macro  arch/x86/include/asm/io.h  268  #define BUILDIO(bwl, bw, type) \
+xlate_dev_mem_ptr  prototype  arch/x86/include/asm/io.h  312  extern void *xlate_dev_mem_ptr(unsigned long phys);
+unxlate_dev_mem_ptr  prototype  arch/x86/include/asm/io.h  313  extern void unxlate_dev_mem_ptr(unsigned long phys, void *addr);
+ioremap_change_attr  prototype  arch/x86/include/asm/io.h  316  extern int ioremap_change_attr(unsigned long vaddr, unsigned long size,unsigned long prot_val);
+ioremap_wc  prototype  arch/x86/include/asm/io.h  317  extern void __iomem *ioremap_wc(resource_size_t offset, unsigned long size);
+early_ioremap_init  prototype  arch/x86/include/asm/io.h  324  extern void early_ioremap_init(void);
+early_ioremap_reset  prototype  arch/x86/include/asm/io.h  325  extern void early_ioremap_reset(void);
+early_ioremap  prototype  arch/x86/include/asm/io.h  327  extern void __iomem *early_ioremap(resource_size_t phys_addr,unsigned long size);
+early_memremap  prototype  arch/x86/include/asm/io.h  329  extern void __iomem *early_memremap(resource_size_t phys_addr,unsigned long size);
+early_iounmap  prototype  arch/x86/include/asm/io.h  330  extern void early_iounmap(void __iomem *addr, unsigned long size);
+fixup_early_ioremap  prototype  arch/x86/include/asm/io.h  331  extern void fixup_early_ioremap(void);
+is_early_ioremap_ptep  prototype  arch/x86/include/asm/io.h  332  extern bool is_early_ioremap_ptep(pte_t *ptep);
+xen_biovec_phys_mergeable  prototype  arch/x86/include/asm/io.h  339  extern bool xen_biovec_phys_mergeable(const struct bio_vec *vec1,const struct bio_vec *vec2);
+BIOVEC_PHYS_MERGEABLE  macro  arch/x86/include/asm/io.h  341  #define BIOVEC_PHYS_MERGEABLE(vec1, vec2) \
+IO_SPACE_LIMIT  macro  arch/x86/include/asm/io.h  346  #define IO_SPACE_LIMIT 0xffff

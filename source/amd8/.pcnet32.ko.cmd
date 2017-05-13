@@ -1,0 +1,1 @@
+cmd_/home/ryyan/myProjects/source/amd8/pcnet32.ko := ld -r -m elf_i386 -T ./scripts/module-common.lds --build-id  -o /home/ryyan/myProjects/source/amd8/pcnet32.ko /home/ryyan/myProjects/source/amd8/pcnet32.o /home/ryyan/myProjects/source/amd8/pcnet32.mod.o

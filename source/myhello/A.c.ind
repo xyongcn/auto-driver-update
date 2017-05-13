@@ -1,0 +1,37 @@
+30 function_decl foo2 myhello/A.c:4:8 myhello/A.c:4:1
+  1 identifier_node foo2
+  37 result_decl myhello/A.c:4:8
+    10 pointer_type *
+      8 integer_type char
+  59 bind_expr myhello/A.c:4:14 ()
+    148 statement_list
+30 function_decl main myhello/A.c:6:5 myhello/A.c:11:1
+  1 identifier_node main
+  37 result_decl myhello/A.c:6:5
+    8 integer_type int
+  59 bind_expr myhello/A.c:7:1 ()
+    148 statement_list
+      60 call_expr myhello/A.c:8:6 ()
+        122 addr_expr myhello/A.c:8:6 ()
+          30 function_decl 
+            1 identifier_node foo
+      60 call_expr myhello/A.c:9:9 ()
+        122 addr_expr myhello/A.c:9:9 ()
+          30 function_decl 
+            1 identifier_node printf
+        118 nop_expr myhello/A.c:9:10 ()
+          122 addr_expr myhello/A.c:9:10 ()
+            29 string_cst hello world 
+      136 return_expr myhello/A.c:10:3 ()
+        53 modify_expr myhello/A.c:10:3 ()
+          37 result_decl 
+          24 integer_cst 0
+30 function_decl foo myhello/A.c:13:6 myhello/A.c:16:1
+  1 identifier_node foo
+  37 result_decl myhello/A.c:13:6
+    8 integer_type char
+  59 bind_expr myhello/A.c:14:1 ()
+    136 return_expr myhello/A.c:15:2 ()
+      53 modify_expr myhello/A.c:15:2 ()
+        37 result_decl 
+        24 integer_cst 97

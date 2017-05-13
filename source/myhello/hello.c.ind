@@ -1,0 +1,73 @@
+30 function_decl main myhello/hello.c:9:5 myhello/hello.c:13:1
+  1 identifier_node main
+  37 result_decl myhello/hello.c:9:5
+    8 integer_type int
+  35 parm_decl myhello/hello.c:9:14
+    1 identifier_node argc
+    8 integer_type int
+  35 parm_decl myhello/hello.c:9:26
+    1 identifier_node argv
+    10 pointer_type *
+      10 pointer_type *
+        8 integer_type char
+  59 bind_expr myhello/hello.c:10:1 ()
+    148 statement_list
+      60 call_expr myhello/hello.c:11:10 ()
+        122 addr_expr myhello/hello.c:11:10 ()
+          30 function_decl 
+            1 identifier_node fun_cmp
+        24 integer_cst 1
+        24 integer_cst 2
+      136 return_expr myhello/hello.c:12:3 ()
+        53 modify_expr myhello/hello.c:12:3 ()
+          37 result_decl 
+          24 integer_cst 0
+30 function_decl fun_cmp myhello/hello.c:15:6 myhello/hello.c:23:1
+  1 identifier_node fun_cmp
+  37 result_decl myhello/hello.c:15:6
+    20 void_type void
+  35 parm_decl myhello/hello.c:15:18
+    1 identifier_node a
+    8 integer_type int
+  35 parm_decl myhello/hello.c:15:24
+    1 identifier_node b
+    8 integer_type int
+  59 bind_expr myhello/hello.c:16:1 ()
+    148 statement_list
+      60 call_expr myhello/hello.c:17:9 ()
+        122 addr_expr myhello/hello.c:17:9 ()
+          30 function_decl 
+            1 identifier_node printf
+        118 nop_expr myhello/hello.c:17:10 ()
+          122 addr_expr myhello/hello.c:17:10 ()
+            29 string_cst a=%d b=%d  
+        35 parm_decl 
+          1 identifier_node a
+        35 parm_decl 
+          1 identifier_node b
+      56 cond_expr myhello/hello.c:18:5 ()
+        102 ge_expr myhello/hello.c:18:7 ()
+          35 parm_decl 
+            1 identifier_node a
+          35 parm_decl 
+            1 identifier_node b
+        60 call_expr myhello/hello.c:19:11 ()
+          122 addr_expr myhello/hello.c:19:11 ()
+            30 function_decl 
+              1 identifier_node printf
+          118 nop_expr myhello/hello.c:19:12 ()
+            122 addr_expr myhello/hello.c:19:12 ()
+              29 string_cst Max a:%d  
+          35 parm_decl 
+            1 identifier_node a
+        60 call_expr myhello/hello.c:21:11 ()
+          122 addr_expr myhello/hello.c:21:11 ()
+            30 function_decl 
+              1 identifier_node printf
+          118 nop_expr myhello/hello.c:21:12 ()
+            122 addr_expr myhello/hello.c:21:12 ()
+              29 string_cst Max b:%d  
+          35 parm_decl 
+            1 identifier_node b
+      136 return_expr myhello/hello.c:22:3 ()
+        NULL_xx

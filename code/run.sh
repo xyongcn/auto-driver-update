@@ -1,47 +1,55 @@
 #!/bin/bash
 
-echo "program running...."
+echo "autorun.sh running...."
 
-cd /tmp
-echo "tar file linux-3.5.3..."
-tar xf ~/Downloads/linux-3.5.4.tar.bz2
-echo "tar file linux-3.8.13..."
-tar xf ~/Downloads/linux-3.8.13.tar.bz2
+rootDir=~/myProjects
+sourceDir=source
+filename=console/vgacon.c
+
+#make and make clean
+cd code  || exit 1
+make
 if [ $? -eq 0 ];then
-  echo "tar successful."
+  echo "Makefile to make successful."
 else
-  echo "tar faild."
+  echo "Makefile to make faild."
+  exit 1
+fi
+make clean
+
+#run make result --> main_get
+cd $rootDir || exit 1
+./code/main_get $sourceDir/$filename
+if [ $? -eq 0 ];then
+  echo "main_get runnning successful."
+else
+  echo "main_get runnning faild."
   exit 1
 fi
 
-echo "create build folder in /tmp"
-mkdir /tmp/build-l5-allno
-mkdir /tmp/build-l8-allno
-
-
-cd /tmp/linux-3.5.4/
-make O=/tmp/build-l5-allno V=1 allnoconfig
-echo "complier kernel source linux-3.5.4..."
-time make O=/tmp/build-l5-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > /tmp/dummy5 2>&1
-ret=`find . -name *.ind`
-if [ -z "$ret" ];then
-  echo "complier again..."
-  time make O=/tmp/build-l5-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > /tmp/dummy5 2>&1
+#run python file --> code/prosHdfile.py
+tgfnm1=$rootDir/target/hdFileList.txt 
+python code/prosHdfile.py $tgfnm1
+if [ $? -eq 0 ];then
+  echo "python code/prosHdfile.py $tgfnm1 runnning successful."
 else
-  echo "creat .ind file in linux-3.5.4  successful."
+  echo "python code/prosHdfile.py $tgfnm1 runnning faild."
 fi
 
-
-cd /tmp/linux-3.8.13/
-make O=/tmp/build-l8-allno V=1 allnoconfig
-echo "complier kernel source linux-3.8.13..."
-time make O=/tmp/build-l8-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > /tmp/dummy8 2>&1
-ret=`find . -name *.ind`
-if [ -z "$ret" ];then
-  echo "complier again..."
-  time make O=/tmp/build-l8-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > /tmp/dummy5 2>&1
+#run python file --> code/prosInter.py
+python code/prosInter.py $sourceDir/$filename".ind"
+if [ $? -eq 0 ];then
+  echo "python code/prosInter.py $sourceDir/$filename.ind runnning successful."
 else
-  echo "creat .ind file in linux-3.8.13  successful."
+  echo "python code/prosInter.py $sourceDir/$filename.ind runnning faild."
 fi
 
-echo "Done."
+#run python file --> code/prosDiff.py
+python code/prosDiff.py $filename
+if [ $? -eq 0 ];then
+  echo "python code/prosDiff.py $filename runnning successful."
+else
+  echo "python code/prosDiff.py $filename runnning faild."
+fi
+
+echo -e "\nautorun.sh Done."

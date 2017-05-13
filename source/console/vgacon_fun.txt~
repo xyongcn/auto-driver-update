@@ -1,0 +1,102 @@
+CON_IS_VISIBLE():
+    vgacon_deinit() <void vgacon_deinit (struct vc_data c) at source/console/vgacon.c:591>
+    vgacon_set_palette() <int vgacon_set_palette (struct vc_data vc, unsigned char *table) at source/console/vgacon.c:861>
+    vgacon_adjust_height() <int vgacon_adjust_height (struct vc_data vc, unsigned fontheight) at source/console/vgacon.c:1196>:
+    vgacon_resize() <int vgacon_resize (struct vc_data c, unsigned int width, unsigned int height, unsigned int user) at source/console/vgacon.c:1294>
+VGA_MAP_MEM():
+    vgacon_startup() <const char *vgacon_startup (void) at source/console/vgacon.c:368>
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+abs():
+    vgacon_scrolldelta() <int vgacon_scrolldelta (struct vc_data c, int lines) at source/console/vgacon.c:336> (R):
+con_cursor():
+    vgacon_adjust_height() <int vgacon_adjust_height (struct vc_data vc, unsigned fontheight) at source/console/vgacon.c:1196>:
+con_free_unimap():
+    vgacon_init() <void vgacon_init (struct vc_data c, int init) at source/console/vgacon.c:553>
+    vgacon_deinit() <void vgacon_deinit (struct vc_data c) at source/console/vgacon.c:591>
+con_set_default_unimap():
+    vgacon_init() <void vgacon_init (struct vc_data c, int init) at source/console/vgacon.c:553>
+    vgacon_deinit() <void vgacon_deinit (struct vc_data c) at source/console/vgacon.c:591>
+inb_p():
+    vgacon_startup() <const char *vgacon_startup (void) at source/console/vgacon.c:368>
+    vgacon_set_cursor_size() <void vgacon_set_cursor_size (int xpos, int from, int to) at source/console/vgacon.c:652>:
+    vgacon_doresize() <int vgacon_doresize (struct vc_data c, unsigned int width, unsigned int height) at source/console/vgacon.c:753>:
+    vga_vesa_blank() <void vga_vesa_blank (struct vgastate state, int mode) at source/console/vgacon.c:890>:
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+    vgacon_adjust_height() <int vgacon_adjust_height (struct vc_data vc, unsigned fontheight) at source/console/vgacon.c:1196>:
+kcalloc():
+    vgacon_scrollback_startup() <void vgacon_scrollback_startup (void) at source/console/vgacon.c:205>:
+min():
+    vgacon_scrolldelta() <int vgacon_scrolldelta (struct vc_data c, int lines) at source/console/vgacon.c:336> (R):
+outb_p():
+    write_vga() <inline void write_vga (unsigned char reg, unsigned int val) at source/console/vgacon.c:151>:
+    vgacon_startup() <const char *vgacon_startup (void) at source/console/vgacon.c:368>
+    vgacon_set_cursor_size() <void vgacon_set_cursor_size (int xpos, int from, int to) at source/console/vgacon.c:652>:
+    vgacon_doresize() <int vgacon_doresize (struct vc_data c, unsigned int width, unsigned int height) at source/console/vgacon.c:753>:
+    vga_vesa_blank() <void vga_vesa_blank (struct vgastate state, int mode) at source/console/vgacon.c:890>:
+    vga_vesa_unblank() <void vga_vesa_unblank (struct vgastate state) at source/console/vgacon.c:960>:
+    vgacon_adjust_height() <int vgacon_adjust_height (struct vc_data vc, unsigned fontheight) at source/console/vgacon.c:1196>:
+outw():
+    write_vga() <inline void write_vga (unsigned char reg, unsigned int val) at source/console/vgacon.c:151>:
+raw_spin_lock_irq():
+    vga_vesa_blank() <void vga_vesa_blank (struct vgastate state, int mode) at source/console/vgacon.c:890>:
+    vga_vesa_unblank() <void vga_vesa_unblank (struct vgastate state) at source/console/vgacon.c:960>:
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+    vgacon_adjust_height() <int vgacon_adjust_height (struct vc_data vc, unsigned fontheight) at source/console/vgacon.c:1196>:
+raw_spin_lock_irqsave():
+    write_vga() <inline void write_vga (unsigned char reg, unsigned int val) at source/console/vgacon.c:151>:
+    vgacon_set_cursor_size() <void vgacon_set_cursor_size (int xpos, int from, int to) at source/console/vgacon.c:652>:
+    vgacon_doresize() <int vgacon_doresize (struct vc_data c, unsigned int width, unsigned int height) at source/console/vgacon.c:753>:
+raw_spin_unlock_irq():
+    vga_vesa_blank() <void vga_vesa_blank (struct vgastate state, int mode) at source/console/vgacon.c:890>:
+    vga_vesa_unblank() <void vga_vesa_unblank (struct vgastate state) at source/console/vgacon.c:960>:
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+    vgacon_adjust_height() <int vgacon_adjust_height (struct vc_data vc, unsigned fontheight) at source/console/vgacon.c:1196>:
+raw_spin_unlock_irqrestore():
+    write_vga() <inline void write_vga (unsigned char reg, unsigned int val) at source/console/vgacon.c:151>:
+    vgacon_set_cursor_size() <void vgacon_set_cursor_size (int xpos, int from, int to) at source/console/vgacon.c:652>:
+    vgacon_doresize() <int vgacon_doresize (struct vc_data c, unsigned int width, unsigned int height) at source/console/vgacon.c:753>:
+request_resource():
+    vgacon_startup() <const char *vgacon_startup (void) at source/console/vgacon.c:368>
+scr_memcpyw():
+    vgacon_scrollback_update() <void vgacon_scrollback_update (struct vc_data c, int t, int count) at source/console/vgacon.c:211>:
+    vgacon_restore_screen() <void vgacon_restore_screen (struct vc_data c) at source/console/vgacon.c:330> (R):
+    vgacon_scrolldelta() <int vgacon_scrolldelta (struct vc_data c, int lines) at source/console/vgacon.c:336> (R):
+    vgacon_switch() <int vgacon_switch (struct vc_data c) at source/console/vgacon.c:815>
+    vgacon_save_screen() <void vgacon_save_screen (struct vc_data c) at source/console/vgacon.c:1320>:
+    vgacon_scroll() <int vgacon_scroll (struct vc_data c, int t, int b, int dir, int lines) at source/console/vgacon.c:1342>
+scr_memmovew():
+    vgacon_scroll() <int vgacon_scroll (struct vc_data c, int t, int b, int dir, int lines) at source/console/vgacon.c:1342>
+scr_memsetw():
+    vgacon_blank() <int vgacon_blank (struct vc_data c, int blank, int mode_switch) at source/console/vgacon.c:1004>
+    vgacon_scroll() <int vgacon_scroll (struct vc_data c, int t, int b, int dir, int lines) at source/console/vgacon.c:1342>
+scr_readw():
+    vgacon_startup() <const char *vgacon_startup (void) at source/console/vgacon.c:368>
+    vgacon_invert_region() <void vgacon_invert_region (struct vc_data c, u16 *p, int count) at source/console/vgacon.c:637>
+scr_writew():
+    vgacon_startup() <const char *vgacon_startup (void) at source/console/vgacon.c:368>
+    vgacon_invert_region() <void vgacon_invert_region (struct vc_data c, u16 *p, int count) at source/console/vgacon.c:637>
+vc_resize():
+    vgacon_init() <void vgacon_init (struct vc_data c, int init) at source/console/vgacon.c:553>
+    vgacon_adjust_height() <int vgacon_adjust_height (struct vc_data vc, unsigned fontheight) at source/console/vgacon.c:1196>:
+vga_r():
+    vga_vesa_blank() <void vga_vesa_blank (struct vgastate state, int mode) at source/console/vgacon.c:890>:
+vga_readb():
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+vga_rseq():
+    vga_vesa_blank() <void vga_vesa_blank (struct vgastate state, int mode) at source/console/vgacon.c:890>:
+vga_w():
+    vga_set_palette() <void vga_set_palette (struct vc_data vc, unsigned char *table) at source/console/vgacon.c:848>:
+    vga_vesa_blank() <void vga_vesa_blank (struct vgastate state, int mode) at source/console/vgacon.c:890>:
+    vga_vesa_unblank() <void vga_vesa_unblank (struct vgastate state) at source/console/vgacon.c:960>:
+    vga_pal_blank() <void vga_pal_blank (struct vgastate state) at source/console/vgacon.c:991>:
+vga_wattr():
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+vga_wgfx():
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+vga_writeb():
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+vga_wseq():
+    vga_vesa_blank() <void vga_vesa_blank (struct vgastate state, int mode) at source/console/vgacon.c:890>:
+    vga_vesa_unblank() <void vga_vesa_unblank (struct vgastate state) at source/console/vgacon.c:960>:
+    vgacon_do_font_op() <int vgacon_do_font_op (struct vgastate state, char *arg, int set, int ch512) at source/console/vgacon.c:1062>:
+vgacon_text_force() <bool vgacon_text_force (void) at source/console/vgacon.c:116>
