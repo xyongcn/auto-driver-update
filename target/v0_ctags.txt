@@ -1743,3 +1743,32 @@ is_early_ioremap_ptep  prototype  arch/x86/include/asm/io.h  332  extern bool is
 xen_biovec_phys_mergeable  prototype  arch/x86/include/asm/io.h  339  extern bool xen_biovec_phys_mergeable(const struct bio_vec *vec1,const struct bio_vec *vec2);
 BIOVEC_PHYS_MERGEABLE  macro  arch/x86/include/asm/io.h  341  #define BIOVEC_PHYS_MERGEABLE(vec1, vec2) \
 IO_SPACE_LIMIT  macro  arch/x86/include/asm/io.h  346  #define IO_SPACE_LIMIT 0xffff
+_ASM_X86_VGA_H  macro  arch/x86/include/asm/vga.h  8  #define _ASM_X86_VGA_H
+VGA_MAP_MEM  macro  arch/x86/include/asm/vga.h  15  #define VGA_MAP_MEM(x, s) (unsigned long)phys_to_virt(x)
+vga_readb  macro  arch/x86/include/asm/vga.h  17  #define vga_readb(x) (*(x))
+vga_writeb  macro  arch/x86/include/asm/vga.h  18  #define vga_writeb(x, y) (*(y) = (x))
+__ARCH_HAS_VGA_DEFAULT_DEVICE  macro  arch/x86/include/asm/vga.h  21  #define __ARCH_HAS_VGA_DEFAULT_DEVICE
+vga_default_device  prototype  arch/x86/include/asm/vga.h  22  extern struct pci_dev *vga_default_device(void);
+vga_set_default_device  prototype  arch/x86/include/asm/vga.h  23  extern void vga_set_default_device(struct pci_dev *pdev);
+_LINUX_VT_BUFFER_H_  macro  include/linux/vt_buffer.h  14  #define _LINUX_VT_BUFFER_H_
+scr_writew  macro  include/linux/vt_buffer.h  22  #define scr_writew(val, addr) (*(addr) = (val))
+scr_readw  macro  include/linux/vt_buffer.h  23  #define scr_readw(addr) (*(addr))
+scr_memcpyw  function  include/linux/vt_buffer.h  40  static inline void scr_memcpyw(u16 *d, const u16 *s, unsigned int count)
+scr_memmovew  function  include/linux/vt_buffer.h  49  static inline void scr_memmovew(u16 *d, const u16 *s, unsigned int count)
+VT_BUF_HAVE_MEMCPYW  macro  include/linux/vt_buffer.h  26  #define VT_BUF_HAVE_MEMCPYW
+VT_BUF_HAVE_MEMMOVEW  macro  include/linux/vt_buffer.h  27  #define VT_BUF_HAVE_MEMMOVEW
+scr_memsetw  function  include/linux/vt_buffer.h  31  static inline void scr_memsetw(u16 *s, u16 c, unsigned int count)
+_LINUX_CONSOLE_STRUCT_H  macro  include/linux/console_struct.h  13  #define _LINUX_CONSOLE_STRUCT_H
+NPAR  macro  include/linux/console_struct.h  21  #define NPAR 16
+vc_SAK  prototype  include/linux/console_struct.h  123  extern void vc_SAK(struct work_struct *work);
+CUR_DEF  macro  include/linux/console_struct.h  125  #define CUR_DEF 0
+CUR_NONE  macro  include/linux/console_struct.h  126  #define CUR_NONE 1
+CUR_UNDERLINE  macro  include/linux/console_struct.h  127  #define CUR_UNDERLINE 2
+CUR_LOWER_THIRD  macro  include/linux/console_struct.h  128  #define CUR_LOWER_THIRD 3
+CUR_LOWER_HALF  macro  include/linux/console_struct.h  129  #define CUR_LOWER_HALF 4
+CUR_TWO_THIRDS  macro  include/linux/console_struct.h  130  #define CUR_TWO_THIRDS 5
+CUR_BLOCK  macro  include/linux/console_struct.h  131  #define CUR_BLOCK 6
+CUR_HWMASK  macro  include/linux/console_struct.h  132  #define CUR_HWMASK 0x0f
+CUR_SWMASK  macro  include/linux/console_struct.h  133  #define CUR_SWMASK 0xfff0
+CUR_DEFAULT  macro  include/linux/console_struct.h  135  #define CUR_DEFAULT CUR_UNDERLINE
+CON_IS_VISIBLE  macro  include/linux/console_struct.h  137  #define CON_IS_VISIBLE(conp) (*conp->vc_display_fg == conp)

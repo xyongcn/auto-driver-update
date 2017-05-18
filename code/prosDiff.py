@@ -3,12 +3,14 @@
 
 import os
 import sys
+import commands
 from subprocess import check_output
 from collections import OrderedDict
 
 EXT0 = '.ind' # AST file
 EXT2 = '.int' #interface file
 SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.4/'
+SOURCE_PATH1 = os.environ['HOME']+'/SOURCE/linux-3.8.13/'
 TARGET_PATH = 'target/' #path to save target file
 FILE_TO_PROCESS = sys.argv[1]
 CTAGSFILE_EXT = '_ctags.txt'
@@ -110,9 +112,7 @@ def prosTargetf():
   fnFile_dict = getFuncAndFile()
   #macFile_dict= getMacAndFile()
   fnCall_dict = getFuncCallDict(FILE_TO_PROCESS)
-  
   v0ctags_dict = getCtagsFileDict('0')
-  v1ctags_dict = getCtagsFileDict('1')
   #ctags_dict[name] = [_type,rows,_file,statement]
   
   fcFile_dict = OrderedDict()
@@ -130,14 +130,38 @@ def prosTargetf():
       fcFile_dict[fnName] = []
   #print To File
   printToFile(fnFile_dict,fnCall_dict,fcFile_dict)
- # return fnFile_dict,macFile_dict,fnCall_dict,fcFile_dict
+  return fcFile_dict
 
-#def code_Diff():
+def code_Diff():
+  v1ctags_dict = getCtagsFileDict('1')
+  fcFile_dict = prosTargetf()
+  
+  diffLog_dict = OrderedDict()
+  for k,vlist in fcFile_dict.items():
+    v0_type,v0_file,v0_rows,v0_state = vlist[0:]
+    if cmp(v0_type,'macfun') != 0:
+		  if k in v1ctags_dict: # if exist
+			  v1_type,v1_rows,v1_file,v1_state = v1ctags_dict[k]
+			  if (cmp(v0_type,v1_type) !=0 ) or (cmp(v0_state,v1_state) !=0 ):
+			    diffLog_dict[k] = ['M']
+			  else:
+			    diffLog_dict[k] = ['N']
+		  else:
+		    diffLog_dict[k] = ['D']
+    else:
+      fileph = SOURCE_PATH1 + v0_file
+      cmd_string = "grep '"+v0_state+"' "+fileph
+      tstr=commands.getstatusoutput(cmd_string)
+      if tstr[0] == 0:
+        diffLog_dict[k] = ['N']
+  print '---test-------'
+  for k,v in diffLog_dict.items():
+    print k,v  
   
 def main():
     print '\npython file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]
-    prosTargetf()
+    code_Diff()
     print 'Done'
   
 if __name__ == '__main__':
