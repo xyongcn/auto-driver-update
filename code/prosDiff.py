@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# python file to get interface infomation
+# python file to get assistant infomation
 
 import os
 import sys
@@ -38,20 +38,7 @@ def printToFile(fnFile_dict,fnCall_dict,fcFile_dict):
   fcFilePath = TARGET_PATH + 'fcFileTemp.txt'
   printDictMethod(fcFile_dict,fcFilePath)
   print 'generated file:',fcFilePath
-'''
-def getMacAndFile():
-  #get macro-file like {'macroName':['file:sloc']}}
-  rpath = TARGET_PATH+'macfile_list.txt'
-  macFile_dict = OrderedDict()
-  with open(rpath) as fp:
-    sline=fp.readline();
-    while sline:    
-      macName,macFile = sline.split()
-      if macName not in macFile_dict:
-        macFile_dict[macName] = macFile
-      sline=fp.readline();
-  return macFile_dict
-''' 
+
 def getFuncAndFile():
   #get func-file like {'fnName':['file:sloc','eloc','.ind--lineNo']}}
   #V0_MANIFEST
@@ -110,10 +97,8 @@ def getCtagsFileDict(vers):
 
 def prosTargetf():
   fnFile_dict = getFuncAndFile()
-  #macFile_dict= getMacAndFile()
   fnCall_dict = getFuncCallDict(FILE_TO_PROCESS)
   v0ctags_dict = getCtagsFileDict('0')
-  #ctags_dict[name] = [_type,rows,_file,statement]
   
   fcFile_dict = OrderedDict()
   for fnName in fnCall_dict.keys():
@@ -133,35 +118,82 @@ def prosTargetf():
   return fcFile_dict
 
 def code_Diff():
-  v1ctags_dict = getCtagsFileDict('1')
+  v0ctags_dict = getCtagsFileDict('0')
+  v1ctags_dict = getCtagsFileDict('1') 
+  diffLog_dict = OrderedDict()
+  for k,vlist in v0ctags_dict.items():
+    v0_type,v0_file,v0_rows,v0_state = vlist[0:]
+    if cmp(v0_type,'struct')!=0 or cmp(v0_type,'member')!=0:
+      if k in v1ctags_dict:# if exist
+        v1_type,v1_file,v1_rows,v1_state = v1ctags_dict[k]
+        if cmp(v0_file,v1_file)==0:       
+          if (cmp(v0_type,v1_type)==0) and (cmp(v0_state,v1_state)==0): 
+            #nothing changed
+            diffLog_dict[k] = ['Not']
+            del v1ctags_dict[k]
+          else: 
+            #del changed
+            cstr = v0_type+'-->'+v1_type
+            diffLog_dict[k] = ['Mod',cstr,v0_file,v0_state,v1_state]
+            del v1ctags_dict[k]
+        else:
+          if (cmp(v0_type,v1_type)==0) and (cmp(v0_state,v1_state)==0):
+            #just file changed
+            diffLog_dict[k] = ['Fcd',v1_type,v0_file,v1_file,v1_state]
+            del v1ctags_dict[k]
+          else:
+            #all changed(file,decl)
+            _type = v0_type+'-->'+v1_type
+            _file = v0_file+'-->'+v1_file
+            diffLog_dict[k] = ['All',_type,_file,v0_state,v1_state]
+            del v1ctags_dict[k]
+      else: 
+        # not exist-->deleted
+        diffLog_dict[k] = ['Del',v0_type,v0_file,v0_state]  
+    else: # struct typedef and so on
+      pass 
+  if len(v1ctags_dict)>0:
+    # add changed
+    for k,vlist in v1ctags_dict.items():
+      diffLog_dict[k] = ['Add'] + vlist
+    
+  print '---test-------'
+  with open('temp.txt','w') as out:
+    for k,vlist in diffLog_dict.items():
+      if cmp(vlist[0],'Not')!=0:
+        print >> out,k,vlist 
+  return diffLog_dict
+  
+def getAssitInfo():
+  diffLog_dict = code_Diff()
   fcFile_dict = prosTargetf()
   
-  diffLog_dict = OrderedDict()
+  assitInfo_dict = OrderedDict()
   for k,vlist in fcFile_dict.items():
-    v0_type,v0_file,v0_rows,v0_state = vlist[0:]
-    if cmp(v0_type,'macfun') != 0:
-		  if k in v1ctags_dict: # if exist
-			  v1_type,v1_rows,v1_file,v1_state = v1ctags_dict[k]
-			  if (cmp(v0_type,v1_type) !=0 ) or (cmp(v0_state,v1_state) !=0 ):
-			    diffLog_dict[k] = ['M']
-			  else:
-			    diffLog_dict[k] = ['N']
-		  else:
-		    diffLog_dict[k] = ['D']
-    else:
-      fileph = SOURCE_PATH1 + v0_file
-      cmd_string = "grep '"+v0_state+"' "+fileph
+    _type,_file,_rows,state = vlist[0:]
+    if k in diffLog_dict:
+      assitInfo_dict[k] = diffLog_dict[k]
+    else: # macro define function condition
+      fileph = SOURCE_PATH1 + _file
+      cmd_string = "grep -w '"+state+"' "+fileph
       tstr=commands.getstatusoutput(cmd_string)
-      if tstr[0] == 0:
-        diffLog_dict[k] = ['N']
+      if tstr[0] == 0 and cmp(state,tstr[1]) ==0 :
+        assitInfo_dict[k] = ['Not']
+      else:
+      	cname = state.split('(')
+      	if cname in diffLog_dict:
+      	  assitInfo_dict[k] = diffLog_dict[cname]
+      	else:
+          assitInfo_dict[k] = ['Del']+[_type,_file,state]
   print '---test-------'
-  for k,v in diffLog_dict.items():
-    print k,v  
+  for k,v in assitInfo_dict.items():
+    print k,v 
   
+    
 def main():
     print '\npython file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]
-    code_Diff()
+    getAssitInfo()
     print 'Done'
   
 if __name__ == '__main__':

@@ -38,15 +38,25 @@ def reviseCtagsFile(vers):
         rows = tlist[2]
         _file = tlist[3][len(SOURCE_PATH):]
         state_list = tlist[4:]
+        statement = state_list[0]
+        for slt in state_list[1:]:
+          if statement.endswith(','):
+            statement = statement + slt
+          else:
+            statement = statement +' '+ slt
+        #statement = ' '.join(state_list).split('/*')[0].strip()
+        statement = statement.split('/*')[0].strip()
         if (cmp(_type,'macro')==0 or cmp(_type,'prototype')==0 or cmp(_type,'function')==0):
-          statement = ' '.join(state_list)
           fileph = tlist[3]
           while statement.endswith(','):
             rows = int(rows) + 1
             temp=check_output(['sed','-n',str(rows)+'p',fileph]).strip()
             statement = statement + temp
-          tstr =' '+ _type+'  '+_file+'  '+str(rows)+'  '+statement
-          ctags_dict[name] = tstr
+          ctags_dict[name] = ' '+ _type+'  '+_file+'  '+str(rows)+'  '+statement
+        elif (cmp(_type,'member')!=0): # struct,typedef,enum,union
+          ctags_dict[name] = ' '+ _type+'  '+_file+'  '+str(rows)+'  '+statement
+        else: # member
+          pass
       sline = fp.readline()
   printDictMethod(ctags_dict,filename)
   print filename,'file is revised successful!'
