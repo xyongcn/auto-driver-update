@@ -35,13 +35,12 @@ else
   echo "python code/prosInter.py $sourceDir/$filename.ind runnning faild."
 fi
 
-#run python file to get process headfile --> code/prosHdfile.py
-tgfnm1=$rootDir/target/hfileList.txt 
-python code/prosHdfile.py $tgfnm1
+#run python file to get process headfile --> code/prosHdfile.py 
+python code/prosHdfile.py
 if [ $? -eq 0 ];then
-  echo "python code/prosHdfile.py $tgfnm1 runnning successful."
+  echo "python code/prosHdfile.py runnning successful."
 else
-  echo "python code/prosHdfile.py $tgfnm1 runnning faild."
+  echo "python code/prosHdfile.py runnning faild."
 fi
 
 #run python file --> code/prosDiff.py

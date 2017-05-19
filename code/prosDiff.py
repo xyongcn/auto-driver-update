@@ -139,7 +139,7 @@ def code_Diff():
         else:
           if (cmp(v0_type,v1_type)==0) and (cmp(v0_state,v1_state)==0):
             #just file changed
-            diffLog_dict[k] = ['Fcd',v1_type,v0_file,v1_file,v1_state]
+            diffLog_dict[k] = ['Mov',v1_type,v0_file,v1_file,v1_state]
             del v1ctags_dict[k]
           else:
             #all changed(file,decl)
@@ -157,10 +157,10 @@ def code_Diff():
     for k,vlist in v1ctags_dict.items():
       diffLog_dict[k] = ['Add'] + vlist
     
-  print '---test-------'
+  print '---> test file temp.txt'
   with open('temp.txt','w') as out:
     for k,vlist in diffLog_dict.items():
-      if cmp(vlist[0],'Not')!=0:
+      if cmp(vlist[0],'Not')!=0 and cmp(vlist[0],'Mov')!=0:
         print >> out,k,vlist 
   return diffLog_dict
   
@@ -185,7 +185,7 @@ def getAssitInfo():
       	  assitInfo_dict[k] = diffLog_dict[cname]
       	else:
           assitInfo_dict[k] = ['Del']+[_type,_file,state]
-  print '---test-------'
+  print '---test print-->:'
   for k,v in assitInfo_dict.items():
     print k,v 
   
@@ -194,7 +194,7 @@ def main():
     print '\npython file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]
     getAssitInfo()
-    print 'Done'
+    print 'Done\n'
   
 if __name__ == '__main__':
     main()

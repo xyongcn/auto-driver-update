@@ -9,8 +9,10 @@ from collections import OrderedDict
 SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.4/'
 SOURCE_PATH1 = os.environ['HOME']+'/SOURCE/linux-3.8.13/'
 TARGET_PATH = 'target/'
-#FILE_TO_INPUT = 'source/console/vgacon.c'
+CURRENT_PATH = os.getcwd()
 CTAGSFILE_EXT = '_ctags.txt'
+HEADERFILE_EXT = '_headfile.txt'
+LOGERR = 'log.txt'
 
 def printDictMethod(dictname,filename):
   with open(filename,'w') as out:
@@ -38,6 +40,10 @@ def reviseCtagsFile(vers):
         rows = tlist[2]
         _file = tlist[3][len(SOURCE_PATH):]
         state_list = tlist[4:]
+        if len(state_list)==0:
+          print 'state_list==0'
+          print sline
+          break
         statement = state_list[0]
         for slt in state_list[1:]:
           if statement.endswith(','):
@@ -61,8 +67,9 @@ def reviseCtagsFile(vers):
   printDictMethod(ctags_dict,filename)
   print filename,'file is revised successful!'
   #return ctags_dict
-  
-def getCtagsFile(hdFileTxt,vers):
+
+def getCtagsFile(vers):
+  hdFileTxt = TARGET_PATH+'v'+vers+HEADERFILE_EXT
   outCtagsPath = TARGET_PATH+'v'+vers+CTAGSFILE_EXT
   SOURCE_PATH = getSrcPath(vers)
   assert os.path.isfile(hdFileTxt),'input file '+hdFileTxt+' not found!\n'
@@ -73,12 +80,18 @@ def getCtagsFile(hdFileTxt,vers):
       while hdFileName:
         filepath1 = SOURCE_PATH+'include/'+hdFileName[:-1]
         filepath2 = SOURCE_PATH+'arch/x86/include/'+hdFileName[:-1]
+        filepath3 = SOURCE_PATH+'include/uapi/'+hdFileName[:-1]
+        filepath4 = SOURCE_PATH+'arch/x86/include/uapi/'+hdFileName[:-1]
         if os.path.isfile(filepath1):
           filepath = filepath1
-        else:
+        elif os.path.isfile(filepath2):
           filepath = filepath2
+        elif os.path.isfile(filepath3):
+          filepath = filepath3
+        else:
+          filepath = filepath4
         assert os.path.isfile(filepath),'file '+filepath+' not found!\n'
-        cmd_string = ['ctags','-xu','--c-kinds=+p',filepath] #,'--extra=+q','--totals'
+        cmd_string = ['ctags','-xu','--c-kinds=+p',filepath] #,'--extra=+q'
         hdFnd_list = check_output(cmd_string).rstrip('\0').split('\0')
         for hflist in hdFnd_list:
           print >> out,hflist
@@ -87,13 +100,11 @@ def getCtagsFile(hdFileTxt,vers):
   
 def main():
     print '\npython file:',sys.argv[0],'running...'
-    print 'input file:',sys.argv[1]
-    hdFileTxt = sys.argv[1]
-    getCtagsFile(hdFileTxt,'0')
+    getCtagsFile('0')
     reviseCtagsFile('0')
-    getCtagsFile(hdFileTxt,'1')
+    getCtagsFile('1')
     reviseCtagsFile('1')
-    print 'Done'
+    print 'Done\n'
   
 if __name__ == '__main__':
     main()

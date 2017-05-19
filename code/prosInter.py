@@ -88,7 +88,7 @@ def printListMethod(listname,copath):
     for tlist in listname:
       print >> out,tlist
             
-def printToFile(count_dict,call_list,macro_list,file_list,sfile_list,isCount):
+def printToFile(count_dict,call_list,macro_list,file_list,isCount):
   copath=TARGET_PATH+'macro_list.txt'
   printListMethod(macro_list,copath)
   copath=TARGET_PATH+'call_list.txt'
@@ -96,9 +96,9 @@ def printToFile(count_dict,call_list,macro_list,file_list,sfile_list,isCount):
   copath=TARGET_PATH+'macfile_list.txt'
   printListMethod(file_list,copath)
   delDuplicateLine(copath)
-  copath=TARGET_PATH+'sfile_list.txt'
-  printListMethod(sfile_list,copath)
-  delDuplicateLine(copath)
+  #copath=TARGET_PATH+'sfile_list.txt'
+  #printListMethod(sfile_list,copath)
+  #delDuplicateLine(copath)
   copath=TARGET_PATH+'cm_list.txt'
   cm_list = mergeCallAndMacro(call_list,macro_list)  #  merge call and micro
   printListMethod(cm_list,copath) 
@@ -214,7 +214,7 @@ def processFuncDecl(fp, outFname, sline,count_dict):
     print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo) 
   
   # print call info
-  count_dict=printToFile(count_dict,call_list,macro_list,file_list,sfile_list,isCount)                
+  count_dict=printToFile(count_dict,call_list,macro_list,file_list,isCount)                
   fp.seek(-len(sline),1); count_dict['lineNo'] -= 1 #back to last line
   return count_dict
   
@@ -261,9 +261,9 @@ def collectInt(prefix,outDir):
         filename = path[len(prefix):-len(ext0)].lstrip('/')
         fncount += collectIntFmfile(path,outFname) 
     print prefix,"-->\n\ttotal .ind file",fcount,"\n\ttotal function decl",fncount 
-
+'''
 def reviseHdFile():
-  outpath = TARGET_PATH+'hfileList.txt'
+  outpath = TARGET_PATH+'headfile.txt'
   inpath = TARGET_PATH+'sfile_list.txt'
   
   str1 = 'arch/x86/include/'
@@ -286,9 +286,12 @@ def reviseHdFile():
   with open(outpath,'w') as out:
     for tlist in hfile_list:
       print >> out,tlist
+  
+  print '-->reviseHdFile():hfile_list',hfile_list
   if os.path.isfile(inpath):
     os.remove(inpath)
-  print 'revise hfileList.txt successful.'
+  print 'revise',outpath,'successful.'
+'''
   
 def info_collect():
     ext0=EXT0
@@ -318,8 +321,8 @@ def main():
     print '\npython file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]
     info_collect()
-    reviseHdFile()
-    print 'Done'
+    #reviseHdFile()
+    print 'Done\n'
   
 if __name__ == '__main__':
     main()
