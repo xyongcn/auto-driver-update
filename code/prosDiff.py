@@ -21,6 +21,7 @@ def printDictMethod(dictname,filename):
       print >> out,k,v
 
 def printToFile(fnFile_dict,fnCall_dict,fcFile_dict):
+  
   fnFilePath = TARGET_PATH + 'fnFileTemp.txt'
   printDictMethod(fnFile_dict,fnFilePath)
   print 'generated file:',fnFilePath
@@ -104,15 +105,20 @@ def prosTargetf():
   for fnName in fnCall_dict.keys():
     if fnName in v0ctags_dict:
       fcFile_dict[fnName] = v0ctags_dict[fnName]
-    elif fnName in fnFile_dict:
+    elif fnName in fnFile_dict:  #comthing wrong occured here,need to solve
       # macro define function
       tlist = fnFile_dict[fnName][0].split(':')
       fileph = SOURCE_PATH0+tlist[0]
       rows =  tlist[1]
+      Sno = tlist[1]+':'+tlist[2]
+      Eno = fnFile_dict[fnName][1]
       tstr=check_output(['sed','-n',rows+'p',fileph]).strip()
-      fcFile_dict[fnName] =['macfun'] + tlist[:-1] + [tstr]
-    else:
-      fcFile_dict[fnName] = []
+      if cmp(Sno,Eno)==0:
+        fcFile_dict[fnName] =['macfun'] + tlist[:-1] + [tstr]
+      else:
+        fcFile_dict[fnName] =['function'] + tlist[:-1] + [tstr]
+    #else:  # if not found,may self-decl-macro or kenerl-decl macro of func
+    #  fcFile_dict[fnName] = []
   #print To File
   printToFile(fnFile_dict,fnCall_dict,fcFile_dict)
   return fcFile_dict
@@ -180,7 +186,7 @@ def getAssitInfo():
       if tstr[0] == 0 and cmp(state,tstr[1]) ==0 :
         assitInfo_dict[k] = ['Not']
       else:
-      	cname = state.split('(')
+      	cname = state.split('(')[0]
       	if cname in diffLog_dict:
       	  assitInfo_dict[k] = diffLog_dict[cname]
       	else:

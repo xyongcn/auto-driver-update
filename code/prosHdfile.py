@@ -88,13 +88,16 @@ def getCtagsFile(vers):
           filepath = filepath2
         elif os.path.isfile(filepath3):
           filepath = filepath3
-        else:
+        elif os.path.isfile(filepath4):
           filepath = filepath4
-        assert os.path.isfile(filepath),'file '+filepath+' not found!\n'
-        cmd_string = ['ctags','-xu','--c-kinds=+p',filepath] #,'--extra=+q'
-        hdFnd_list = check_output(cmd_string).rstrip('\0').split('\0')
-        for hflist in hdFnd_list:
-          print >> out,hflist
+        else:
+          filepath = ""
+          print 'header file '+hdFileName[:-1]+' not found!\n'
+        if cmp(filepath,"")!= 0:
+		      cmd_string = ['ctags','-xu','--c-kinds=+p',filepath] #,'--extra=+q'
+		      hdFnd_list = check_output(cmd_string).rstrip('\0').split('\0')
+		      for hflist in hdFnd_list:
+		        print >> out,hflist
         hdFileName = fp.readline()
   print outCtagsPath,'file is generated successful!'
   
