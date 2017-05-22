@@ -15,7 +15,7 @@ int get2ndHdFile(char codePath[],char outHeadFname[],char outFname[]);
 
 int main(int argc, char *argv[])
 {
-	char sFileName[60];
+	char sFileName[160];
 	int ret=0,ret2=0;
 	
 	if(argc <= 1){

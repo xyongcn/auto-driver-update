@@ -135,7 +135,7 @@ def code_Diff():
         if cmp(v0_file,v1_file)==0:       
           if (cmp(v0_type,v1_type)==0) and (cmp(v0_state,v1_state)==0): 
             #nothing changed
-            diffLog_dict[k] = ['Not']
+            diffLog_dict[k] = ['Non']
             del v1ctags_dict[k]
           else: 
             #del changed
@@ -166,7 +166,7 @@ def code_Diff():
   print '---> test file temp.txt'
   with open('temp.txt','w') as out:
     for k,vlist in diffLog_dict.items():
-      if cmp(vlist[0],'Not')!=0 and cmp(vlist[0],'Mov')!=0:
+      if cmp(vlist[0],'Non')!=0 and cmp(vlist[0],'Mov')!=0:
         print >> out,k,vlist 
   return diffLog_dict
   
@@ -184,7 +184,7 @@ def getAssitInfo():
       cmd_string = "grep -w '"+state+"' "+fileph
       tstr=commands.getstatusoutput(cmd_string)
       if tstr[0] == 0 and cmp(state,tstr[1]) ==0 :
-        assitInfo_dict[k] = ['Not']
+        assitInfo_dict[k] = ['Non']
       else:
       	cname = state.split('(')[0]
       	if cname in diffLog_dict:

@@ -95,9 +95,9 @@ def printToFile(count_dict,call_list,macro_list,sfile_list,macfile_list,isCount)
   copath=TARGET_PATH+'macfile_list.txt'
   printListMethod(macfile_list,copath)
   delDuplicateLine(copath)
-  copath=TARGET_PATH+'sfile_list.txt'
-  printListMethod(sfile_list,copath)
-  delDuplicateLine(copath)
+  #copath=TARGET_PATH+'sfile_list.txt'
+  #printListMethod(sfile_list,copath)
+  #delDuplicateLine(copath)
   copath=TARGET_PATH+'cm_list.txt'
   cm_list = mergeCallAndMacro(call_list,macro_list)  #  merge call and micro
   printListMethod(cm_list,copath) 
@@ -341,9 +341,9 @@ def main():
     print 'python file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]
     info_collect()
-    reviseHdFile('0')
-    reviseHdFile('1')
-    print 'Done\n'
+    #reviseHdFile('0')
+    #reviseHdFile('1')
+    print 'Done'
   
 if __name__ == '__main__':
     main()

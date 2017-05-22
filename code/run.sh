@@ -43,7 +43,7 @@ if [ $? -eq 0 ];then
   echo "main_get runnning successful."
 else
   echo "main_get runnning faild."
-  exit 1
+  #exit 1
 fi
 
 #run python file to get interface info--> code/prosInter.py

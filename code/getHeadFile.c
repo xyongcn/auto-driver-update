@@ -66,7 +66,7 @@ int getHeaderFile(char sFileName[],char outHeadFname[])
 			if (LinePreprocessing(fpIn, sReadLine)!=0)
 			{
 				int len=strlen(sReadLine);
-				char defType[50],fname[50];
+				char defType[50],fname[150],tfname[150];
 			
 				sReadLine[len-1]='\0';
 				if (sReadLine[0]=='#')	//处理包括宏定义、头文件及条件预编译语句
@@ -83,12 +83,43 @@ int getHeaderFile(char sFileName[],char outHeadFname[])
 					if(strcmp(defType,"include")==0)
 					{	
 						j=0;memset(fname,0,sizeof(fname));
-						while(sReadLine[i]!='>')
+						int flg = 0;
+						while(sReadLine[i]==' ') i++;
+						if(sReadLine[i]=='<')
 						{
+							while(sReadLine[i]!='>')
+						 {
 							if(sReadLine[i]!='<' && sReadLine[i]!=' ')
 								fname[j++]=sReadLine[i];		
 							i++;
+						 }
 						}
+						else //sReadLine[i]=='"'
+						{
+							i++;
+							while(sReadLine[i]!='"')
+						  {
+							  if(sReadLine[i]!=' ')
+								  tfname[j++]=sReadLine[i];		
+							  i++;
+						  }
+							const char *ptr=strstr(sFileName,"include");
+							char path[50],tmpath[50];
+							int len=0,j=0,t=0;
+							while(*ptr!='\0')
+							{
+									path[len++] = *ptr;
+									ptr++;
+							}
+							path[len] = '\0';
+							int start=strlen("include/");
+							while(path[len] !='/') len--;
+							for(j=start;j<=len;j++)
+								tmpath[t++] = path[j];
+							tmpath[t] = '\0';
+							sprintf(fname,"%s%s",tmpath,tfname);
+						}
+						
 						fprintf(fpOut, "%s\n", fname);
 					}
 				}
