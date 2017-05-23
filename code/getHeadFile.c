@@ -103,6 +103,8 @@ int getHeaderFile(char sFileName[],char outHeadFname[])
 								  tfname[j++]=sReadLine[i];		
 							  i++;
 						  }
+						  tfname[j] ='\0';
+							
 							const char *ptr=strstr(sFileName,"include");
 							char path[50],tmpath[50];
 							int len=0,j=0,t=0;

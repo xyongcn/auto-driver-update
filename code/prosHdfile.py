@@ -12,7 +12,6 @@ TARGET_PATH = 'target/'
 CURRENT_PATH = os.getcwd()
 CTAGSFILE_EXT = '_ctags.txt'
 HEADERFILE_EXT = '_headfile.txt'
-LOGERR = 'log.txt'
 
 def printDictMethod(dictname,filename):
   with open(filename,'w') as out:
@@ -52,16 +51,21 @@ def reviseCtagsFile(vers):
             statement = statement +' '+ slt
         #statement = ' '.join(state_list).split('/*')[0].strip()
         statement = statement.split('/*')[0].strip()
-        if (cmp(_type,'macro')==0 or cmp(_type,'prototype')==0 or cmp(_type,'function')==0):
+        if _type in ('macro','function','prototype'):
           fileph = tlist[3]
           while statement.endswith(','):
             rows = int(rows) + 1
             temp=check_output(['sed','-n',str(rows)+'p',fileph]).strip()
             statement = statement + temp
+          while(statement.endswith('\\')):
+            rows = int(rows) + 1
+            temp=check_output(['sed','-n',str(rows)+'p',fileph]).strip()
+            statement = statement.rstrip('\\').rstrip()+' '+ temp
+            
           ctags_dict[name] = ' '+ _type+'  '+_file+'  '+str(rows)+'  '+statement
-        elif (cmp(_type,'member')!=0): # struct,typedef,enum,union
+        elif _type in ('struct','enum','union'):
           ctags_dict[name] = ' '+ _type+'  '+_file+'  '+str(rows)+'  '+statement
-        else: # member
+        else: # struct->member,enum->enumerator,typedef
           pass
       sline = fp.readline()
   printDictMethod(ctags_dict,filename)
@@ -92,7 +96,7 @@ def getCtagsFile(vers):
           filepath = filepath4
         else:
           filepath = ""
-          print 'header file '+hdFileName[:-1]+' not found!\n'
+          print 'header file '+hdFileName[:-1]+' in',SOURCE_PATH,' not found!\n'
         if cmp(filepath,"")!= 0:
 		      cmd_string = ['ctags','-xu','--c-kinds=+p',filepath] #,'--extra=+q'
 		      hdFnd_list = check_output(cmd_string).rstrip('\0').split('\0')
