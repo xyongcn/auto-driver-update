@@ -1,0 +1,64 @@
+filename to process: pcnet32.c
+more info about this log description to read log_description.txt
+
+
+===== A  level =====
+total count: 3
+
+__devinit 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devinit __section(.devinit.text) __cold notrace
+
+	pcnet32.c: 1446:static void __devinit pcnet32_probe_vlbus(unsigned int *pcnet32_portlist)
+	pcnet32.c: 1465:static int __devinit
+	pcnet32.c: 1524:static int __devinit
+
+__devexit 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devexit __section(.devexit.text) __exitused __cold notrace
+
+	pcnet32.c: 2826:static void __devexit pcnet32_remove_one(struct pci_dev *pdev)
+
+__devexit_p 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devexit_p(x) NULL
+
+	pcnet32.c: 2847:	.remove = __devexit_p(pcnet32_remove_one),
+
+
+===== B  level =====
+total count: 2
+
+KERN_DEBUG 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_DEBUG "<7>"
+	++ #define KERN_DEBUG KERN_SOH "7"
+
+  pcnet32_ethtool_test:
+    drivers/net/ethernet/amd/pcnet32.c:859:25
+    drivers/net/ethernet/amd/pcnet32.c:863:25
+    drivers/net/ethernet/amd/pcnet32.c:866:24
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:914:25
+    drivers/net/ethernet/amd/pcnet32.c:977:17
+    drivers/net/ethernet/amd/pcnet32.c:980:18
+    drivers/net/ethernet/amd/pcnet32.c:995:26
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1095:25
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1614:11
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2361:10
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2398:30
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2462:26
+    drivers/net/ethernet/amd/pcnet32.c:2501:25
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2525:27
+
+DEFINE_PCI_DEVICE_TABLE 	( diff_type: Mod type: macro file: include/linux/pci.h )
+	-- #define DEFINE_PCI_DEVICE_TABLE(_table) const struct pci_device_id _table[] __devinitconst
+	++ #define DEFINE_PCI_DEVICE_TABLE(_table) const struct pci_device_id _table[]
+
+	pcnet32.c: 64:static DEFINE_PCI_DEVICE_TABLE(pcnet32_pci_tbl) = {
+
+
+===== C  level =====
+total count: 0

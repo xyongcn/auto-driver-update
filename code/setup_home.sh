@@ -3,8 +3,19 @@
 echo "run.sh running...."
 
 cd ~/SOURCE
-rm -r linux-3.5.4/
-rm -r linux-3.8.13/
+if [ -d linux-3.5.4/ ];then
+  rm -r linux-3.5.4/
+fi
+if [ -d linux-3.8.13/ ];then
+  rm -r linux-3.8.13/
+fi
+if [ -d build-linux-v0/ ];then
+  rm -r build-linux-v0/
+fi
+if [ -d build-linux-v1/ ];then
+  rm -r build-linux-v1/
+fi
+
 echo "tar file linux-3.5.3..."
 tar xf ~/Downloads/linux-3.5.4.tar.bz2
 echo "tar file linux-3.8.13..."
@@ -22,7 +33,7 @@ mkdir ~/SOURCE/build-l8-allno
 
 
 cd ~/SOURCE/linux-3.5.4/
-make O=~/SOURCE/build-l5-allno V=1 localmodconfig
+make O=~/SOURCE/build-l5-allno V=1 allnoconfig
 make O=~/SOURCE/build-l5-allno V=1 menuconfig
 echo "complier kernel source linux-3.5.4..."
 time make O=~/SOURCE/build-l5-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > ~/SOURCE/dummy5 2>&1

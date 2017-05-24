@@ -1,0 +1,14 @@
+(1) diff_type: that means the type of difference 
+  Del means delete, Add means increase, Mod means change, Not means no change has occurred. 
+  The above three types of interfaces are located in the file without any changes. 
+  All indicates that the file where the interface resides has changed, and the interface type or declaration has also changed.
+
+(2) Output format description: 
+  Interface name (difference type interface type interface file)
+  -- old version interface declaration 
+  ++ new version interface declaration 
+
+(3) Change level output description 
+  A: a greater impact, the need for co-evolution 
+  B: interface name does not change, but the value has changed, the use is not affected, but may affect the variable results 
+  C: interface type changes, but the interface name and parameter list did not change, little impact 

@@ -98,6 +98,18 @@ def getCtagsFileDict(vers):
       sline = fp.readline()
   return ctags_dict
 
+def getHeadFileList():
+  headFilePath = TARGET_PATH + 'headfile.txt'
+  headfile_list = []
+  with open(headFilePath) as fp:
+    sline = fp.readline()
+    while sline:
+      sline = sline.strip('\n')
+      headfile_list.append(sline)
+      sline = fp.readline()
+  
+  return headfile_list
+
 def prosTargetf():
   fnFile_dict = getFuncAndFile()
   fnCall_dict = getFuncCallDict(FILE_TO_PROCESS)
@@ -123,7 +135,7 @@ def prosTargetf():
     #  fcFile_dict[fnName] = []
   #print To File
   printToFile(fnFile_dict,fnCall_dict,fcFile_dict)
-  return fcFile_dict
+  return fcFile_dict,fnCall_dict
 
 def code_Diff():
   v0ctags_dict = getCtagsFileDict('0')
@@ -139,8 +151,7 @@ def code_Diff():
             #nothing changed
             diffLog_dict[k] = ['Not']
             del v1ctags_dict[k]
-          else: 
-            #decl changed
+          else:  #decl changed
             if cmp(v0_type,v1_type)!=0:
               cstr = v0_type+'-->'+v1_type
             else:
@@ -152,8 +163,7 @@ def code_Diff():
             #just file changed
             diffLog_dict[k] = ['Mov',v1_type,v0_file,v1_file,v1_state]
             del v1ctags_dict[k]
-          else:
-            #all changed(file,decl)
+          else: #all changed(file,decl)
             _file = v0_file+'-->'+v1_file #file
             if cmp(v0_type,v1_type)!=0:   #type
               _type = v0_type+'-->'+v1_type
@@ -161,13 +171,11 @@ def code_Diff():
               _type = v0_type
             diffLog_dict[k] = ['All',_type,_file,v0_state,v1_state]
             del v1ctags_dict[k]
-      else: 
-        # not exist-->deleted
+      else:  # not exist-->deleted
         diffLog_dict[k] = ['Del',v0_type,v0_file,v0_state]  
     else: # struct typedef and so on
       pass 
-  if len(v1ctags_dict)>0:
-    # add changed
+  if len(v1ctags_dict)>0:  # add changed
     for k,vlist in v1ctags_dict.items():
       diffLog_dict[k] = ['Add'] + vlist 
   return diffLog_dict
@@ -208,42 +216,132 @@ def classDiffLog(diffLog_dict):
     else: # cmp(diff_type,'Add')==0
       pass 
   return Alevel_dict,Blevel_dict,Clevel_dict
+
+def getfcDiffInfoDict(diffLog_dict):
+  fcFile_dict,fnCall_dict = prosTargetf() # get call info
   
-def getAssitInfo():
-  diffLog_dict = code_Diff()
-  fcFile_dict = prosTargetf()
-  Alevel_dict,Blevel_dict,Clevel_dict = classDiffLog(diffLog_dict)
-  assitInfo_dict = OrderedDict()
+  fcDiffInfo_dict = OrderedDict()
   for k,vlist in fcFile_dict.items():
     _type,_file,_rows,state = vlist[0:]
     if k in diffLog_dict:
-      assitInfo_dict[k] = diffLog_dict[k]
+      fcDiffInfo_dict[k] = diffLog_dict[k]
     else: # macro define function condition
       fileph = SOURCE_PATH1 + _file
       cmd_string = "grep -w '"+state+"' "+fileph
       tstr=commands.getstatusoutput(cmd_string)
       if tstr[0] == 0 and cmp(state,tstr[1]) ==0 :
-        assitInfo_dict[k] = ['Not']
+        fcDiffInfo_dict[k] = ['Not']
       else:
       	cname = state.split('(')[0]
       	if cname in diffLog_dict:
-      	  assitInfo_dict[k] = diffLog_dict[cname]
+      	  fcDiffInfo_dict[k] = diffLog_dict[cname]
       	else:
-          assitInfo_dict[k] = ['Del']+[_type,_file,state]
+          fcDiffInfo_dict[k] = ['Del']+[_type,_file,state]
+  return fcDiffInfo_dict,fnCall_dict
+
+def printAssitInfo(out,assitInfo_dict,level,assitLoc_dict):
+  filename = os.path.basename(FILE_TO_PROCESS)
   
-  for k,v in assitInfo_dict.items():
-    print k,v 
+  print >> out,'\n\n=====',level,' level ====='  
+  print >> out,'total count:',len(assitInfo_dict)
+  for k,vlist in assitInfo_dict.items():  
+    diff_type,_type,_file = vlist[0:3]
+    print >> out,'\n',k,'\t( diff_type: '+diff_type,'type: '+_type,'file: '+_file,')'
+    print >> out,'\t--',vlist[3]
+    if cmp(diff_type,'Del')!=0:
+      print >> out,'\t++',vlist[4]
+    print >> out,""
+    if isinstance(assitLoc_dict[k],list) == True:
+      for loc in assitLoc_dict[k]:
+        print >> out,'\t',filename+':',loc
+    else:
+      for fcName,fcLoc_list in assitLoc_dict[k].items():
+		    print >> out,'  '+fcName
+		    for fcLoc in fcLoc_list:
+		      print >> out,'    '+fcLoc
+		      
+def getAssitInfo():
+  diffLog_dict = code_Diff() # get diff info
+  headfile_list =getHeadFileList() #get head file list
+  # get class diff info
+  Alevel_dict,Blevel_dict,Clevel_dict = classDiffLog(diffLog_dict) 
+  fcDiffInfo_dict,fnCall_dict = getfcDiffInfoDict(diffLog_dict)# get call  diff info
   
+  assitInfoA_dict = OrderedDict()
+  assitInfoB_dict = OrderedDict()
+  assitInfoC_dict = OrderedDict()
+  assitLoc_dict = OrderedDict() # restore call location
+  
+  for k,vlist in fcDiffInfo_dict.items():
+    if k in Alevel_dict:
+      assitInfoA_dict[k] = fcDiffInfo_dict[k]
+      assitLoc_dict[k] = fnCall_dict[k]
+    elif k in Blevel_dict:
+      assitInfoB_dict[k] = fcDiffInfo_dict[k]
+      assitLoc_dict[k] = fnCall_dict[k]
+    elif k in Clevel_dict:
+      assitInfoC_dict[k] = fcDiffInfo_dict[k]
+      assitLoc_dict[k] = fnCall_dict[k]
+    else: # 'Not',Mov'
+      pass
+      
+  fileTopros = 'source/' + FILE_TO_PROCESS
+  for k,vlist in Alevel_dict.items():  #A level
+    diff_type,_type,_file = vlist[0:3]
+    if cmp(diff_type,'Del')==0 and cmp(_type,'macro')==0:
+      _file = _file.split('include/')[1]
+      if _file in headfile_list:
+        cmd_string = "grep -nw '"+k+"' "+fileTopros
+        status,tstr=commands.getstatusoutput(cmd_string)
+        if status == 0:
+          loc_list = tstr.split('\n')
+          assitLoc_dict[k] = loc_list
+          assitInfoA_dict[k] = Alevel_dict[k]
+    elif diff_type in ('Mod','All') and ('macro' in _type):
+      if k not in fcDiffInfo_dict:
+        _file = _file.split('-->')[0]
+        _file = _file.split('include/')[1]
+        if _file in headfile_list:
+          cmd_string = "grep -nw '"+k+"' "+fileTopros
+          status,tstr=commands.getstatusoutput(cmd_string)
+          if status == 0:
+            loc_list = tstr.split('\n')
+            assitLoc_dict[k] = loc_list
+            assitInfoA_dict[k] = Alevel_dict[k]
+    else: # 'Add'
+      pass
+  
+  for k,vlist in Blevel_dict.items(): #B level
+    if k not in fcDiffInfo_dict:
+      _file = vlist[2].split('-->')[0]
+      _file = _file.split('include/')[1]
+      if _file in headfile_list:
+        cmd_string = "grep -nw '"+k+"' "+fileTopros
+        status,tstr=commands.getstatusoutput(cmd_string)
+        if status == 0:
+          loc_list = tstr.split('\n')
+          assitLoc_dict[k] = loc_list
+          assitInfoB_dict[k] = Blevel_dict[k]  
+  for k,vlist in Clevel_dict.items(): #C level
+    if k not in fcDiffInfo_dict:
+      _file = vlist[2].split('-->')[0]
+      _file = _file.split('include/')[1]
+      if _file in headfile_list:
+        cmd_string = "grep -nw '"+k+"' "+fileTopros
+        status,tstr=commands.getstatusoutput(cmd_string)
+        if status == 0:
+          loc_list = tstr.split('\n')
+          assitLoc_dict[k] = loc_list
+          assitInfoB_dict[k] = Clevel_dict[k]      
+      
   with open(LOGERR,'w') as out:
-    print >> out,'\n------A level difference--------------\n'
-    for k,vlist in Alevel_dict.items():
-      print >> out,k,vlist
-    print >> out,'\n------B level difference--------------\n'
-    for k,vlist in Blevel_dict.items():
-      print >> out,k,vlist
-    print >> out,'\n------C level difference--------------\n'
-    for k,vlist in Clevel_dict.items():
-      print >> out,k,vlist
+    filename = os.path.basename(FILE_TO_PROCESS)
+    print >> out,'filename to process:',filename
+    print >> out,'more info about this log description to read log_description.txt'
+  
+    printAssitInfo(out,assitInfoA_dict,'A',assitLoc_dict)
+    printAssitInfo(out,assitInfoB_dict,'B',assitLoc_dict)
+    printAssitInfo(out,assitInfoC_dict,'C',assitLoc_dict)  
     
 def main():
     print '\npython file:',sys.argv[0],'running...'

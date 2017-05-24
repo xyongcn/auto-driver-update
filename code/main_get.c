@@ -10,7 +10,6 @@ char outFname2[30] = "target/v1_headfile.txt";
 	
 int LinePreprocessing(FILE *fpIn, char *sReadLine, long *zLineNo);
 int getHeaderFile(char sFileName[],char outHeadFname[]);
-int getFunCall(char sFileName[]);
 int get2ndHdFile(char codePath[],char outHeadFname[],char outFname[]);
 
 int main(int argc, char *argv[])
@@ -44,12 +43,5 @@ int main(int argc, char *argv[])
 		printf("get2ndHdFile running faild.\n");
 		exit(1);
 	}
-		
-	printf("program getFunCall running ....\n");	
-	ret=getFunCall(sFileName);	
-	if(ret==0)
-		printf("getFunCall running successful.\n");
-	else
-		printf("getFunCall running faild.\n");
-	return 0;
+
 }
