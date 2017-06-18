@@ -241,7 +241,7 @@ def classDiffLog(diffLog_dict):
               Alevel_dict[k] = diffLog_dict[k]
           else: # macro without parameter
             Blevel_dict[k] = diffLog_dict[k]
-        elif cmp(_type,'enum')==0:
+        elif _type in ('struct','union','enum'): # data struct
           Blevel_dict[k] = diffLog_dict[k]
         else:
           Alevel_dict[k] = diffLog_dict[k]

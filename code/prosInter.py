@@ -11,7 +11,7 @@ EXT2 = '.int' #interface file
 SOURCE_PATH0 = '/home/ryyan/SOURCE/linux-3.5.4/'
 TARGET_PATH = 'target/' #path to save target file
 V0_CODE=sys.argv[1]			#python run param 
-FILE_TO_PROCESS = 'console/vgacon.c'
+FILE_TO_PROCESS = sys.argv[1]
 
 def delSelfFuncCall(count_dict):
  #del self-decl-func call 
@@ -111,10 +111,10 @@ def processFuncDecl(fp, outFname, sline,count_dict):
   startLineNo = count_dict['lineNo']
   # get function name,filename and start-end lineno as follows
   nodeNo,tree_type,fnName,tfnFileSno,tfnEno=sline.lstrip().split()   
-  if SOURCE_PATH0 in tfnFileSno:  ## add surround if-else 20170520
-    fnFileSno=tfnFileSno[len(SOURCE_PATH0):]
-  else:
-    fnFileSno=tfnFileSno
+  if SOURCE_PATH0 in tfnFileSno:
+    tfnFileSno = tfnFileSno[len(SOURCE_PATH0):]
+  
+  fnFileSno=tfnFileSno
   fnEno=':'.join(tfnEno.split(':')[1:])
   # get function return type as follows 
   while sline and ("result_decl" not in sline):  
@@ -127,16 +127,23 @@ def processFuncDecl(fp, outFname, sline,count_dict):
         tfnType[-1] = sline.lstrip().split()[-1]+' '+tfnType[-1]
       else:
         tfnType.append(sline.lstrip().split()[-1])
-      sline=fp.readline(); count_dict['lineNo'] += 1  
+      sline=fp.readline(); count_dict['lineNo'] += 1   #read next line 
   fnType=tfnType[0]
   for rty in tfnType[1:]:           
     fnType = fnType+' '+rty
   fnType = fnType.strip()
   
   # get function parm as follows
+  dataStruct_list = []
   tfnPara = []  
   while sline and ("bind_expr" not in sline):    
     if sline and ("parm_decl" in sline): 
+      #get para data struct loc
+      param_loc = sline.strip().split()[2] #param location
+      param_loc = ':'.join(param_loc.split(':')[0:2]) # del col num
+      if SOURCE_PATH0 in param_loc:
+        param_loc = param_loc[len(SOURCE_PATH0):]
+      #end
       sline=fp.readline(); count_dict['lineNo'] += 1  # first identifier_node
       tfnPara.append(' ')  #add new para to save real value
       while sline and ("parm_decl" not in sline and "bind_expr" not in sline):           
@@ -144,13 +151,27 @@ def processFuncDecl(fp, outFname, sline,count_dict):
         for s in sline.lstrip().split()[2:]: #change para value
           tstr += s +' ' 
         tstr = tstr.strip()
-        if ('(inplace)' not in tstr):
+        if ('(' not in tstr): #(inplace)
           if cmp(tstr,'*')==0:
             tfnPara[-1] =tstr+tfnPara[-1]
           else:
             tfnPara[-1] =tstr+' '+tfnPara[-1]          
         tfnPara[-1] = tfnPara[-1].strip()
-        sline=fp.readline(); count_dict['lineNo'] += 1                    
+        # get data struct
+        nodeType = sline.strip().split()[1] 
+        if nodeType in ('record_type','union_type','enumeral_type'):
+          if cmp(nodeType,'record_type')==0:
+            dataType = 'struct'
+          elif cmp(nodeType,'union_type')==0:
+            dataType = 'union'
+          else:
+            dataType = 'enum'
+          nodeValue = sline.strip().split()[-1]
+          if ('(' not in nodeValue): #(inplace)
+            dataStructCall = fnName +': '+ nodeValue +' '+ param_loc +' '+ dataType
+            dataStruct_list.append(dataStructCall)
+        # end
+        sline=fp.readline(); count_dict['lineNo'] += 1  #read next line                  
   if len(tfnPara) > 0 :
     fnPara=tfnPara[0]
     for rty in tfnPara[1:]:                
@@ -165,61 +186,77 @@ def processFuncDecl(fp, outFname, sline,count_dict):
   macfile_list = []  # restore called-macro and its file relationship
   sfile_list = [] # restore .h of .c file related
   while sline and (sline[0] == ' ' or sline[0] == '\t') and ("function_decl" not in sline):         
-    # get Macro Expansion Info    
     if ("_expr" in sline or "indirect_ref" in sline):      
+      # get data struct
+      if 'decl_expr' in sline:
+        dataStruct_loc = sline.strip().split()[2] #data struct location
+        dataStruct_loc = ':'.join(dataStruct_loc.split(':')[0:2]) # del col num
+        if SOURCE_PATH0 in dataStruct_loc:
+          dataStruct_loc = dataStruct_loc[len(SOURCE_PATH0):]
+      nodeType = sline.strip().split()[1] 
+      if nodeType in ('record_type','union_type','enumeral_type'):
+        if cmp(nodeType,'record_type')==0:
+          dataType = 'struct'
+        elif cmp(nodeType,'union_type')==0:
+          dataType = 'union'
+        else:
+          dataType = 'enum'
+        nodeValue = sline.strip().split()[-1]
+        filename = os.path.basename(fp.name).split('.')[0]
+        print '\n=================='
+        print 'filename-->',filename
+        print '==================\n'
+        if ('(' not in nodeValue) and (filename not in nodeValue): #(inplace)
+          dataStructCall = fnName +': '+ nodeValue +' '+ dataStruct_loc +' '+ dataType
+          dataStruct_list.append(dataStructCall)
+      # end
+      # get Macro Expansion Info
       if (sline.lstrip().split()[-1] != '()'):
         tlist=sline.lstrip().split()
         mlist_sline = fnName+': '+tlist[-2]+' '
-        
-        if SOURCE_PATH0 in tlist[-1]:  ## add surround if-else 20170520
-          mlist_sline = mlist_sline+tlist[-1][:-1][len(SOURCE_PATH0):]
-        else:
-          mlist_sline = mlist_sline+tlist[-1][:-1]
+
+        if SOURCE_PATH0 in tlist[-1]:
+          tlist[-1] = tlist[-1][:-1][len(SOURCE_PATH0):]
+        mlist_sline = mlist_sline+tlist[-1][:-1]
         if mlist_sline not in macro_list:        	
           macro_list.append(mlist_sline) 
         
         tmfloc = tlist[-3].split('(')[-1].split(':')[:-1]
-        if SOURCE_PATH0 in tmfloc[0]: ## add surround if-else 20170520
-          mfloc = tlist[-2]+' '+tmfloc[0][len(SOURCE_PATH0):]
-        else:
-          mfloc = tlist[-2]+' '+tmfloc[0]
+        if SOURCE_PATH0 in tmfloc[0]:
+          tmfloc[0] = tmfloc[0][len(SOURCE_PATH0):]
+        mfloc = tlist[-2]+' '+tmfloc[0]
         if (mfloc not in macfile_list):        	
           macfile_list.append(mfloc) 
-        
+        #end  
         # get .h of which self-called-macro in
         fnFile=fnFileSno.split(':')[0]
         if (fnFile.endswith(os.path.basename(fp.name)[:-len(ext0)])):
-          if SOURCE_PATH0 in tmfloc[0]: ## add surround if-else 20170520
-            smfloc = tmfloc[0][len(SOURCE_PATH0):]
-          else:
-            smfloc = tmfloc[0]
+          smfloc = tmfloc[0]
           if (smfloc not in sfile_list) and smfloc.endswith('h'):
             sfile_list.append(smfloc) 
-        #end              
+         #end              
     if ("call_expr" in sline): # find call location    
       sline_list = sline.lstrip().split()
       fcLoc = sline_list[2]
-      sline=fp.readline();count_dict['lineNo'] += 1
+      if SOURCE_PATH0 in fcLoc:
+        fcLoc = fcLoc[len(SOURCE_PATH0):]
+      sline=fp.readline();count_dict['lineNo'] += 1   #read next line
       mflag = 1
       if sline and ("component_ref" in sline):
         mflag = 0
       while sline and ("identifier_node" not in sline): 
          sline=fp.readline();count_dict['lineNo'] += 1 #skip lines      
       nodeNo,tree_type,fcName=sline.lstrip().split()      
-      if SOURCE_PATH0 in fcLoc: ## add surround if-else 20170520
-        tempstr=fnName+': '+fcName+' '+fcLoc[len(SOURCE_PATH0):]
-      else:
-        tempstr=fnName+': '+fcName+' '+fcLoc
+      tempstr=fnName+': '+fcName+' '+fcLoc
       if mflag and (tempstr not in call_list):
         call_list.append(tempstr)      
-    sline=fp.readline();count_dict['lineNo'] += 1
+    sline=fp.readline();count_dict['lineNo'] += 1   #read next line
 
   # print function declation info 
   flag = 1;isCount = 0;
   fnFile=fnFileSno.split(':')[0]
-  #restore .h file by the way
   if fnFile.endswith('.h') and (fnFile not in sfile_list):
-    sfile_list.append(fnFile)
+    sfile_list.append(fnFile) #restore .h file by the way
   
   if (fnFile.endswith(os.path.basename(fp.name)[:-len(ext0)])):
     isCount = 1
@@ -233,6 +270,9 @@ def processFuncDecl(fp, outFname, sline,count_dict):
     count_dict['fndl_count'] += 1
     with open(fcopath, 'a') as out:
       print >> out,'{}'.format(fnName) 
+    # print dataStruct_list
+    copath=TARGET_PATH+'dataStruct_list.txt' 
+    printListMethod(dataStruct_list,copath)
   else:
     print >> outFname,'{} {} ({}) {} {} {}'.format(fnType,fnName,fnPara,fnFileSno,fnEno,startLineNo) 
   
@@ -245,11 +285,11 @@ def collectIntFmfile(path,outFname):
     count_dict={'fndl_count':0,'lineNo':0,'call_count':0}
     fnCall_dict={}
     with open(path) as fp:
-      sline=fp.readline();count_dict['lineNo'] += 1
+      sline=fp.readline();count_dict['lineNo'] += 1   #read next line
       while sline:        
         if ((sline[0] != ' ' and sline[0] != '\t') and ("function_decl" in sline)):
           count_dict=processFuncDecl(fp, outFname, sline,count_dict)
-        sline=fp.readline();count_dict['lineNo'] += 1
+        sline=fp.readline();count_dict['lineNo'] += 1   #read next line
       else:
         count_dict['lineNo'] -= 1
     count_dict=delSelfFuncCall(count_dict)	##del self-func call 
@@ -332,6 +372,9 @@ def info_collect():
             os.remove(TARGET_PATH+'cm_list.txt')
         if os.path.isfile(TARGET_PATH+'macfile_list.txt'): # if file exist then del
             os.remove(TARGET_PATH+'macfile_list.txt')
+        if os.path.isfile(TARGET_PATH+'dataStruct_list.txt'): # if file exist then del
+            os.remove(TARGET_PATH+'dataStruct_list.txt')
+        
         # call function to collect interface infomattion
         collectInt(V0_CODE,TARGET_PATH)       
     else:
@@ -341,8 +384,8 @@ def main():
     print 'python file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]
     info_collect()
-    reviseHdFile('0')
-    reviseHdFile('1')
+    #reviseHdFile('0')
+    #reviseHdFile('1')
     print 'Done'
   
 if __name__ == '__main__':
