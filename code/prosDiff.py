@@ -14,7 +14,7 @@ SOURCE_PATH1 = os.environ['HOME']+'/SOURCE/linux-3.8.13/'
 TARGET_PATH = 'target/' #path to save target file
 FILE_TO_PROCESS = sys.argv[1]
 CTAGSFILE_EXT = '_ctags.txt'
-LOGERR = 'log.txt'
+LOGERR = 'assitLog.txt'
 
 def printDictMethod(dictname,filename):
   with open(filename,'w') as out:
@@ -93,8 +93,8 @@ def getCtagsFileDict(vers):
         rows = tlist[2]
         _file = tlist[3]
         statement = ' '.join(tlist[4:])
-        if _type in ('macro','function','prototype'):
-          ctags_dict[name] = [_type,rows,_file,statement]
+        #if _type in ('macro','function','prototype'):
+        ctags_dict[name] = [_type,rows,_file,statement]
       sline = fp.readline()
   return ctags_dict
 
@@ -119,7 +119,7 @@ def prosTargetf():
   for fnName in fnCall_dict.keys():
     if fnName in v0ctags_dict:
       fcFile_dict[fnName] = v0ctags_dict[fnName]
-    elif fnName in fnFile_dict:  #comthing wrong occured here,need to solve
+    elif fnName in fnFile_dict:  
       # macro define function
       tlist = fnFile_dict[fnName][0].split(':')
       fileph = SOURCE_PATH0+tlist[0]
@@ -143,7 +143,7 @@ def code_Diff():
   diffLog_dict = OrderedDict()
   for k,vlist in v0ctags_dict.items():
     v0_type,v0_file,v0_rows,v0_state = vlist[0:]
-    if v0_type not in ('struct','member'):
+    if v0_type in ('macro','function','prototype'):
       if k in v1ctags_dict:# if exist
         v1_type,v1_file,v1_rows,v1_state = v1ctags_dict[k]
         if cmp(v0_file,v1_file)==0:       
@@ -161,7 +161,7 @@ def code_Diff():
         else:
           if (cmp(v0_type,v1_type)==0) and (cmp(v0_state,v1_state)==0):
             #just file changed
-            diffLog_dict[k] = ['Mov',v1_type,v0_file,v1_file,v1_state]
+            diffLog_dict[k] = ['Mov',v0_type,v0_file,v1_file,v1_state]
             del v1ctags_dict[k]
           else: #all changed(file,decl)
             _file = v0_file+'-->'+v1_file #file
@@ -173,11 +173,48 @@ def code_Diff():
             del v1ctags_dict[k]
       else:  # not exist-->deleted
         diffLog_dict[k] = ['Del',v0_type,v0_file,v0_state]  
-    else: # struct typedef and so on
-      pass 
+    elif v0_type in ('struct','enum','union'): # data type
+      if k in v1ctags_dict:# if exist
+        v1_type,v1_file,v1_rows,v1_state = v1ctags_dict[k]
+        if cmp(v0_file,v1_file)==0:
+          if (cmp(v0_state,v1_state)==0):
+            #nothing changed
+            diffLog_dict[k] = ['Not']
+            del v1ctags_dict[k]
+          else:
+            diffLog_dict[k] = ['Mod',v0_type,v0_file,v0_state,v1_state]
+            del v1ctags_dict[k]
+        else:
+          if (cmp(v0_state,v1_state)==0):
+            #just file changed
+            diffLog_dict[k] = ['Mov',v0_type,v0_file,v1_file,v1_state]
+            del v1ctags_dict[k]
+          else: #all changed(file,decl)
+            _file = v0_file+'-->'+v1_file #file
+            diffLog_dict[k] = ['All',v0_type,_file,v0_state,v1_state]
+            del v1ctags_dict[k]
+      else: # not exist-->deleted
+        diffLog_dict[k] = ['Del',v0_type,v0_file,v0_state]   
+    else:# typedef others
+      pass
   if len(v1ctags_dict)>0:  # add changed
     for k,vlist in v1ctags_dict.items():
       diffLog_dict[k] = ['Add'] + vlist 
+  
+  #print test start--------------------------------
+  filename = 'diffLog.txt'
+  with open(filename,'w') as out:
+		for k,vlist in diffLog_dict.items():  
+			if vlist[0] not in ('Not','Mov'):
+				diff_type,_type,_file = vlist[0:3]
+				print >> out,'\n',k,'\t( diff_type: '+diff_type,'type: '+_type,'file: '+_file,')'
+				print >> out,'\t--',vlist[3]
+				if cmp(diff_type,'Del')!=0:
+					print >> out,'\t++',vlist[4]
+				print >> out,""
+  print filename,'file generated successful!'
+  #print test end--------------------------------
+  
   return diffLog_dict
 
 def classDiffLog(diffLog_dict):
@@ -193,9 +230,7 @@ def classDiffLog(diffLog_dict):
     elif diff_type in ('Mod','All'):  
       _type,_file,v0_state,v1_state = vlist[1:]
       if '-->' not in _type: #type not changed
-        if cmp(_type,'macro')!=0:
-          Alevel_dict[k] = diffLog_dict[k]
-        else: 
+        if cmp(_type,'macro')==0:
           macor_name_list = v0_state.split()
           if('(' in macor_name_list[1]): # macro with parameter
             state0 = v0_state.split(k)[1].split(')')[0]+')'
@@ -206,6 +241,10 @@ def classDiffLog(diffLog_dict):
               Alevel_dict[k] = diffLog_dict[k]
           else: # macro without parameter
             Blevel_dict[k] = diffLog_dict[k]
+        elif cmp(_type,'enum')==0:
+          Blevel_dict[k] = diffLog_dict[k]
+        else:
+          Alevel_dict[k] = diffLog_dict[k]
       else: #type changed,but defination may not changed
         state0 = v0_state.split(k)[1].rstrip(';')
         state1 = v1_state.split(k)[1].rstrip(';')
@@ -251,6 +290,7 @@ def printAssitInfo(out,assitInfo_dict,level,assitLoc_dict):
     if cmp(diff_type,'Del')!=0:
       print >> out,'\t++',vlist[4]
     print >> out,""
+    # print call loction
     if isinstance(assitLoc_dict[k],list) == True:
       for loc in assitLoc_dict[k]:
         print >> out,'\t',filename+':',loc
@@ -288,15 +328,16 @@ def getAssitInfo():
   fileTopros = 'source/' + FILE_TO_PROCESS
   for k,vlist in Alevel_dict.items():  #A level
     diff_type,_type,_file = vlist[0:3]
-    if cmp(diff_type,'Del')==0 and cmp(_type,'macro')==0:
-      _file = _file.split('include/')[1]
-      if _file in headfile_list:
-        cmd_string = "grep -nw '"+k+"' "+fileTopros
-        status,tstr=commands.getstatusoutput(cmd_string)
-        if status == 0:
-          loc_list = tstr.split('\n')
-          assitLoc_dict[k] = loc_list
-          assitInfoA_dict[k] = Alevel_dict[k]
+    if cmp(diff_type,'Del')==0 and _type in ('macro'):
+      if k not in fcDiffInfo_dict:
+        _file = _file.split('include/')[1]
+        if _file in headfile_list:
+          cmd_string = "grep -nw '"+k+"' "+fileTopros
+          status,tstr=commands.getstatusoutput(cmd_string)
+          if status == 0:
+            loc_list = tstr.split('\n')
+            assitLoc_dict[k] = loc_list
+            assitInfoA_dict[k] = Alevel_dict[k]
     elif diff_type in ('Mod','All') and ('macro' in _type):
       if k not in fcDiffInfo_dict:
         _file = _file.split('-->')[0]
@@ -308,15 +349,29 @@ def getAssitInfo():
             loc_list = tstr.split('\n')
             assitLoc_dict[k] = loc_list
             assitInfoA_dict[k] = Alevel_dict[k]
+    elif diff_type in ('Mod','All','Del') and _type in ('struct','union','enum'):
+      if k not in fcDiffInfo_dict:
+        _file = _file.split('include/')[1]
+        key = _type +' '+ k
+        if _file in headfile_list:
+          cmd_string = "grep -nw '"+key+"' "+fileTopros
+          status,tstr=commands.getstatusoutput(cmd_string)
+          if status == 0:
+            loc_list = tstr.split('\n')
+            assitLoc_dict[k] = loc_list
+            assitInfoA_dict[k] = Alevel_dict[k]
     else: # 'Add'
       pass
-  
   for k,vlist in Blevel_dict.items(): #B level
     if k not in fcDiffInfo_dict:
+      _type = vlist[1]
       _file = vlist[2].split('-->')[0]
       _file = _file.split('include/')[1]
+      key = k
+      if _type in ('struct','union','enum'):
+        key = _type +' '+ key
       if _file in headfile_list:
-        cmd_string = "grep -nw '"+k+"' "+fileTopros
+        cmd_string = "grep -nw '"+key+"' "+fileTopros
         status,tstr=commands.getstatusoutput(cmd_string)
         if status == 0:
           loc_list = tstr.split('\n')

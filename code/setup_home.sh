@@ -28,31 +28,32 @@ else
 fi
 
 echo "create build folder in ~/SOURCE"
-mkdir ~/SOURCE/build-l5-allno
-mkdir ~/SOURCE/build-l8-allno
+mkdir ~/SOURCE/build-linux-v0
+mkdir ~/SOURCE/build-linux-v1
 
 
 cd ~/SOURCE/linux-3.5.4/
-make O=~/SOURCE/build-l5-allno V=1 allnoconfig
-make O=~/SOURCE/build-l5-allno V=1 menuconfig
+make O=~/SOURCE/build-linux-v0 V=1 allnoconfig
+make O=~/SOURCE/build-linux-v0 V=1 menuconfig
 echo "complier kernel source linux-3.5.4..."
-time make O=~/SOURCE/build-l5-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > ~/SOURCE/dummy5 2>&1
+time make O=~/SOURCE/build-linux-v0 V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > ~/SOURCE/dummy5 2>&1
 ret=`find . -name "*.ind"`
 if [ x"$ret" == x"" ];then
   echo "complier again..."
-  time make O=~/SOURCE/build-l5-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > ~/SOURCE/dummy5 2>&1
+  time make O=~/SOURCE/build-linux-v0 V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > ~/SOURCE/dummy5 2>&1
 else
   echo "creat .ind file in linux-3.5.4  successful."
 fi
 
 cd ~/SOURCE/linux-3.8.13/
-make O=~/SOURCE/build-l8-allno V=1 allnoconfig
+make O=~/SOURCE/build-linux-v1 V=1 allnoconfig
+make O=~/SOURCE/build-linux-v1 V=1 menuconfig
 echo "complier kernel source linux-3.8.13..."
-time make O=~/SOURCE/build-l8-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > ~/SOURCE/dummy8 2>&1
+time make O=~/SOURCE/build-linux-v1 V=1 > ~/SOURCE/dummy8 2>&1
 ret=`find . -name *.ind`
 if [ x"$ret" == x"" ];then
   echo "complier again..."
-  time make O=~/SOURCE/build-l8-allno V=1 EXTRA_CFLAGS="-fplugin=gccdiff" > ~/SOURCE/dummy5 2>&1
+  time make O=~/SOURCE/build-linux-v1 V=1 > ~/SOURCE/dummy5 2>&1
 else
   echo "creat .ind file in linux-3.8.13  successful."
 fi

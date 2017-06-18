@@ -27,6 +27,7 @@ def getSrcPath(vers):
 def reviseCtagsFile(vers):
   filename = TARGET_PATH+'v'+vers+CTAGSFILE_EXT
   SOURCE_PATH = getSrcPath(vers)
+  print filename,'file is reviseding ...'
   
   ctags_dict = OrderedDict()
   with open(filename) as fp:
@@ -36,23 +37,21 @@ def reviseCtagsFile(vers):
         tlist = sline.split()
         name = tlist[0]
         _type = tlist[1]
-        rows = tlist[2]
+        rows = tlist[2];rowstart = rows
         _file = tlist[3][len(SOURCE_PATH):]
         state_list = tlist[4:]
         if len(state_list)==0:
-          print 'state_list==0'
-          print sline
+          print 'state_list==0',sline
           break
-        statement = state_list[0]
-        for slt in state_list[1:]:
-          if statement.endswith(','):
-            statement = statement + slt
-          else:
-            statement = statement +' '+ slt
-        #statement = ' '.join(state_list).split('/*')[0].strip()
-        statement = statement.split('/*')[0].strip()
+        fileph = tlist[3]
         if _type in ('macro','function','prototype'):
-          fileph = tlist[3]
+          statement = state_list[0]
+          for slt in state_list[1:]:	#handle more space
+            if statement.endswith(','):
+              statement = statement + slt
+            else:
+              statement = statement +' '+ slt
+          statement = statement.split('/*')[0].strip() #del notes
           while statement.endswith(','):
             rows = int(rows) + 1
             temp=check_output(['sed','-n',str(rows)+'p',fileph]).strip()
@@ -61,13 +60,176 @@ def reviseCtagsFile(vers):
             rows = int(rows) + 1
             temp=check_output(['sed','-n',str(rows)+'p',fileph]).strip()
             statement = statement.rstrip('\\').rstrip()+' '+ temp
-            
-          ctags_dict[name] = ' '+ _type+'  '+_file+'  '+str(rows)+'  '+statement
+          ctags_dict[name] = ' '+ _type+'  '+_file+'  '+rowstart+'  '+statement
+        
         elif _type in ('struct','enum','union'):
-          ctags_dict[name] = ' '+ _type+'  '+_file+'  '+str(rows)+'  '+statement
-        else: # struct->member,enum->enumerator,typedef
+          statement = ' '.join(state_list).split('/*')[0].strip()
+          statement = statement.split('/*')[0].strip() #del notes
+          aliasname_list = []
+          if not statement.endswith(';'): # not one decl
+		        openbrace_unmatch = 0	# open brace-->{ , close brace-->}
+		        openbrace_unmatch += statement.count('{')
+		        temp_dict = {}
+		        rowend = int(rows) + 1
+		        temp=check_output(['sed','-n',str(rowend)+'p',fileph]).strip()
+		        while True:  # find end rows of struct
+		          openbrace_unmatch += temp.count('{')
+		          openbrace_unmatch -= temp.count('}')
+		          if openbrace_unmatch == 0:
+		            break
+		          rowend = int(rowend) + 1 # refresh end rows of struct
+		          if('{' in temp and len(temp) > 1 and '*' not in temp): # recored unamed/named struct member start flag
+		            temp_dict[rowend] = temp.split('/*')[0].strip()
+		          if temp.startswith('}') and temp.endswith(';'): # recored named struct member end flag
+		            temp_dict[rowend] = temp.split('/*')[0].strip()
+		          temp=check_output(['sed','-n',str(rowend)+'p',fileph]).strip()
+		        endstmt = temp.split('/*')[0].strip() # end flag of struct
+		        
+		        #get alias name of data struct 
+		        if not endstmt.endswith('};'):
+		          i = 0;
+		          for cstr in endstmt[::-1]:
+		            if cstr == '}':
+		              break
+		            i += 1
+		          aliasname = endstmt[(len(endstmt)-i):-1].strip()
+		          if '(' not in aliasname:
+		            aliasname_list = aliasname.split(',')
+		        
+		        if '{' not in statement:
+		          statement = statement + ' {'
+		        sline2 = fp.readline()
+		        while sline2 and (sline2 != '\n'):
+		          rows = sline2.split()[2]
+		          if int(rows) > int(rowend):
+		            break
+		          state_list2 = sline2.split()[4:]
+		          statement2 = ' '.join(state_list2).split('/*')[0].strip()
+		          if int(rows) in temp_dict: #mod struct member struct/union/enum start and end
+		            if not statement.endswith(temp_dict[int(rows)]):
+		              statement = statement +' '+ temp_dict[int(rows)] 
+		          while statement2.endswith(',') and ('member' in sline2):  #enumerator endswith ',' so exclude it
+		          	rows = int(rows) + 1
+		          	temp=check_output(['sed','-n',str(rows)+'p',fileph]).split('/*')[0].strip()
+		          	statement2 = statement2 + temp
+		          
+		          if not statement.endswith(statement2):
+		            statement = statement +' '+ statement2  # merge statement
+		          sline2 = fp.readline() # read next line
+		        if not statement.endswith(endstmt):
+		          statement = statement +' '+ endstmt 
+		        fp.seek(-len(sline2),1); #back to last line    
+          else:
+            if not statement.endswith('};'):
+              i = 0;
+              for cstr in statement[::-1]:
+                if cstr == '}':
+                  break
+                i += 1
+            aliasname = statement[(len(statement)-i):-1].strip()
+            if '(' not in aliasname:
+              aliasname_list = aliasname.split(',')
+          
+          ctags_dict[name] = ' '+ _type+'  '+_file+'  '+rowstart+'  '+statement
+          if len(aliasname_list)>0:
+            for vname in aliasname_list:
+              ctags_dict[vname] = ' '+ _type+'  '+_file+'  '+rowstart+'  '+statement
+        elif _type in ('member','enumerator'): #typedef struct,typedef enum,struct class
+          statement = ' '.join(state_list).split('/*')[0].strip()
+          statement = statement.split('/*')[0].strip() #del notes
+          namelist = []
+          temp = statement
+          while True: # find start rows of data type
+            if '{' in temp: 
+              if ('struct' not in temp) and ('enum' not in temp) and ('union' not in temp):
+                rowstart = int(rowstart) - 1
+                temp=check_output(['sed','-n',str(rowstart)+'p',fileph]).split('/*')[0].strip() 
+              break
+            rowstart = int(rowstart) - 1
+            temp=check_output(['sed','-n',str(rowstart)+'p',fileph]).split('/*')[0].strip()  
+          startstmt = temp.split('/*')[0].strip() # start flag
+          
+          rowend = rowstart
+          if not startstmt.endswith(';'):
+            openbrace_unmatch = 0
+            openbrace_unmatch += startstmt.count('{')
+            rowend = rowend + 1
+            temp=check_output(['sed','-n',str(rowend)+'p',fileph]).strip()
+            while True:  # find end
+              openbrace_unmatch += temp.count('{')
+              openbrace_unmatch -= temp.count('}')
+              if openbrace_unmatch == 0:
+                break
+              rowend = rowend + 1
+              temp=check_output(['sed','-n',str(rowend)+'p',fileph]).strip()
+            endstmt = temp.split('/*')[0].strip() # end flag
+            
+            if not ('typedef' in startstmt):
+              _type = startstmt.split()[0]
+            else:
+              _type = startstmt.split()[1]
+            
+            if not endstmt.endswith('};'):
+              #name = endstmt[1:-1].strip()
+              i = 0;
+              for cstr in endstmt[::-1]:
+                if cstr == '}':
+                  break
+                i += 1
+              name = endstmt[(len(endstmt)-i):-1].strip()
+              if '(' not in name:
+                namelist = name.split(',')
+            else:
+              name = 'unamed-'+_type
+            
+            if '{' not in startstmt:
+              startstmt = startstmt + ' {'
+            if int(rows) <= int(rowend):
+              statement = startstmt +' '+ statement
+            sline2 = fp.readline()
+            while sline2 and (sline2 != '\n'):
+              rows = sline2.split()[2]
+              if int(rows) > int(rowend):
+                break
+              state_list2 = sline2.split()[4:]
+              statement2 = ' '.join(state_list2).split('/*')[0].strip()
+              while statement2.endswith(',') and ('member' in sline2):  #enumerator endswith ',' so exclude it
+                rows = int(rows) + 1
+                temp=check_output(['sed','-n',str(rows)+'p',fileph]).split('/*')[0].strip()
+                statement2 = statement2 + temp
+              if not statement.endswith(statement2):
+                statement = statement +' '+ statement2  # merge statement
+              sline2 = fp.readline() # read next line    
+            if not statement.endswith(endstmt):
+              statement = statement +' '+ endstmt
+            fp.seek(-len(sline2),1); #back to last line  
+          else:
+            if 'struct' in statement:
+              _type = 'struct'
+            elif 'enum' in statement:
+              _type = 'enum'
+            elif 'union' in statement:
+              _type = 'union'
+            else:
+              _type = 'typedef'
+            
+            if statement.endswith('};'):
+              name = 'unamed-' +_type
+            else:
+              i = 0;
+              for cstr in statement[::-1]:
+                if cstr == '}':
+                  break
+                i += 1
+              name = statement[(len(statement)-i):-1].strip()
+              if '(' not in name:
+                namelist = name.split(',')
+          if 'unamed' not in name:
+            for vname in namelist:
+              ctags_dict[vname] = ' '+ _type+'  '+_file+'  '+str(rowstart)+'  '+statement
+        else: #other typedef
           pass
-      sline = fp.readline()
+      sline = fp.readline()# move file pointer
   printDictMethod(ctags_dict,filename)
   print filename,'file is revised successful!'
   #return ctags_dict
@@ -104,12 +266,12 @@ def getCtagsFile(vers):
 		        print >> out,hflist
         hdFileName = fp.readline()
   print outCtagsPath,'file is generated successful!'
-  
+
 def main():
     print '\npython file:',sys.argv[0],'running...'
     getCtagsFile('0')
-    reviseCtagsFile('0')
     getCtagsFile('1')
+    reviseCtagsFile('0')
     reviseCtagsFile('1')
     print 'Done\n'
   
