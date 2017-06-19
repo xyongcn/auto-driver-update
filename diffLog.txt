@@ -114,9 +114,9 @@ IRQF_SAMPLE_RANDOM 	( diff_type: Del type: macro file: include/linux/interrupt.h
 	-- #define IRQF_SAMPLE_RANDOM 0x00000040
 
 
-____cacheline_internodealigned_in_smp 	( diff_type: Mod type: struct file: include/linux/irqdesc.h )
-	-- struct irq_desc { struct irq_data irq_data; unsigned int __percpu *kstat_irqs; irq_flow_handler_t handle_irq; irq_preflow_handler_t preflow_handler; struct irqaction *action; unsigned int status_use_accessors; unsigned int core_internal_state__do_not_mess_with_it; unsigned int depth; unsigned int wake_depth; unsigned int irq_count; unsigned long last_unhandled; unsigned int irqs_unhandled; raw_spinlock_t lock; struct cpumask *percpu_enabled; const struct cpumask *affinity_hint; struct irq_affinity_notify *affinity_notify; cpumask_var_t pending_mask; unsigned long threads_oneshot; atomic_t threads_active; wait_queue_head_t wait_for_threads; struct proc_dir_entry *dir; struct module *owner; const char *name; } ____cacheline_internodealigned_in_smp;
-	++ struct irq_desc { struct irq_data irq_data; unsigned int __percpu *kstat_irqs; irq_flow_handler_t handle_irq; irq_preflow_handler_t preflow_handler; struct irqaction *action; unsigned int status_use_accessors; unsigned int core_internal_state__do_not_mess_with_it; unsigned int depth; unsigned int wake_depth; unsigned int irq_count; unsigned long last_unhandled; unsigned int irqs_unhandled; raw_spinlock_t lock; struct cpumask *percpu_enabled; const struct cpumask *affinity_hint; struct irq_affinity_notify *affinity_notify; cpumask_var_t pending_mask; unsigned long threads_oneshot; atomic_t threads_active; wait_queue_head_t wait_for_threads; struct proc_dir_entry *dir; int parent_irq; struct module *owner; const char *name; } ____cacheline_internodealigned_in_smp;
+____cacheline_internodealigned_in_smp 	( diff_type: Mod type: struct file: include/linux/mmzone.h )
+	-- struct zone { unsigned long watermark[NR_WMARK]; unsigned long percpu_drift_mark; unsigned long lowmem_reserve[MAX_NR_ZONES]; unsigned long dirty_balance_reserve; int node; unsigned long min_unmapped_pages; unsigned long min_slab_pages; struct per_cpu_pageset __percpu *pageset; spinlock_t lock; int all_unreclaimable; seqlock_t span_seqlock; unsigned long min_cma_pages; struct free_area free_area[MAX_ORDER]; unsigned long *pageblock_flags; unsigned int compact_considered; unsigned int compact_defer_shift; int compact_order_failed; spinlock_t lru_lock; struct lruvec lruvec; unsigned long pages_scanned; unsigned long flags; atomic_long_t vm_stat[NR_VM_ZONE_STAT_ITEMS]; unsigned int inactive_ratio; wait_queue_head_t * wait_table; unsigned long wait_table_hash_nr_entries; unsigned long wait_table_bits; struct pglist_data *zone_pgdat; unsigned long zone_start_pfn; unsigned long spanned_pages; unsigned long present_pages; const char *name; } ____cacheline_internodealigned_in_smp;
+	++ struct zone { unsigned long watermark[NR_WMARK]; unsigned long percpu_drift_mark; unsigned long lowmem_reserve[MAX_NR_ZONES]; unsigned long dirty_balance_reserve; int node; unsigned long min_unmapped_pages; unsigned long min_slab_pages; struct per_cpu_pageset __percpu *pageset; spinlock_t lock; int all_unreclaimable; bool compact_blockskip_flush; unsigned long compact_cached_free_pfn; unsigned long compact_cached_migrate_pfn; seqlock_t span_seqlock; struct free_area free_area[MAX_ORDER]; unsigned long *pageblock_flags; unsigned int compact_considered; unsigned int compact_defer_shift; int compact_order_failed; spinlock_t lru_lock; struct lruvec lruvec; unsigned long pages_scanned; unsigned long flags; atomic_long_t vm_stat[NR_VM_ZONE_STAT_ITEMS]; unsigned int inactive_ratio; wait_queue_head_t * wait_table; unsigned long wait_table_hash_nr_entries; unsigned long wait_table_bits; struct pglist_data *zone_pgdat; unsigned long zone_start_pfn; unsigned long spanned_pages; unsigned long present_pages; unsigned long managed_pages; const char *name; } ____cacheline_internodealigned_in_smp;
 
 
 irq_run_affinity_notifiers 	( diff_type: Del type: function file: include/linux/interrupt.h )
@@ -1630,6 +1630,10 @@ __kernel_fd_set 	( diff_type: Del type: struct file: include/linux/posix_types.h
 	-- typedef struct { unsigned long fds_bits[__FD_SETSIZE / (8 * sizeof(long))]; } __kernel_fd_set;
 
 
+_LINUX_BYTEORDER_LITTLE_ENDIAN_H 	( diff_type: Del type: macro file: include/linux/byteorder/little_endian.h )
+	-- #define _LINUX_BYTEORDER_LITTLE_ENDIAN_H
+
+
 __LITTLE_ENDIAN 	( diff_type: Del type: macro file: include/linux/byteorder/little_endian.h )
 	-- #define __LITTLE_ENDIAN 1234
 
@@ -2918,16 +2922,6 @@ ptrace_signal_deliver 	( diff_type: Del type: macro file: arch/x86/include/asm/s
 	-- #define ptrace_signal_deliver(regs,cookie) do { } while (0)
 
 
-__ARCH_SI_CLOCK_T 	( diff_type: All type: macro file: include/asm-generic/siginfo.h-->arch/x86/include/uapi/asm/siginfo.h )
-	-- #define __ARCH_SI_CLOCK_T __kernel_clock_t
-	++ # define __ARCH_SI_CLOCK_T __kernel_si_clock_t
-
-
-__ARCH_SI_PREAMBLE_SIZE 	( diff_type: All type: macro file: include/asm-generic/siginfo.h-->arch/x86/include/uapi/asm/siginfo.h )
-	-- #define __ARCH_SI_PREAMBLE_SIZE (3 * sizeof(int))
-	++ # define __ARCH_SI_PREAMBLE_SIZE (4 * sizeof(int))
-
-
 cma_wmark_pages 	( diff_type: Del type: macro file: include/linux/mmzone.h )
 	-- # define cma_wmark_pages(zone) 0
 
@@ -2984,16 +2978,6 @@ keyring_alloc 	( diff_type: Mod type: prototype file: include/linux/key.h )
 rcu_assign_keypointer 	( diff_type: Mod type: macro file: include/linux/key.h )
 	-- #define rcu_assign_keypointer(KEY,PAYLOAD) (rcu_assign_pointer((KEY)->payload.rcudata, PAYLOAD))
 	++ #define rcu_assign_keypointer(KEY,PAYLOAD) do { rcu_assign_pointer((KEY)->payload.rcudata, (PAYLOAD)); } while (0)
-
-
-cmpxchg 	( diff_type: All type: macro file: arch/x86/include/asm/cmpxchg_32.h-->arch/x86/include/asm/cmpxchg.h )
-	-- #define cmpxchg(ptr,o,n) ({ __typeof__(*(ptr)) __ret; if (likely(boot_cpu_data.x86 > 3)) __ret = (__typeof__(*(ptr)))__cmpxchg((ptr), (unsigned long)(o), (unsigned long)(n), sizeof(*(ptr))); else __ret = (__typeof__(*(ptr)))cmpxchg_386((ptr), (unsigned long)(o), (unsigned long)(n), sizeof(*(ptr))); __ret; })
-	++ #define cmpxchg(ptr,old,new) __cmpxchg(ptr, old, new, sizeof(*(ptr)))
-
-
-cmpxchg_local 	( diff_type: All type: macro file: arch/x86/include/asm/cmpxchg_32.h-->arch/x86/include/asm/cmpxchg.h )
-	-- #define cmpxchg_local(ptr,o,n) ({ __typeof__(*(ptr)) __ret; if (likely(boot_cpu_data.x86 > 3)) __ret = (__typeof__(*(ptr)))__cmpxchg_local((ptr), (unsigned long)(o), (unsigned long)(n), sizeof(*(ptr))); else __ret = (__typeof__(*(ptr)))cmpxchg_386((ptr), (unsigned long)(o), (unsigned long)(n), sizeof(*(ptr))); __ret; })
-	++ #define cmpxchg_local(ptr,old,new) __cmpxchg_local(ptr, old, new, sizeof(*(ptr)))
 
 
 BIOSSEG 	( diff_type: Del type: macro file: arch/x86/include/asm/vm86.h )
@@ -3226,6 +3210,11 @@ paravirt_wrmsr_regs 	( diff_type: Del type: function file: arch/x86/include/asm/
 flush_tlb_others 	( diff_type: Mod type: function file: arch/x86/include/asm/paravirt.h )
 	-- static inline void flush_tlb_others(const struct cpumask *cpumask,struct mm_struct *mm,unsigned long va)
 	++ static inline void flush_tlb_others(const struct cpumask *cpumask,struct mm_struct *mm,unsigned long start,unsigned long end)
+
+
+arch_flush_lazy_mmu_mode 	( diff_type: Mod type: prototype-->function file: arch/x86/include/asm/paravirt.h )
+	-- void arch_flush_lazy_mmu_mode(void);
+	++ static inline void arch_flush_lazy_mmu_mode(void)
 
 
 iovec 	( diff_type: Del type: struct file: include/linux/uio.h )
@@ -4589,6 +4578,10 @@ cisco_proto 	( diff_type: Del type: struct file: include/linux/hdlc/ioctl.h )
 	-- typedef struct { unsigned int interval; unsigned int timeout; } cisco_proto;
 
 
+__LINUX_NETLINK_H 	( diff_type: Del type: macro file: include/linux/netlink.h )
+	-- #define __LINUX_NETLINK_H
+
+
 NETLINK_ROUTE 	( diff_type: Del type: macro file: include/linux/netlink.h )
 	-- #define NETLINK_ROUTE 0
 
@@ -4857,49 +4850,120 @@ NLA_HDRLEN 	( diff_type: Del type: macro file: include/linux/netlink.h )
 	-- #define NLA_HDRLEN ((int) NLA_ALIGN(sizeof(struct nlattr)))
 
 
-netlink_skb_parms 	( diff_type: Mod type: struct file: include/linux/netlink.h )
+nlmsg_hdr 	( diff_type: Del type: function file: include/linux/netlink.h )
+	-- static inline struct nlmsghdr *nlmsg_hdr(const struct sk_buff *skb)
+
+
+netlink_skb_parms 	( diff_type: Del type: struct file: include/linux/netlink.h )
 	-- struct netlink_skb_parms { struct ucred creds; __u32 pid; __u32 dst_group; };
-	++ struct netlink_skb_parms { struct scm_creds creds; __u32 portid; __u32 dst_group; struct sock *ssk; };
 
 
-netlink_kernel_create 	( diff_type: Mod type: prototype-->function file: include/linux/netlink.h )
+NETLINK_CB 	( diff_type: Del type: macro file: include/linux/netlink.h )
+	-- #define NETLINK_CB(skb) (*(struct netlink_skb_parms*)&((skb)->cb))
+
+
+NETLINK_CREDS 	( diff_type: Del type: macro file: include/linux/netlink.h )
+	-- #define NETLINK_CREDS(skb) (&NETLINK_CB((skb)).creds)
+
+
+netlink_table_grab 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern void netlink_table_grab(void);
+
+
+netlink_table_ungrab 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern void netlink_table_ungrab(void);
+
+
+netlink_kernel_create 	( diff_type: Del type: prototype file: include/linux/netlink.h )
 	-- extern struct sock *netlink_kernel_create(struct net *net,int unit,unsigned int groups,void (*input)(struct sk_buff *skb),struct mutex *cb_mutex,struct module *module);
-	++ netlink_kernel_create(struct net *net,int unit,struct netlink_kernel_cfg *cfg)
 
 
-netlink_unicast 	( diff_type: Mod type: prototype file: include/linux/netlink.h )
+netlink_kernel_release 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern void netlink_kernel_release(struct sock *sk);
+
+
+__netlink_change_ngroups 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern int __netlink_change_ngroups(struct sock *sk,unsigned int groups);
+
+
+netlink_change_ngroups 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern int netlink_change_ngroups(struct sock *sk,unsigned int groups);
+
+
+__netlink_clear_multicast_users 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern void __netlink_clear_multicast_users(struct sock *sk,unsigned int group);
+
+
+netlink_clear_multicast_users 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern void netlink_clear_multicast_users(struct sock *sk,unsigned int group);
+
+
+netlink_ack 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern void netlink_ack(struct sk_buff *in_skb,struct nlmsghdr *nlh,int err);
+
+
+netlink_has_listeners 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern int netlink_has_listeners(struct sock *sk,unsigned int group);
+
+
+netlink_unicast 	( diff_type: Del type: prototype file: include/linux/netlink.h )
 	-- extern int netlink_unicast(struct sock *ssk,struct sk_buff *skb,__u32 pid,int nonblock);
-	++ extern int netlink_unicast(struct sock *ssk,struct sk_buff *skb,__u32 portid,int nonblock);
 
 
-netlink_broadcast 	( diff_type: Mod type: prototype file: include/linux/netlink.h )
+netlink_broadcast 	( diff_type: Del type: prototype file: include/linux/netlink.h )
 	-- extern int netlink_broadcast(struct sock *ssk,struct sk_buff *skb,__u32 pid,__u32 group, gfp_t allocation);
-	++ extern int netlink_broadcast(struct sock *ssk,struct sk_buff *skb,__u32 portid,__u32 group, gfp_t allocation);
 
 
-netlink_broadcast_filtered 	( diff_type: Mod type: prototype file: include/linux/netlink.h )
+netlink_broadcast_filtered 	( diff_type: Del type: prototype file: include/linux/netlink.h )
 	-- extern int netlink_broadcast_filtered(struct sock *ssk,struct sk_buff *skb,__u32 pid, __u32 group, gfp_t allocation,int (*filter)(struct sock *dsk, struct sk_buff *skb, void *data),void *filter_data);
-	++ extern int netlink_broadcast_filtered(struct sock *ssk,struct sk_buff *skb,__u32 portid, __u32 group, gfp_t allocation,int (*filter)(struct sock *dsk, struct sk_buff *skb, void *data),void *filter_data);
 
 
-netlink_set_err 	( diff_type: Mod type: prototype file: include/linux/netlink.h )
+netlink_set_err 	( diff_type: Del type: prototype file: include/linux/netlink.h )
 	-- extern int netlink_set_err(struct sock *ssk,__u32 pid,__u32 group,int code);
-	++ extern int netlink_set_err(struct sock *ssk,__u32 portid,__u32 group,int code);
 
 
-netlink_callback 	( diff_type: Mod type: struct file: include/linux/netlink.h )
+netlink_register_notifier 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern int netlink_register_notifier(struct notifier_block *nb);
+
+
+netlink_unregister_notifier 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- extern int netlink_unregister_notifier(struct notifier_block *nb);
+
+
+netlink_getsockbyfilp 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- struct sock *netlink_getsockbyfilp(struct file *filp);
+
+
+netlink_attachskb 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- int netlink_attachskb(struct sock *sk,struct sk_buff *skb,long *timeo, struct sock *ssk);
+
+
+netlink_detachskb 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- void netlink_detachskb(struct sock *sk,struct sk_buff *skb);
+
+
+netlink_sendskb 	( diff_type: Del type: prototype file: include/linux/netlink.h )
+	-- int netlink_sendskb(struct sock *sk,struct sk_buff *skb);
+
+
+NLMSG_GOODSIZE 	( diff_type: Del type: macro file: include/linux/netlink.h )
+	-- #define NLMSG_GOODSIZE SKB_WITH_OVERHEAD(8192UL)
+
+
+NLMSG_DEFAULT_SIZE 	( diff_type: Del type: macro file: include/linux/netlink.h )
+	-- #define NLMSG_DEFAULT_SIZE (NLMSG_GOODSIZE - NLMSG_HDRLEN)
+
+
+netlink_callback 	( diff_type: Del type: struct file: include/linux/netlink.h )
 	-- struct netlink_callback { struct sk_buff *skb; const struct nlmsghdr *nlh; int (*dump)(struct sk_buff * skb,struct netlink_callback *cb); int (*done)(struct netlink_callback *cb); void *data; u16 family; u16 min_dump_alloc; unsigned int prev_seq, seq; long args[6]; };
-	++ struct netlink_callback { struct sk_buff *skb; const struct nlmsghdr *nlh; int (*dump)(struct sk_buff * skb,struct netlink_callback *cb); int (*done)(struct netlink_callback *cb); void *data; struct module *module; u16 family; u16 min_dump_alloc; unsigned int prev_seq, seq; long args[6]; };
 
 
-netlink_notify 	( diff_type: Mod type: struct file: include/linux/netlink.h )
+netlink_notify 	( diff_type: Del type: struct file: include/linux/netlink.h )
 	-- struct netlink_notify { struct net *net; int pid; int protocol; };
-	++ struct netlink_notify { struct net *net; int portid; int protocol; };
 
 
-__nlmsg_put 	( diff_type: Mod type: prototype file: include/linux/netlink.h )
+__nlmsg_put 	( diff_type: Del type: prototype file: include/linux/netlink.h )
 	-- __nlmsg_put(struct sk_buff *skb,u32 pid,u32 seq,int type,int len,int flags);
-	++ __nlmsg_put(struct sk_buff *skb,u32 portid,u32 seq,int type,int len,int flags);
 
 
 NLMSG_NEW 	( diff_type: Del type: macro file: include/linux/netlink.h )
@@ -4910,14 +4974,12 @@ NLMSG_PUT 	( diff_type: Del type: macro file: include/linux/netlink.h )
 	-- #define NLMSG_PUT(skb,pid,seq,type,len) NLMSG_NEW(skb, pid, seq, type, len, 0)
 
 
-netlink_dump_control 	( diff_type: Mod type: struct file: include/linux/netlink.h )
+netlink_dump_control 	( diff_type: Del type: struct file: include/linux/netlink.h )
 	-- struct netlink_dump_control { int (*dump)(struct sk_buff *skb, struct netlink_callback *); int (*done)(struct netlink_callback*); void *data; u16 min_dump_alloc; };
-	++ struct netlink_dump_control { int (*dump)(struct sk_buff *skb, struct netlink_callback *); int (*done)(struct netlink_callback *); void *data; struct module *module; u16 min_dump_alloc; };
 
 
-netlink_dump_start 	( diff_type: Mod type: prototype-->function file: include/linux/netlink.h )
+netlink_dump_start 	( diff_type: Del type: prototype file: include/linux/netlink.h )
 	-- extern int netlink_dump_start(struct sock *ssk,struct sk_buff *skb,const struct nlmsghdr *nlh,struct netlink_dump_control *control);
-	++ static inline int netlink_dump_start(struct sock *ssk,struct sk_buff *skb,const struct nlmsghdr *nlh,struct netlink_dump_control *control)
 
 
 NL_NONROOT_RECV 	( diff_type: Del type: macro file: include/linux/netlink.h )
@@ -5147,1194 +5209,6 @@ clear_user 	( diff_type: All type: prototype file: arch/x86/include/asm/uaccess_
 __clear_user 	( diff_type: All type: prototype file: arch/x86/include/asm/uaccess_64.h-->arch/x86/include/asm/uaccess.h )
 	-- __must_check unsigned long __clear_user(void __user *mem,unsigned long len);
 	++ unsigned long __must_check __clear_user(void __user *mem,unsigned long len);
-
-
-___constant_swab16 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define ___constant_swab16(x) ((__u16)( (((__u16)(x) & (__u16)0x00ffU) << 8) | (((__u16)(x) & (__u16)0xff00U) >> 8)))
-
-
-___constant_swab32 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define ___constant_swab32(x) ((__u32)( (((__u32)(x) & (__u32)0x000000ffUL) << 24) | (((__u32)(x) & (__u32)0x0000ff00UL) << 8) | (((__u32)(x) & (__u32)0x00ff0000UL) >> 8) | (((__u32)(x) & (__u32)0xff000000UL) >> 24)))
-
-
-___constant_swab64 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define ___constant_swab64(x) ((__u64)( (((__u64)(x) & (__u64)0x00000000000000ffULL) << 56) | (((__u64)(x) & (__u64)0x000000000000ff00ULL) << 40) | (((__u64)(x) & (__u64)0x0000000000ff0000ULL) << 24) | (((__u64)(x) & (__u64)0x00000000ff000000ULL) << 8) | (((__u64)(x) & (__u64)0x000000ff00000000ULL) >> 8) | (((__u64)(x) & (__u64)0x0000ff0000000000ULL) >> 24) | (((__u64)(x) & (__u64)0x00ff000000000000ULL) >> 40) | (((__u64)(x) & (__u64)0xff00000000000000ULL) >> 56)))
-
-
-___constant_swahw32 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define ___constant_swahw32(x) ((__u32)( (((__u32)(x) & (__u32)0x0000ffffUL) << 16) | (((__u32)(x) & (__u32)0xffff0000UL) >> 16)))
-
-
-___constant_swahb32 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define ___constant_swahb32(x) ((__u32)( (((__u32)(x) & (__u32)0x00ff00ffUL) << 8) | (((__u32)(x) & (__u32)0xff00ff00UL) >> 8)))
-
-
-__fswab16 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __attribute_const__ __u16 __fswab16(__u16 val)
-
-
-__fswab32 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __attribute_const__ __u32 __fswab32(__u32 val)
-
-
-__fswab64 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __attribute_const__ __u64 __fswab64(__u64 val)
-
-
-__fswahw32 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __attribute_const__ __u32 __fswahw32(__u32 val)
-
-
-__fswahb32 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __attribute_const__ __u32 __fswahb32(__u32 val)
-
-
-__swab16 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define __swab16(x) (__builtin_constant_p((__u16)(x)) ? ___constant_swab16(x) : __fswab16(x))
-
-
-__swab32 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define __swab32(x) (__builtin_constant_p((__u32)(x)) ? ___constant_swab32(x) : __fswab32(x))
-
-
-__swab64 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define __swab64(x) (__builtin_constant_p((__u64)(x)) ? ___constant_swab64(x) : __fswab64(x))
-
-
-__swahw32 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define __swahw32(x) (__builtin_constant_p((__u32)(x)) ? ___constant_swahw32(x) : __fswahw32(x))
-
-
-__swahb32 	( diff_type: Del type: macro file: include/linux/swab.h )
-	-- #define __swahb32(x) (__builtin_constant_p((__u32)(x)) ? ___constant_swahb32(x) : __fswahb32(x))
-
-
-__swab16p 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __u16 __swab16p(const __u16 *p)
-
-
-__swab32p 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __u32 __swab32p(const __u32 *p)
-
-
-__swab64p 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __u64 __swab64p(const __u64 *p)
-
-
-__swahw32p 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __u32 __swahw32p(const __u32 *p)
-
-
-__swahb32p 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline __u32 __swahb32p(const __u32 *p)
-
-
-__swab16s 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline void __swab16s(__u16 *p)
-
-
-__swab32s 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline void __swab32s(__u32 *p)
-
-
-__swab64s 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline void __swab64s(__u64 *p)
-
-
-__swahw32s 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline void __swahw32s(__u32 *p)
-
-
-__swahb32s 	( diff_type: Del type: function file: include/linux/swab.h )
-	-- static inline void __swahb32s(__u32 *p)
-
-
-cmpxchg_386_u8 	( diff_type: Del type: prototype file: arch/x86/include/asm/cmpxchg_32.h )
-	-- extern unsigned long cmpxchg_386_u8(volatile void *,u8,u8);
-
-
-cmpxchg_386_u16 	( diff_type: Del type: prototype file: arch/x86/include/asm/cmpxchg_32.h )
-	-- extern unsigned long cmpxchg_386_u16(volatile void *,u16,u16);
-
-
-cmpxchg_386_u32 	( diff_type: Del type: prototype file: arch/x86/include/asm/cmpxchg_32.h )
-	-- extern unsigned long cmpxchg_386_u32(volatile void *,u32,u32);
-
-
-cmpxchg_386 	( diff_type: Del type: function file: arch/x86/include/asm/cmpxchg_32.h )
-	-- static inline unsigned long cmpxchg_386(volatile void *ptr,unsigned long old,unsigned long new, int size)
-
-
-online_pages 	( diff_type: Mod type: prototype file: include/linux/memory_hotplug.h )
-	-- extern int online_pages(unsigned long,unsigned long);
-	++ extern int online_pages(unsigned long,unsigned long,int);
-
-
-sigval 	( diff_type: Del type: union file: include/asm-generic/siginfo.h )
-	-- typedef union sigval { int sival_int; void __user *sival_ptr; } sigval_t;
-
-
-sigval_t 	( diff_type: Del type: union file: include/asm-generic/siginfo.h )
-	-- typedef union sigval { int sival_int; void __user *sival_ptr; } sigval_t;
-
-
-SI_MAX_SIZE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_MAX_SIZE 128
-
-
-SI_PAD_SIZE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_PAD_SIZE ((SI_MAX_SIZE - __ARCH_SI_PREAMBLE_SIZE) / sizeof(int))
-
-
-__ARCH_SI_UID_T 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define __ARCH_SI_UID_T __kernel_uid32_t
-
-
-__ARCH_SI_BAND_T 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define __ARCH_SI_BAND_T long
-
-
-siginfo 	( diff_type: Del type: struct file: include/asm-generic/siginfo.h )
-	-- typedef struct siginfo { int si_signo; int si_errno; int si_code; union { int _pad[SI_PAD_SIZE]; struct { __kernel_pid_t _pid; __ARCH_SI_UID_T _uid; } _kill; struct { __kernel_timer_t _tid; int _overrun; char _pad[sizeof( __ARCH_SI_UID_T) - sizeof(int)]; sigval_t _sigval; int _sys_private; } _timer; struct { __kernel_pid_t _pid; __ARCH_SI_UID_T _uid; sigval_t _sigval; } _rt; struct { __kernel_pid_t _pid; __ARCH_SI_UID_T _uid; int _status; __ARCH_SI_CLOCK_T _utime; __ARCH_SI_CLOCK_T _stime; } _sigchld; struct { void __user *_addr; int _trapno; short _addr_lsb; } _sigfault; struct { __ARCH_SI_BAND_T _band; int _fd; } _sigpoll; struct { void __user *_call_addr; int _syscall; unsigned int _arch; } _sigsys; } _sifields; } __ARCH_SI_ATTRIBUTES siginfo_t;
-
-
-__ARCH_SIGSYS 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define __ARCH_SIGSYS
-
-
-si_pid 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_pid _sifields._kill._pid
-
-
-si_uid 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_uid _sifields._kill._uid
-
-
-si_tid 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_tid _sifields._timer._tid
-
-
-si_overrun 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_overrun _sifields._timer._overrun
-
-
-si_sys_private 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_sys_private _sifields._timer._sys_private
-
-
-si_status 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_status _sifields._sigchld._status
-
-
-si_utime 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_utime _sifields._sigchld._utime
-
-
-si_stime 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_stime _sifields._sigchld._stime
-
-
-si_value 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_value _sifields._rt._sigval
-
-
-si_int 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_int _sifields._rt._sigval.sival_int
-
-
-si_ptr 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_ptr _sifields._rt._sigval.sival_ptr
-
-
-si_addr 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_addr _sifields._sigfault._addr
-
-
-si_trapno 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_trapno _sifields._sigfault._trapno
-
-
-si_addr_lsb 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_addr_lsb _sifields._sigfault._addr_lsb
-
-
-si_band 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_band _sifields._sigpoll._band
-
-
-si_fd 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_fd _sifields._sigpoll._fd
-
-
-si_call_addr 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_call_addr _sifields._sigsys._call_addr
-
-
-si_syscall 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_syscall _sifields._sigsys._syscall
-
-
-si_arch 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define si_arch _sifields._sigsys._arch
-
-
-__SI_KILL 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_KILL 0
-	++ #define __SI_KILL (0 << 16)
-
-
-__SI_TIMER 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_TIMER 0
-	++ #define __SI_TIMER (1 << 16)
-
-
-__SI_POLL 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_POLL 0
-	++ #define __SI_POLL (2 << 16)
-
-
-__SI_FAULT 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_FAULT 0
-	++ #define __SI_FAULT (3 << 16)
-
-
-__SI_CHLD 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_CHLD 0
-	++ #define __SI_CHLD (4 << 16)
-
-
-__SI_RT 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_RT 0
-	++ #define __SI_RT (5 << 16)
-
-
-__SI_MESGQ 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_MESGQ 0
-	++ #define __SI_MESGQ (6 << 16)
-
-
-__SI_SYS 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_SYS 0
-	++ #define __SI_SYS (7 << 16)
-
-
-__SI_CODE 	( diff_type: Mod type: macro file: include/asm-generic/siginfo.h )
-	-- #define __SI_CODE(T,N) (N)
-	++ #define __SI_CODE(T,N) ((T) | ((N) & 0xffff))
-
-
-SI_USER 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_USER 0
-
-
-SI_KERNEL 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_KERNEL 0x80
-
-
-SI_QUEUE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_QUEUE -1
-
-
-SI_TIMER 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_TIMER __SI_CODE(__SI_TIMER,-2)
-
-
-SI_MESGQ 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_MESGQ __SI_CODE(__SI_MESGQ,-3)
-
-
-SI_ASYNCIO 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_ASYNCIO -4
-
-
-SI_SIGIO 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_SIGIO -5
-
-
-SI_TKILL 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_TKILL -6
-
-
-SI_DETHREAD 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_DETHREAD -7
-
-
-SI_FROMUSER 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_FROMUSER(siptr) ((siptr)->si_code <= 0)
-
-
-SI_FROMKERNEL 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SI_FROMKERNEL(siptr) ((siptr)->si_code > 0)
-
-
-ILL_ILLOPC 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define ILL_ILLOPC (__SI_FAULT|1)
-
-
-ILL_ILLOPN 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define ILL_ILLOPN (__SI_FAULT|2)
-
-
-ILL_ILLADR 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define ILL_ILLADR (__SI_FAULT|3)
-
-
-ILL_ILLTRP 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define ILL_ILLTRP (__SI_FAULT|4)
-
-
-ILL_PRVOPC 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define ILL_PRVOPC (__SI_FAULT|5)
-
-
-ILL_PRVREG 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define ILL_PRVREG (__SI_FAULT|6)
-
-
-ILL_COPROC 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define ILL_COPROC (__SI_FAULT|7)
-
-
-ILL_BADSTK 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define ILL_BADSTK (__SI_FAULT|8)
-
-
-NSIGILL 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define NSIGILL 8
-
-
-FPE_INTDIV 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define FPE_INTDIV (__SI_FAULT|1)
-
-
-FPE_INTOVF 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define FPE_INTOVF (__SI_FAULT|2)
-
-
-FPE_FLTDIV 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define FPE_FLTDIV (__SI_FAULT|3)
-
-
-FPE_FLTOVF 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define FPE_FLTOVF (__SI_FAULT|4)
-
-
-FPE_FLTUND 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define FPE_FLTUND (__SI_FAULT|5)
-
-
-FPE_FLTRES 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define FPE_FLTRES (__SI_FAULT|6)
-
-
-FPE_FLTINV 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define FPE_FLTINV (__SI_FAULT|7)
-
-
-FPE_FLTSUB 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define FPE_FLTSUB (__SI_FAULT|8)
-
-
-NSIGFPE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define NSIGFPE 8
-
-
-SEGV_MAPERR 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SEGV_MAPERR (__SI_FAULT|1)
-
-
-SEGV_ACCERR 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SEGV_ACCERR (__SI_FAULT|2)
-
-
-NSIGSEGV 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define NSIGSEGV 2
-
-
-BUS_ADRALN 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define BUS_ADRALN (__SI_FAULT|1)
-
-
-BUS_ADRERR 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define BUS_ADRERR (__SI_FAULT|2)
-
-
-BUS_OBJERR 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define BUS_OBJERR (__SI_FAULT|3)
-
-
-BUS_MCEERR_AR 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define BUS_MCEERR_AR (__SI_FAULT|4)
-
-
-BUS_MCEERR_AO 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define BUS_MCEERR_AO (__SI_FAULT|5)
-
-
-NSIGBUS 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define NSIGBUS 5
-
-
-TRAP_BRKPT 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define TRAP_BRKPT (__SI_FAULT|1)
-
-
-TRAP_TRACE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define TRAP_TRACE (__SI_FAULT|2)
-
-
-TRAP_BRANCH 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define TRAP_BRANCH (__SI_FAULT|3)
-
-
-TRAP_HWBKPT 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define TRAP_HWBKPT (__SI_FAULT|4)
-
-
-NSIGTRAP 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define NSIGTRAP 4
-
-
-CLD_EXITED 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define CLD_EXITED (__SI_CHLD|1)
-
-
-CLD_KILLED 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define CLD_KILLED (__SI_CHLD|2)
-
-
-CLD_DUMPED 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define CLD_DUMPED (__SI_CHLD|3)
-
-
-CLD_TRAPPED 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define CLD_TRAPPED (__SI_CHLD|4)
-
-
-CLD_STOPPED 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define CLD_STOPPED (__SI_CHLD|5)
-
-
-CLD_CONTINUED 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define CLD_CONTINUED (__SI_CHLD|6)
-
-
-NSIGCHLD 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define NSIGCHLD 6
-
-
-POLL_IN 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define POLL_IN (__SI_POLL|1)
-
-
-POLL_OUT 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define POLL_OUT (__SI_POLL|2)
-
-
-POLL_MSG 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define POLL_MSG (__SI_POLL|3)
-
-
-POLL_ERR 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define POLL_ERR (__SI_POLL|4)
-
-
-POLL_PRI 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define POLL_PRI (__SI_POLL|5)
-
-
-POLL_HUP 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define POLL_HUP (__SI_POLL|6)
-
-
-NSIGPOLL 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define NSIGPOLL 6
-
-
-SYS_SECCOMP 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SYS_SECCOMP (__SI_SYS|1)
-
-
-NSIGSYS 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define NSIGSYS 1
-
-
-SIGEV_SIGNAL 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SIGEV_SIGNAL 0
-
-
-SIGEV_NONE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SIGEV_NONE 1
-
-
-SIGEV_THREAD 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SIGEV_THREAD 2
-
-
-SIGEV_THREAD_ID 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SIGEV_THREAD_ID 4
-
-
-__ARCH_SIGEV_PREAMBLE_SIZE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define __ARCH_SIGEV_PREAMBLE_SIZE (sizeof(int) * 2 + sizeof(sigval_t))
-
-
-SIGEV_MAX_SIZE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SIGEV_MAX_SIZE 64
-
-
-SIGEV_PAD_SIZE 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define SIGEV_PAD_SIZE ((SIGEV_MAX_SIZE - __ARCH_SIGEV_PREAMBLE_SIZE) / sizeof(int))
-
-
-sigevent 	( diff_type: Del type: struct file: include/asm-generic/siginfo.h )
-	-- typedef struct sigevent { sigval_t sigev_value; int sigev_signo; int sigev_notify; union { int _pad[SIGEV_PAD_SIZE]; int _tid; struct { void (*_function)(sigval_t); void *_attribute; } _sigev_thread; } _sigev_un; } sigevent_t;
-
-
-sigevent_t 	( diff_type: Del type: struct file: include/asm-generic/siginfo.h )
-	-- typedef struct sigevent { sigval_t sigev_value; int sigev_signo; int sigev_notify; union { int _pad[SIGEV_PAD_SIZE]; int _tid; struct { void (*_function)(sigval_t); void *_attribute; } _sigev_thread; } _sigev_un; } sigevent_t;
-
-
-sigev_notify_function 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define sigev_notify_function _sigev_un._sigev_thread._function
-
-
-sigev_notify_attributes 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define sigev_notify_attributes _sigev_un._sigev_thread._attribute
-
-
-sigev_notify_thread_id 	( diff_type: Del type: macro file: include/asm-generic/siginfo.h )
-	-- #define sigev_notify_thread_id _sigev_un._tid
-
-
-irq_get_msi_desc 	( diff_type: Mod type: function-->prototype file: include/linux/irq.h )
-	-- static inline struct msi_desc *irq_get_msi_desc(unsigned int irq)
-	++ extern struct msi_desc *irq_get_msi_desc(unsigned int irq);
-
-
-irq_desc 	( diff_type: Mod type: struct file: include/linux/irqdesc.h )
-	-- struct irq_desc { struct irq_data irq_data; unsigned int __percpu *kstat_irqs; irq_flow_handler_t handle_irq; irq_preflow_handler_t preflow_handler; struct irqaction *action; unsigned int status_use_accessors; unsigned int core_internal_state__do_not_mess_with_it; unsigned int depth; unsigned int wake_depth; unsigned int irq_count; unsigned long last_unhandled; unsigned int irqs_unhandled; raw_spinlock_t lock; struct cpumask *percpu_enabled; const struct cpumask *affinity_hint; struct irq_affinity_notify *affinity_notify; cpumask_var_t pending_mask; unsigned long threads_oneshot; atomic_t threads_active; wait_queue_head_t wait_for_threads; struct proc_dir_entry *dir; struct module *owner; const char *name; } ____cacheline_internodealigned_in_smp;
-	++ struct irq_desc { struct irq_data irq_data; unsigned int __percpu *kstat_irqs; irq_flow_handler_t handle_irq; irq_preflow_handler_t preflow_handler; struct irqaction *action; unsigned int status_use_accessors; unsigned int core_internal_state__do_not_mess_with_it; unsigned int depth; unsigned int wake_depth; unsigned int irq_count; unsigned long last_unhandled; unsigned int irqs_unhandled; raw_spinlock_t lock; struct cpumask *percpu_enabled; const struct cpumask *affinity_hint; struct irq_affinity_notify *affinity_notify; cpumask_var_t pending_mask; unsigned long threads_oneshot; atomic_t threads_active; wait_queue_head_t wait_for_threads; struct proc_dir_entry *dir; int parent_irq; struct module *owner; const char *name; } ____cacheline_internodealigned_in_smp;
-
-
-E820MAP 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820MAP 0x2d0
-
-
-E820MAX 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820MAX 128
-
-
-E820NR 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820NR 0x1e8
-
-
-E820_RAM 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820_RAM 1
-
-
-E820_RESERVED 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820_RESERVED 2
-
-
-E820_ACPI 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820_ACPI 3
-
-
-E820_NVS 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820_NVS 4
-
-
-E820_UNUSABLE 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820_UNUSABLE 5
-
-
-E820_RESERVED_KERN 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define E820_RESERVED_KERN 128
-
-
-e820entry 	( diff_type: Del type: struct file: arch/x86/include/asm/e820.h )
-	-- struct e820entry { __u64 addr; __u64 size; __u32 type; } __attribute__((packed));
-
-
-e820map 	( diff_type: Del type: struct file: arch/x86/include/asm/e820.h )
-	-- struct e820map { __u32 nr_map; struct e820entry map[E820_X_MAX]; };
-
-
-ISA_START_ADDRESS 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define ISA_START_ADDRESS 0xa0000
-
-
-ISA_END_ADDRESS 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define ISA_END_ADDRESS 0x100000
-
-
-BIOS_BEGIN 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define BIOS_BEGIN 0x000a0000
-
-
-BIOS_END 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define BIOS_END 0x00100000
-
-
-BIOS_ROM_BASE 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define BIOS_ROM_BASE 0xffe00000
-
-
-BIOS_ROM_END 	( diff_type: Del type: macro file: arch/x86/include/asm/e820.h )
-	-- #define BIOS_ROM_END 0xffffffff
-
-
-fixed_addresses 	( diff_type: Mod type: enum file: arch/x86/include/asm/fixmap.h )
-	-- enum fixed_addresses { FIX_HOLE, FIX_VDSO, FIX_DBGP_BASE, FIX_EARLYCON_MEM_BASE, FIX_OHCI1394_BASE, FIX_APIC_BASE, FIX_IO_APIC_BASE_0, FIX_IO_APIC_BASE_END = FIX_IO_APIC_BASE_0 + MAX_IO_APICS - 1, FIX_CO_CPU, FIX_CO_APIC, FIX_LI_PCIA, FIX_LI_PCIB, FIX_F00F_IDT, FIX_CYCLONE_TIMER, FIX_KMAP_BEGIN, FIX_KMAP_END = FIX_KMAP_BEGIN+(KM_TYPE_NR*NR_CPUS)-1, FIX_PCIE_MCFG, FIX_PARAVIRT_BOOTMAP, FIX_TEXT_POKE1, FIX_TEXT_POKE0, FIX_LNW_VRTC, __end_of_permanent_fixed_addresses, #define NR_FIX_BTMAPS 64 #define FIX_BTMAPS_SLOTS 4 #define TOTAL_FIX_BTMAPS (NR_FIX_BTMAPS * FIX_BTMAPS_SLOTS) FIX_BTMAP_END = FIX_BTMAP_BEGIN = FIX_BTMAP_END + TOTAL_FIX_BTMAPS - 1, FIX_WP_TEST, FIX_TBOOT_BASE, __end_of_fixed_addresses };
-	++ enum fixed_addresses { FIX_HOLE, FIX_VDSO, PVCLOCK_FIXMAP_BEGIN, PVCLOCK_FIXMAP_END = PVCLOCK_FIXMAP_BEGIN+PVCLOCK_VSYSCALL_NR_PAGES-1, FIX_DBGP_BASE, FIX_EARLYCON_MEM_BASE, FIX_OHCI1394_BASE, FIX_APIC_BASE, FIX_IO_APIC_BASE_0, FIX_IO_APIC_BASE_END = FIX_IO_APIC_BASE_0 + MAX_IO_APICS - 1, FIX_CO_CPU, FIX_CO_APIC, FIX_LI_PCIA, FIX_LI_PCIB, FIX_F00F_IDT, FIX_CYCLONE_TIMER, FIX_KMAP_BEGIN, FIX_KMAP_END = FIX_KMAP_BEGIN+(KM_TYPE_NR*NR_CPUS)-1, FIX_PCIE_MCFG, FIX_PARAVIRT_BOOTMAP, FIX_TEXT_POKE1, FIX_TEXT_POKE0, FIX_LNW_VRTC, __end_of_permanent_fixed_addresses, #define NR_FIX_BTMAPS 64 #define FIX_BTMAPS_SLOTS 4 #define TOTAL_FIX_BTMAPS (NR_FIX_BTMAPS * FIX_BTMAPS_SLOTS) FIX_BTMAP_END = FIX_BTMAP_BEGIN = FIX_BTMAP_END + TOTAL_FIX_BTMAPS - 1, FIX_WP_TEST, FIX_TBOOT_BASE, __end_of_fixed_addresses };
-
-
-pte_ERROR 	( diff_type: Mod type: macro file: arch/x86/include/asm/pgtable-2level.h )
-	-- #define pte_ERROR(e) printk("%s:%d: bad pte %08lx.\n", __FILE__, __LINE__, (e).pte_low)
-	++ #define pte_ERROR(e) pr_err("%s:%d: bad pte %08lx\n", __FILE__, __LINE__, (e).pte_low)
-
-
-pgd_ERROR 	( diff_type: Mod type: macro file: arch/x86/include/asm/pgtable-2level.h )
-	-- #define pgd_ERROR(e) printk("%s:%d: bad pgd %08lx.\n", __FILE__, __LINE__, pgd_val(e))
-	++ #define pgd_ERROR(e) pr_err("%s:%d: bad pgd %08lx\n", __FILE__, __LINE__, pgd_val(e))
-
-
-track_pfn_vma_new 	( diff_type: Del type: prototype file: include/asm-generic/pgtable.h )
-	-- extern int track_pfn_vma_new(struct vm_area_struct *vma,pgprot_t *prot,unsigned long pfn, unsigned long size);
-
-
-track_pfn_vma_copy 	( diff_type: Del type: prototype file: include/asm-generic/pgtable.h )
-	-- extern int track_pfn_vma_copy(struct vm_area_struct *vma);
-
-
-untrack_pfn_vma 	( diff_type: Del type: prototype file: include/asm-generic/pgtable.h )
-	-- extern void untrack_pfn_vma(struct vm_area_struct *vma,unsigned long pfn,unsigned long size);
-
-
-get_pmd_huge_pte 	( diff_type: Del type: prototype file: include/linux/huge_mm.h )
-	-- extern pgtable_t get_pmd_huge_pte(struct mm_struct *mm);
-
-
-follow_trans_huge_pmd 	( diff_type: Mod type: prototype file: include/linux/huge_mm.h )
-	-- extern struct page *follow_trans_huge_pmd(struct mm_struct *mm,unsigned long addr,pmd_t *pmd,unsigned int flags);
-	++ extern struct page *follow_trans_huge_pmd(struct vm_area_struct *vma,unsigned long addr,pmd_t *pmd,unsigned int flags);
-
-
-change_huge_pmd 	( diff_type: Mod type: prototype file: include/linux/huge_mm.h )
-	-- extern int change_huge_pmd(struct vm_area_struct *vma,pmd_t *pmd,unsigned long addr, pgprot_t newprot);
-	++ extern int change_huge_pmd(struct vm_area_struct *vma,pmd_t *pmd,unsigned long addr, pgprot_t newprot,int prot_numa);
-
-
-transparent_hugepage_flag 	( diff_type: Mod type: enum file: include/linux/huge_mm.h )
-	-- enum transparent_hugepage_flag { TRANSPARENT_HUGEPAGE_FLAG, TRANSPARENT_HUGEPAGE_REQ_MADV_FLAG, TRANSPARENT_HUGEPAGE_DEFRAG_FLAG, TRANSPARENT_HUGEPAGE_DEFRAG_REQ_MADV_FLAG, TRANSPARENT_HUGEPAGE_DEFRAG_KHUGEPAGED_FLAG, TRANSPARENT_HUGEPAGE_DEBUG_COW_FLAG, };
-	++ enum transparent_hugepage_flag { TRANSPARENT_HUGEPAGE_FLAG, TRANSPARENT_HUGEPAGE_REQ_MADV_FLAG, TRANSPARENT_HUGEPAGE_DEFRAG_FLAG, TRANSPARENT_HUGEPAGE_DEFRAG_REQ_MADV_FLAG, TRANSPARENT_HUGEPAGE_DEFRAG_KHUGEPAGED_FLAG, TRANSPARENT_HUGEPAGE_USE_ZERO_PAGE_FLAG, TRANSPARENT_HUGEPAGE_DEBUG_COW_FLAG, };
-
-
-__split_huge_page_pmd 	( diff_type: Mod type: prototype file: include/linux/huge_mm.h )
-	-- extern void __split_huge_page_pmd(struct mm_struct *mm,pmd_t *pmd);
-	++ extern void __split_huge_page_pmd(struct vm_area_struct *vma,unsigned long address, pmd_t *pmd);
-
-
-split_huge_page_pmd 	( diff_type: Mod type: macro file: include/linux/huge_mm.h )
-	-- #define split_huge_page_pmd(__mm,__pmd) do { } while (0)
-	++ #define split_huge_page_pmd(__vma,__address,__pmd) do { } while (0)
-
-
-zap_zone_vm_stats 	( diff_type: Del type: function file: include/linux/vmstat.h )
-	-- static inline void zap_zone_vm_stats(struct zone *zone)
-
-
-swiotlb_tbl_map_single 	( diff_type: Mod type: prototype file: include/linux/swiotlb.h )
-	-- extern void *swiotlb_tbl_map_single(struct device *hwdev,dma_addr_t tbl_dma_addr,phys_addr_t phys, size_t size,enum dma_data_direction dir);
-	++ extern phys_addr_t swiotlb_tbl_map_single(struct device *hwdev,dma_addr_t tbl_dma_addr,phys_addr_t phys, size_t size,enum dma_data_direction dir);
-
-
-swiotlb_tbl_unmap_single 	( diff_type: Mod type: prototype file: include/linux/swiotlb.h )
-	-- extern void swiotlb_tbl_unmap_single(struct device *hwdev,char *dma_addr,size_t size, enum dma_data_direction dir);
-	++ extern void swiotlb_tbl_unmap_single(struct device *hwdev,phys_addr_t tlb_addr,size_t size, enum dma_data_direction dir);
-
-
-swiotlb_tbl_sync_single 	( diff_type: Mod type: prototype file: include/linux/swiotlb.h )
-	-- extern void swiotlb_tbl_sync_single(struct device *hwdev,char *dma_addr,size_t size, enum dma_data_direction dir,enum dma_sync_target target);
-	++ extern void swiotlb_tbl_sync_single(struct device *hwdev,phys_addr_t tlb_addr,size_t size, enum dma_data_direction dir,enum dma_sync_target target);
-
-
-swiotlb_bounce 	( diff_type: Del type: prototype file: include/linux/swiotlb.h )
-	-- extern void swiotlb_bounce(phys_addr_t phys,char *dma_addr,size_t size,enum dma_data_direction dir);
-
-
-dma_declare_contiguous 	( diff_type: Mod type: function file: include/linux/dma-contiguous.h )
-	-- int dma_declare_contiguous(struct device *dev,unsigned long size,phys_addr_t base, phys_addr_t limit)
-	++ int dma_declare_contiguous(struct device *dev,phys_addr_t size,phys_addr_t base, phys_addr_t limit)
-
-
-inet_frag_queue 	( diff_type: Mod type: struct file: include/net/inet_frag.h )
-	-- struct inet_frag_queue { struct hlist_node list; struct netns_frags *net; struct list_head lru_list; spinlock_t lock; atomic_t refcnt; struct timer_list timer; struct sk_buff *fragments; struct sk_buff *fragments_tail; ktime_t stamp; int len; int meat; __u8 last_in; #define INET_FRAG_COMPLETE 4 #define INET_FRAG_FIRST_IN 2 #define INET_FRAG_LAST_IN 1 };
-	++ struct inet_frag_queue { struct hlist_node list; struct netns_frags *net; struct list_head lru_list; spinlock_t lock; atomic_t refcnt; struct timer_list timer; struct sk_buff *fragments; struct sk_buff *fragments_tail; ktime_t stamp; int len; int meat; __u8 last_in; #define INET_FRAG_COMPLETE 4 #define INET_FRAG_FIRST_IN 2 #define INET_FRAG_LAST_IN 1 u16 max_size; };
-
-
-inet_frag_evictor 	( diff_type: Mod type: prototype file: include/net/inet_frag.h )
-	-- int inet_frag_evictor(struct netns_frags *nf,struct inet_frags *f);
-	++ int inet_frag_evictor(struct netns_frags *nf,struct inet_frags *f,bool force);
-
-
-dst_ops 	( diff_type: Mod type: struct file: include/net/dst_ops.h )
-	-- struct dst_ops { unsigned short family; __be16 protocol; unsigned int gc_thresh; int (*gc)(struct dst_ops *ops); struct dst_entry * (*check)(struct dst_entry *, __u32 cookie); unsigned int (*default_advmss)(const struct dst_entry *); unsigned int (*mtu)(const struct dst_entry *); u32 * (*cow_metrics)(struct dst_entry *, unsigned long); void (*destroy)(struct dst_entry *); void (*ifdown)(struct dst_entry *,struct net_device *dev, int how); struct dst_entry * (*negative_advice)(struct dst_entry *); void (*link_failure)(struct sk_buff *); void (*update_pmtu)(struct dst_entry *dst, u32 mtu); int (*local_out)(struct sk_buff *skb); struct neighbour * (*neigh_lookup)(const struct dst_entry *dst, const void *daddr); struct kmem_cache *kmem_cachep; struct percpu_counter pcpuc_entries ____cacheline_aligned_in_smp; };
-	++ struct dst_ops { unsigned short family; __be16 protocol; unsigned int gc_thresh; int (*gc)(struct dst_ops *ops); struct dst_entry * (*check)(struct dst_entry *, __u32 cookie); unsigned int (*default_advmss)(const struct dst_entry *); unsigned int (*mtu)(const struct dst_entry *); u32 * (*cow_metrics)(struct dst_entry *, unsigned long); void (*destroy)(struct dst_entry *); void (*ifdown)(struct dst_entry *,struct net_device *dev, int how); struct dst_entry * (*negative_advice)(struct dst_entry *); void (*link_failure)(struct sk_buff *); void (*update_pmtu)(struct dst_entry *dst, struct sock *sk,struct sk_buff *skb, u32 mtu); void (*redirect)(struct dst_entry *dst, struct sock *sk,struct sk_buff *skb); int (*local_out)(struct sk_buff *skb); struct neighbour * (*neigh_lookup)(const struct dst_entry *dst,struct sk_buff *skb,const void *daddr); struct kmem_cache *kmem_cachep; struct percpu_counter pcpuc_entries ____cacheline_aligned_in_smp; };
-
-
-in_addr 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct in_addr { __be32 s_addr; };
-
-
-IP_TOS 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_TOS 1
-
-
-IP_TTL 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_TTL 2
-
-
-IP_HDRINCL 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_HDRINCL 3
-
-
-IP_OPTIONS 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_OPTIONS 4
-
-
-IP_ROUTER_ALERT 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_ROUTER_ALERT 5
-
-
-IP_RECVOPTS 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_RECVOPTS 6
-
-
-IP_RETOPTS 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_RETOPTS 7
-
-
-IP_PKTINFO 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_PKTINFO 8
-
-
-IP_PKTOPTIONS 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_PKTOPTIONS 9
-
-
-IP_MTU_DISCOVER 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MTU_DISCOVER 10
-
-
-IP_RECVERR 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_RECVERR 11
-
-
-IP_RECVTTL 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_RECVTTL 12
-
-
-IP_RECVTOS 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_RECVTOS 13
-
-
-IP_MTU 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MTU 14
-
-
-IP_FREEBIND 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_FREEBIND 15
-
-
-IP_IPSEC_POLICY 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_IPSEC_POLICY 16
-
-
-IP_XFRM_POLICY 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_XFRM_POLICY 17
-
-
-IP_PASSSEC 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_PASSSEC 18
-
-
-IP_TRANSPARENT 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_TRANSPARENT 19
-
-
-IP_RECVRETOPTS 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_RECVRETOPTS IP_RETOPTS
-
-
-IP_ORIGDSTADDR 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_ORIGDSTADDR 20
-
-
-IP_RECVORIGDSTADDR 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_RECVORIGDSTADDR IP_ORIGDSTADDR
-
-
-IP_MINTTL 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MINTTL 21
-
-
-IP_NODEFRAG 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_NODEFRAG 22
-
-
-IP_PMTUDISC_DONT 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_PMTUDISC_DONT 0
-
-
-IP_PMTUDISC_WANT 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_PMTUDISC_WANT 1
-
-
-IP_PMTUDISC_DO 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_PMTUDISC_DO 2
-
-
-IP_PMTUDISC_PROBE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_PMTUDISC_PROBE 3
-
-
-IP_MULTICAST_IF 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MULTICAST_IF 32
-
-
-IP_MULTICAST_TTL 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MULTICAST_TTL 33
-
-
-IP_MULTICAST_LOOP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MULTICAST_LOOP 34
-
-
-IP_ADD_MEMBERSHIP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_ADD_MEMBERSHIP 35
-
-
-IP_DROP_MEMBERSHIP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_DROP_MEMBERSHIP 36
-
-
-IP_UNBLOCK_SOURCE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_UNBLOCK_SOURCE 37
-
-
-IP_BLOCK_SOURCE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_BLOCK_SOURCE 38
-
-
-IP_ADD_SOURCE_MEMBERSHIP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_ADD_SOURCE_MEMBERSHIP 39
-
-
-IP_DROP_SOURCE_MEMBERSHIP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_DROP_SOURCE_MEMBERSHIP 40
-
-
-IP_MSFILTER 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MSFILTER 41
-
-
-MCAST_JOIN_GROUP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_JOIN_GROUP 42
-
-
-MCAST_BLOCK_SOURCE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_BLOCK_SOURCE 43
-
-
-MCAST_UNBLOCK_SOURCE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_UNBLOCK_SOURCE 44
-
-
-MCAST_LEAVE_GROUP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_LEAVE_GROUP 45
-
-
-MCAST_JOIN_SOURCE_GROUP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_JOIN_SOURCE_GROUP 46
-
-
-MCAST_LEAVE_SOURCE_GROUP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_LEAVE_SOURCE_GROUP 47
-
-
-MCAST_MSFILTER 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_MSFILTER 48
-
-
-IP_MULTICAST_ALL 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MULTICAST_ALL 49
-
-
-IP_UNICAST_IF 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_UNICAST_IF 50
-
-
-MCAST_EXCLUDE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_EXCLUDE 0
-
-
-MCAST_INCLUDE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define MCAST_INCLUDE 1
-
-
-IP_DEFAULT_MULTICAST_TTL 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_DEFAULT_MULTICAST_TTL 1
-
-
-IP_DEFAULT_MULTICAST_LOOP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_DEFAULT_MULTICAST_LOOP 1
-
-
-ip_mreq 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct ip_mreq { struct in_addr imr_multiaddr; struct in_addr imr_interface; };
-
-
-ip_mreqn 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct ip_mreqn { struct in_addr imr_multiaddr; struct in_addr imr_address; int imr_ifindex; };
-
-
-ip_mreq_source 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct ip_mreq_source { __be32 imr_multiaddr; __be32 imr_interface; __be32 imr_sourceaddr; };
-
-
-ip_msfilter 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct ip_msfilter { __be32 imsf_multiaddr; __be32 imsf_interface; __u32 imsf_fmode; __u32 imsf_numsrc; __be32 imsf_slist[1]; };
-
-
-IP_MSFILTER_SIZE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IP_MSFILTER_SIZE(numsrc) (sizeof(struct ip_msfilter) - sizeof(__u32) + (numsrc) * sizeof(__u32))
-
-
-group_req 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct group_req { __u32 gr_interface; struct __kernel_sockaddr_storage gr_group; };
-
-
-group_source_req 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct group_source_req { __u32 gsr_interface; struct __kernel_sockaddr_storage gsr_group; struct __kernel_sockaddr_storage gsr_source; };
-
-
-group_filter 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct group_filter { __u32 gf_interface; struct __kernel_sockaddr_storage gf_group; __u32 gf_fmode; __u32 gf_numsrc; struct __kernel_sockaddr_storage gf_slist[1]; };
-
-
-GROUP_FILTER_SIZE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define GROUP_FILTER_SIZE(numsrc) (sizeof(struct group_filter) - sizeof(struct __kernel_sockaddr_storage) + (numsrc) * sizeof(struct __kernel_sockaddr_storage))
-
-
-in_pktinfo 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct in_pktinfo { int ipi_ifindex; struct in_addr ipi_spec_dst; struct in_addr ipi_addr; };
-
-
-__SOCK_SIZE__ 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define __SOCK_SIZE__ 16
-
-
-sockaddr_in 	( diff_type: Del type: struct file: include/linux/in.h )
-	-- struct sockaddr_in { __kernel_sa_family_t sin_family; __be16 sin_port; struct in_addr sin_addr; unsigned char __pad[__SOCK_SIZE__ - sizeof(short int) - };
-
-
-sin_zero 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define sin_zero __pad
-
-
-IN_CLASSA 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSA(a) ((((long int) (a)) & 0x80000000) == 0)
-
-
-IN_CLASSA_NET 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSA_NET 0xff000000
-
-
-IN_CLASSA_NSHIFT 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSA_NSHIFT 24
-
-
-IN_CLASSA_HOST 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSA_HOST (0xffffffff & ~IN_CLASSA_NET)
-
-
-IN_CLASSA_MAX 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSA_MAX 128
-
-
-IN_CLASSB 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSB(a) ((((long int) (a)) & 0xc0000000) == 0x80000000)
-
-
-IN_CLASSB_NET 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSB_NET 0xffff0000
-
-
-IN_CLASSB_NSHIFT 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSB_NSHIFT 16
-
-
-IN_CLASSB_HOST 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSB_HOST (0xffffffff & ~IN_CLASSB_NET)
-
-
-IN_CLASSB_MAX 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSB_MAX 65536
-
-
-IN_CLASSC 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSC(a) ((((long int) (a)) & 0xe0000000) == 0xc0000000)
-
-
-IN_CLASSC_NET 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSC_NET 0xffffff00
-
-
-IN_CLASSC_NSHIFT 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSC_NSHIFT 8
-
-
-IN_CLASSC_HOST 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSC_HOST (0xffffffff & ~IN_CLASSC_NET)
-
-
-IN_CLASSD 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_CLASSD(a) ((((long int) (a)) & 0xf0000000) == 0xe0000000)
-
-
-IN_MULTICAST 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_MULTICAST(a) IN_CLASSD(a)
-
-
-IN_MULTICAST_NET 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_MULTICAST_NET 0xF0000000
-
-
-IN_EXPERIMENTAL 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_EXPERIMENTAL(a) ((((long int) (a)) & 0xf0000000) == 0xf0000000)
-
-
-IN_BADCLASS 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_BADCLASS(a) IN_EXPERIMENTAL((a))
-
-
-INADDR_ANY 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define INADDR_ANY ((unsigned long int) 0x00000000)
-
-
-INADDR_BROADCAST 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define INADDR_BROADCAST ((unsigned long int) 0xffffffff)
-
-
-INADDR_NONE 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define INADDR_NONE ((unsigned long int) 0xffffffff)
-
-
-IN_LOOPBACKNET 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_LOOPBACKNET 127
-
-
-INADDR_LOOPBACK 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define INADDR_LOOPBACK 0x7f000001
-
-
-IN_LOOPBACK 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define IN_LOOPBACK(a) ((((long int) (a)) & 0xff000000) == 0x7f000000)
-
-
-INADDR_UNSPEC_GROUP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define INADDR_UNSPEC_GROUP 0xe0000000U
-
-
-INADDR_ALLHOSTS_GROUP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define INADDR_ALLHOSTS_GROUP 0xe0000001U
-
-
-INADDR_ALLRTRS_GROUP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define INADDR_ALLRTRS_GROUP 0xe0000002U
-
-
-INADDR_MAX_LOCAL_GROUP 	( diff_type: Del type: macro file: include/linux/in.h )
-	-- #define INADDR_MAX_LOCAL_GROUP 0xe00000ffU
-
-
-NF_DROP 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_DROP 0
-
-
-NF_ACCEPT 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_ACCEPT 1
-
-
-NF_STOLEN 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_STOLEN 2
-
-
-NF_QUEUE 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_QUEUE 3
-
-
-NF_REPEAT 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_REPEAT 4
-
-
-NF_STOP 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_STOP 5
-
-
-NF_MAX_VERDICT 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_MAX_VERDICT NF_STOP
-
-
-NF_VERDICT_MASK 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_VERDICT_MASK 0x000000ff
-
-
-NF_VERDICT_FLAG_QUEUE_BYPASS 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_VERDICT_FLAG_QUEUE_BYPASS 0x00008000
-
-
-NF_VERDICT_QMASK 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_VERDICT_QMASK 0xffff0000
-
-
-NF_VERDICT_QBITS 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_VERDICT_QBITS 16
-
-
-NF_QUEUE_NR 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_QUEUE_NR(x) ((((x) << 16) & NF_VERDICT_QMASK) | NF_QUEUE)
-
-
-NF_DROP_ERR 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_DROP_ERR(x) (((-x) << 16) | NF_DROP)
-
-
-NFC_UNKNOWN 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NFC_UNKNOWN 0x4000
-
-
-NFC_ALTERED 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NFC_ALTERED 0x8000
-
-
-NF_VERDICT_BITS 	( diff_type: Del type: macro file: include/linux/netfilter.h )
-	-- #define NF_VERDICT_BITS 16
-
-
-nf_inet_hooks 	( diff_type: Del type: enum file: include/linux/netfilter.h )
-	-- enum nf_inet_hooks { NF_INET_PRE_ROUTING, NF_INET_LOCAL_IN, NF_INET_FORWARD, NF_INET_LOCAL_OUT, NF_INET_POST_ROUTING, NF_INET_NUMHOOKS };
-
-
-nf_inet_addr 	( diff_type: Del type: union file: include/linux/netfilter.h )
-	-- union nf_inet_addr { __u32 all[4]; __be32 ip; __be32 ip6[4]; struct in_addr in; struct in6_addr in6; };
-
-
-seq_file 	( diff_type: Mod type: struct file: include/linux/seq_file.h )
-	-- struct seq_file { char *buf; size_t size; size_t from; size_t count; loff_t index; loff_t read_pos; u64 version; struct mutex lock; const struct seq_operations *op; int poll_event; };
-	++ struct seq_file { char *buf; size_t size; size_t from; size_t count; loff_t index; loff_t read_pos; u64 version; struct mutex lock; const struct seq_operations *op; int poll_event; struct user_namespace *user_ns; };
 
 
 MODULE_SIG_STRING 	( diff_type: Add type: macro file: include/linux/module.h )
@@ -8972,11 +7846,6 @@ compat_siginfo_t 	( diff_type: Add type: struct file: arch/x86/include/asm/compa
 	++ typedef struct compat_siginfo { int si_signo; int si_errno; int si_code; union { int _pad[128/sizeof(int) - 3]; struct { unsigned int _pid; unsigned int _uid; } _kill; struct { compat_timer_t _tid; int _overrun; compat_sigval_t _sigval; int _sys_private; int _overrun_incr; } _timer; struct { unsigned int _pid; unsigned int _uid; compat_sigval_t _sigval; } _rt; struct { unsigned int _pid; unsigned int _uid; int _status; compat_clock_t _utime; compat_clock_t _stime; } _sigchld; struct { unsigned int _pid; unsigned int _uid; int _status; compat_s64 _utime; compat_s64 _stime; } _sigchld_x32; struct { unsigned int _addr; } _sigfault; struct { int _band; int _fd; } _sigpoll; struct { unsigned int _call_addr; int _syscall; unsigned int _arch; } _sigsys; } _sifields; } compat_siginfo_t;
 
 
-__ARCH_SI_ATTRIBUTES 	( diff_type: Add type: macro file: arch/x86/include/uapi/asm/siginfo.h )
-	-- 8
-	++ # define __ARCH_SI_ATTRIBUTES __attribute__((aligned(8)))
-
-
 __ARCH_HAS_SA_RESTORER 	( diff_type: Add type: macro file: arch/x86/include/asm/signal.h )
 	-- 35
 	++ #define __ARCH_HAS_SA_RESTORER
@@ -9290,294 +8159,4 @@ stac 	( diff_type: Add type: function file: arch/x86/include/asm/smap.h )
 copy_user_enhanced_fast_string 	( diff_type: Add type: prototype file: arch/x86/include/asm/uaccess_64.h )
 	-- 20
 	++ copy_user_enhanced_fast_string(void *to,const void *from,unsigned len);
-
-
-offline_pages 	( diff_type: Add type: prototype file: include/linux/memory_hotplug.h )
-	-- 248
-	++ extern int offline_pages(unsigned long start_pfn,unsigned long nr_pages);
-
-
-offline_memory_block 	( diff_type: Add type: prototype file: include/linux/memory_hotplug.h )
-	-- 249
-	++ extern int offline_memory_block(struct memory_block *mem);
-
-
-irq_set_parent 	( diff_type: Add type: function file: include/linux/irq.h )
-	-- 395
-	++ static inline int irq_set_parent(int irq,int parent_irq)
-
-
-pud_pfn 	( diff_type: Add type: function file: arch/x86/include/asm/pgtable.h )
-	-- 145
-	++ static inline unsigned long pud_pfn(pud_t pud)
-
-
-pte_accessible 	( diff_type: Add type: macro file: include/asm-generic/pgtable.h )
-	-- 233
-	++ # define pte_accessible(pte) ((void)(pte),1)
-
-
-update_mmu_cache_pmd 	( diff_type: Add type: macro file: arch/x86/include/asm/pgtable_32.h )
-	-- 74
-	++ #define update_mmu_cache_pmd(vma,address,pmd) do { } while (0)
-
-
-USER_PGTABLES_CEILING 	( diff_type: Add type: macro file: include/asm-generic/pgtable.h )
-	-- 17
-	++ #define USER_PGTABLES_CEILING 0UL
-
-
-pgtable_trans_huge_deposit 	( diff_type: Add type: prototype file: include/asm-generic/pgtable.h )
-	-- 176
-	++ extern void pgtable_trans_huge_deposit(struct mm_struct *mm,pgtable_t pgtable);
-
-
-pgtable_trans_huge_withdraw 	( diff_type: Add type: prototype file: include/asm-generic/pgtable.h )
-	-- 180
-	++ extern pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm);
-
-
-pmdp_invalidate 	( diff_type: Add type: prototype file: include/asm-generic/pgtable.h )
-	-- 184
-	++ extern void pmdp_invalidate(struct vm_area_struct *vma,unsigned long address,pmd_t *pmdp);
-
-
-track_pfn_remap 	( diff_type: Add type: prototype file: include/asm-generic/pgtable.h )
-	-- 456
-	++ extern int track_pfn_remap(struct vm_area_struct *vma,pgprot_t *prot,unsigned long pfn, unsigned long addr,unsigned long size);
-
-
-track_pfn_insert 	( diff_type: Add type: prototype file: include/asm-generic/pgtable.h )
-	-- 459
-	++ extern int track_pfn_insert(struct vm_area_struct *vma,pgprot_t *prot,unsigned long pfn);
-
-
-track_pfn_copy 	( diff_type: Add type: prototype file: include/asm-generic/pgtable.h )
-	-- 461
-	++ extern int track_pfn_copy(struct vm_area_struct *vma);
-
-
-untrack_pfn 	( diff_type: Add type: prototype file: include/asm-generic/pgtable.h )
-	-- 462
-	++ extern void untrack_pfn(struct vm_area_struct *vma,unsigned long pfn,unsigned long size);
-
-
-is_zero_pfn 	( diff_type: Add type: function file: include/asm-generic/pgtable.h )
-	-- 477
-	++ static inline int is_zero_pfn(unsigned long pfn)
-
-
-my_zero_pfn 	( diff_type: Add type: function file: include/asm-generic/pgtable.h )
-	-- 483
-	++ static inline unsigned long my_zero_pfn(unsigned long addr)
-
-
-pte_numa 	( diff_type: Add type: function file: include/asm-generic/pgtable.h )
-	-- 675
-	++ static inline int pte_numa(pte_t pte)
-
-
-pmd_numa 	( diff_type: Add type: function file: include/asm-generic/pgtable.h )
-	-- 670
-	++ static inline int pmd_numa(pmd_t pmd)
-
-
-pte_mknonnuma 	( diff_type: Add type: function file: include/asm-generic/pgtable.h )
-	-- 680
-	++ static inline pte_t pte_mknonnuma(pte_t pte)
-
-
-pmd_mknonnuma 	( diff_type: Add type: function file: include/asm-generic/pgtable.h )
-	-- 685
-	++ static inline pmd_t pmd_mknonnuma(pmd_t pmd)
-
-
-pte_mknuma 	( diff_type: Add type: function file: include/asm-generic/pgtable.h )
-	-- 690
-	++ static inline pte_t pte_mknuma(pte_t pte)
-
-
-pmd_mknuma 	( diff_type: Add type: function file: include/asm-generic/pgtable.h )
-	-- 695
-	++ static inline pmd_t pmd_mknuma(pmd_t pmd)
-
-
-PG_head_mask 	( diff_type: Add type: macro file: include/linux/page-flags.h )
-	-- 377
-	++ #define PG_head_mask ((1L << PG_compound))
-
-
-PageHead 	( diff_type: Add type: function file: include/linux/page-flags.h )
-	-- 380
-	++ static inline int PageHead(struct page *page)
-
-
-PageSlabPfmemalloc 	( diff_type: Add type: function file: include/linux/page-flags.h )
-	-- 467
-	++ static inline int PageSlabPfmemalloc(struct page *page)
-
-
-SetPageSlabPfmemalloc 	( diff_type: Add type: function file: include/linux/page-flags.h )
-	-- 473
-	++ static inline void SetPageSlabPfmemalloc(struct page *page)
-
-
-__ClearPageSlabPfmemalloc 	( diff_type: Add type: function file: include/linux/page-flags.h )
-	-- 479
-	++ static inline void __ClearPageSlabPfmemalloc(struct page *page)
-
-
-ClearPageSlabPfmemalloc 	( diff_type: Add type: function file: include/linux/page-flags.h )
-	-- 485
-	++ static inline void ClearPageSlabPfmemalloc(struct page *page)
-
-
-huge_pmd_set_accessed 	( diff_type: Add type: prototype file: include/linux/huge_mm.h )
-	-- 11
-	++ extern void huge_pmd_set_accessed(struct mm_struct *mm,struct vm_area_struct *vma,unsigned long address, pmd_t *pmd,pmd_t orig_pmd, int dirty);
-
-
-transparent_hugepage_use_zero_page 	( diff_type: Add type: macro file: include/linux/huge_mm.h )
-	-- 83
-	++ #define transparent_hugepage_use_zero_page() (transparent_hugepage_flags & (1<<TRANSPARENT_HUGEPAGE_USE_ZERO_PAGE_FLAG))
-
-
-split_huge_page_pmd_mm 	( diff_type: Add type: macro file: include/linux/huge_mm.h )
-	-- 197
-	++ #define split_huge_page_pmd_mm(__mm,__address,__pmd) do { } while (0)
-
-
-do_huge_pmd_numa_page 	( diff_type: Add type: function file: include/linux/huge_mm.h )
-	-- 218
-	++ static inline int do_huge_pmd_numa_page(struct mm_struct *mm,struct vm_area_struct *vma,unsigned long addr, pmd_t pmd, pmd_t *pmdp)
-
-
-count_vm_numa_event 	( diff_type: Add type: macro file: include/linux/vmstat.h )
-	-- 87
-	++ #define count_vm_numa_event(x) do {} while (0)
-
-
-count_vm_numa_events 	( diff_type: Add type: macro file: include/linux/vmstat.h )
-	-- 88
-	++ #define count_vm_numa_events(x,y) do {} while (0)
-
-
-drain_zonestat 	( diff_type: Add type: function file: include/linux/vmstat.h )
-	-- 264
-	++ static inline void drain_zonestat(struct zone *zone,struct per_cpu_pageset *pset) { }
-
-
-__mod_zone_freepage_state 	( diff_type: Add type: function file: include/linux/vmstat.h )
-	-- 268
-	++ static inline void __mod_zone_freepage_state(struct zone *zone,int nr_pages,int migratetype)
-
-
-debug_dma_mapping_error 	( diff_type: Add type: function file: include/linux/dma-debug.h )
-	-- 110
-	++ static inline void debug_dma_mapping_error(struct device *dev,dma_addr_t dma_addr)
-
-
-swiotlb_late_init_with_tbl 	( diff_type: Add type: prototype file: include/linux/swiotlb.h )
-	-- 28
-	++ extern int swiotlb_late_init_with_tbl(char *tlb,unsigned long nslabs);
-
-
-SWIOTLB_MAP_ERROR 	( diff_type: Add type: macro file: include/linux/swiotlb.h )
-	-- 39
-	++ #define SWIOTLB_MAP_ERROR (~(phys_addr_t)0x0)
-
-
-dma_common_mmap 	( diff_type: Add type: prototype file: include/asm-generic/dma-mapping-common.h )
-	-- 179
-	++ extern int dma_common_mmap(struct device *dev,struct vm_area_struct *vma,void *cpu_addr, dma_addr_t dma_addr, size_t size);
-
-
-dma_mmap_attrs 	( diff_type: Add type: function file: include/asm-generic/dma-mapping-common.h )
-	-- 196
-	++ dma_mmap_attrs(struct device *dev,struct vm_area_struct *vma,void *cpu_addr,dma_addr_t dma_addr, size_t size, struct dma_attrs *attrs)
-
-
-dma_mmap_coherent 	( diff_type: Add type: macro file: include/asm-generic/dma-mapping-common.h )
-	-- 206
-	++ #define dma_mmap_coherent(d,v,c,h,s) dma_mmap_attrs(d,v,c,h,s,NULL)
-
-
-dma_mmap_writecombine 	( diff_type: Add type: function file: include/asm-generic/dma-mapping-common.h )
-	-- 208
-	++ static inline int dma_mmap_writecombine(struct device *dev,struct vm_area_struct *vma,void *cpu_addr, dma_addr_t dma_addr, size_t size)
-
-
-dma_common_get_sgtable 	( diff_type: Add type: prototype file: include/asm-generic/dma-mapping-common.h )
-	-- 217
-	++ dma_common_get_sgtable(struct device *dev,struct sg_table *sgt,void *cpu_addr, dma_addr_t dma_addr, size_t size);
-
-
-dma_get_sgtable_attrs 	( diff_type: Add type: function file: include/asm-generic/dma-mapping-common.h )
-	-- 221
-	++ dma_get_sgtable_attrs(struct device *dev,struct sg_table *sgt,void *cpu_addr,dma_addr_t dma_addr, size_t size, struct dma_attrs *attrs)
-
-
-dma_get_sgtable 	( diff_type: Add type: macro file: include/asm-generic/dma-mapping-common.h )
-	-- 232
-	++ #define dma_get_sgtable(d,t,v,h,s) dma_get_sgtable_attrs(d,t,v,h,s,NULL)
-
-
-NL_CFG_F_NONROOT_RECV 	( diff_type: Add type: macro file: include/linux/netlink.h )
-	-- 32
-	++ #define NL_CFG_F_NONROOT_RECV (1 << 0)
-
-
-NL_CFG_F_NONROOT_SEND 	( diff_type: Add type: macro file: include/linux/netlink.h )
-	-- 33
-	++ #define NL_CFG_F_NONROOT_SEND (1 << 1)
-
-
-netlink_kernel_cfg 	( diff_type: Add type: struct file: include/linux/netlink.h )
-	-- 36
-	++ struct netlink_kernel_cfg { unsigned int groups; unsigned int flags; void (*input)(struct sk_buff *skb); struct mutex *cb_mutex; void (*bind)(int group); };
-
-
-__netlink_kernel_create 	( diff_type: Add type: prototype file: include/linux/netlink.h )
-	-- 44
-	++ extern struct sock *__netlink_kernel_create(struct net *net,int unit,struct module *module,struct netlink_kernel_cfg *cfg);
-
-
-__netlink_dump_start 	( diff_type: Add type: prototype file: include/linux/netlink.h )
-	-- 125
-	++ extern int __netlink_dump_start(struct sock *ssk,struct sk_buff *skb,const struct nlmsghdr *nlh,struct netlink_dump_control *control);
-
-
-INETFRAGS_MAXDEPTH 	( diff_type: Add type: macro file: include/net/inet_frag.h )
-	-- 43
-	++ #define INETFRAGS_MAXDEPTH 128
-
-
-inet_frag_maybe_warn_overflow 	( diff_type: Add type: prototype file: include/net/inet_frag.h )
-	-- 75
-	++ void inet_frag_maybe_warn_overflow(struct inet_frag_queue *q,const char *prefix);
-
-
-nf_inet_addr_mask 	( diff_type: Add type: function file: include/linux/netfilter.h )
-	-- 28
-	++ static inline void nf_inet_addr_mask(const union nf_inet_addr *a1,union nf_inet_addr *result,const union nf_inet_addr *mask)
-
-
-nfq_ct_hook 	( diff_type: Add type: struct file: include/linux/netfilter.h )
-	-- 329
-	++ struct nfq_ct_hook { size_t (*build_size)(const struct nf_conn *ct); int (*build)(struct sk_buff *skb, struct nf_conn *ct); int (*parse)(const struct nlattr *attr, struct nf_conn *ct); };
-
-
-nfq_ct_nat_hook 	( diff_type: Add type: struct file: include/linux/netfilter.h )
-	-- 336
-	++ struct nfq_ct_nat_hook { void (*seq_adjust)(struct sk_buff *skb, struct nf_conn *ct,u32 ctinfo, int off); };
-
-
-seq_vprintf 	( diff_type: Add type: prototype file: include/linux/seq_file.h )
-	-- 93
-	++ __printf(2,0) int seq_vprintf(struct seq_file *,const char *,va_list args);
-
-
-seq_user_ns 	( diff_type: Add type: function file: include/linux/seq_file.h )
-	-- 135
-	++ static inline struct user_namespace *seq_user_ns(struct seq_file *seq)
 

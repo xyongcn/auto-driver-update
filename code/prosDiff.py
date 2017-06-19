@@ -23,11 +23,11 @@ def printDictMethod(dictname,filename):
 
 def printToFile(fnFile_dict,fnCall_dict,fcFile_dict):
   
-  fnFilePath = TARGET_PATH + 'fnFileTemp.txt'
+  fnFilePath = TARGET_PATH + 'fnFile_dictTemp.txt'
   printDictMethod(fnFile_dict,fnFilePath)
   print 'generated file:',fnFilePath
   
-  fnCallPath = TARGET_PATH + 'fnCallTemp.txt'
+  fnCallPath = TARGET_PATH + 'fnCall_dictTemp.txt'
   with open(fnCallPath,'w') as out:
 		for fnName,fcName_dict in fnCall_dict.items():
 		  print >> out,fnName
@@ -37,12 +37,48 @@ def printToFile(fnFile_dict,fnCall_dict,fcFile_dict):
 		      print >> out,'    '+fcLoc
   print 'generated file:',fnCallPath
   
-  fcFilePath = TARGET_PATH + 'fcFileTemp.txt'
+  fcFilePath = TARGET_PATH + 'fcFile_dictTemp.txt'
   printDictMethod(fcFile_dict,fcFilePath)
   print 'generated file:',fcFilePath
 
+def printDataStruct(dataStructCall_dict):
+  dataStructCallPath = TARGET_PATH + 'dataStructCall_dictTemp.txt'
+  with open(dataStructCallPath,'w') as out:
+    for dataName,fnName_dict in dataStructCall_dict.items():
+      print >> out,dataName
+      for fnName,dcLoc_list in fnName_dict.items():
+        print >> out,'  '+fnName
+        for dcLoc in dcLoc_list:
+          print >> out, '    '+dcLoc
+
+  print 'generated file:',dataStructCallPath
+  
+def getDataStructCall(filename):
+  # get dataStruct-Call-dict as {'dataName':{'fnName':['loc1','loc2',..]}}
+  crpath=TARGET_PATH+'dataStruct_list.txt'
+  dataStructCall_dict = OrderedDict()
+  with open(crpath) as fp:
+    sline=fp.readline();
+    while sline:
+      fnName,dataName,dcLoc,dataType=sline.split()
+      if dcLoc.split(':')[0].endswith(os.path.basename(filename)):
+        if dataName not in dataStructCall_dict:
+          dataStructCall_dict[dataName] = OrderedDict()
+          dataStructCall_dict[dataName][fnName] = [dcLoc]
+        else:
+          if fnName not in dataStructCall_dict[dataName]:
+            dataStructCall_dict[dataName][fnName] = [dcLoc]
+          else:
+            dataStructCall_dict[dataName][fnName].append(dcLoc)
+      else:
+        pass
+      sline=fp.readline();    
+  #print 'test--------------'
+  printDataStruct(dataStructCall_dict)
+  return dataStructCall_dict
+
 def getFuncAndFile():
-  #get func-file like {'fnName':['file:sloc','eloc','.ind--lineNo']}}
+  #get function-file like {'fnName':['file:sloc','eloc','.ind--lineNo']}}
   #V0_MANIFEST
   rpath = check_output(['find',TARGET_PATH,'-name','*'+EXT2]).rstrip('\n')
   fnFile_dict = OrderedDict()
@@ -60,7 +96,7 @@ def getFuncAndFile():
   return fnFile_dict
  
 def getFuncCallDict(filename):
-  #get func-call-dict like {'fdA':{'fcB':['loc1','loc2']}}
+  #get function-call-dict like {'fdA':{'fcB':['loc1','loc2',..]}}
   #filename = os.path.basename(path)[:-len(EXT2)]
   crpath=TARGET_PATH+'cm_list.txt'
   fnCall_dict = OrderedDict()
@@ -80,6 +116,18 @@ def getFuncCallDict(filename):
       sline=fp.readline();
   return fnCall_dict
 
+def getHeadFileList():
+  headFilePath = TARGET_PATH + 'headfile.txt'
+  headfile_list = []
+  with open(headFilePath) as fp:
+    sline = fp.readline()
+    while sline:
+      sline = sline.strip('\n')
+      headfile_list.append(sline)
+      sline = fp.readline()
+  
+  return headfile_list
+
 def getCtagsFileDict(vers):
   filename = TARGET_PATH+'v'+vers+CTAGSFILE_EXT
   ctags_dict = OrderedDict()
@@ -97,45 +145,6 @@ def getCtagsFileDict(vers):
         ctags_dict[name] = [_type,rows,_file,statement]
       sline = fp.readline()
   return ctags_dict
-
-def getHeadFileList():
-  headFilePath = TARGET_PATH + 'headfile.txt'
-  headfile_list = []
-  with open(headFilePath) as fp:
-    sline = fp.readline()
-    while sline:
-      sline = sline.strip('\n')
-      headfile_list.append(sline)
-      sline = fp.readline()
-  
-  return headfile_list
-
-def prosTargetf():
-  fnFile_dict = getFuncAndFile()
-  fnCall_dict = getFuncCallDict(FILE_TO_PROCESS)
-  v0ctags_dict = getCtagsFileDict('0')
-  
-  fcFile_dict = OrderedDict()
-  for fnName in fnCall_dict.keys():
-    if fnName in v0ctags_dict:
-      fcFile_dict[fnName] = v0ctags_dict[fnName]
-    elif fnName in fnFile_dict:  
-      # macro define function
-      tlist = fnFile_dict[fnName][0].split(':')
-      fileph = SOURCE_PATH0+tlist[0]
-      rows =  tlist[1]
-      Sno = tlist[1]+':'+tlist[2]
-      Eno = fnFile_dict[fnName][1]
-      tstr=check_output(['sed','-n',rows+'p',fileph]).strip()
-      if cmp(Sno,Eno)==0:
-        fcFile_dict[fnName] =['macfun'] + tlist[:-1] + [tstr]
-      else:
-        fcFile_dict[fnName] =['function'] + tlist[:-1] + [tstr]
-    #else:  # if not found,may self-decl-macro or kenerl-decl macro of func
-    #  fcFile_dict[fnName] = []
-  #print To File
-  printToFile(fnFile_dict,fnCall_dict,fcFile_dict)
-  return fcFile_dict,fnCall_dict
 
 def code_Diff():
   v0ctags_dict = getCtagsFileDict('0')
@@ -256,15 +265,43 @@ def classDiffLog(diffLog_dict):
       pass 
   return Alevel_dict,Blevel_dict,Clevel_dict
 
+def prosFuncTargetFile():
+  #handle function-call-relation
+  fnFile_dict = getFuncAndFile()
+  fnCall_dict = getFuncCallDict(FILE_TO_PROCESS)
+  v0ctags_dict = getCtagsFileDict('0')
+  
+  fcFile_dict = OrderedDict()
+  for fnName in fnCall_dict.keys():
+    if fnName in v0ctags_dict:
+      fcFile_dict[fnName] = v0ctags_dict[fnName]
+    elif fnName in fnFile_dict:  
+      # macro define function
+      tlist = fnFile_dict[fnName][0].split(':')
+      fileph = SOURCE_PATH0+tlist[0]
+      rows =  tlist[1]
+      Sno = tlist[1]+':'+tlist[2]
+      Eno = fnFile_dict[fnName][1]
+      tstr=check_output(['sed','-n',rows+'p',fileph]).strip()
+      if cmp(Sno,Eno)==0:
+        fcFile_dict[fnName] =['macfun'] + tlist[:-1] + [tstr]
+      else:
+        fcFile_dict[fnName] =['function'] + tlist[:-1] + [tstr]
+    else:  # if not found,may self-decl-macro or kenerl-decl macro of func
+      pass #  fcFile_dict[fnName] = []
+  #print To File
+  printToFile(fnFile_dict,fnCall_dict,fcFile_dict)
+  return fcFile_dict,fnCall_dict
+
 def getfcDiffInfoDict(diffLog_dict):
-  fcFile_dict,fnCall_dict = prosTargetf() # get call info
+  fcFile_dict,fnCall_dict = prosFuncTargetFile() # get call info
   
   fcDiffInfo_dict = OrderedDict()
-  for k,vlist in fcFile_dict.items():
+  for k,vlist in fcFile_dict.items(): # handle function ..
     _type,_file,_rows,state = vlist[0:]
     if k in diffLog_dict:
       fcDiffInfo_dict[k] = diffLog_dict[k]
-    else: # macro define function condition
+    elif cmp(_type,'macfun')==0: # macro define function condition
       fileph = SOURCE_PATH1 + _file
       cmd_string = "grep -w '"+state+"' "+fileph
       tstr=commands.getstatusoutput(cmd_string)
@@ -276,6 +313,8 @@ def getfcDiffInfoDict(diffLog_dict):
       	  fcDiffInfo_dict[k] = diffLog_dict[cname]
       	else:
           fcDiffInfo_dict[k] = ['Del']+[_type,_file,state]
+    else:
+      pass
   return fcDiffInfo_dict,fnCall_dict
 
 def printAssitInfo(out,assitInfo_dict,level,assitLoc_dict):
@@ -303,9 +342,9 @@ def printAssitInfo(out,assitInfo_dict,level,assitLoc_dict):
 def getAssitInfo():
   diffLog_dict = code_Diff() # get diff info
   headfile_list =getHeadFileList() #get head file list
-  # get class diff info
-  Alevel_dict,Blevel_dict,Clevel_dict = classDiffLog(diffLog_dict) 
-  fcDiffInfo_dict,fnCall_dict = getfcDiffInfoDict(diffLog_dict)# get call  diff info
+  Alevel_dict,Blevel_dict,Clevel_dict = classDiffLog(diffLog_dict) # get class diff info
+  fcDiffInfo_dict,fnCall_dict = getfcDiffInfoDict(diffLog_dict)# get call diff info
+  dataStructCall_dict = getDataStructCall(FILE_TO_PROCESS) # get dataStruct call info
   
   assitInfoA_dict = OrderedDict()
   assitInfoB_dict = OrderedDict()
@@ -323,6 +362,12 @@ def getAssitInfo():
       assitInfoC_dict[k] = fcDiffInfo_dict[k]
       assitLoc_dict[k] = fnCall_dict[k]
     else: # 'Not',Mov'
+      pass
+  for k,vdict in dataStructCall_dict.items():
+    if k in Blevel_dict:
+      assitInfoB_dict[k] = Blevel_dict[k]
+      assitLoc_dict[k] = dataStructCall_dict[k]
+    else:
       pass
       
   fileTopros = 'source/' + FILE_TO_PROCESS
@@ -349,6 +394,9 @@ def getAssitInfo():
             loc_list = tstr.split('\n')
             assitLoc_dict[k] = loc_list
             assitInfoA_dict[k] = Alevel_dict[k]
+    else: # 'Add'
+      pass
+    '''
     elif diff_type in ('Mod','All','Del') and _type in ('struct','union','enum'):
       if k not in fcDiffInfo_dict:
         _file = _file.split('include/')[1]
@@ -360,10 +408,10 @@ def getAssitInfo():
             loc_list = tstr.split('\n')
             assitLoc_dict[k] = loc_list
             assitInfoA_dict[k] = Alevel_dict[k]
-    else: # 'Add'
-      pass
+    '''
+    
   for k,vlist in Blevel_dict.items(): #B level
-    if k not in fcDiffInfo_dict:
+    if k not in fcDiffInfo_dict and (k not in dataStructCall_dict):
       _type = vlist[1]
       _file = vlist[2].split('-->')[0]
       _file = _file.split('include/')[1]
