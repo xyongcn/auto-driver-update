@@ -69,7 +69,7 @@ def reviseCtagsFile(vers):
           if not statement.endswith(';'): # not one decl
 		        openbrace_unmatch = 0	# open brace-->{ , close brace-->}
 		        openbrace_unmatch += statement.count('{')
-		        temp_dict = {}
+		        temp_dict = OrderedDict()
 		        rowend = int(rows) + 1
 		        temp=check_output(['sed','-n',str(rowend)+'p',fileph]).strip()
 		        while True:  # find end rows of struct
@@ -77,16 +77,26 @@ def reviseCtagsFile(vers):
 		          openbrace_unmatch -= temp.count('}')
 		          if openbrace_unmatch == 0:
 		            break
+		          
+		          temp = temp.split('/*')[0].strip()
+		          temp = temp.split('{')[0].strip()
+		          locNo = rowend - 1
+		          lastline = check_output(['sed','-n',str(locNo)+'p',fileph]).strip()
+		          if cmp(lastline,'')==0:
+		            locNo = rowend-2
+		          if temp in ('union','struct','enum'): # recored unamed/named struct member start flag
+		            if not temp.endswith('{'):
+		              temp = temp + ' {'
+		            temp_dict[locNo] = temp
+		          elif temp.endswith('};'): # recored named struct member end flag
+		            temp_dict[locNo] = temp
+		          else:
+		            pass
 		          rowend = int(rowend) + 1 # refresh end rows of struct
-		          if('{' in temp and len(temp) > 1 and '*' not in temp): # recored unamed/named struct member start flag
-		            temp_dict[rowend] = temp.split('/*')[0].strip()
-		          if temp.startswith('}') and temp.endswith(';'): # recored named struct member end flag
-		            temp_dict[rowend] = temp.split('/*')[0].strip()
 		          temp=check_output(['sed','-n',str(rowend)+'p',fileph]).strip()
 		        endstmt = temp.split('/*')[0].strip() # end flag of struct
 		        
-		        #get alias name of data struct 
-		        if not endstmt.endswith('};'):
+		        if not endstmt.endswith('};'):#get alias name of data struct 
 		          i = 0;
 		          for cstr in endstmt[::-1]:
 		            if cstr == '}':
@@ -105,16 +115,16 @@ def reviseCtagsFile(vers):
 		            break
 		          state_list2 = sline2.split()[4:]
 		          statement2 = ' '.join(state_list2).split('/*')[0].strip()
-		          if int(rows) in temp_dict: #mod struct member struct/union/enum start and end
-		            if not statement.endswith(temp_dict[int(rows)]):
-		              statement = statement +' '+ temp_dict[int(rows)] 
 		          while statement2.endswith(',') and ('member' in sline2):  #enumerator endswith ',' so exclude it
 		          	rows = int(rows) + 1
 		          	temp=check_output(['sed','-n',str(rows)+'p',fileph]).split('/*')[0].strip()
 		          	statement2 = statement2 + temp
-		          
 		          if not statement.endswith(statement2):
 		            statement = statement +' '+ statement2  # merge statement
+		          if int(rows) in temp_dict: #mod struct member struct/union/enum start and end
+		            if not statement.endswith(temp_dict[int(rows)]):
+		              statement = statement +' '+ temp_dict[int(rows)]
+		          
 		          sline2 = fp.readline() # read next line
 		        if not statement.endswith(endstmt):
 		          statement = statement +' '+ endstmt 
@@ -134,9 +144,11 @@ def reviseCtagsFile(vers):
           if len(aliasname_list)>0:
             for vname in aliasname_list:
               ctags_dict[vname] = ' '+ _type+'  '+_file+'  '+rowstart+'  '+statement
+        
         elif _type in ('member','enumerator'): #typedef struct,typedef enum,struct class
           statement = ' '.join(state_list).split('/*')[0].strip()
           statement = statement.split('/*')[0].strip() #del notes
+          temp_dict = OrderedDict()
           namelist = []
           temp = statement
           while True: # find start rows of data type
@@ -160,6 +172,20 @@ def reviseCtagsFile(vers):
               openbrace_unmatch -= temp.count('}')
               if openbrace_unmatch == 0:
                 break
+              temp = temp.split('/*')[0].strip()
+              temp = temp.split('{')[0].strip()
+              locNo = rowend - 1
+              lastline = check_output(['sed','-n',str(locNo)+'p',fileph]).strip()
+              if cmp(lastline,'')==0:
+                locNo = rowend-2
+              if temp in ('union','struct','enum'): # recored unamed/named struct member start flag
+                if not temp.endswith('{'):
+                  temp = temp + ' {'
+                temp_dict[locNo] = temp
+              elif temp.endswith('};'): # recored named struct member end flag
+                temp_dict[locNo] = temp
+              else:
+                pass
               rowend = rowend + 1
               temp=check_output(['sed','-n',str(rowend)+'p',fileph]).strip()
             endstmt = temp.split('/*')[0].strip() # end flag
@@ -199,6 +225,11 @@ def reviseCtagsFile(vers):
                 statement2 = statement2 + temp
               if not statement.endswith(statement2):
                 statement = statement +' '+ statement2  # merge statement
+              
+              if int(rows) in temp_dict: #mod struct member struct/union/enum start and end
+                if not statement.endswith(temp_dict[int(rows)]):
+                  statement = statement +' '+ temp_dict[int(rows)]
+              
               sline2 = fp.readline() # read next line    
             if not statement.endswith(endstmt):
               statement = statement +' '+ endstmt
@@ -232,7 +263,6 @@ def reviseCtagsFile(vers):
       sline = fp.readline()# move file pointer
   printDictMethod(ctags_dict,filename)
   print filename,'file is revised successful!'
-  #return ctags_dict
 
 def getCtagsFile(vers):
   hdFileTxt = TARGET_PATH+'v'+vers+HEADERFILE_EXT
