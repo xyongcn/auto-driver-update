@@ -152,7 +152,7 @@ def code_Diff():
   diffLog_dict = OrderedDict()
   for k,vlist in v0ctags_dict.items():
     v0_type,v0_file,v0_rows,v0_state = vlist[0:]
-    if v0_type in ('macro','function','prototype'):
+    if v0_type not in ('typedef'): #('macro','function','prototype'):
       if k in v1ctags_dict:# if exist
         v1_type,v1_file,v1_rows,v1_state = v1ctags_dict[k]
         if cmp(v0_file,v1_file)==0:       
@@ -161,11 +161,10 @@ def code_Diff():
             diffLog_dict[k] = ['Not']
             del v1ctags_dict[k]
           else:  #decl changed
-            if cmp(v0_type,v1_type)!=0:
-              cstr = v0_type+'-->'+v1_type
-            else:
-              cstr = v0_type
-            diffLog_dict[k] = ['Mod',cstr,v0_file,v0_state,v1_state]
+            _type = v0_type
+            if cmp(v0_type,v1_type)!=0: #type
+              _type = _type+'-->'+v1_type
+            diffLog_dict[k] = ['Mod',_type,v0_file,v0_state,v1_state]
             del v1ctags_dict[k]
         else:
           if (cmp(v0_type,v1_type)==0) and (cmp(v0_state,v1_state)==0):
@@ -174,14 +173,16 @@ def code_Diff():
             del v1ctags_dict[k]
           else: #all changed(file,decl)
             _file = v0_file+'-->'+v1_file #file
+            _type = v0_type
             if cmp(v0_type,v1_type)!=0:   #type
-              _type = v0_type+'-->'+v1_type
-            else:
-              _type = v0_type
+              _type = _type+'-->'+v1_type
             diffLog_dict[k] = ['All',_type,_file,v0_state,v1_state]
             del v1ctags_dict[k]
       else:  # not exist-->deleted
         diffLog_dict[k] = ['Del',v0_type,v0_file,v0_state]  
+    else:# typedef others
+      pass
+    '''
     elif v0_type in ('struct','enum','union'): # data type
       if k in v1ctags_dict:# if exist
         v1_type,v1_file,v1_rows,v1_state = v1ctags_dict[k]
@@ -204,8 +205,7 @@ def code_Diff():
             del v1ctags_dict[k]
       else: # not exist-->deleted
         diffLog_dict[k] = ['Del',v0_type,v0_file,v0_state]   
-    else:# typedef others
-      pass
+    '''
   if len(v1ctags_dict)>0:  # add changed
     for k,vlist in v1ctags_dict.items():
       diffLog_dict[k] = ['Add'] + vlist 
@@ -221,7 +221,9 @@ def code_Diff():
 				if cmp(diff_type,'Del')!=0:
 					print >> out,'\t++',vlist[4]
 				print >> out,""
+  print '\nprint test start--------------------------'
   print filename,'file generated successful!'
+  print 'print test end--------------------------\n'
   #print test end--------------------------------
   
   return diffLog_dict
@@ -396,19 +398,6 @@ def getAssitInfo():
             assitInfoA_dict[k] = Alevel_dict[k]
     else: # 'Add'
       pass
-    '''
-    elif diff_type in ('Mod','All','Del') and _type in ('struct','union','enum'):
-      if k not in fcDiffInfo_dict:
-        _file = _file.split('include/')[1]
-        key = _type +' '+ k
-        if _file in headfile_list:
-          cmd_string = "grep -nw '"+key+"' "+fileTopros
-          status,tstr=commands.getstatusoutput(cmd_string)
-          if status == 0:
-            loc_list = tstr.split('\n')
-            assitLoc_dict[k] = loc_list
-            assitInfoA_dict[k] = Alevel_dict[k]
-    '''
     
   for k,vlist in Blevel_dict.items(): #B level
     if k not in fcDiffInfo_dict and (k not in dataStructCall_dict):
