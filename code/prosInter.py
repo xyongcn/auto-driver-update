@@ -325,34 +325,6 @@ def collectInt(prefix,outDir):
     print prefix,"-->\n\ttotal .ind file",fcount,"\n\ttotal function decl",fncount
   print 'collectInt():V0_MANIFEST-->',V0_MANIFEST 
 
-def reviseHdFile(vers):
-  outpath = TARGET_PATH+'v'+vers+'_headfile.txt'
-  inpath = TARGET_PATH+'sfile_list.txt'
-  str1 = 'arch/x86/include/'
-  str2 = 'include/'
-  
-  hfile_list = [] #
-  with open(outpath) as fp:
-    for line in fp.readlines():
-      line = line.rstrip('\n')
-      hfile_list.append(line)
-  with open(inpath) as fp:
-    for line in fp.readlines():
-      line = line.rstrip('\n')
-      if line.startswith(str1):
-        line = line[len(str1):]
-      else:
-        line = line[len(str2):] 
-      if line not in hfile_list:
-        hfile_list.append(line)
-  with open(outpath,'w') as out:
-    for tlist in hfile_list:
-      print >> out,tlist
-      
-  #if (cmp(vers,'1') ==0) and os.path.isfile(inpath):
-  #  os.remove(inpath)
-  print 'revise',outpath,'successful.'
-  
 def info_collect():
     ext0=EXT0
     ext2=EXT2
@@ -384,8 +356,6 @@ def main():
     print 'python file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]
     info_collect()
-    #reviseHdFile('0')
-    #reviseHdFile('1')
     print 'Done'
   
 if __name__ == '__main__':

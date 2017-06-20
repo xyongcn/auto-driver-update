@@ -2331,5 +2331,13 @@ void pcnet32_watchdog (structBUG net_device *dev) drivers/net/ethernet/amd/pcnet
 int pcnet32_pm_suspend (structBUG pci_dev *pdev,pm_message_t state) drivers/net/ethernet/amd/pcnet32.c:2799:12 2810:1 101210
 int pcnet32_pm_resume (structBUG pci_dev *pdev) drivers/net/ethernet/amd/pcnet32.c:2812:12 2824:1 101275
 void pcnet32_remove_one (structBUG pci_dev *pdev) drivers/net/ethernet/amd/pcnet32.c:2826:23 2842:1 101330
+int * __check_debug () drivers/net/ethernet/amd/pcnet32.c:2858:1 2858:1 101428
+int * __check_max_interrupt_work () drivers/net/ethernet/amd/pcnet32.c:2860:1 2860:1 101440
+int * __check_rx_copybreak () drivers/net/ethernet/amd/pcnet32.c:2863:1 2863:1 101452
+int * __check_tx_start_pt () drivers/net/ethernet/amd/pcnet32.c:2866:1 2866:1 101464
+int * __check_pcnet32vlb () drivers/net/ethernet/amd/pcnet32.c:2868:1 2868:1 101476
+int * __check_options () drivers/net/ethernet/amd/pcnet32.c:2870:1 2870:1 101488
+int * __check_full_duplex () drivers/net/ethernet/amd/pcnet32.c:2872:1 2872:1 101502
+int * __check_homepna () drivers/net/ethernet/amd/pcnet32.c:2875:1 2875:1 101516
 int pcnet32_init_module () drivers/net/ethernet/amd/pcnet32.c:2886:19 2907:1 101530
 void pcnet32_cleanup_module () drivers/net/ethernet/amd/pcnet32.c:2909:20 2927:1 101636

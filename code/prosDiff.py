@@ -138,11 +138,11 @@ def getCtagsFileDict(vers):
         tlist = sline.split()
         name = tlist[0]
         _type = tlist[1]
-        rows = tlist[2]
-        _file = tlist[3]
+        _file = tlist[2]
+        rows = tlist[3]
         statement = ' '.join(tlist[4:])
         #if _type in ('macro','function','prototype'):
-        ctags_dict[name] = [_type,rows,_file,statement]
+        ctags_dict[name] = [_type,_file,rows,statement]
       sline = fp.readline()
   return ctags_dict
 
@@ -182,30 +182,7 @@ def code_Diff():
         diffLog_dict[k] = ['Del',v0_type,v0_file,v0_state]  
     else:# typedef others
       pass
-    '''
-    elif v0_type in ('struct','enum','union'): # data type
-      if k in v1ctags_dict:# if exist
-        v1_type,v1_file,v1_rows,v1_state = v1ctags_dict[k]
-        if cmp(v0_file,v1_file)==0:
-          if (cmp(v0_state,v1_state)==0):
-            #nothing changed
-            diffLog_dict[k] = ['Not']
-            del v1ctags_dict[k]
-          else:
-            diffLog_dict[k] = ['Mod',v0_type,v0_file,v0_state,v1_state]
-            del v1ctags_dict[k]
-        else:
-          if (cmp(v0_state,v1_state)==0):
-            #just file changed
-            diffLog_dict[k] = ['Mov',v0_type,v0_file,v1_file,v1_state]
-            del v1ctags_dict[k]
-          else: #all changed(file,decl)
-            _file = v0_file+'-->'+v1_file #file
-            diffLog_dict[k] = ['All',v0_type,_file,v0_state,v1_state]
-            del v1ctags_dict[k]
-      else: # not exist-->deleted
-        diffLog_dict[k] = ['Del',v0_type,v0_file,v0_state]   
-    '''
+    
   if len(v1ctags_dict)>0:  # add changed
     for k,vlist in v1ctags_dict.items():
       diffLog_dict[k] = ['Add'] + vlist 
@@ -214,7 +191,7 @@ def code_Diff():
   filename = 'diffLog.txt'
   with open(filename,'w') as out:
 		for k,vlist in diffLog_dict.items():  
-			if vlist[0] not in ('Not','Mov'):
+			if vlist[0] not in ('Not'):
 				diff_type,_type,_file = vlist[0:3]
 				print >> out,'\n',k,'\t( diff_type: '+diff_type,'type: '+_type,'file: '+_file,')'
 				print >> out,'\t--',vlist[3]

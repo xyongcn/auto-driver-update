@@ -24,6 +24,16 @@ fi
 echo "clean target file in path target/"
 rm target/*.txt
 rm target/*.int
+echo ""
+
+#run python file to get interface info--> code/prosInter.py
+python code/prosInter.py $sourceDir/$filename".ind"
+if [ $? -eq 0 ];then
+  echo "python code/prosInter.py $sourceDir/$filename.ind runnning successful."
+else
+  echo "python code/prosInter.py $sourceDir/$filename.ind runnning faild."
+fi
+echo ""
 
 #make and make clean
 cd code  || exit 1
@@ -35,6 +45,7 @@ else
   exit 1
 fi
 make clean
+echo ""
 
 #run make result --> main_get
 cd $rootDir || exit 1
@@ -46,14 +57,6 @@ else
   #exit 1
 fi
 
-#run python file to get interface info--> code/prosInter.py
-python code/prosInter.py $sourceDir/$filename".ind"
-if [ $? -eq 0 ];then
-  echo "python code/prosInter.py $sourceDir/$filename.ind runnning successful."
-else
-  echo "python code/prosInter.py $sourceDir/$filename.ind runnning faild."
-fi
-
 #run python file to get process headfile --> code/prosHdfile.py 
 python code/prosHdfile.py
 if [ $? -eq 0 ];then
@@ -61,6 +64,7 @@ if [ $? -eq 0 ];then
 else
   echo "python code/prosHdfile.py runnning faild."
 fi
+echo ""
 
 #run python file --> code/prosDiff.py
 python code/prosDiff.py $filename
@@ -69,6 +73,7 @@ if [ $? -eq 0 ];then
 else
   echo "python code/prosDiff.py $filename runnning faild."
 fi
+echo ""
 
 echo -e "autorun.sh Done."
 echo -e "all is running successful, program end.\n"

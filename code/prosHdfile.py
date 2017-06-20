@@ -288,7 +288,7 @@ def getCtagsFile(vers):
           filepath = filepath4
         else:
           filepath = ""
-          print 'header file '+hdFileName[:-1]+' in',SOURCE_PATH,' not found!\n'
+          print 'header file '+hdFileName[:-1]+' in',SOURCE_PATH,' not found!'
         if cmp(filepath,"")!= 0:
 		      cmd_string = ['ctags','-xu','--c-kinds=+p',filepath] #,'--extra=+q'
 		      hdFnd_list = check_output(cmd_string).rstrip('\0').split('\0')
@@ -297,8 +297,36 @@ def getCtagsFile(vers):
         hdFileName = fp.readline()
   print outCtagsPath,'file is generated successful!'
 
+def reviseHdFile(vers):
+  outpath = TARGET_PATH+'v'+vers+'_headfile.txt'
+  inpath = TARGET_PATH+'sfile_list.txt'
+  str1 = 'arch/x86/include/'
+  str2 = 'include/'
+  
+  hfile_list = [] #
+  with open(outpath) as fp:
+    for line in fp.readlines():
+      line = line.rstrip('\n')
+      hfile_list.append(line)
+  with open(inpath) as fp:
+    for line in fp.readlines():
+      line = line.rstrip('\n')
+      if line.startswith(str1):
+        line = line[len(str1):]
+      else:
+        line = line[len(str2):] 
+      if line not in hfile_list:
+        hfile_list.append(line)
+  with open(outpath,'w') as out:
+    for tlist in hfile_list:
+      print >> out,tlist
+
+  print 'revise',outpath,'successful.'
+
 def main():
     print '\npython file:',sys.argv[0],'running...'
+    #reviseHdFile('0')
+    #reviseHdFile('1')
     getCtagsFile('0')
     getCtagsFile('1')
     reviseCtagsFile('0')
