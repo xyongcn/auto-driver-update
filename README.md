@@ -3,7 +3,7 @@ Auto updating for Linux driver
 
 # directory Instructions
 
-* [code](https://github.com/xyongcn/auto-driver-update/tree/master/code)   --> python code to handle generated file(*.ind)
+* [code](https://github.com/xyongcn/auto-driver-update/tree/master/code)   --> c and python code to handle generated file
 
 * [source](https://github.com/xyongcn/auto-driver-update/tree/master/source) --> source code to analyse
 
