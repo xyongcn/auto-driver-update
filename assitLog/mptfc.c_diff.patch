@@ -1,0 +1,30 @@
+--- linux-3.5.6/drivers/message/fusion/mptfc.c	2012-10-07 23:36:20.000000000 +0800
++++ linux-3.8.13/drivers/message/fusion/mptfc.c	2013-05-12 04:57:46.000000000 +0800
+@@ -100,7 +100,7 @@
+ static int mptfc_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt);
+ static void mptfc_target_destroy(struct scsi_target *starget);
+ static void mptfc_set_rport_loss_tmo(struct fc_rport *rport, uint32_t timeout);
+-static void __devexit mptfc_remove(struct pci_dev *pdev);
++static void mptfc_remove(struct pci_dev *pdev);
+ static int mptfc_abort(struct scsi_cmnd *SCpnt);
+ static int mptfc_dev_reset(struct scsi_cmnd *SCpnt);
+ static int mptfc_bus_reset(struct scsi_cmnd *SCpnt);
+@@ -1360,7 +1360,7 @@
+ 	.name		= "mptfc",
+ 	.id_table	= mptfc_pci_table,
+ 	.probe		= mptfc_probe,
+-	.remove		= __devexit_p(mptfc_remove),
++	.remove		= mptfc_remove,
+ 	.shutdown	= mptscsih_shutdown,
+ #ifdef CONFIG_PM
+ 	.suspend	= mptscsih_suspend,
+@@ -1496,8 +1496,7 @@
+  *	@pdev: Pointer to pci_dev structure
+  *
+  */
+-static void __devexit
+-mptfc_remove(struct pci_dev *pdev)
++static void mptfc_remove(struct pci_dev *pdev)
+ {
+ 	MPT_ADAPTER		*ioc = pci_get_drvdata(pdev);
+ 	struct mptfc_rport_info	*p, *n;

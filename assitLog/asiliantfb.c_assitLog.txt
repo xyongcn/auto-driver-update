@@ -1,0 +1,70 @@
+filename to process: asiliantfb.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 4
+
+__devinit 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devinit __section(.devinit.text) __cold notrace
+
+	asiliantfb.c: 454:static void __devinit chips_hw_init(struct fb_info *p)
+	asiliantfb.c: 507:static int __devinit init_asiliant(struct fb_info *p, unsigned long addr)
+	asiliantfb.c: 538:static int __devinit
+
+__devinitdata 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devinitdata __section(.devinit.data)
+
+	asiliantfb.c: 477:static struct fb_fix_screeninfo asiliantfb_fix __devinitdata = {
+	asiliantfb.c: 486:static struct fb_var_screeninfo asiliantfb_var __devinitdata = {
+	asiliantfb.c: 596:static struct pci_device_id asiliantfb_pci_tbl[] __devinitdata = {
+
+__devexit 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devexit __section(.devexit.text) __exitused __cold notrace
+
+	asiliantfb.c: 584:static void __devexit asiliantfb_remove(struct pci_dev *dp)
+
+__devexit_p 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devexit_p(x) NULL
+
+	asiliantfb.c: 607:	.remove =	__devexit_p(asiliantfb_remove),
+
+
+===== B  level =====
+total count: 4
+
+KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_ERR "<3>"
+	++ #define KERN_ERR KERN_SOH "3"
+
+  asiliantfb_check_var:
+    drivers/video/asiliantfb.c:237:1
+  init_asiliant:
+    drivers/video/asiliantfb.c:519:1
+    drivers/video/asiliantfb.c:525:1
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  init_asiliant:
+    drivers/video/asiliantfb.c:530:
+
+pci_dev 	( diff_type: Mod type: struct file: include/linux/pci.h )
+	-- struct pci_dev { struct list_head bus_list; struct pci_bus *bus; struct pci_bus *subordinate; void *sysdata; struct proc_dir_entry *procent; struct pci_slot *slot; unsigned int devfn; unsigned short vendor; unsigned short device; unsigned short subsystem_vendor; unsigned short subsystem_device; u8 revision; u8 hdr_type; u8 pcie_cap; u8 pcie_type:4; u8 pcie_mpss:3; u8 rom_base_reg; u8 pin; struct pci_driver *driver; u64 dma_mask; struct device_dma_parameters dma_parms; pci_power_t current_state; int pm_cap; unsigned int pme_support:5; unsigned int pme_interrupt:1; unsigned int pme_poll:1; unsigned int d1_support:1; unsigned int d2_support:1; unsigned int no_d1d2:1; unsigned int mmio_always_on:1; unsigned int wakeup_prepared:1; unsigned int d3_delay; struct pcie_link_state *link_state; pci_channel_state_t error_state; struct device dev; int cfg_size; unsigned int irq; struct resource resource[DEVICE_COUNT_RESOURCE]; unsigned int transparent:1; unsigned int multifunction:1; unsigned int is_added:1; unsigned int is_busmaster:1; unsigned int no_msi:1; unsigned int block_cfg_access:1; unsigned int broken_parity_status:1; unsigned int irq_reroute_variant:2; unsigned int msi_enabled:1; unsigned int msix_enabled:1; unsigned int ari_enabled:1; unsigned int is_managed:1; unsigned int is_pcie:1; unsigned int needs_freset:1; unsigned int state_saved:1; unsigned int is_physfn:1; unsigned int is_virtfn:1; unsigned int reset_fn:1; unsigned int is_hotplug_bridge:1; unsigned int __aer_firmware_first_valid:1; unsigned int __aer_firmware_first:1; pci_dev_flags_t dev_flags; atomic_t enable_cnt; u32 saved_config_space[16]; struct hlist_head saved_cap_space; struct bin_attribute *rom_attr; int rom_attr_enabled; struct bin_attribute *res_attr[DEVICE_COUNT_RESOURCE]; struct bin_attribute *res_attr_wc[DEVICE_COUNT_RESOURCE]; struct list_head msi_list; struct kset *msi_kset; struct pci_vpd *vpd; struct pci_sriov *sriov; struct pci_dev *physfn; }; struct pci_ats *ats; };
+	++ struct pci_dev { struct list_head bus_list; struct pci_bus *bus; struct pci_bus *subordinate; void *sysdata; struct proc_dir_entry *procent; struct pci_slot *slot; unsigned int devfn; unsigned short vendor; unsigned short device; unsigned short subsystem_vendor; unsigned short subsystem_device; u8 revision; u8 hdr_type; u8 pcie_cap; u8 pcie_mpss:3; u8 rom_base_reg; u8 pin; u16 pcie_flags_reg; struct pci_driver *driver; u64 dma_mask; struct device_dma_parameters dma_parms; pci_power_t current_state; int pm_cap; unsigned int pme_support:5; unsigned int pme_interrupt:1; unsigned int pme_poll:1; unsigned int d1_support:1; unsigned int d2_support:1; unsigned int no_d1d2:1; unsigned int no_d3cold:1; unsigned int d3cold_allowed:1; unsigned int mmio_always_on:1; unsigned int wakeup_prepared:1; unsigned int runtime_d3cold:1; unsigned int d3_delay; unsigned int d3cold_delay; struct pcie_link_state *link_state; pci_channel_state_t error_state; struct device dev; int cfg_size; unsigned int irq; struct resource resource[DEVICE_COUNT_RESOURCE]; unsigned int transparent:1; unsigned int multifunction:1; unsigned int is_added:1; unsigned int is_busmaster:1; unsigned int no_msi:1; unsigned int block_cfg_access:1; unsigned int broken_parity_status:1; unsigned int irq_reroute_variant:2; unsigned int msi_enabled:1; unsigned int msix_enabled:1; unsigned int ari_enabled:1; unsigned int is_managed:1; unsigned int is_pcie:1; unsigned int needs_freset:1; unsigned int state_saved:1; unsigned int is_physfn:1; unsigned int is_virtfn:1; unsigned int reset_fn:1; unsigned int is_hotplug_bridge:1; unsigned int __aer_firmware_first_valid:1; unsigned int __aer_firmware_first:1; unsigned int broken_intx_masking:1; unsigned int io_window_1k:1; pci_dev_flags_t dev_flags; atomic_t enable_cnt; u32 saved_config_space[16]; struct hlist_head saved_cap_space; struct bin_attribute *rom_attr; int rom_attr_enabled; struct bin_attribute *res_attr[DEVICE_COUNT_RESOURCE]; struct bin_attribute *res_attr_wc[DEVICE_COUNT_RESOURCE]; struct list_head msi_list; struct kset *msi_kset; struct pci_vpd *vpd; struct pci_sriov *sriov; struct pci_dev *physfn; }; struct pci_ats *ats; phys_addr_t rom; size_t romlen; };
+
+  asiliantfb_pci_init:
+    drivers/video/asiliantfb.c:539
+  asiliantfb_remove:
+    drivers/video/asiliantfb.c:584
+
+pci_driver 	( diff_type: Mod type: struct file: include/linux/pci.h )
+	-- struct pci_driver { struct list_head node; const char *name; const struct pci_device_id *id_table; int (*probe) (struct pci_dev *dev, const struct pci_device_id *id); void (*remove) (struct pci_dev *dev); int (*suspend) (struct pci_dev *dev, pm_message_t state); int (*suspend_late) (struct pci_dev *dev, pm_message_t state); int (*resume_early) (struct pci_dev *dev); int (*resume) (struct pci_dev *dev); void (*shutdown) (struct pci_dev *dev); struct pci_error_handlers *err_handler; struct device_driver driver; struct pci_dynids dynids; };
+	++ struct pci_driver { struct list_head node; const char *name; const struct pci_device_id *id_table; int (*probe) (struct pci_dev *dev, const struct pci_device_id *id); void (*remove) (struct pci_dev *dev); int (*suspend) (struct pci_dev *dev, pm_message_t state); int (*suspend_late) (struct pci_dev *dev, pm_message_t state); int (*resume_early) (struct pci_dev *dev); int (*resume) (struct pci_dev *dev); void (*shutdown) (struct pci_dev *dev); int (*sriov_configure) (struct pci_dev *dev, int num_vfs); const struct pci_error_handlers *err_handler; struct device_driver driver; struct pci_dynids dynids; };
+
+	asiliantfb.c: 603:static struct pci_driver asiliantfb_driver = {
+
+
+===== C  level =====
+total count: 0

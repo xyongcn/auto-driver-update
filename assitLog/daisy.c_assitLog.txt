@@ -1,0 +1,21 @@
+filename to process: daisy.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 1
+
+KERN_INFO 	( diff_type: Del type: macro file: include/linux/printk.h )
+	-- #define KERN_INFO "<6>"
+
+  parport_daisy_init:
+    drivers/parport/daisy.c:112:1
+    drivers/parport/daisy.c:126:1
+
+
+===== B  level =====
+total count: 0
+
+
+===== C  level =====
+total count: 0

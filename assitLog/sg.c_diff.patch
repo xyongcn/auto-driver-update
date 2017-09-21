@@ -1,0 +1,11 @@
+--- linux-3.5.6/drivers/scsi/sg.c	2012-10-07 23:36:20.000000000 +0800
++++ linux-3.8.13/drivers/scsi/sg.c	2013-05-12 04:57:46.000000000 +0800
+@@ -1257,7 +1257,7 @@
+ 	}
+ 
+ 	sfp->mmap_called = 1;
+-	vma->vm_flags |= VM_RESERVED;
++	vma->vm_flags |= VM_DONTEXPAND | VM_DONTDUMP;
+ 	vma->vm_private_data = sfp;
+ 	vma->vm_ops = &sg_mmap_vm_ops;
+ 	return 0;

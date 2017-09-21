@@ -1,0 +1,122 @@
+filename to process: mptsas.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 4
+
+queue_delayed_work_on 	( diff_type: Mod type: prototype file: include/linux/workqueue.h )
+	-- extern int queue_delayed_work_on(int cpu,struct workqueue_struct *wq,struct delayed_work *work, unsigned long delay);
+	++ extern bool queue_delayed_work_on(int cpu,struct workqueue_struct *wq,struct delayed_work *work, unsigned long delay);
+
+  mptsas_requeue_fw_event:
+    drivers/message/fusion/mptsas.c:312:23
+
+cancel_delayed_work 	( diff_type: Mod type: function-->prototype file: include/linux/workqueue.h )
+	-- static inline bool cancel_delayed_work(struct delayed_work *work)
+	++ extern bool cancel_delayed_work(struct delayed_work *dwork);
+
+  mptsas_cleanup_fw_event_q:
+    drivers/message/fusion/mptsas.c:358:26
+
+__devexit 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devexit __section(.devexit.text) __exitused __cold notrace
+
+	mptsas.c: 5335:static void __devexit mptsas_remove(struct pci_dev *pdev)
+
+__devexit_p 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devexit_p(x) NULL
+
+	mptsas.c: 5390:	.remove		= __devexit_p(mptsas_remove),
+
+
+===== B  level =====
+total count: 7
+
+INIT_DELAYED_WORK 	( diff_type: Mod type: macro file: include/linux/workqueue.h )
+	-- #define INIT_DELAYED_WORK(_work,_func) do { INIT_WORK(&(_work)->work, (_func)); init_timer(&(_work)->timer); } while (0)
+	++ #define INIT_DELAYED_WORK(_work,_func) __INIT_DELAYED_WORK(_work, _func, 0)
+
+  mptsas_add_fw_event:
+    drivers/message/fusion/mptsas.c:292:
+
+KERN_DEBUG 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_DEBUG "<7>"
+	++ #define KERN_DEBUG KERN_SOH "7"
+
+  mptsas_set_rphy:
+    drivers/message/fusion/mptsas.c:497:3
+  mptsas_set_port:
+    drivers/message/fusion/mptsas.c:520:3
+  mptsas_setup_wide_ports:
+    drivers/message/fusion/mptsas.c:860:3
+  mptsas_del_end_device:
+    drivers/message/fusion/mptsas.c:1542:1
+    drivers/message/fusion/mptsas.c:1563:1
+    drivers/message/fusion/mptsas.c:1570:1
+  mptsas_probe_one_phy:
+    drivers/message/fusion/mptsas.c:3182:3
+    drivers/message/fusion/mptsas.c:3193:3
+  mptsas_expander_delete:
+    drivers/message/fusion/mptsas.c:3572:1
+    drivers/message/fusion/mptsas.c:3578:1
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  mptsas_slave_configure:
+    drivers/message/fusion/mptsas.c:1696:1
+  mptsas_target_destroy:
+    drivers/message/fusion/mptsas.c:1825:1
+  mptsas_probe_one_phy:
+    drivers/message/fusion/mptsas.c:3279:1
+  mptsas_handle_queue_full_event:
+    drivers/message/fusion/mptsas.c:4091:1
+    drivers/message/fusion/mptsas.c:4101:1
+    drivers/message/fusion/mptsas.c:4105:1
+    drivers/message/fusion/mptsas.c:4109:1
+  mptsas_hotplug_work:
+    drivers/message/fusion/mptsas.c:4462:1
+    drivers/message/fusion/mptsas.c:4528:1
+
+KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_ERR "<3>"
+	++ #define KERN_ERR KERN_SOH "3"
+
+  mptsas_eh_timed_out:
+    drivers/message/fusion/mptsas.c:1941:1
+    drivers/message/fusion/mptsas.c:1948:1
+  mptsas_exp_repmanufacture_info:
+    drivers/message/fusion/mptsas.c:2881:1
+
+scsi_device 	( diff_type: Mod type: struct file: include/scsi/scsi_device.h )
+	-- struct scsi_device { struct Scsi_Host *host; struct request_queue *request_queue; struct list_head siblings; struct list_head same_target_siblings; unsigned int device_busy; spinlock_t list_lock; struct list_head cmd_list; struct list_head starved_entry; struct scsi_cmnd *current_cmnd; unsigned short queue_depth; unsigned short max_queue_depth; unsigned short last_queue_full_depth; unsigned short last_queue_full_count; unsigned long last_queue_full_time; unsigned long queue_ramp_up_period; #define SCSI_DEFAULT_RAMP_UP_PERIOD (120 * HZ) unsigned long last_queue_ramp_up; unsigned int id, lun, channel; unsigned int manufacturer; unsigned sector_size; void *hostdata; char type; char scsi_level; char inq_periph_qual; unsigned char inquiry_len; unsigned char * inquiry; const char * vendor; const char * model; const char * rev; unsigned char current_tag; struct scsi_target *sdev_target; unsigned int sdev_bflags; unsigned writeable:1; unsigned removable:1; unsigned changed:1; unsigned busy:1; unsigned lockable:1; unsigned locked:1; unsigned borken:1; unsigned disconnect:1; unsigned soft_reset:1; unsigned sdtr:1; unsigned wdtr:1; unsigned ppr:1; unsigned tagged_supported:1; unsigned simple_tags:1; unsigned ordered_tags:1; unsigned was_reset:1; unsigned expecting_cc_ua:1; unsigned use_10_for_rw:1; unsigned use_10_for_ms:1; unsigned skip_ms_page_8:1; unsigned skip_ms_page_3f:1; unsigned skip_vpd_pages:1; unsigned use_192_bytes_for_3f:1; unsigned no_start_on_add:1; unsigned allow_restart:1; unsigned manage_start_stop:1; unsigned start_stop_pwr_cond:1; unsigned no_uld_attach:1; unsigned select_no_atn:1; unsigned fix_capacity:1; unsigned guess_capacity:1; unsigned retry_hwerror:1; unsigned last_sector_bug:1; unsigned no_read_disc_info:1; unsigned no_read_capacity_16:1; unsigned try_rc_10_first:1; unsigned is_visible:1; DECLARE_BITMAP(supported_events, SDEV_EVT_MAXBITS); struct list_head event_list; struct work_struct event_work; unsigned int device_blocked; unsigned int max_device_blocked; #define SCSI_DEFAULT_DEVICE_BLOCKED 3 atomic_t iorequest_cnt; atomic_t iodone_cnt; atomic_t ioerr_cnt; struct device sdev_gendev,sdev_dev; struct execute_work ew; struct work_struct requeue_work; struct scsi_dh_data *scsi_dh_data; enum scsi_device_state sdev_state; unsigned long sdev_data[0]; } __attribute__((aligned(sizeof(unsigned long))));
+	++ struct scsi_device { struct Scsi_Host *host; struct request_queue *request_queue; struct list_head siblings; struct list_head same_target_siblings; unsigned int device_busy; spinlock_t list_lock; struct list_head cmd_list; struct list_head starved_entry; struct scsi_cmnd *current_cmnd; unsigned short queue_depth; unsigned short max_queue_depth; unsigned short last_queue_full_depth; unsigned short last_queue_full_count; unsigned long last_queue_full_time; unsigned long queue_ramp_up_period; #define SCSI_DEFAULT_RAMP_UP_PERIOD (120 * HZ) unsigned long last_queue_ramp_up; unsigned int id, lun, channel; unsigned int manufacturer; unsigned sector_size; void *hostdata; char type; char scsi_level; char inq_periph_qual; unsigned char inquiry_len; unsigned char * inquiry; const char * vendor; const char * model; const char * rev; unsigned char current_tag; struct scsi_target *sdev_target; unsigned int sdev_bflags; unsigned writeable:1; unsigned removable:1; unsigned changed:1; unsigned busy:1; unsigned lockable:1; unsigned locked:1; unsigned borken:1; unsigned disconnect:1; unsigned soft_reset:1; unsigned sdtr:1; unsigned wdtr:1; unsigned ppr:1; unsigned tagged_supported:1; unsigned simple_tags:1; unsigned ordered_tags:1; unsigned was_reset:1; unsigned expecting_cc_ua:1; unsigned use_10_for_rw:1; unsigned use_10_for_ms:1; unsigned no_report_opcodes:1; unsigned no_write_same:1; unsigned use_16_for_rw:1; unsigned skip_ms_page_8:1; unsigned skip_ms_page_3f:1; unsigned skip_vpd_pages:1; unsigned use_192_bytes_for_3f:1; unsigned no_start_on_add:1; unsigned allow_restart:1; unsigned manage_start_stop:1; unsigned start_stop_pwr_cond:1; unsigned no_uld_attach:1; unsigned select_no_atn:1; unsigned fix_capacity:1; unsigned guess_capacity:1; unsigned retry_hwerror:1; unsigned last_sector_bug:1; unsigned no_read_disc_info:1; unsigned no_read_capacity_16:1; unsigned try_rc_10_first:1; unsigned is_visible:1; unsigned can_power_off:1; unsigned wce_default_on:1; unsigned no_dif:1; DECLARE_BITMAP(supported_events, SDEV_EVT_MAXBITS); struct list_head event_list; struct work_struct event_work; unsigned int device_blocked; unsigned int max_device_blocked; #define SCSI_DEFAULT_DEVICE_BLOCKED 3 atomic_t iorequest_cnt; atomic_t iodone_cnt; atomic_t ioerr_cnt; struct device sdev_gendev,sdev_dev; struct execute_work ew; struct work_struct requeue_work; struct scsi_dh_data *scsi_dh_data; enum scsi_device_state sdev_state; unsigned long sdev_data[0]; } __attribute__((aligned(sizeof(unsigned long))));
+
+  mptsas_block_io_sdev:
+    drivers/message/fusion/mptsas.c:1089
+  mptsas_slave_configure:
+    drivers/message/fusion/mptsas.c:1688
+  mptsas_slave_alloc:
+    drivers/message/fusion/mptsas.c:1845
+  mptsas_reprobe_lun:
+    drivers/message/fusion/mptsas.c:4218
+
+request 	( diff_type: Mod type: struct file: include/linux/blkdev.h )
+	-- struct request { struct list_head queuelist; struct call_single_data csd; struct request_queue *q; unsigned int cmd_flags; enum rq_cmd_type_bits cmd_type; unsigned long atomic_flags; int cpu; unsigned int __data_len; sector_t __sector; struct bio *bio; struct bio *biotail; struct hlist_node hash; struct rb_node rb_node; void *completion_data; }; struct io_cq *icq; void *priv[2]; } elv; struct { unsigned int seq; struct list_head list; rq_end_io_fn *saved_end_io; } flush; }; struct gendisk *rq_disk; struct hd_struct *part; unsigned long start_time; unsigned long long start_time_ns; unsigned long long io_start_time_ns; unsigned short nr_phys_segments; unsigned short nr_integrity_segments; unsigned short ioprio; int ref_count; void *special; char *buffer; int tag; int errors; unsigned char __cmd[BLK_MAX_CDB]; unsigned char *cmd; unsigned short cmd_len; unsigned int extra_len; unsigned int sense_len; unsigned int resid_len; void *sense; unsigned long deadline; struct list_head timeout_list; unsigned int timeout; int retries; rq_end_io_fn *end_io; void *end_io_data; struct request *next_rq; };
+	++ struct request { struct list_head queuelist; struct call_single_data csd; struct request_queue *q; unsigned int cmd_flags; enum rq_cmd_type_bits cmd_type; unsigned long atomic_flags; int cpu; unsigned int __data_len; sector_t __sector; struct bio *bio; struct bio *biotail; struct hlist_node hash; struct rb_node rb_node; void *completion_data; }; struct io_cq *icq; void *priv[2]; } elv; struct { unsigned int seq; struct list_head list; rq_end_io_fn *saved_end_io; } flush; }; struct gendisk *rq_disk; struct hd_struct *part; unsigned long start_time; struct request_list *rl; unsigned long long start_time_ns; unsigned long long io_start_time_ns; unsigned short nr_phys_segments; unsigned short nr_integrity_segments; unsigned short ioprio; int ref_count; void *special; char *buffer; int tag; int errors; unsigned char __cmd[BLK_MAX_CDB]; unsigned char *cmd; unsigned short cmd_len; unsigned int extra_len; unsigned int sense_len; unsigned int resid_len; void *sense; unsigned long deadline; struct list_head timeout_list; unsigned int timeout; int retries; rq_end_io_fn *end_io; void *end_io_data; struct request *next_rq; };
+
+  mptsas_smp_handler:
+    drivers/message/fusion/mptsas.c:2217
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  mptsas_probe_one_phy:
+    drivers/message/fusion/mptsas.c:3040
+
+
+===== C  level =====
+total count: 0

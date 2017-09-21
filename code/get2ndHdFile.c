@@ -14,10 +14,10 @@ int get2ndHdFile(char codePath[],char outHeadFname[],char outFname[])
 {
 	FILE *fpIn = NULL;
 	FILE *fpOut = NULL;
-	char sline[120];
-	char sHeadFile[400][120];
-	char sHdFileList[400][120];
-	char filepath[120];
+	char sline[500];
+	char sHeadFile[400][200];
+	char sHdFileList[400][200];
+	char filepath[200];
 	int len = 0;
 	int count=0;
 	if(fpIn=fopen(outHeadFname, "r"))
@@ -34,7 +34,7 @@ int get2ndHdFile(char codePath[],char outHeadFname[],char outFname[])
 	}
 	else
 	{
-		printf("cannot open header file ：%s\n", outHeadFname);
+		printf("cannot open file ：%s\n", outHeadFname);
 		exit(1);
 	}
 	srcPath = getenv("HOME"); // get home path

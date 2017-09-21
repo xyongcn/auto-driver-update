@@ -6,7 +6,7 @@ pcnet-objs := pcnet32.o
 obj-m += pcnet32.o
 
 all:
-	make -C $(KMPATH) M=$(PWD) modules $(INCLUDE) V=1 EXTRA_CFLAGS="-fplugin=gccdiff"
+	make -C  $(KMPATH) M=$(PWD) modules $(INCLUDE) V=1 EXTRA_CFLAGS="-fplugin=gccdiff"
 clean:
 	make -C $(KMPATH) M=$(PWD) clean
 	rm -f *~

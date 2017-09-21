@@ -1,0 +1,99 @@
+filename to process: ch.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 0
+
+
+===== B  level =====
+total count: 8
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  ch_read_element_status:
+    drivers/scsi/ch.c:268:1
+  ch_init_elem:
+    drivers/scsi/ch.c:283:1
+    drivers/scsi/ch.c:288:1
+  ch_readconfig:
+    drivers/scsi/ch.c:331:1
+    drivers/scsi/ch.c:334:1
+    drivers/scsi/ch.c:337:1
+    drivers/scsi/ch.c:340:1
+    drivers/scsi/ch.c:344:1
+    drivers/scsi/ch.c:355:1
+    drivers/scsi/ch.c:375:1
+    drivers/scsi/ch.c:379:1
+    drivers/scsi/ch.c:382:1
+  ch_gstatus:
+    drivers/scsi/ch.c:554:1
+  ch_ioctl:
+    drivers/scsi/ch.c:800:1
+  ch_probe:
+    drivers/scsi/ch.c:943:1
+  init_ch_module:
+    drivers/scsi/ch.c:991:
+
+KERN_CONT 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_CONT "<c>"
+	++ #define KERN_CONT ""
+
+  ch_readconfig:
+    drivers/scsi/ch.c:384:1
+    drivers/scsi/ch.c:387:1
+    drivers/scsi/ch.c:397:1
+    drivers/scsi/ch.c:404:1
+    drivers/scsi/ch.c:406:1
+
+put_user 	( diff_type: Mod type: macro file: arch/x86/include/asm/uaccess.h )
+	-- #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr))__pus_tmp = x; __ret_pu = 0; if (unlikely(__copy_to_user_ll(ptr, &__pus_tmp, sizeof(*(ptr))) != 0)) __ret_pu = -EFAULT; __ret_pu; })
+	++ #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr)) __pu_val; __chk_user_ptr(ptr); might_fault(); __pu_val = x; switch (sizeof(*(ptr))) { case 1: __put_user_x(1, __pu_val, ptr, __ret_pu); break; case 2: __put_user_x(2, __pu_val, ptr, __ret_pu); break; case 4: __put_user_x(4, __pu_val, ptr, __ret_pu); break; case 8: __put_user_x8(__pu_val, ptr, __ret_pu); break; default: __put_user_x(X, __pu_val, ptr, __ret_pu); break; } __ret_pu; })
+
+  ch_gstatus:
+    drivers/scsi/ch.c:552:
+
+KERN_WARNING 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_WARNING "<4>"
+	++ #define KERN_WARNING KERN_SOH "4"
+
+  ch_probe:
+    drivers/scsi/ch.c:930:1
+
+inode 	( diff_type: Mod type: struct file: include/linux/fs.h )
+	-- struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct list_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+	++ struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct hlist_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+
+  ch_release:
+    drivers/scsi/ch.c:569
+  ch_open:
+    drivers/scsi/ch.c:579
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  ch_probe:
+    drivers/scsi/ch.c:894
+  ch_remove:
+    drivers/scsi/ch.c:953
+
+file_operations 	( diff_type: Mod type: struct file: include/linux/fs.h )
+	-- struct file_operations { struct module *owner; loff_t (*llseek) (struct file *, loff_t, int); ssize_t (*read) (struct file *, char __user *, size_t, loff_t *); ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *); ssize_t (*aio_read) (struct kiocb *, const struct iovec *, unsigned long, loff_t); ssize_t (*aio_write) (struct kiocb *, const struct iovec *, unsigned long, loff_t); int (*readdir) (struct file *, void *, filldir_t); unsigned int (*poll) (struct file *, struct poll_table_struct *); long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long); long (*compat_ioctl) (struct file *, unsigned int, unsigned long); int (*mmap) (struct file *, struct vm_area_struct *); int (*open) (struct inode *, struct file *); int (*flush) (struct file *, fl_owner_t id); int (*release) (struct inode *, struct file *); int (*fsync) (struct file *, loff_t, loff_t, int datasync); int (*aio_fsync) (struct kiocb *, int datasync); int (*fasync) (int, struct file *, int); int (*lock) (struct file *, int, struct file_lock *); ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int); unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long); int (*check_flags)(int); int (*flock) (struct file *, int, struct file_lock *); ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int); ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int); int (*setlease)(struct file *, long, struct file_lock **); long (*fallocate)(struct file *file, int mode, loff_t offset,loff_t len); };
+	++ struct file_operations { struct module *owner; loff_t (*llseek) (struct file *, loff_t, int); ssize_t (*read) (struct file *, char __user *, size_t, loff_t *); ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *); ssize_t (*aio_read) (struct kiocb *, const struct iovec *, unsigned long, loff_t); ssize_t (*aio_write) (struct kiocb *, const struct iovec *, unsigned long, loff_t); int (*readdir) (struct file *, void *, filldir_t); unsigned int (*poll) (struct file *, struct poll_table_struct *); long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long); long (*compat_ioctl) (struct file *, unsigned int, unsigned long); int (*mmap) (struct file *, struct vm_area_struct *); int (*open) (struct inode *, struct file *); int (*flush) (struct file *, fl_owner_t id); int (*release) (struct inode *, struct file *); int (*fsync) (struct file *, loff_t, loff_t, int datasync); int (*aio_fsync) (struct kiocb *, int datasync); int (*fasync) (int, struct file *, int); int (*lock) (struct file *, int, struct file_lock *); ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int); unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long); int (*check_flags)(int); int (*flock) (struct file *, int, struct file_lock *); ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int); ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int); int (*setlease)(struct file *, long, struct file_lock **); long (*fallocate)(struct file *file, int mode, loff_t offset,loff_t len); int (*show_fdinfo)(struct seq_file *m, struct file *f); };
+
+	ch.c: 976:static const struct file_operations changer_fops = {
+
+scsi_device 	( diff_type: Mod type: struct file: include/scsi/scsi_device.h )
+	-- struct scsi_device { struct Scsi_Host *host; struct request_queue *request_queue; struct list_head siblings; struct list_head same_target_siblings; unsigned int device_busy; spinlock_t list_lock; struct list_head cmd_list; struct list_head starved_entry; struct scsi_cmnd *current_cmnd; unsigned short queue_depth; unsigned short max_queue_depth; unsigned short last_queue_full_depth; unsigned short last_queue_full_count; unsigned long last_queue_full_time; unsigned long queue_ramp_up_period; #define SCSI_DEFAULT_RAMP_UP_PERIOD (120 * HZ) unsigned long last_queue_ramp_up; unsigned int id, lun, channel; unsigned int manufacturer; unsigned sector_size; void *hostdata; char type; char scsi_level; char inq_periph_qual; unsigned char inquiry_len; unsigned char * inquiry; const char * vendor; const char * model; const char * rev; unsigned char current_tag; struct scsi_target *sdev_target; unsigned int sdev_bflags; unsigned writeable:1; unsigned removable:1; unsigned changed:1; unsigned busy:1; unsigned lockable:1; unsigned locked:1; unsigned borken:1; unsigned disconnect:1; unsigned soft_reset:1; unsigned sdtr:1; unsigned wdtr:1; unsigned ppr:1; unsigned tagged_supported:1; unsigned simple_tags:1; unsigned ordered_tags:1; unsigned was_reset:1; unsigned expecting_cc_ua:1; unsigned use_10_for_rw:1; unsigned use_10_for_ms:1; unsigned skip_ms_page_8:1; unsigned skip_ms_page_3f:1; unsigned skip_vpd_pages:1; unsigned use_192_bytes_for_3f:1; unsigned no_start_on_add:1; unsigned allow_restart:1; unsigned manage_start_stop:1; unsigned start_stop_pwr_cond:1; unsigned no_uld_attach:1; unsigned select_no_atn:1; unsigned fix_capacity:1; unsigned guess_capacity:1; unsigned retry_hwerror:1; unsigned last_sector_bug:1; unsigned no_read_disc_info:1; unsigned no_read_capacity_16:1; unsigned try_rc_10_first:1; unsigned is_visible:1; DECLARE_BITMAP(supported_events, SDEV_EVT_MAXBITS); struct list_head event_list; struct work_struct event_work; unsigned int device_blocked; unsigned int max_device_blocked; #define SCSI_DEFAULT_DEVICE_BLOCKED 3 atomic_t iorequest_cnt; atomic_t iodone_cnt; atomic_t ioerr_cnt; struct device sdev_gendev,sdev_dev; struct execute_work ew; struct work_struct requeue_work; struct scsi_dh_data *scsi_dh_data; enum scsi_device_state sdev_state; unsigned long sdev_data[0]; } __attribute__((aligned(sizeof(unsigned long))));
+	++ struct scsi_device { struct Scsi_Host *host; struct request_queue *request_queue; struct list_head siblings; struct list_head same_target_siblings; unsigned int device_busy; spinlock_t list_lock; struct list_head cmd_list; struct list_head starved_entry; struct scsi_cmnd *current_cmnd; unsigned short queue_depth; unsigned short max_queue_depth; unsigned short last_queue_full_depth; unsigned short last_queue_full_count; unsigned long last_queue_full_time; unsigned long queue_ramp_up_period; #define SCSI_DEFAULT_RAMP_UP_PERIOD (120 * HZ) unsigned long last_queue_ramp_up; unsigned int id, lun, channel; unsigned int manufacturer; unsigned sector_size; void *hostdata; char type; char scsi_level; char inq_periph_qual; unsigned char inquiry_len; unsigned char * inquiry; const char * vendor; const char * model; const char * rev; unsigned char current_tag; struct scsi_target *sdev_target; unsigned int sdev_bflags; unsigned writeable:1; unsigned removable:1; unsigned changed:1; unsigned busy:1; unsigned lockable:1; unsigned locked:1; unsigned borken:1; unsigned disconnect:1; unsigned soft_reset:1; unsigned sdtr:1; unsigned wdtr:1; unsigned ppr:1; unsigned tagged_supported:1; unsigned simple_tags:1; unsigned ordered_tags:1; unsigned was_reset:1; unsigned expecting_cc_ua:1; unsigned use_10_for_rw:1; unsigned use_10_for_ms:1; unsigned no_report_opcodes:1; unsigned no_write_same:1; unsigned use_16_for_rw:1; unsigned skip_ms_page_8:1; unsigned skip_ms_page_3f:1; unsigned skip_vpd_pages:1; unsigned use_192_bytes_for_3f:1; unsigned no_start_on_add:1; unsigned allow_restart:1; unsigned manage_start_stop:1; unsigned start_stop_pwr_cond:1; unsigned no_uld_attach:1; unsigned select_no_atn:1; unsigned fix_capacity:1; unsigned guess_capacity:1; unsigned retry_hwerror:1; unsigned last_sector_bug:1; unsigned no_read_disc_info:1; unsigned no_read_capacity_16:1; unsigned try_rc_10_first:1; unsigned is_visible:1; unsigned can_power_off:1; unsigned wce_default_on:1; unsigned no_dif:1; DECLARE_BITMAP(supported_events, SDEV_EVT_MAXBITS); struct list_head event_list; struct work_struct event_work; unsigned int device_blocked; unsigned int max_device_blocked; #define SCSI_DEFAULT_DEVICE_BLOCKED 3 atomic_t iorequest_cnt; atomic_t iodone_cnt; atomic_t ioerr_cnt; struct device sdev_gendev,sdev_dev; struct execute_work ew; struct work_struct requeue_work; struct scsi_dh_data *scsi_dh_data; enum scsi_device_state sdev_state; unsigned long sdev_data[0]; } __attribute__((aligned(sizeof(unsigned long))));
+
+	ch.c: 108:	struct scsi_device  *device;
+	ch.c: 109:	struct scsi_device  **dt;        /* ptrs to data transfer elements */
+	ch.c: 896:	struct scsi_device *sd = to_scsi_device(dev);
+
+
+===== C  level =====
+total count: 0

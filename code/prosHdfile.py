@@ -6,7 +6,7 @@ import sys
 from subprocess import check_output
 from collections import OrderedDict
 
-SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.4/'
+SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.6/'
 SOURCE_PATH1 = os.environ['HOME']+'/SOURCE/linux-3.8.13/'
 TARGET_PATH = 'target/'
 CURRENT_PATH = os.getcwd()
@@ -66,7 +66,7 @@ def reviseCtagsFile(vers):
           statement = ' '.join(state_list).split('/*')[0].strip()
           statement = statement.split('/*')[0].strip() #del notes
           aliasname_list = []
-          if not statement.endswith(';'): # not one decl
+          if not statement.endswith(';'): # not one line decl
 		        openbrace_unmatch = 0	# open brace-->{ , close brace-->}
 		        openbrace_unmatch += statement.count('{')
 		        temp_dict = OrderedDict()
@@ -77,7 +77,6 @@ def reviseCtagsFile(vers):
 		          openbrace_unmatch -= temp.count('}')
 		          if openbrace_unmatch == 0:
 		            break
-		          
 		          temp = temp.split('/*')[0].strip()
 		          temp = temp.split('{')[0].strip()
 		          locNo = rowend - 1
@@ -96,7 +95,7 @@ def reviseCtagsFile(vers):
 		          temp=check_output(['sed','-n',str(rowend)+'p',fileph]).strip()
 		        endstmt = temp.split('/*')[0].strip() # end flag of struct
 		        
-		        if not endstmt.endswith('};'):#get alias name of data struct 
+		        if not endstmt.endswith('};') and endstmt.endswith(';'):#get alias name of data struct 
 		          i = 0;
 		          for cstr in endstmt[::-1]:
 		            if cstr == '}':
@@ -130,21 +129,22 @@ def reviseCtagsFile(vers):
 		          statement = statement +' '+ endstmt 
 		        fp.seek(-len(sline2),1); #back to last line    
           else:
-            if not statement.endswith('};'):
+            if not statement.endswith('};') and endstmt.endswith(';'):
               i = 0;
               for cstr in statement[::-1]:
                 if cstr == '}':
                   break
                 i += 1
-            aliasname = statement[(len(statement)-i):-1].strip()
-            if '(' not in aliasname:
-              aliasname_list = aliasname.split(',')
+              aliasname = statement[(len(statement)-i):-1].strip()
+              if '(' not in aliasname:
+                aliasname_list = aliasname.split(',')
           
           ctags_dict[name] = ' '+ _type+'  '+_file+'  '+rowstart+'  '+statement
           if len(aliasname_list)>0:
             for vname in aliasname_list:
-              ctags_dict[vname] = ' '+ _type+'  '+_file+'  '+rowstart+'  '+statement
-        
+              if '____' not in vname:
+                vname = vname.split()[-1]
+                ctags_dict[vname] = ' '+ _type+'  '+_file+'  '+rowstart+'  '+statement
         elif _type in ('member','enumerator'): #typedef struct,typedef enum,struct class
           statement = ' '.join(state_list).split('/*')[0].strip()
           statement = statement.split('/*')[0].strip() #del notes
@@ -195,8 +195,7 @@ def reviseCtagsFile(vers):
             else:
               _type = startstmt.split()[1]
             
-            if not endstmt.endswith('};'):
-              #name = endstmt[1:-1].strip()
+            if not endstmt.endswith('};') and endstmt.endswith(';'):
               i = 0;
               for cstr in endstmt[::-1]:
                 if cstr == '}':
@@ -246,7 +245,7 @@ def reviseCtagsFile(vers):
             
             if statement.endswith('};'):
               name = 'unamed-' +_type
-            else:
+            elif endstmt.endswith(';'):
               i = 0;
               for cstr in statement[::-1]:
                 if cstr == '}':
@@ -255,9 +254,13 @@ def reviseCtagsFile(vers):
               name = statement[(len(statement)-i):-1].strip()
               if '(' not in name:
                 namelist = name.split(',')
+            else:
+              pass
           if 'unamed' not in name:
             for vname in namelist:
-              ctags_dict[vname] = ' '+ _type+'  '+_file+'  '+str(rowstart)+'  '+statement
+              if '____' not in vname:
+                vname = vname.split()[-1]
+                ctags_dict[vname] = ' '+ _type+'  '+_file+'  '+str(rowstart)+'  '+statement
         else: #other typedef
           pass
       sline = fp.readline()# move file pointer

@@ -1,0 +1,109 @@
+filename to process: floppy.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 4
+
+__cancel_delayed_work 	( diff_type: Mod type: function file: include/linux/workqueue.h )
+	-- static inline bool __cancel_delayed_work(struct delayed_work *work)
+	++ static inline bool __deprecated __cancel_delayed_work(struct delayed_work *work)
+
+  __reschedule_timeout:
+    drivers/block/floppy.c:674:23
+  unlock_fdc:
+    drivers/block/floppy.c:893:23
+
+queue_delayed_work 	( diff_type: Mod type: prototype file: include/linux/workqueue.h )
+	-- extern int queue_delayed_work(struct workqueue_struct *wq,struct delayed_work *work, unsigned long delay);
+	++ extern bool queue_delayed_work(struct workqueue_struct *wq,struct delayed_work *work, unsigned long delay);
+
+  __reschedule_timeout:
+    drivers/block/floppy.c:682:20
+  fd_wait_for_completion:
+    drivers/block/floppy.c:1020:21
+
+queue_work 	( diff_type: Mod type: prototype file: include/linux/workqueue.h )
+	-- extern int queue_work(struct workqueue_struct *wq,struct work_struct *work);
+	++ extern bool queue_work(struct workqueue_struct *wq,struct work_struct *work);
+
+  schedule_bh:
+    drivers/block/floppy.c:971:12
+
+cancel_delayed_work 	( diff_type: Mod type: function-->prototype file: include/linux/workqueue.h )
+	-- static inline bool cancel_delayed_work(struct delayed_work *work)
+	++ extern bool cancel_delayed_work(struct delayed_work *dwork);
+
+  fd_watchdog:
+    drivers/block/floppy.c:995:22
+  main_command_interrupt:
+    drivers/block/floppy.c:1003:21
+  fd_wait_for_completion:
+    drivers/block/floppy.c:1018:22
+
+
+===== B  level =====
+total count: 8
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  show_floppy:
+    drivers/block/floppy.c:1789:1
+
+request 	( diff_type: Mod type: struct file: include/linux/blkdev.h )
+	-- struct request { struct list_head queuelist; struct call_single_data csd; struct request_queue *q; unsigned int cmd_flags; enum rq_cmd_type_bits cmd_type; unsigned long atomic_flags; int cpu; unsigned int __data_len; sector_t __sector; struct bio *bio; struct bio *biotail; struct hlist_node hash; struct rb_node rb_node; void *completion_data; }; struct io_cq *icq; void *priv[2]; } elv; struct { unsigned int seq; struct list_head list; rq_end_io_fn *saved_end_io; } flush; }; struct gendisk *rq_disk; struct hd_struct *part; unsigned long start_time; unsigned long long start_time_ns; unsigned long long io_start_time_ns; unsigned short nr_phys_segments; unsigned short nr_integrity_segments; unsigned short ioprio; int ref_count; void *special; char *buffer; int tag; int errors; unsigned char __cmd[BLK_MAX_CDB]; unsigned char *cmd; unsigned short cmd_len; unsigned int extra_len; unsigned int sense_len; unsigned int resid_len; void *sense; unsigned long deadline; struct list_head timeout_list; unsigned int timeout; int retries; rq_end_io_fn *end_io; void *end_io_data; struct request *next_rq; };
+	++ struct request { struct list_head queuelist; struct call_single_data csd; struct request_queue *q; unsigned int cmd_flags; enum rq_cmd_type_bits cmd_type; unsigned long atomic_flags; int cpu; unsigned int __data_len; sector_t __sector; struct bio *bio; struct bio *biotail; struct hlist_node hash; struct rb_node rb_node; void *completion_data; }; struct io_cq *icq; void *priv[2]; } elv; struct { unsigned int seq; struct list_head list; rq_end_io_fn *saved_end_io; } flush; }; struct gendisk *rq_disk; struct hd_struct *part; unsigned long start_time; struct request_list *rl; unsigned long long start_time_ns; unsigned long long io_start_time_ns; unsigned short nr_phys_segments; unsigned short nr_integrity_segments; unsigned short ioprio; int ref_count; void *special; char *buffer; int tag; int errors; unsigned char __cmd[BLK_MAX_CDB]; unsigned char *cmd; unsigned short cmd_len; unsigned int extra_len; unsigned int sense_len; unsigned int resid_len; void *sense; unsigned long deadline; struct list_head timeout_list; unsigned int timeout; int retries; rq_end_io_fn *end_io; void *end_io_data; struct request *next_rq; };
+
+  floppy_end_request:
+    drivers/block/floppy.c:2191
+
+request_queue 	( diff_type: Mod type: struct file: include/linux/blkdev.h )
+	-- struct request_queue { struct list_head queue_head; struct request *last_merge; struct elevator_queue *elevator; struct request_list rq; request_fn_proc *request_fn; make_request_fn *make_request_fn; prep_rq_fn *prep_rq_fn; unprep_rq_fn *unprep_rq_fn; merge_bvec_fn *merge_bvec_fn; softirq_done_fn *softirq_done_fn; rq_timed_out_fn *rq_timed_out_fn; dma_drain_needed_fn *dma_drain_needed; lld_busy_fn *lld_busy_fn; sector_t end_sector; struct request *boundary_rq; struct delayed_work delay_work; struct backing_dev_info backing_dev_info; void *queuedata; unsigned long queue_flags; int id; gfp_t bounce_gfp; spinlock_t __queue_lock; spinlock_t *queue_lock; struct kobject kobj; unsigned long nr_requests; unsigned int nr_congestion_on; unsigned int nr_congestion_off; unsigned int nr_batching; unsigned int dma_drain_size; void *dma_drain_buffer; unsigned int dma_pad_mask; unsigned int dma_alignment; struct blk_queue_tag *queue_tags; struct list_head tag_busy_list; unsigned int nr_sorted; unsigned int in_flight[2]; unsigned int rq_timeout; struct timer_list timeout; struct list_head timeout_list; struct list_head icq_list; DECLARE_BITMAP (blkcg_pols, BLKCG_MAX_POLS); struct blkcg_gq *root_blkg; struct list_head blkg_list; struct queue_limits limits; unsigned int sg_timeout; unsigned int sg_reserved_size; int node; struct blk_trace *blk_trace; unsigned int flush_flags; unsigned int flush_not_queueable:1; unsigned int flush_queue_delayed:1; unsigned int flush_pending_idx:1; unsigned int flush_running_idx:1; unsigned long flush_pending_since; struct list_head flush_queue[2]; struct list_head flush_data_in_flight; struct request flush_rq; struct mutex sysfs_lock; int bypass_depth; bsg_job_fn *bsg_job_fn; int bsg_job_size; struct bsg_class_device bsg_dev; struct list_head all_q_node; struct throtl_data *td; };
+	++ struct request_queue { struct list_head queue_head; struct request *last_merge; struct elevator_queue *elevator; int nr_rqs[2]; int nr_rqs_elvpriv; struct request_list root_rl; request_fn_proc *request_fn; make_request_fn *make_request_fn; prep_rq_fn *prep_rq_fn; unprep_rq_fn *unprep_rq_fn; merge_bvec_fn *merge_bvec_fn; softirq_done_fn *softirq_done_fn; rq_timed_out_fn *rq_timed_out_fn; dma_drain_needed_fn *dma_drain_needed; lld_busy_fn *lld_busy_fn; sector_t end_sector; struct request *boundary_rq; struct delayed_work delay_work; struct backing_dev_info backing_dev_info; void *queuedata; unsigned long queue_flags; int id; gfp_t bounce_gfp; spinlock_t __queue_lock; spinlock_t *queue_lock; struct kobject kobj; unsigned long nr_requests; unsigned int nr_congestion_on; unsigned int nr_congestion_off; unsigned int nr_batching; unsigned int dma_drain_size; void *dma_drain_buffer; unsigned int dma_pad_mask; unsigned int dma_alignment; struct blk_queue_tag *queue_tags; struct list_head tag_busy_list; unsigned int nr_sorted; unsigned int in_flight[2]; unsigned int request_fn_active; unsigned int rq_timeout; struct timer_list timeout; struct list_head timeout_list; struct list_head icq_list; DECLARE_BITMAP (blkcg_pols, BLKCG_MAX_POLS); struct blkcg_gq *root_blkg; struct list_head blkg_list; struct queue_limits limits; unsigned int sg_timeout; unsigned int sg_reserved_size; int node; struct blk_trace *blk_trace; unsigned int flush_flags; unsigned int flush_not_queueable:1; unsigned int flush_queue_delayed:1; unsigned int flush_pending_idx:1; unsigned int flush_running_idx:1; unsigned long flush_pending_since; struct list_head flush_queue[2]; struct list_head flush_data_in_flight; struct request flush_rq; struct mutex sysfs_lock; int bypass_depth; bsg_job_fn *bsg_job_fn; int bsg_job_size; struct bsg_class_device bsg_dev; struct list_head all_q_node; struct throtl_data *td; };
+
+  do_fd_request:
+    drivers/block/floppy.c:2883
+
+bio 	( diff_type: Mod type: struct file: include/linux/blk_types.h )
+	-- struct bio { sector_t bi_sector; struct bio *bi_next; struct block_device *bi_bdev; unsigned long bi_flags; unsigned long bi_rw; unsigned short bi_vcnt; unsigned short bi_idx; unsigned int bi_phys_segments; unsigned int bi_size; unsigned int bi_seg_front_size; unsigned int bi_seg_back_size; unsigned int bi_max_vecs; atomic_t bi_cnt; struct bio_vec *bi_io_vec; bio_end_io_t *bi_end_io; void *bi_private; struct io_context *bi_ioc; struct cgroup_subsys_state *bi_css; struct bio_integrity_payload *bi_integrity; bio_destructor_t *bi_destructor; struct bio_vec bi_inline_vecs[0]; };
+	++ struct bio { sector_t bi_sector; struct bio *bi_next; struct block_device *bi_bdev; unsigned long bi_flags; unsigned long bi_rw; unsigned short bi_vcnt; unsigned short bi_idx; unsigned int bi_phys_segments; unsigned int bi_size; unsigned int bi_seg_front_size; unsigned int bi_seg_back_size; bio_end_io_t *bi_end_io; void *bi_private; struct io_context *bi_ioc; struct cgroup_subsys_state *bi_css; struct bio_integrity_payload *bi_integrity; unsigned int bi_max_vecs; atomic_t bi_cnt; struct bio_vec *bi_io_vec; struct bio_set *bi_pool; struct bio_vec bi_inline_vecs[0]; };
+
+  floppy_rb0_complete:
+    drivers/block/floppy.c:3752
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  floppy_cmos_show:
+    drivers/block/floppy.c:4072
+  floppy_device_release:
+    drivers/block/floppy.c:4084
+  floppy_resume:
+    drivers/block/floppy.c:4088
+
+init_timer 	( diff_type: Mod type: macro file: include/linux/timer.h )
+	-- #define init_timer(timer) init_timer_key((timer), NULL, NULL)
+	++ #define init_timer(timer) __init_timer((timer), 0)
+
+	floppy.c: 4166:		init_timer(&motor_off_timer[dr]);
+
+DECLARE_DELAYED_WORK 	( diff_type: Mod type: macro file: include/linux/workqueue.h )
+	-- #define DECLARE_DELAYED_WORK(n,f) struct delayed_work n = __DELAYED_WORK_INITIALIZER(n, f)
+	++ #define DECLARE_DELAYED_WORK(n,f) struct delayed_work n = __DELAYED_WORK_INITIALIZER(n, f, 0)
+
+	floppy.c: 635:static DECLARE_DELAYED_WORK(fd_timeout, floppy_shutdown);
+	floppy.c: 974:static DECLARE_DELAYED_WORK(fd_timer, NULL);
+
+platform_device 	( diff_type: Mod type: struct file: include/linux/platform_device.h )
+	-- struct platform_device { const char * name; int id; struct device dev; u32 num_resources; struct resource * resource; const struct platform_device_id *id_entry; struct mfd_cell *mfd_cell; struct pdev_archdata archdata; };
+	++ struct platform_device { const char * name; int id; bool id_auto; struct device dev; u32 num_resources; struct resource * resource; const struct platform_device_id *id_entry; struct mfd_cell *mfd_cell; struct pdev_archdata archdata; };
+
+	floppy.c: 4075:	struct platform_device *p = to_platform_device(dev);
+	floppy.c: 4111:static struct platform_device floppy_device[N_DRIVE];
+
+
+===== C  level =====
+total count: 0

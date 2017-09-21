@@ -8,7 +8,7 @@ from collections import OrderedDict
 
 EXT0 = '.ind' # AST file
 EXT2 = '.int' #interface file
-SOURCE_PATH0 = '/home/ryyan/SOURCE/linux-3.5.4/'
+SOURCE_PATH0 = '/home/ryyan/SOURCE/linux-3.5.6/'
 TARGET_PATH = 'target/' #path to save target file
 V0_CODE=sys.argv[1]			#python run param 
 FILE_TO_PROCESS = sys.argv[1]

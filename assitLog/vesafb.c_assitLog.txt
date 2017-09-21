@@ -1,0 +1,52 @@
+filename to process: vesafb.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 0
+
+
+===== B  level =====
+total count: 4
+
+KERN_WARNING 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_WARNING "<4>"
+	++ #define KERN_WARNING KERN_SOH "4"
+
+  vesafb_probe:
+    drivers/video/vesafb.c:283:1
+    drivers/video/vesafb.c:343:1
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  vesafb_probe:
+    drivers/video/vesafb.c:307:
+    drivers/video/vesafb.c:311:1
+    drivers/video/vesafb.c:323:1
+    drivers/video/vesafb.c:325:1
+    drivers/video/vesafb.c:336:1
+    drivers/video/vesafb.c:351:1
+    drivers/video/vesafb.c:354:1
+    drivers/video/vesafb.c:381:
+    drivers/video/vesafb.c:464:
+    drivers/video/vesafb.c:487:
+
+KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_ERR "<3>"
+	++ #define KERN_ERR KERN_SOH "3"
+
+  vesafb_probe:
+    drivers/video/vesafb.c:457:1
+
+platform_device 	( diff_type: Mod type: struct file: include/linux/platform_device.h )
+	-- struct platform_device { const char * name; int id; struct device dev; u32 num_resources; struct resource * resource; const struct platform_device_id *id_entry; struct mfd_cell *mfd_cell; struct pdev_archdata archdata; };
+	++ struct platform_device { const char * name; int id; bool id_auto; struct device dev; u32 num_resources; struct resource * resource; const struct platform_device_id *id_entry; struct mfd_cell *mfd_cell; struct pdev_archdata archdata; };
+
+  vesafb_probe:
+    drivers/video/vesafb.c:229
+
+
+===== C  level =====
+total count: 0

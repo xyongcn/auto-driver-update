@@ -1,0 +1,49 @@
+--- linux-3.5.6/drivers/char/hpet.c	2012-10-07 23:36:20.000000000 +0800
++++ linux-3.8.13/drivers/char/hpet.c	2013-05-12 04:57:46.000000000 +0800
+@@ -373,26 +373,14 @@
+ 	struct hpet_dev *devp;
+ 	unsigned long addr;
+ 
+-	if (((vma->vm_end - vma->vm_start) != PAGE_SIZE) || vma->vm_pgoff)
+-		return -EINVAL;
+-
+ 	devp = file->private_data;
+ 	addr = devp->hd_hpets->hp_hpet_phys;
+ 
+ 	if (addr & (PAGE_SIZE - 1))
+ 		return -ENOSYS;
+ 
+-	vma->vm_flags |= VM_IO;
+ 	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
+-
+-	if (io_remap_pfn_range(vma, vma->vm_start, addr >> PAGE_SHIFT,
+-					PAGE_SIZE, vma->vm_page_prot)) {
+-		printk(KERN_ERR "%s: io_remap_pfn_range failed\n",
+-			__func__);
+-		return -EAGAIN;
+-	}
+-
+-	return 0;
++	return vm_iomap_memory(vma, addr, PAGE_SIZE);
+ #else
+ 	return -ENOSYS;
+ #endif
+@@ -816,7 +804,7 @@
+ 
+ static unsigned long hpet_calibrate(struct hpets *hpetp)
+ {
+-	unsigned long ret = -1;
++	unsigned long ret = ~0UL;
+ 	unsigned long tmp;
+ 
+ 	/*
+@@ -1001,6 +989,9 @@
+ 		irqp = &res->data.extended_irq;
+ 
+ 		for (i = 0; i < irqp->interrupt_count; i++) {
++			if (hdp->hd_nirqs >= HPET_MAX_TIMERS)
++				break;
++
+ 			irq = acpi_register_gsi(NULL, irqp->interrupts[i],
+ 				      irqp->triggering, irqp->polarity);
+ 			if (irq < 0)

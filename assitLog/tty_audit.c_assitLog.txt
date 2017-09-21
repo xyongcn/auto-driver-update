@@ -1,0 +1,95 @@
+filename to process: tty_audit.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 7
+
+audit_log_start 	( diff_type: Mod type: macro-->function file: include/linux/audit.h )
+	-- #define audit_log_start(c,g,t) ({ NULL; })
+	++ static inline struct audit_buffer *audit_log_start(struct audit_context *ctx,gfp_t gfp_mask, int type)
+
+  tty_audit_log:
+    drivers/tty/tty_audit.c:69:22
+
+audit_log_format 	( diff_type: Mod type: macro-->function file: include/linux/audit.h )
+	-- #define audit_log_format(b,f,...) do { ; } while (0)
+	++ void audit_log_format(struct audit_buffer *ab,const char *fmt,...)
+
+  tty_audit_log:
+    drivers/tty/tty_audit.c:74:19
+    drivers/tty/tty_audit.c:80:19
+
+audit_log_untrustedstring 	( diff_type: Mod type: macro-->function file: include/linux/audit.h )
+	-- #define audit_log_untrustedstring(a,s) do { ; } while (0)
+	++ static inline void audit_log_untrustedstring(struct audit_buffer *ab,const char *string)
+
+  tty_audit_log:
+    drivers/tty/tty_audit.c:79:28
+
+audit_log_n_hex 	( diff_type: Mod type: macro-->function file: include/linux/audit.h )
+	-- #define audit_log_n_hex(a,b,l) do { ; } while (0)
+	++ static inline void audit_log_n_hex(struct audit_buffer *ab,const unsigned char *buf, size_t len)
+
+  tty_audit_log:
+    drivers/tty/tty_audit.c:81:18
+
+audit_log_end 	( diff_type: Mod type: macro-->function file: include/linux/audit.h )
+	-- #define audit_log_end(b) do { ; } while (0)
+	++ static inline void audit_log_end(struct audit_buffer *ab)
+
+  tty_audit_log:
+    drivers/tty/tty_audit.c:82:16
+
+audit_get_loginuid 	( diff_type: Mod type: macro-->function file: include/linux/audit.h )
+	-- #define audit_get_loginuid(t) (-1)
+	++ static inline kuid_t audit_get_loginuid(struct task_struct *tsk)
+
+  tty_audit_tiocsti:
+    drivers/tty/tty_audit.c:185:1
+
+audit_get_sessionid 	( diff_type: Mod type: macro-->function file: include/linux/audit.h )
+	-- #define audit_get_sessionid(t) (-1)
+	++ static inline int audit_get_sessionid(struct task_struct *tsk)
+
+  tty_audit_tiocsti:
+    drivers/tty/tty_audit.c:186:1
+
+
+===== B  level =====
+total count: 3
+
+task_struct 	( diff_type: Mod type: struct file: include/linux/sched.h )
+	-- struct task_struct { volatile long state; void *stack; atomic_t usage; unsigned int flags; unsigned int ptrace; struct llist_node wake_entry; int on_cpu; int on_rq; int prio, static_prio, normal_prio; unsigned int rt_priority; const struct sched_class *sched_class; struct sched_entity se; struct sched_rt_entity rt; struct task_group *sched_task_group; struct hlist_head preempt_notifiers; unsigned char fpu_counter; unsigned int btrace_seq; unsigned int policy; int nr_cpus_allowed; cpumask_t cpus_allowed; int rcu_read_lock_nesting; char rcu_read_unlock_special; struct list_head rcu_node_entry; struct rcu_node *rcu_blocked_node; struct rt_mutex *rcu_boost_mutex; struct sched_info sched_info; struct list_head tasks; struct plist_node pushable_tasks; struct mm_struct *mm, *active_mm; unsigned brk_randomized:1; struct task_rss_stat rss_stat; int exit_state; int exit_code, exit_signal; int pdeath_signal; unsigned int jobctl; unsigned int personality; unsigned did_exec:1; unsigned in_execve:1; unsigned in_iowait:1; unsigned no_new_privs:1; unsigned sched_reset_on_fork:1; unsigned sched_contributes_to_load:1; pid_t pid; pid_t tgid; unsigned long stack_canary; struct task_struct __rcu *real_parent; struct task_struct __rcu *parent; struct list_head children; struct list_head sibling; struct task_struct *group_leader; struct list_head ptraced; struct list_head ptrace_entry; struct pid_link pids[PIDTYPE_MAX]; struct list_head thread_group; struct completion *vfork_done; int __user *set_child_tid; int __user *clear_child_tid; cputime_t utime, stime, utimescaled, stimescaled; cputime_t gtime; cputime_t prev_utime, prev_stime; unsigned long nvcsw, nivcsw; struct timespec start_time; struct timespec real_start_time; unsigned long min_flt, maj_flt; struct task_cputime cputime_expires; struct list_head cpu_timers[3]; const struct cred __rcu *real_cred; const struct cred __rcu *cred; char comm[TASK_COMM_LEN]; int link_count, total_link_count; struct sysv_sem sysvsem; unsigned long last_switch_count; struct thread_struct thread; struct fs_struct *fs; struct files_struct *files; struct nsproxy *nsproxy; struct signal_struct *signal; struct sighand_struct *sighand; sigset_t blocked, real_blocked; sigset_t saved_sigmask; struct sigpending pending; unsigned long sas_ss_sp; size_t sas_ss_size; int (*notifier)(void *priv); void *notifier_data; sigset_t *notifier_mask; struct hlist_head task_works; struct audit_context *audit_context; uid_t loginuid; unsigned int sessionid; struct seccomp seccomp; u32 parent_exec_id; u32 self_exec_id; spinlock_t alloc_lock; raw_spinlock_t pi_lock; struct plist_head pi_waiters; struct rt_mutex_waiter *pi_blocked_on; struct mutex_waiter *blocked_on; unsigned int irq_events; unsigned long hardirq_enable_ip; unsigned long hardirq_disable_ip; unsigned int hardirq_enable_event; unsigned int hardirq_disable_event; int hardirqs_enabled; int hardirq_context; unsigned long softirq_disable_ip; unsigned long softirq_enable_ip; unsigned int softirq_disable_event; unsigned int softirq_enable_event; int softirqs_enabled; int softirq_context; # define MAX_LOCK_DEPTH 48UL u64 curr_chain_key; int lockdep_depth; unsigned int lockdep_recursion; struct held_lock held_locks[MAX_LOCK_DEPTH]; gfp_t lockdep_reclaim_gfp; void *journal_info; struct bio_list *bio_list; struct blk_plug *plug; struct reclaim_state *reclaim_state; struct backing_dev_info *backing_dev_info; struct io_context *io_context; unsigned long ptrace_message; siginfo_t *last_siginfo; struct task_io_accounting ioac; u64 acct_rss_mem1; u64 acct_vm_mem1; cputime_t acct_timexpd; nodemask_t mems_allowed; seqcount_t mems_allowed_seq; int cpuset_mem_spread_rotor; int cpuset_slab_spread_rotor; struct css_set __rcu *cgroups; struct list_head cg_list; struct robust_list_head __user *robust_list; struct compat_robust_list_head __user *compat_robust_list; struct list_head pi_state_list; struct futex_pi_state *pi_state_cache; struct perf_event_context *perf_event_ctxp[perf_nr_task_contexts]; struct mutex perf_event_mutex; struct list_head perf_event_list; struct mempolicy *mempolicy; short il_next; short pref_node_fork; struct rcu_head rcu; struct pipe_inode_info *splice_pipe; struct task_delay_info *delays; int make_it_fail; int nr_dirtied; int nr_dirtied_pause; unsigned long dirty_paused_when; int latency_record_count; struct latency_record latency_record[LT_SAVECOUNT]; unsigned long timer_slack_ns; unsigned long default_timer_slack_ns; struct list_head *scm_work_list; int curr_ret_stack; struct ftrace_ret_stack *ret_stack; unsigned long long ftrace_timestamp; atomic_t trace_overrun; atomic_t tracing_graph_pause; unsigned long trace; unsigned long trace_recursion; struct memcg_batch_info { int do_batch; struct mem_cgroup *memcg; unsigned long nr_pages; unsigned long memsw_nr_pages; } memcg_batch; atomic_t ptrace_bp_refcnt; struct uprobe_task *utask; int uprobe_srcu_id; };
+	++ struct task_struct { volatile long state; void *stack; atomic_t usage; unsigned int flags; unsigned int ptrace; struct llist_node wake_entry; int on_cpu; int on_rq; int prio, static_prio, normal_prio; unsigned int rt_priority; const struct sched_class *sched_class; struct sched_entity se; struct sched_rt_entity rt; struct task_group *sched_task_group; struct hlist_head preempt_notifiers; unsigned char fpu_counter; unsigned int btrace_seq; unsigned int policy; int nr_cpus_allowed; cpumask_t cpus_allowed; int rcu_read_lock_nesting; char rcu_read_unlock_special; struct list_head rcu_node_entry; struct rcu_node *rcu_blocked_node; struct rt_mutex *rcu_boost_mutex; struct sched_info sched_info; struct list_head tasks; struct plist_node pushable_tasks; struct mm_struct *mm, *active_mm; unsigned brk_randomized:1; struct task_rss_stat rss_stat; int exit_state; int exit_code, exit_signal; int pdeath_signal; unsigned int jobctl; unsigned int personality; unsigned did_exec:1; unsigned in_execve:1; unsigned in_iowait:1; unsigned no_new_privs:1; unsigned sched_reset_on_fork:1; unsigned sched_contributes_to_load:1; pid_t pid; pid_t tgid; unsigned long stack_canary; struct task_struct __rcu *real_parent; struct task_struct __rcu *parent; struct list_head children; struct list_head sibling; struct task_struct *group_leader; struct list_head ptraced; struct list_head ptrace_entry; struct pid_link pids[PIDTYPE_MAX]; struct list_head thread_group; struct completion *vfork_done; int __user *set_child_tid; int __user *clear_child_tid; cputime_t utime, stime, utimescaled, stimescaled; cputime_t gtime; struct cputime prev_cputime; unsigned long nvcsw, nivcsw; struct timespec start_time; struct timespec real_start_time; unsigned long min_flt, maj_flt; struct task_cputime cputime_expires; struct list_head cpu_timers[3]; const struct cred __rcu *real_cred; const struct cred __rcu *cred; char comm[TASK_COMM_LEN]; int link_count, total_link_count; struct sysv_sem sysvsem; unsigned long last_switch_count; struct thread_struct thread; struct fs_struct *fs; struct files_struct *files; struct nsproxy *nsproxy; struct signal_struct *signal; struct sighand_struct *sighand; sigset_t blocked, real_blocked; sigset_t saved_sigmask; struct sigpending pending; unsigned long sas_ss_sp; size_t sas_ss_size; int (*notifier)(void *priv); void *notifier_data; sigset_t *notifier_mask; struct callback_head *task_works; struct audit_context *audit_context; kuid_t loginuid; unsigned int sessionid; struct seccomp seccomp; u32 parent_exec_id; u32 self_exec_id; spinlock_t alloc_lock; raw_spinlock_t pi_lock; struct plist_head pi_waiters; struct rt_mutex_waiter *pi_blocked_on; struct mutex_waiter *blocked_on; unsigned int irq_events; unsigned long hardirq_enable_ip; unsigned long hardirq_disable_ip; unsigned int hardirq_enable_event; unsigned int hardirq_disable_event; int hardirqs_enabled; int hardirq_context; unsigned long softirq_disable_ip; unsigned long softirq_enable_ip; unsigned int softirq_disable_event; unsigned int softirq_enable_event; int softirqs_enabled; int softirq_context; # define MAX_LOCK_DEPTH 48UL u64 curr_chain_key; int lockdep_depth; unsigned int lockdep_recursion; struct held_lock held_locks[MAX_LOCK_DEPTH]; gfp_t lockdep_reclaim_gfp; void *journal_info; struct bio_list *bio_list; struct blk_plug *plug; struct reclaim_state *reclaim_state; struct backing_dev_info *backing_dev_info; struct io_context *io_context; unsigned long ptrace_message; siginfo_t *last_siginfo; struct task_io_accounting ioac; u64 acct_rss_mem1; u64 acct_vm_mem1; cputime_t acct_timexpd; nodemask_t mems_allowed; seqcount_t mems_allowed_seq; int cpuset_mem_spread_rotor; int cpuset_slab_spread_rotor; struct css_set __rcu *cgroups; struct list_head cg_list; struct robust_list_head __user *robust_list; struct compat_robust_list_head __user *compat_robust_list; struct list_head pi_state_list; struct futex_pi_state *pi_state_cache; struct perf_event_context *perf_event_ctxp[perf_nr_task_contexts]; struct mutex perf_event_mutex; struct list_head perf_event_list; struct mempolicy *mempolicy; short il_next; short pref_node_fork; int numa_scan_seq; int numa_migrate_seq; unsigned int numa_scan_period; u64 node_stamp; struct callback_head numa_work; struct rcu_head rcu; struct pipe_inode_info *splice_pipe; struct page_frag task_frag; struct task_delay_info *delays; int make_it_fail; int nr_dirtied; int nr_dirtied_pause; unsigned long dirty_paused_when; int latency_record_count; struct latency_record latency_record[LT_SAVECOUNT]; unsigned long timer_slack_ns; unsigned long default_timer_slack_ns; int curr_ret_stack; struct ftrace_ret_stack *ret_stack; unsigned long long ftrace_timestamp; atomic_t trace_overrun; atomic_t tracing_graph_pause; unsigned long trace; unsigned long trace_recursion; struct memcg_batch_info { int do_batch; struct mem_cgroup *memcg; unsigned long nr_pages; unsigned long memsw_nr_pages; } memcg_batch; unsigned int memcg_kmem_skip_account; atomic_t ptrace_bp_refcnt; struct uprobe_task *utask; };
+
+  tty_audit_log:
+    drivers/tty/tty_audit.c:63
+  tty_audit_buf_push:
+    drivers/tty/tty_audit.c:92
+  tty_audit_push_task:
+    drivers/tty/tty_audit.c:202
+
+signal_struct 	( diff_type: Mod type: struct file: include/linux/sched.h )
+	-- struct signal_struct { atomic_t sigcnt; atomic_t live; int nr_threads; wait_queue_head_t wait_chldexit; struct task_struct *curr_target; struct sigpending shared_pending; int group_exit_code; int notify_count; struct task_struct *group_exit_task; int group_stop_count; unsigned int flags; unsigned int is_child_subreaper:1; unsigned int has_child_subreaper:1; struct list_head posix_timers; struct hrtimer real_timer; struct pid *leader_pid; ktime_t it_real_incr; struct cpu_itimer it[2]; struct thread_group_cputimer cputimer; struct task_cputime cputime_expires; struct list_head cpu_timers[3]; struct pid *tty_old_pgrp; int leader; struct tty_struct *tty; struct autogroup *autogroup; cputime_t utime, stime, cutime, cstime; cputime_t gtime; cputime_t cgtime; cputime_t prev_utime, prev_stime; unsigned long nvcsw, nivcsw, cnvcsw, cnivcsw; unsigned long min_flt, maj_flt, cmin_flt, cmaj_flt; unsigned long inblock, oublock, cinblock, coublock; unsigned long maxrss, cmaxrss; struct task_io_accounting ioac; unsigned long long sum_sched_runtime; struct rlimit rlim[RLIM_NLIMITS]; struct pacct_struct pacct; struct taskstats *stats; unsigned audit_tty; struct tty_audit_buf *tty_audit_buf; struct rw_semaphore group_rwsem; int oom_adj; int oom_score_adj; int oom_score_adj_min; struct mutex cred_guard_mutex; };
+	++ struct signal_struct { atomic_t sigcnt; atomic_t live; int nr_threads; wait_queue_head_t wait_chldexit; struct task_struct *curr_target; struct sigpending shared_pending; int group_exit_code; int notify_count; struct task_struct *group_exit_task; int group_stop_count; unsigned int flags; unsigned int is_child_subreaper:1; unsigned int has_child_subreaper:1; struct list_head posix_timers; struct hrtimer real_timer; struct pid *leader_pid; ktime_t it_real_incr; struct cpu_itimer it[2]; struct thread_group_cputimer cputimer; struct task_cputime cputime_expires; struct list_head cpu_timers[3]; struct pid *tty_old_pgrp; int leader; struct tty_struct *tty; struct autogroup *autogroup; cputime_t utime, stime, cutime, cstime; cputime_t gtime; cputime_t cgtime; struct cputime prev_cputime; unsigned long nvcsw, nivcsw, cnvcsw, cnivcsw; unsigned long min_flt, maj_flt, cmin_flt, cmaj_flt; unsigned long inblock, oublock, cinblock, coublock; unsigned long maxrss, cmaxrss; struct task_io_accounting ioac; unsigned long long sum_sched_runtime; struct rlimit rlim[RLIM_NLIMITS]; struct pacct_struct pacct; struct taskstats *stats; unsigned audit_tty; struct tty_audit_buf *tty_audit_buf; struct rw_semaphore group_rwsem; oom_flags_t oom_flags; short oom_score_adj; short oom_score_adj_min; struct mutex cred_guard_mutex; };
+
+  tty_audit_fork:
+    drivers/tty/tty_audit.c:149
+
+tty_struct 	( diff_type: Mod type: struct file: include/linux/tty.h )
+	-- struct tty_struct { int magic; struct kref kref; struct device *dev; struct tty_driver *driver; const struct tty_operations *ops; int index; struct mutex ldisc_mutex; struct tty_ldisc *ldisc; struct mutex termios_mutex; spinlock_t ctrl_lock; struct ktermios *termios, *termios_locked; struct termiox *termiox; char name[64]; struct pid *pgrp; struct pid *session; unsigned long flags; int count; struct winsize winsize; unsigned char stopped:1, hw_stopped:1, flow_stopped:1, packet:1; unsigned char low_latency:1, warned:1; unsigned char ctrl_status; unsigned int receive_room; struct tty_struct *link; struct fasync_struct *fasync; struct tty_bufhead buf; int alt_speed; wait_queue_head_t write_wait; wait_queue_head_t read_wait; struct work_struct hangup_work; void *disc_data; void *driver_data; struct list_head tty_files; #define N_TTY_BUF_SIZE 4096 unsigned int column; unsigned char lnext:1, erasing:1, raw:1, real_raw:1, icanon:1; unsigned char closing:1; unsigned char echo_overrun:1; unsigned short minimum_to_wake; unsigned long overrun_time; int num_overrun; unsigned long process_char_map[256/(8*sizeof(unsigned long))]; char *read_buf; int read_head; int read_tail; int read_cnt; unsigned long read_flags[N_TTY_BUF_SIZE/(8*sizeof(unsigned long))]; unsigned char *echo_buf; unsigned int echo_pos; unsigned int echo_cnt; int canon_data; unsigned long canon_head; unsigned int canon_column; struct mutex atomic_read_lock; struct mutex atomic_write_lock; struct mutex output_lock; struct mutex echo_lock; unsigned char *write_buf; int write_cnt; spinlock_t read_lock; struct work_struct SAK_work; struct tty_port *port; };
+	++ struct tty_struct { int magic; struct kref kref; struct device *dev; struct tty_driver *driver; const struct tty_operations *ops; int index; struct mutex ldisc_mutex; struct tty_ldisc *ldisc; struct mutex atomic_write_lock; struct mutex legacy_mutex; struct mutex termios_mutex; spinlock_t ctrl_lock; struct ktermios termios, termios_locked; struct termiox *termiox; char name[64]; struct pid *pgrp; struct pid *session; unsigned long flags; int count; struct winsize winsize; unsigned char stopped:1, hw_stopped:1, flow_stopped:1, packet:1; unsigned char low_latency:1, warned:1; unsigned char ctrl_status; unsigned int receive_room; struct tty_struct *link; struct fasync_struct *fasync; int alt_speed; wait_queue_head_t write_wait; wait_queue_head_t read_wait; struct work_struct hangup_work; void *disc_data; void *driver_data; struct list_head tty_files; #define N_TTY_BUF_SIZE 4096 unsigned char closing:1; unsigned short minimum_to_wake; unsigned char *write_buf; int write_cnt; struct work_struct SAK_work; struct tty_port *port; };
+
+  tty_audit_tiocsti:
+    drivers/tty/tty_audit.c:159
+  tty_audit_buf_get:
+    drivers/tty/tty_audit.c:239
+  tty_audit_add_data:
+    drivers/tty/tty_audit.c:286
+  tty_audit_push:
+    drivers/tty/tty_audit.c:335
+
+
+===== C  level =====
+total count: 0

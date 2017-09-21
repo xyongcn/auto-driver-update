@@ -1,0 +1,49 @@
+filename to process: scsi_pm.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 1
+
+async_synchronize_full_domain 	( diff_type: Mod type: prototype file: include/linux/async.h )
+	-- extern void async_synchronize_full_domain(struct list_head *list);
+	++ extern void async_synchronize_full_domain(struct async_domain *domain);
+
+  scsi_bus_prepare:
+    drivers/scsi/scsi_pm.c:103:32
+
+
+===== B  level =====
+total count: 2
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  scsi_dev_type_suspend:
+    drivers/scsi/scsi_pm.c:19
+  scsi_dev_type_resume:
+    drivers/scsi/scsi_pm.c:37
+  scsi_bus_suspend_common:
+    drivers/scsi/scsi_pm.c:52
+  scsi_bus_resume_common:
+    drivers/scsi/scsi_pm.c:75
+  scsi_bus_prepare:
+    drivers/scsi/scsi_pm.c:99
+  scsi_bus_suspend:
+    drivers/scsi/scsi_pm.c:112
+  scsi_bus_freeze:
+    drivers/scsi/scsi_pm.c:117
+  scsi_bus_poweroff:
+    drivers/scsi/scsi_pm.c:122
+
+scsi_device 	( diff_type: Mod type: struct file: include/scsi/scsi_device.h )
+	-- struct scsi_device { struct Scsi_Host *host; struct request_queue *request_queue; struct list_head siblings; struct list_head same_target_siblings; unsigned int device_busy; spinlock_t list_lock; struct list_head cmd_list; struct list_head starved_entry; struct scsi_cmnd *current_cmnd; unsigned short queue_depth; unsigned short max_queue_depth; unsigned short last_queue_full_depth; unsigned short last_queue_full_count; unsigned long last_queue_full_time; unsigned long queue_ramp_up_period; #define SCSI_DEFAULT_RAMP_UP_PERIOD (120 * HZ) unsigned long last_queue_ramp_up; unsigned int id, lun, channel; unsigned int manufacturer; unsigned sector_size; void *hostdata; char type; char scsi_level; char inq_periph_qual; unsigned char inquiry_len; unsigned char * inquiry; const char * vendor; const char * model; const char * rev; unsigned char current_tag; struct scsi_target *sdev_target; unsigned int sdev_bflags; unsigned writeable:1; unsigned removable:1; unsigned changed:1; unsigned busy:1; unsigned lockable:1; unsigned locked:1; unsigned borken:1; unsigned disconnect:1; unsigned soft_reset:1; unsigned sdtr:1; unsigned wdtr:1; unsigned ppr:1; unsigned tagged_supported:1; unsigned simple_tags:1; unsigned ordered_tags:1; unsigned was_reset:1; unsigned expecting_cc_ua:1; unsigned use_10_for_rw:1; unsigned use_10_for_ms:1; unsigned skip_ms_page_8:1; unsigned skip_ms_page_3f:1; unsigned skip_vpd_pages:1; unsigned use_192_bytes_for_3f:1; unsigned no_start_on_add:1; unsigned allow_restart:1; unsigned manage_start_stop:1; unsigned start_stop_pwr_cond:1; unsigned no_uld_attach:1; unsigned select_no_atn:1; unsigned fix_capacity:1; unsigned guess_capacity:1; unsigned retry_hwerror:1; unsigned last_sector_bug:1; unsigned no_read_disc_info:1; unsigned no_read_capacity_16:1; unsigned try_rc_10_first:1; unsigned is_visible:1; DECLARE_BITMAP(supported_events, SDEV_EVT_MAXBITS); struct list_head event_list; struct work_struct event_work; unsigned int device_blocked; unsigned int max_device_blocked; #define SCSI_DEFAULT_DEVICE_BLOCKED 3 atomic_t iorequest_cnt; atomic_t iodone_cnt; atomic_t ioerr_cnt; struct device sdev_gendev,sdev_dev; struct execute_work ew; struct work_struct requeue_work; struct scsi_dh_data *scsi_dh_data; enum scsi_device_state sdev_state; unsigned long sdev_data[0]; } __attribute__((aligned(sizeof(unsigned long))));
+	++ struct scsi_device { struct Scsi_Host *host; struct request_queue *request_queue; struct list_head siblings; struct list_head same_target_siblings; unsigned int device_busy; spinlock_t list_lock; struct list_head cmd_list; struct list_head starved_entry; struct scsi_cmnd *current_cmnd; unsigned short queue_depth; unsigned short max_queue_depth; unsigned short last_queue_full_depth; unsigned short last_queue_full_count; unsigned long last_queue_full_time; unsigned long queue_ramp_up_period; #define SCSI_DEFAULT_RAMP_UP_PERIOD (120 * HZ) unsigned long last_queue_ramp_up; unsigned int id, lun, channel; unsigned int manufacturer; unsigned sector_size; void *hostdata; char type; char scsi_level; char inq_periph_qual; unsigned char inquiry_len; unsigned char * inquiry; const char * vendor; const char * model; const char * rev; unsigned char current_tag; struct scsi_target *sdev_target; unsigned int sdev_bflags; unsigned writeable:1; unsigned removable:1; unsigned changed:1; unsigned busy:1; unsigned lockable:1; unsigned locked:1; unsigned borken:1; unsigned disconnect:1; unsigned soft_reset:1; unsigned sdtr:1; unsigned wdtr:1; unsigned ppr:1; unsigned tagged_supported:1; unsigned simple_tags:1; unsigned ordered_tags:1; unsigned was_reset:1; unsigned expecting_cc_ua:1; unsigned use_10_for_rw:1; unsigned use_10_for_ms:1; unsigned no_report_opcodes:1; unsigned no_write_same:1; unsigned use_16_for_rw:1; unsigned skip_ms_page_8:1; unsigned skip_ms_page_3f:1; unsigned skip_vpd_pages:1; unsigned use_192_bytes_for_3f:1; unsigned no_start_on_add:1; unsigned allow_restart:1; unsigned manage_start_stop:1; unsigned start_stop_pwr_cond:1; unsigned no_uld_attach:1; unsigned select_no_atn:1; unsigned fix_capacity:1; unsigned guess_capacity:1; unsigned retry_hwerror:1; unsigned last_sector_bug:1; unsigned no_read_disc_info:1; unsigned no_read_capacity_16:1; unsigned try_rc_10_first:1; unsigned is_visible:1; unsigned can_power_off:1; unsigned wce_default_on:1; unsigned no_dif:1; DECLARE_BITMAP(supported_events, SDEV_EVT_MAXBITS); struct list_head event_list; struct work_struct event_work; unsigned int device_blocked; unsigned int max_device_blocked; #define SCSI_DEFAULT_DEVICE_BLOCKED 3 atomic_t iorequest_cnt; atomic_t iodone_cnt; atomic_t ioerr_cnt; struct device sdev_gendev,sdev_dev; struct execute_work ew; struct work_struct requeue_work; struct scsi_dh_data *scsi_dh_data; enum scsi_device_state sdev_state; unsigned long sdev_data[0]; } __attribute__((aligned(sizeof(unsigned long))));
+
+	scsi_pm.c: 184:int scsi_autopm_get_device(struct scsi_device *sdev)
+	scsi_pm.c: 197:void scsi_autopm_put_device(struct scsi_device *sdev)
+
+
+===== C  level =====
+total count: 0

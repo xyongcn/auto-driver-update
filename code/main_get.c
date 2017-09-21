@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-char codePath1[30] = "/SOURCE/linux-3.5.4/";
+char codePath1[30] = "/SOURCE/linux-3.5.6/";
 char codePath2[30] = "/SOURCE/linux-3.8.13/";
 char outHeadFname[30] = "target/headfile.txt";
 char outFname1[30] = "target/v0_headfile.txt";
@@ -14,7 +14,7 @@ int get2ndHdFile(char codePath[],char outHeadFname[],char outFname[]);
 
 int main(int argc, char *argv[])
 {
-	char sFileName[160];
+	char sFileName[200];
 	int ret=0,ret2=0;
 	
 	if(argc <= 1){

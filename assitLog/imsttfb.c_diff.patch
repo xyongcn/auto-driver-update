@@ -1,0 +1,68 @@
+--- linux-3.5.6/drivers/video/imsttfb.c	2012-10-07 23:36:20.000000000 +0800
++++ linux-3.8.13/drivers/video/imsttfb.c	2013-05-12 04:57:46.000000000 +0800
+@@ -225,7 +225,7 @@
+ 	__u8 addr, value;
+ };
+ 
+-static struct initvalues ibm_initregs[] __devinitdata = {
++static struct initvalues ibm_initregs[] = {
+ 	{ CLKCTL,	0x21 },
+ 	{ SYNCCTL,	0x00 },
+ 	{ HSYNCPOS,	0x00 },
+@@ -272,7 +272,7 @@
+ 	{ KEYCTL,	0x00 }
+ };
+ 
+-static struct initvalues tvp_initregs[] __devinitdata = {
++static struct initvalues tvp_initregs[] = {
+ 	{ TVPIRICC,	0x00 },
+ 	{ TVPIRBRC,	0xe4 },
+ 	{ TVPIRLAC,	0x06 },
+@@ -336,7 +336,7 @@
+ static int inverse = 0;
+ static char fontname[40] __initdata = { 0 };
+ #if defined(CONFIG_PPC)
+-static signed char init_vmode __devinitdata = -1, init_cmode __devinitdata = -1;
++static signed char init_vmode = -1, init_cmode = -1;
+ #endif
+ 
+ static struct imstt_regvals tvp_reg_init_2 = {
+@@ -1333,7 +1333,7 @@
+ 	.name =		"imsttfb",
+ 	.id_table =	imsttfb_pci_tbl,
+ 	.probe =	imsttfb_probe,
+-	.remove =	__devexit_p(imsttfb_remove),
++	.remove =	imsttfb_remove,
+ };
+ 
+ static struct fb_ops imsttfb_ops = {
+@@ -1349,8 +1349,7 @@
+ 	.fb_ioctl 	= imsttfb_ioctl,
+ };
+ 
+-static void __devinit
+-init_imstt(struct fb_info *info)
++static void init_imstt(struct fb_info *info)
+ {
+ 	struct imstt_par *par = info->par;
+ 	__u32 i, tmp, *ip, *end;
+@@ -1466,8 +1465,7 @@
+ 		info->node, info->fix.id, info->fix.smem_len >> 20, tmp);
+ }
+ 
+-static int __devinit
+-imsttfb_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
++static int imsttfb_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+ {
+ 	unsigned long addr, size;
+ 	struct imstt_par *par;
+@@ -1534,8 +1532,7 @@
+ 	return 0;
+ }
+ 
+-static void __devexit
+-imsttfb_remove(struct pci_dev *pdev)
++static void imsttfb_remove(struct pci_dev *pdev)
+ {
+ 	struct fb_info *info = pci_get_drvdata(pdev);
+ 	struct imstt_par *par = info->par;

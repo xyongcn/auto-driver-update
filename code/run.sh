@@ -4,11 +4,9 @@ echo "autorun.sh running...."
 
 rootDir=~/myProjects
 sourceDir=source
-filename=console/vgacon.c
+filename=amd/pcnet32.c
 
 if [ $# -ne 1 ];then
-  #echo "please input a filename to process."
-  #exit 1
   echo "process default filename $sourceDir/$filename"
 else 
   if [ -f $sourceDir/$1 ];then # -a -f $2 
@@ -35,6 +33,7 @@ else
 fi
 echo ""
 
+:<<!
 #make and make clean
 cd code  || exit 1
 make
@@ -46,6 +45,7 @@ else
 fi
 make clean
 echo ""
+!
 
 #run make result --> main_get
 cd $rootDir || exit 1
@@ -75,5 +75,4 @@ else
 fi
 echo ""
 
-echo -e "autorun.sh Done."
-echo -e "all is running successful, program end.\n"
+echo "autorun.sh running Done."

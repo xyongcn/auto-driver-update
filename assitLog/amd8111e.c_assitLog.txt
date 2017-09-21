@@ -1,0 +1,187 @@
+filename to process: amd8111e.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 3
+
+__devinit 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devinit __section(.devinit.text) __cold notrace
+
+	amd8111e.c: 1777:static void __devinit amd8111e_probe_ext_phy(struct net_device* dev)
+	amd8111e.c: 1813:static int __devinit amd8111e_probe_one(struct pci_dev *pdev,
+
+__devexit 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devexit __section(.devexit.text) __exitused __cold notrace
+
+	amd8111e.c: 1705:static void __devexit amd8111e_remove_one(struct pci_dev *pdev)
+
+__devexit_p 	( diff_type: Del type: macro file: include/linux/init.h )
+	-- #define __devexit_p(x) NULL
+
+	amd8111e.c: 1977:	.remove		= __devexit_p(amd8111e_remove_one),
+
+
+===== B  level =====
+total count: 12
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  amd8111e_restart:
+    drivers/net/ethernet/amd/amd8111e.c:507:1
+  amd8111e_link_change:
+    drivers/net/ethernet/amd/amd8111e.c:863:1
+    drivers/net/ethernet/amd/amd8111e.c:872:1
+
+KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_ERR "<3>"
+	++ #define KERN_ERR KERN_SOH "3"
+
+  amd8111e_tx_timeout:
+    drivers/net/ethernet/amd/amd8111e.c:1626:
+  amd8111e_probe_one:
+    drivers/net/ethernet/amd/amd8111e.c:1823:1
+    drivers/net/ethernet/amd/amd8111e.c:1829:1
+    drivers/net/ethernet/amd/amd8111e.c:1837:1
+    drivers/net/ethernet/amd/amd8111e.c:1846:1
+    drivers/net/ethernet/amd/amd8111e.c:1853:1
+    drivers/net/ethernet/amd/amd8111e.c:1882:1
+
+net_device 	( diff_type: Mod type: struct file: include/linux/netdevice.h )
+	-- struct net_device { char name[IFNAMSIZ]; struct pm_qos_request pm_qos_req; struct hlist_node name_hlist; char *ifalias; unsigned long mem_end; unsigned long mem_start; unsigned long base_addr; unsigned int irq; unsigned long state; struct list_head dev_list; struct list_head napi_list; struct list_head unreg_list; netdev_features_t features; netdev_features_t hw_features; netdev_features_t wanted_features; netdev_features_t vlan_features; int ifindex; int iflink; struct net_device_stats stats; atomic_long_t rx_dropped; const struct iw_handler_def * wireless_handlers; struct iw_public_data * wireless_data; const struct net_device_ops *netdev_ops; const struct ethtool_ops *ethtool_ops; const struct header_ops *header_ops; unsigned int flags; unsigned int priv_flags; unsigned short gflags; unsigned short padded; unsigned char operstate; unsigned char link_mode; unsigned char if_port; unsigned char dma; unsigned int mtu; unsigned short type; unsigned short hard_header_len; unsigned short needed_headroom; unsigned short needed_tailroom; unsigned char perm_addr[MAX_ADDR_LEN]; unsigned char addr_assign_type; unsigned char addr_len; unsigned char neigh_priv_len; unsigned short dev_id; spinlock_t addr_list_lock; struct netdev_hw_addr_list uc; struct netdev_hw_addr_list mc; bool uc_promisc; unsigned int promiscuity; unsigned int allmulti; struct vlan_info __rcu *vlan_info; struct dsa_switch_tree *dsa_ptr; void *atalk_ptr; struct in_device __rcu *ip_ptr; struct dn_dev __rcu *dn_ptr; struct inet6_dev __rcu *ip6_ptr; void *ax25_ptr; struct wireless_dev *ieee80211_ptr; unsigned long last_rx; struct net_device *master; unsigned char *dev_addr; struct netdev_hw_addr_list dev_addrs; unsigned char broadcast[MAX_ADDR_LEN]; struct kset *queues_kset; struct netdev_rx_queue *_rx; unsigned int num_rx_queues; unsigned int real_num_rx_queues; struct cpu_rmap *rx_cpu_rmap; rx_handler_func_t __rcu *rx_handler; void __rcu *rx_handler_data; struct netdev_queue __rcu *ingress_queue; struct netdev_queue *_tx ____cacheline_aligned_in_smp; unsigned int num_tx_queues; unsigned int real_num_tx_queues; struct Qdisc *qdisc; unsigned long tx_queue_len; spinlock_t tx_global_lock; struct xps_dev_maps __rcu *xps_maps; unsigned long trans_start; int watchdog_timeo; struct timer_list watchdog_timer; int __percpu *pcpu_refcnt; struct list_head todo_list; struct hlist_node index_hlist; struct list_head link_watch_list; enum { NETREG_UNINITIALIZED=0, NETREG_REGISTERED, NETREG_UNREGISTERING, NETREG_UNREGISTERED, NETREG_RELEASED, NETREG_DUMMY, } reg_state:8; bool dismantle; enum { RTNL_LINK_INITIALIZED, RTNL_LINK_INITIALIZING, } rtnl_link_state:16; void (*destructor)(struct net_device *dev); struct netpoll_info *npinfo; struct net *nd_net; void *ml_priv; struct pcpu_lstats __percpu *lstats; struct pcpu_tstats __percpu *tstats; struct pcpu_dstats __percpu *dstats; }; struct garp_port __rcu *garp_port; struct device dev; const struct attribute_group *sysfs_groups[4]; const struct rtnl_link_ops *rtnl_link_ops; #define GSO_MAX_SIZE 65536 unsigned int gso_max_size; #define GSO_MAX_SEGS 65535 u16 gso_max_segs; const struct dcbnl_rtnl_ops *dcbnl_ops; u8 num_tc; struct netdev_tc_txq tc_to_txq[TC_MAX_QUEUE]; u8 prio_tc_map[TC_BITMASK + 1]; unsigned int fcoe_ddp_xid; struct netprio_map __rcu *priomap; struct phy_device *phydev; int group; };
+	++ struct net_device { char name[IFNAMSIZ]; struct hlist_node name_hlist; char *ifalias; unsigned long mem_end; unsigned long mem_start; unsigned long base_addr; unsigned int irq; unsigned long state; struct list_head dev_list; struct list_head napi_list; struct list_head unreg_list; netdev_features_t features; netdev_features_t hw_features; netdev_features_t wanted_features; netdev_features_t vlan_features; netdev_features_t hw_enc_features; int ifindex; int iflink; struct net_device_stats stats; atomic_long_t rx_dropped; const struct iw_handler_def * wireless_handlers; struct iw_public_data * wireless_data; const struct net_device_ops *netdev_ops; const struct ethtool_ops *ethtool_ops; const struct header_ops *header_ops; unsigned int flags; unsigned int priv_flags; unsigned short gflags; unsigned short padded; unsigned char operstate; unsigned char link_mode; unsigned char if_port; unsigned char dma; unsigned int mtu; unsigned short type; unsigned short hard_header_len; unsigned short needed_headroom; unsigned short needed_tailroom; unsigned char perm_addr[MAX_ADDR_LEN]; unsigned char addr_assign_type; unsigned char addr_len; unsigned char neigh_priv_len; unsigned short dev_id; spinlock_t addr_list_lock; struct netdev_hw_addr_list uc; struct netdev_hw_addr_list mc; bool uc_promisc; unsigned int promiscuity; unsigned int allmulti; struct vlan_info __rcu *vlan_info; struct dsa_switch_tree *dsa_ptr; void *atalk_ptr; struct in_device __rcu *ip_ptr; struct dn_dev __rcu *dn_ptr; struct inet6_dev __rcu *ip6_ptr; void *ax25_ptr; struct wireless_dev *ieee80211_ptr; unsigned long last_rx; struct net_device *master; unsigned char *dev_addr; struct netdev_hw_addr_list dev_addrs; unsigned char broadcast[MAX_ADDR_LEN]; struct kset *queues_kset; struct netdev_rx_queue *_rx; unsigned int num_rx_queues; unsigned int real_num_rx_queues; struct cpu_rmap *rx_cpu_rmap; rx_handler_func_t __rcu *rx_handler; void __rcu *rx_handler_data; struct netdev_queue __rcu *ingress_queue; struct netdev_queue *_tx ____cacheline_aligned_in_smp; unsigned int num_tx_queues; unsigned int real_num_tx_queues; struct Qdisc *qdisc; unsigned long tx_queue_len; spinlock_t tx_global_lock; struct xps_dev_maps __rcu *xps_maps; unsigned long trans_start; int watchdog_timeo; struct timer_list watchdog_timer; int __percpu *pcpu_refcnt; struct list_head todo_list; struct hlist_node index_hlist; struct list_head link_watch_list; enum { NETREG_UNINITIALIZED=0, NETREG_REGISTERED, NETREG_UNREGISTERING, NETREG_UNREGISTERED, NETREG_RELEASED, NETREG_DUMMY, } reg_state:8; bool dismantle; enum { RTNL_LINK_INITIALIZED, RTNL_LINK_INITIALIZING, } rtnl_link_state:16; void (*destructor)(struct net_device *dev); struct netpoll_info *npinfo; struct net *nd_net; void *ml_priv; struct pcpu_lstats __percpu *lstats; struct pcpu_tstats __percpu *tstats; struct pcpu_dstats __percpu *dstats; }; struct garp_port __rcu *garp_port; struct device dev; const struct attribute_group *sysfs_groups[4]; const struct rtnl_link_ops *rtnl_link_ops; #define GSO_MAX_SIZE 65536 unsigned int gso_max_size; #define GSO_MAX_SEGS 65535 u16 gso_max_segs; const struct dcbnl_rtnl_ops *dcbnl_ops; u8 num_tc; struct netdev_tc_txq tc_to_txq[TC_MAX_QUEUE]; u8 prio_tc_map[TC_BITMASK + 1]; unsigned int fcoe_ddp_xid; struct netprio_map __rcu *priomap; struct phy_device *phydev; struct lock_class_key *qdisc_tx_busylock; int group; struct pm_qos_request pm_qos_req; };
+
+  amd8111e_mdio_read:
+    drivers/net/ethernet/amd/amd8111e.c:185
+  amd8111e_mdio_write:
+    drivers/net/ethernet/amd/amd8111e.c:198
+  amd8111e_set_ext_phy:
+    drivers/net/ethernet/amd/amd8111e.c:208
+  amd8111e_free_skbs:
+    drivers/net/ethernet/amd/amd8111e.c:250
+  amd8111e_set_rx_buff_len:
+    drivers/net/ethernet/amd/amd8111e.c:283
+  amd8111e_init_ring:
+    drivers/net/ethernet/amd/amd8111e.c:303
+  amd8111e_set_coalesce:
+    drivers/net/ethernet/amd/amd8111e.c:383
+  amd8111e_restart:
+    drivers/net/ethernet/amd/amd8111e.c:444
+  amd8111e_tx:
+    drivers/net/ethernet/amd/amd8111e.c:668
+  amd8111e_link_change:
+    drivers/net/ethernet/amd/amd8111e.c:839
+  amd8111e_get_stats:
+    drivers/net/ethernet/amd/amd8111e.c:902
+  amd8111e_calc_coalesce:
+    drivers/net/ethernet/amd/amd8111e.c:998
+  amd8111e_close:
+    drivers/net/ethernet/amd/amd8111e.c:1211
+  amd8111e_open:
+    drivers/net/ethernet/amd/amd8111e.c:1243
+  amd8111e_start_xmit:
+    drivers/net/ethernet/amd/amd8111e.c:1295
+  amd8111e_set_multicast_list:
+    drivers/net/ethernet/amd/amd8111e.c:1368
+  amd8111e_get_drvinfo:
+    drivers/net/ethernet/amd/amd8111e.c:1412
+  amd8111e_get_regs_len:
+    drivers/net/ethernet/amd/amd8111e.c:1423
+  amd8111e_get_regs:
+    drivers/net/ethernet/amd/amd8111e.c:1428
+  amd8111e_get_settings:
+    drivers/net/ethernet/amd/amd8111e.c:1435
+  amd8111e_set_settings:
+    drivers/net/ethernet/amd/amd8111e.c:1444
+  amd8111e_nway_reset:
+    drivers/net/ethernet/amd/amd8111e.c:1454
+  amd8111e_get_link:
+    drivers/net/ethernet/amd/amd8111e.c:1460
+  amd8111e_get_wol:
+    drivers/net/ethernet/amd/amd8111e.c:1466
+  amd8111e_set_wol:
+    drivers/net/ethernet/amd/amd8111e.c:1474
+  amd8111e_ioctl:
+    drivers/net/ethernet/amd/amd8111e.c:1508
+  amd8111e_set_mac_address:
+    drivers/net/ethernet/amd/amd8111e.c:1545
+  amd8111e_change_mtu:
+    drivers/net/ethernet/amd/amd8111e.c:1565
+  amd8111e_tx_timeout:
+    drivers/net/ethernet/amd/amd8111e.c:1621
+  amd8111e_config_ipg:
+    drivers/net/ethernet/amd/amd8111e.c:1717
+  amd8111e_probe_ext_phy:
+    drivers/net/ethernet/amd/amd8111e.c:1777
+
+napi_struct 	( diff_type: Mod type: struct file: include/linux/netdevice.h )
+	-- struct napi_struct { struct list_head poll_list; unsigned long state; int weight; int (*poll)(struct napi_struct *, int); spinlock_t poll_lock; int poll_owner; unsigned int gro_count; struct net_device *dev; struct list_head dev_list; struct sk_buff *gro_list; struct sk_buff *skb; };
+	++ struct napi_struct { struct list_head poll_list; unsigned long state; int weight; unsigned int gro_count; int (*poll)(struct napi_struct *, int); spinlock_t poll_lock; int poll_owner; struct net_device *dev; struct sk_buff *gro_list; struct sk_buff *skb; struct list_head dev_list; };
+
+  amd8111e_rx_poll:
+    drivers/net/ethernet/amd/amd8111e.c:709
+
+sk_buff 	( diff_type: Mod type: struct file: include/linux/skbuff.h )
+	-- struct sk_buff { struct sk_buff *next; struct sk_buff *prev; ktime_t tstamp; struct sock *sk; struct net_device *dev; unsigned long _skb_refdst; struct sec_path *sp; unsigned int len,data_len; __u16 mac_len,hdr_len; union { hdr_len; union { __wsum csum; struct { __u16 csum_start; __u16 csum_offset; }; __u32 priority; kmemcheck_bitfield_begin(flags1); __u8 local_df:1,cloned:1,ip_summed:2,nohdr:1,nfctinfo:3; __u8 pkt_type:3,fclone:2,ipvs_property:1,peeked:1,nf_trace:1; kmemcheck_bitfield_end(flags1); __be16 protocol; void (*destructor)(struct sk_buff *skb); struct nf_conntrack *nfct; struct sk_buff *nfct_reasm; struct nf_bridge_info *nf_bridge; int skb_iif; __u32 rxhash; __u16 vlan_tci; __u16 tc_index; __u16 tc_verd; __u16 queue_mapping; kmemcheck_bitfield_begin(flags2); __u8 ndisc_nodetype:2; __u8 ooo_okay:1; __u8 l4_rxhash:1; __u8 wifi_acked_valid:1; __u8 wifi_acked:1; __u8 no_fcs:1; __u8 head_frag:1; kmemcheck_bitfield_end(flags2); dma_cookie_t dma_cookie; __u32 secmark; __u32 mark; __u32 dropcount; __u32 avail_size; }; sk_buff_data_t transport_header; sk_buff_data_t network_header; sk_buff_data_t mac_header; sk_buff_data_t tail; sk_buff_data_t end; unsigned char *head,*data; unsigned int truesize; atomic_t users; };
+	++ struct sk_buff { struct sk_buff *next; struct sk_buff *prev; ktime_t tstamp; struct sock *sk; struct net_device *dev; unsigned long _skb_refdst; struct sec_path *sp; unsigned int len,data_len; __u16 mac_len,hdr_len; union { hdr_len; union { __wsum csum; struct { __u16 csum_start; __u16 csum_offset; }; __u32 priority; kmemcheck_bitfield_begin(flags1); __u8 local_df:1,cloned:1,ip_summed:2,nohdr:1,nfctinfo:3; __u8 pkt_type:3,fclone:2,ipvs_property:1,peeked:1,nf_trace:1; kmemcheck_bitfield_end(flags1); __be16 protocol; void (*destructor)(struct sk_buff *skb); struct nf_conntrack *nfct; struct sk_buff *nfct_reasm; struct nf_bridge_info *nf_bridge; int skb_iif; __u32 rxhash; __u16 vlan_tci; __u16 tc_index; __u16 tc_verd; __u16 queue_mapping; kmemcheck_bitfield_begin(flags2); __u8 ndisc_nodetype:2; __u8 pfmemalloc:1; __u8 ooo_okay:1; __u8 l4_rxhash:1; __u8 wifi_acked_valid:1; __u8 wifi_acked:1; __u8 no_fcs:1; __u8 head_frag:1; __u8 encapsulation:1; kmemcheck_bitfield_end(flags2); dma_cookie_t dma_cookie; __u32 secmark; __u32 mark; __u32 dropcount; __u32 reserved_tailroom; }; sk_buff_data_t inner_transport_header; sk_buff_data_t inner_network_header; sk_buff_data_t transport_header; sk_buff_data_t network_header; sk_buff_data_t mac_header; sk_buff_data_t tail; sk_buff_data_t end; unsigned char *head,*data; unsigned int truesize; atomic_t users; };
+
+  amd8111e_start_xmit:
+    drivers/net/ethernet/amd/amd8111e.c:1294
+
+ethtool_cmd 	( diff_type: All type: struct file: include/linux/ethtool.h-->include/uapi/linux/ethtool.h )
+	-- struct ethtool_cmd { __u32 cmd; __u32 supported; __u32 advertising; __u16 speed; __u8 duplex; __u8 port; __u8 phy_address; __u8 transceiver; __u8 autoneg; __u8 mdio_support; __u32 maxtxpkt; __u32 maxrxpkt; __u16 speed_hi; __u8 eth_tp_mdix; __u8 reserved2; __u32 lp_advertising; __u32 reserved[2]; };
+	++ struct ethtool_cmd { __u32 cmd; __u32 supported; __u32 advertising; __u16 speed; __u8 duplex; __u8 port; __u8 phy_address; __u8 transceiver; __u8 autoneg; __u8 mdio_support; __u32 maxtxpkt; __u32 maxrxpkt; __u16 speed_hi; __u8 eth_tp_mdix; __u8 eth_tp_mdix_ctrl; __u32 lp_advertising; __u32 reserved[2]; };
+
+  amd8111e_get_settings:
+    drivers/net/ethernet/amd/amd8111e.c:1435
+  amd8111e_set_settings:
+    drivers/net/ethernet/amd/amd8111e.c:1444
+
+pci_dev 	( diff_type: Mod type: struct file: include/linux/pci.h )
+	-- struct pci_dev { struct list_head bus_list; struct pci_bus *bus; struct pci_bus *subordinate; void *sysdata; struct proc_dir_entry *procent; struct pci_slot *slot; unsigned int devfn; unsigned short vendor; unsigned short device; unsigned short subsystem_vendor; unsigned short subsystem_device; u8 revision; u8 hdr_type; u8 pcie_cap; u8 pcie_type:4; u8 pcie_mpss:3; u8 rom_base_reg; u8 pin; struct pci_driver *driver; u64 dma_mask; struct device_dma_parameters dma_parms; pci_power_t current_state; int pm_cap; unsigned int pme_support:5; unsigned int pme_interrupt:1; unsigned int pme_poll:1; unsigned int d1_support:1; unsigned int d2_support:1; unsigned int no_d1d2:1; unsigned int mmio_always_on:1; unsigned int wakeup_prepared:1; unsigned int d3_delay; struct pcie_link_state *link_state; pci_channel_state_t error_state; struct device dev; int cfg_size; unsigned int irq; struct resource resource[DEVICE_COUNT_RESOURCE]; unsigned int transparent:1; unsigned int multifunction:1; unsigned int is_added:1; unsigned int is_busmaster:1; unsigned int no_msi:1; unsigned int block_cfg_access:1; unsigned int broken_parity_status:1; unsigned int irq_reroute_variant:2; unsigned int msi_enabled:1; unsigned int msix_enabled:1; unsigned int ari_enabled:1; unsigned int is_managed:1; unsigned int is_pcie:1; unsigned int needs_freset:1; unsigned int state_saved:1; unsigned int is_physfn:1; unsigned int is_virtfn:1; unsigned int reset_fn:1; unsigned int is_hotplug_bridge:1; unsigned int __aer_firmware_first_valid:1; unsigned int __aer_firmware_first:1; pci_dev_flags_t dev_flags; atomic_t enable_cnt; u32 saved_config_space[16]; struct hlist_head saved_cap_space; struct bin_attribute *rom_attr; int rom_attr_enabled; struct bin_attribute *res_attr[DEVICE_COUNT_RESOURCE]; struct bin_attribute *res_attr_wc[DEVICE_COUNT_RESOURCE]; struct list_head msi_list; struct kset *msi_kset; struct pci_vpd *vpd; struct pci_sriov *sriov; struct pci_dev *physfn; }; struct pci_ats *ats; };
+	++ struct pci_dev { struct list_head bus_list; struct pci_bus *bus; struct pci_bus *subordinate; void *sysdata; struct proc_dir_entry *procent; struct pci_slot *slot; unsigned int devfn; unsigned short vendor; unsigned short device; unsigned short subsystem_vendor; unsigned short subsystem_device; u8 revision; u8 hdr_type; u8 pcie_cap; u8 pcie_mpss:3; u8 rom_base_reg; u8 pin; u16 pcie_flags_reg; struct pci_driver *driver; u64 dma_mask; struct device_dma_parameters dma_parms; pci_power_t current_state; int pm_cap; unsigned int pme_support:5; unsigned int pme_interrupt:1; unsigned int pme_poll:1; unsigned int d1_support:1; unsigned int d2_support:1; unsigned int no_d1d2:1; unsigned int no_d3cold:1; unsigned int d3cold_allowed:1; unsigned int mmio_always_on:1; unsigned int wakeup_prepared:1; unsigned int runtime_d3cold:1; unsigned int d3_delay; unsigned int d3cold_delay; struct pcie_link_state *link_state; pci_channel_state_t error_state; struct device dev; int cfg_size; unsigned int irq; struct resource resource[DEVICE_COUNT_RESOURCE]; unsigned int transparent:1; unsigned int multifunction:1; unsigned int is_added:1; unsigned int is_busmaster:1; unsigned int no_msi:1; unsigned int block_cfg_access:1; unsigned int broken_parity_status:1; unsigned int irq_reroute_variant:2; unsigned int msi_enabled:1; unsigned int msix_enabled:1; unsigned int ari_enabled:1; unsigned int is_managed:1; unsigned int is_pcie:1; unsigned int needs_freset:1; unsigned int state_saved:1; unsigned int is_physfn:1; unsigned int is_virtfn:1; unsigned int reset_fn:1; unsigned int is_hotplug_bridge:1; unsigned int __aer_firmware_first_valid:1; unsigned int __aer_firmware_first:1; unsigned int broken_intx_masking:1; unsigned int io_window_1k:1; pci_dev_flags_t dev_flags; atomic_t enable_cnt; u32 saved_config_space[16]; struct hlist_head saved_cap_space; struct bin_attribute *rom_attr; int rom_attr_enabled; struct bin_attribute *res_attr[DEVICE_COUNT_RESOURCE]; struct bin_attribute *res_attr_wc[DEVICE_COUNT_RESOURCE]; struct list_head msi_list; struct kset *msi_kset; struct pci_vpd *vpd; struct pci_sriov *sriov; struct pci_dev *physfn; }; struct pci_ats *ats; phys_addr_t rom; size_t romlen; };
+
+  amd8111e_suspend:
+    drivers/net/ethernet/amd/amd8111e.c:1634
+  amd8111e_resume:
+    drivers/net/ethernet/amd/amd8111e.c:1677
+  amd8111e_remove_one:
+    drivers/net/ethernet/amd/amd8111e.c:1705
+  amd8111e_probe_one:
+    drivers/net/ethernet/amd/amd8111e.c:1813
+
+pci_driver 	( diff_type: Mod type: struct file: include/linux/pci.h )
+	-- struct pci_driver { struct list_head node; const char *name; const struct pci_device_id *id_table; int (*probe) (struct pci_dev *dev, const struct pci_device_id *id); void (*remove) (struct pci_dev *dev); int (*suspend) (struct pci_dev *dev, pm_message_t state); int (*suspend_late) (struct pci_dev *dev, pm_message_t state); int (*resume_early) (struct pci_dev *dev); int (*resume) (struct pci_dev *dev); void (*shutdown) (struct pci_dev *dev); struct pci_error_handlers *err_handler; struct device_driver driver; struct pci_dynids dynids; };
+	++ struct pci_driver { struct list_head node; const char *name; const struct pci_device_id *id_table; int (*probe) (struct pci_dev *dev, const struct pci_device_id *id); void (*remove) (struct pci_dev *dev); int (*suspend) (struct pci_dev *dev, pm_message_t state); int (*suspend_late) (struct pci_dev *dev, pm_message_t state); int (*resume_early) (struct pci_dev *dev); int (*resume) (struct pci_dev *dev); void (*shutdown) (struct pci_dev *dev); int (*sriov_configure) (struct pci_dev *dev, int num_vfs); const struct pci_error_handlers *err_handler; struct device_driver driver; struct pci_dynids dynids; };
+
+	amd8111e.c: 1973:static struct pci_driver amd8111e_driver = {
+
+DEFINE_PCI_DEVICE_TABLE 	( diff_type: Mod type: macro file: include/linux/pci.h )
+	-- #define DEFINE_PCI_DEVICE_TABLE(_table) const struct pci_device_id _table[] __devinitconst
+	++ #define DEFINE_PCI_DEVICE_TABLE(_table) const struct pci_device_id _table[]
+
+	amd8111e.c: 115:static DEFINE_PCI_DEVICE_TABLE(amd8111e_pci_tbl) = {
+
+netdev_hw_addr 	( diff_type: Mod type: struct file: include/linux/netdevice.h )
+	-- struct netdev_hw_addr { struct list_head list; unsigned char addr[MAX_ADDR_LEN]; unsigned char type; #define NETDEV_HW_ADDR_T_LAN 1 #define NETDEV_HW_ADDR_T_SAN 2 #define NETDEV_HW_ADDR_T_SLAVE 3 #define NETDEV_HW_ADDR_T_UNICAST 4 #define NETDEV_HW_ADDR_T_MULTICAST 5 bool synced; bool global_use; int refcount; struct rcu_head rcu_head; };
+	++ struct netdev_hw_addr { struct list_head list; unsigned char addr[MAX_ADDR_LEN]; unsigned char type; #define NETDEV_HW_ADDR_T_LAN 1 #define NETDEV_HW_ADDR_T_SAN 2 #define NETDEV_HW_ADDR_T_SLAVE 3 #define NETDEV_HW_ADDR_T_UNICAST 4 #define NETDEV_HW_ADDR_T_MULTICAST 5 bool global_use; int refcount; int synced; struct rcu_head rcu_head; };
+
+	amd8111e.c: 1370:	struct netdev_hw_addr *ha;
+
+net_device_ops 	( diff_type: Mod type: struct file: include/linux/netdevice.h )
+	-- struct net_device_ops { int (*ndo_init)(struct net_device *dev); void (*ndo_uninit)(struct net_device *dev); int (*ndo_open)(struct net_device *dev); int (*ndo_stop)(struct net_device *dev); netdev_tx_t (*ndo_start_xmit) (struct sk_buff *skb,struct net_device *dev); u16 (*ndo_select_queue)(struct net_device *dev,struct sk_buff *skb); void (*ndo_change_rx_flags)(struct net_device *dev,int flags); void (*ndo_set_rx_mode)(struct net_device *dev); int (*ndo_set_mac_address)(struct net_device *dev,void *addr); int (*ndo_validate_addr)(struct net_device *dev); int (*ndo_do_ioctl)(struct net_device *dev,struct ifreq *ifr, int cmd); int (*ndo_set_config)(struct net_device *dev,struct ifmap *map); int (*ndo_change_mtu)(struct net_device *dev,int new_mtu); int (*ndo_neigh_setup)(struct net_device *dev,struct neigh_parms *); void (*ndo_tx_timeout) (struct net_device *dev); struct rtnl_link_stats64* (*ndo_get_stats64)(struct net_device *dev,struct rtnl_link_stats64 *storage); struct net_device_stats* (*ndo_get_stats)(struct net_device *dev); int (*ndo_vlan_rx_add_vid)(struct net_device *dev,unsigned short vid); int (*ndo_vlan_rx_kill_vid)(struct net_device *dev,unsigned short vid); void (*ndo_poll_controller)(struct net_device *dev); int (*ndo_netpoll_setup)(struct net_device *dev,struct netpoll_info *info); void (*ndo_netpoll_cleanup)(struct net_device *dev); int (*ndo_set_vf_mac)(struct net_device *dev,int queue, u8 *mac); int (*ndo_set_vf_vlan)(struct net_device *dev,int queue, u16 vlan, u8 qos); int (*ndo_set_vf_tx_rate)(struct net_device *dev,int vf, int rate); int (*ndo_set_vf_spoofchk)(struct net_device *dev,int vf, bool setting); int (*ndo_get_vf_config)(struct net_device *dev,int vf,struct ifla_vf_info *ivf); int (*ndo_set_vf_port)(struct net_device *dev,int vf,struct nlattr *port[]); int (*ndo_get_vf_port)(struct net_device *dev,int vf, struct sk_buff *skb); int (*ndo_setup_tc)(struct net_device *dev, u8 tc); int (*ndo_fcoe_enable)(struct net_device *dev); int (*ndo_fcoe_disable)(struct net_device *dev); int (*ndo_fcoe_ddp_setup)(struct net_device *dev,u16 xid,struct scatterlist *sgl,unsigned int sgc); int (*ndo_fcoe_ddp_done)(struct net_device *dev,u16 xid); int (*ndo_fcoe_ddp_target)(struct net_device *dev,u16 xid,struct scatterlist *sgl,unsigned int sgc); int (*ndo_fcoe_get_hbainfo)(struct net_device *dev,struct netdev_fcoe_hbainfo *hbainfo); #define NETDEV_FCOE_WWNN 0 #define NETDEV_FCOE_WWPN 1 int (*ndo_fcoe_get_wwn)(struct net_device *dev,u64 *wwn, int type); int (*ndo_rx_flow_steer)(struct net_device *dev,const struct sk_buff *skb,u16 rxq_index,u32 flow_id); int (*ndo_add_slave)(struct net_device *dev,struct net_device *slave_dev); int (*ndo_del_slave)(struct net_device *dev,struct net_device *slave_dev); netdev_features_t (*ndo_fix_features)(struct net_device *dev,netdev_features_t features); int (*ndo_set_features)(struct net_device *dev,netdev_features_t features); int (*ndo_neigh_construct)(struct neighbour *n); void (*ndo_neigh_destroy)(struct neighbour *n); int (*ndo_fdb_add)(struct ndmsg *ndm,struct net_device *dev,unsigned char *addr,u16 flags); int (*ndo_fdb_del)(struct ndmsg *ndm,struct net_device *dev,unsigned char *addr); int (*ndo_fdb_dump)(struct sk_buff *skb,struct netlink_callback *cb,struct net_device *dev,int idx); };
+	++ struct net_device_ops { int (*ndo_init)(struct net_device *dev); void (*ndo_uninit)(struct net_device *dev); int (*ndo_open)(struct net_device *dev); int (*ndo_stop)(struct net_device *dev); netdev_tx_t (*ndo_start_xmit) (struct sk_buff *skb,struct net_device *dev); u16 (*ndo_select_queue)(struct net_device *dev,struct sk_buff *skb); void (*ndo_change_rx_flags)(struct net_device *dev,int flags); void (*ndo_set_rx_mode)(struct net_device *dev); int (*ndo_set_mac_address)(struct net_device *dev,void *addr); int (*ndo_validate_addr)(struct net_device *dev); int (*ndo_do_ioctl)(struct net_device *dev,struct ifreq *ifr, int cmd); int (*ndo_set_config)(struct net_device *dev,struct ifmap *map); int (*ndo_change_mtu)(struct net_device *dev,int new_mtu); int (*ndo_neigh_setup)(struct net_device *dev,struct neigh_parms *); void (*ndo_tx_timeout) (struct net_device *dev); struct rtnl_link_stats64* (*ndo_get_stats64)(struct net_device *dev,struct rtnl_link_stats64 *storage); struct net_device_stats* (*ndo_get_stats)(struct net_device *dev); int (*ndo_vlan_rx_add_vid)(struct net_device *dev,unsigned short vid); int (*ndo_vlan_rx_kill_vid)(struct net_device *dev,unsigned short vid); void (*ndo_poll_controller)(struct net_device *dev); int (*ndo_netpoll_setup)(struct net_device *dev,struct netpoll_info *info,gfp_t gfp); void (*ndo_netpoll_cleanup)(struct net_device *dev); int (*ndo_set_vf_mac)(struct net_device *dev,int queue, u8 *mac); int (*ndo_set_vf_vlan)(struct net_device *dev,int queue, u16 vlan, u8 qos); int (*ndo_set_vf_tx_rate)(struct net_device *dev,int vf, int rate); int (*ndo_set_vf_spoofchk)(struct net_device *dev,int vf, bool setting); int (*ndo_get_vf_config)(struct net_device *dev,int vf,struct ifla_vf_info *ivf); int (*ndo_set_vf_port)(struct net_device *dev,int vf,struct nlattr *port[]); int (*ndo_get_vf_port)(struct net_device *dev,int vf, struct sk_buff *skb); int (*ndo_setup_tc)(struct net_device *dev, u8 tc); int (*ndo_fcoe_enable)(struct net_device *dev); int (*ndo_fcoe_disable)(struct net_device *dev); int (*ndo_fcoe_ddp_setup)(struct net_device *dev,u16 xid,struct scatterlist *sgl,unsigned int sgc); int (*ndo_fcoe_ddp_done)(struct net_device *dev,u16 xid); int (*ndo_fcoe_ddp_target)(struct net_device *dev,u16 xid,struct scatterlist *sgl,unsigned int sgc); int (*ndo_fcoe_get_hbainfo)(struct net_device *dev,struct netdev_fcoe_hbainfo *hbainfo); #define NETDEV_FCOE_WWNN 0 #define NETDEV_FCOE_WWPN 1 int (*ndo_fcoe_get_wwn)(struct net_device *dev,u64 *wwn, int type); int (*ndo_rx_flow_steer)(struct net_device *dev,const struct sk_buff *skb,u16 rxq_index,u32 flow_id); int (*ndo_add_slave)(struct net_device *dev,struct net_device *slave_dev); int (*ndo_del_slave)(struct net_device *dev,struct net_device *slave_dev); netdev_features_t (*ndo_fix_features)(struct net_device *dev,netdev_features_t features); int (*ndo_set_features)(struct net_device *dev,netdev_features_t features); int (*ndo_neigh_construct)(struct neighbour *n); void (*ndo_neigh_destroy)(struct neighbour *n); int (*ndo_fdb_add)(struct ndmsg *ndm,struct nlattr *tb[],struct net_device *dev,const unsigned char *addr,u16 flags); int (*ndo_fdb_del)(struct ndmsg *ndm,struct net_device *dev,const unsigned char *addr); int (*ndo_fdb_dump)(struct sk_buff *skb,struct netlink_callback *cb,struct net_device *dev,int idx); int (*ndo_bridge_setlink)(struct net_device *dev,struct nlmsghdr *nlh); int (*ndo_bridge_getlink)(struct sk_buff *skb,u32 pid, u32 seq,struct net_device *dev); };
+
+	amd8111e.c: 1797:static const struct net_device_ops amd8111e_netdev_ops = {
+
+ethtool_ops 	( diff_type: Mod type: struct file: include/linux/ethtool.h )
+	-- struct ethtool_ops { int (*get_settings)(struct net_device *, struct ethtool_cmd *); int (*set_settings)(struct net_device *, struct ethtool_cmd *); void (*get_drvinfo)(struct net_device *, struct ethtool_drvinfo *); int (*get_regs_len)(struct net_device *); void (*get_regs)(struct net_device *, struct ethtool_regs *, void *); void (*get_wol)(struct net_device *, struct ethtool_wolinfo *); int (*set_wol)(struct net_device *, struct ethtool_wolinfo *); u32 (*get_msglevel)(struct net_device *); void (*set_msglevel)(struct net_device *, u32); int (*nway_reset)(struct net_device *); u32 (*get_link)(struct net_device *); int (*get_eeprom_len)(struct net_device *); int (*get_eeprom)(struct net_device *,struct ethtool_eeprom *, u8 *); int (*set_eeprom)(struct net_device *,struct ethtool_eeprom *, u8 *); int (*get_coalesce)(struct net_device *, struct ethtool_coalesce *); int (*set_coalesce)(struct net_device *, struct ethtool_coalesce *); void (*get_ringparam)(struct net_device *,struct ethtool_ringparam *); int (*set_ringparam)(struct net_device *,struct ethtool_ringparam *); void (*get_pauseparam)(struct net_device *,struct ethtool_pauseparam*); int (*set_pauseparam)(struct net_device *,struct ethtool_pauseparam*); void (*self_test)(struct net_device *, struct ethtool_test *, u64 *); void (*get_strings)(struct net_device *, u32 stringset, u8 *); int (*set_phys_id)(struct net_device *, enum ethtool_phys_id_state); void (*get_ethtool_stats)(struct net_device *,struct ethtool_stats *, u64 *); int (*begin)(struct net_device *); void (*complete)(struct net_device *); u32 (*get_priv_flags)(struct net_device *); int (*set_priv_flags)(struct net_device *, u32); int (*get_sset_count)(struct net_device *, int); int (*get_rxnfc)(struct net_device *,struct ethtool_rxnfc *, u32 *rule_locs); int (*set_rxnfc)(struct net_device *, struct ethtool_rxnfc *); int (*flash_device)(struct net_device *, struct ethtool_flash *); int (*reset)(struct net_device *, u32 *); u32 (*get_rxfh_indir_size)(struct net_device *); int (*get_rxfh_indir)(struct net_device *, u32 *); int (*set_rxfh_indir)(struct net_device *, const u32 *); void (*get_channels)(struct net_device *, struct ethtool_channels *); int (*set_channels)(struct net_device *, struct ethtool_channels *); int (*get_dump_flag)(struct net_device *, struct ethtool_dump *); int (*get_dump_data)(struct net_device *,struct ethtool_dump *, void *); int (*set_dump)(struct net_device *, struct ethtool_dump *); int (*get_ts_info)(struct net_device *, struct ethtool_ts_info *); int (*get_module_info)(struct net_device *,struct ethtool_modinfo *); int (*get_module_eeprom)(struct net_device *,struct ethtool_eeprom *, u8 *); };
+	++ struct ethtool_ops { int (*get_settings)(struct net_device *, struct ethtool_cmd *); int (*set_settings)(struct net_device *, struct ethtool_cmd *); void (*get_drvinfo)(struct net_device *, struct ethtool_drvinfo *); int (*get_regs_len)(struct net_device *); void (*get_regs)(struct net_device *, struct ethtool_regs *, void *); void (*get_wol)(struct net_device *, struct ethtool_wolinfo *); int (*set_wol)(struct net_device *, struct ethtool_wolinfo *); u32 (*get_msglevel)(struct net_device *); void (*set_msglevel)(struct net_device *, u32); int (*nway_reset)(struct net_device *); u32 (*get_link)(struct net_device *); int (*get_eeprom_len)(struct net_device *); int (*get_eeprom)(struct net_device *,struct ethtool_eeprom *, u8 *); int (*set_eeprom)(struct net_device *,struct ethtool_eeprom *, u8 *); int (*get_coalesce)(struct net_device *, struct ethtool_coalesce *); int (*set_coalesce)(struct net_device *, struct ethtool_coalesce *); void (*get_ringparam)(struct net_device *,struct ethtool_ringparam *); int (*set_ringparam)(struct net_device *,struct ethtool_ringparam *); void (*get_pauseparam)(struct net_device *,struct ethtool_pauseparam*); int (*set_pauseparam)(struct net_device *,struct ethtool_pauseparam*); void (*self_test)(struct net_device *, struct ethtool_test *, u64 *); void (*get_strings)(struct net_device *, u32 stringset, u8 *); int (*set_phys_id)(struct net_device *, enum ethtool_phys_id_state); void (*get_ethtool_stats)(struct net_device *,struct ethtool_stats *, u64 *); int (*begin)(struct net_device *); void (*complete)(struct net_device *); u32 (*get_priv_flags)(struct net_device *); int (*set_priv_flags)(struct net_device *, u32); int (*get_sset_count)(struct net_device *, int); int (*get_rxnfc)(struct net_device *,struct ethtool_rxnfc *, u32 *rule_locs); int (*set_rxnfc)(struct net_device *, struct ethtool_rxnfc *); int (*flash_device)(struct net_device *, struct ethtool_flash *); int (*reset)(struct net_device *, u32 *); u32 (*get_rxfh_indir_size)(struct net_device *); int (*get_rxfh_indir)(struct net_device *, u32 *); int (*set_rxfh_indir)(struct net_device *, const u32 *); void (*get_channels)(struct net_device *, struct ethtool_channels *); int (*set_channels)(struct net_device *, struct ethtool_channels *); int (*get_dump_flag)(struct net_device *, struct ethtool_dump *); int (*get_dump_data)(struct net_device *,struct ethtool_dump *, void *); int (*set_dump)(struct net_device *, struct ethtool_dump *); int (*get_ts_info)(struct net_device *, struct ethtool_ts_info *); int (*get_module_info)(struct net_device *,struct ethtool_modinfo *); int (*get_module_eeprom)(struct net_device *,struct ethtool_eeprom *, u8 *); int (*get_eee)(struct net_device *, struct ethtool_eee *); int (*set_eee)(struct net_device *, struct ethtool_eee *); };
+
+	amd8111e.c: 1492:static const struct ethtool_ops ops = {
+
+
+===== C  level =====
+total count: 0

@@ -1,0 +1,177 @@
+filename to process: sg.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 1
+
+VM_RESERVED 	( diff_type: Del type: macro file: include/linux/mm.h )
+	-- #define VM_RESERVED 0x00080000
+
+	sg.c: 1260:	vma->vm_flags |= VM_RESERVED;
+
+
+===== B  level =====
+total count: 13
+
+KERN_WARNING 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_WARNING "<4>"
+	++ #define KERN_WARNING KERN_SOH "4"
+
+  sg_write:
+    drivers/scsi/sg.c:654:2
+  sg_alloc:
+    drivers/scsi/sg.c:1390:1
+    drivers/scsi/sg.c:1395:1
+    drivers/scsi/sg.c:1405:1
+    drivers/scsi/sg.c:1437:1
+  sg_add:
+    drivers/scsi/sg.c:1456:1
+    drivers/scsi/sg.c:1464:1
+    drivers/scsi/sg.c:1472:1
+    drivers/scsi/sg.c:1501:1
+
+put_user 	( diff_type: Mod type: macro file: arch/x86/include/asm/uaccess.h )
+	-- #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr))__pus_tmp = x; __ret_pu = 0; if (unlikely(__copy_to_user_ll(ptr, &__pus_tmp, sizeof(*(ptr))) != 0)) __ret_pu = -EFAULT; __ret_pu; })
+	++ #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr)) __pu_val; __chk_user_ptr(ptr); might_fault(); __pu_val = x; switch (sizeof(*(ptr))) { case 1: __put_user_x(1, __pu_val, ptr, __ret_pu); break; case 2: __put_user_x(2, __pu_val, ptr, __ret_pu); break; case 4: __put_user_x(4, __pu_val, ptr, __ret_pu); break; case 8: __put_user_x8(__pu_val, ptr, __ret_pu); break; default: __put_user_x(X, __pu_val, ptr, __ret_pu); break; } __ret_pu; })
+
+  sg_ioctl:
+    drivers/scsi/sg.c:885:1
+    drivers/scsi/sg.c:937:1
+    drivers/scsi/sg.c:939:1
+    drivers/scsi/sg.c:958:1
+    drivers/scsi/sg.c:966:1
+    drivers/scsi/sg.c:974:1
+    drivers/scsi/sg.c:982:1
+    drivers/scsi/sg.c:986:1
+    drivers/scsi/sg.c:1036:1
+    drivers/scsi/sg.c:1097:1
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  sg_rq_end_io:
+    drivers/scsi/sg.c:1298:1
+  sg_start_req:
+    drivers/scsi/sg.c:1657:2
+
+KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_ERR "<3>"
+	++ #define KERN_ERR KERN_SOH "3"
+
+  sg_add:
+    drivers/scsi/sg.c:1490:1
+    drivers/scsi/sg.c:1498:1
+
+KERN_NOTICE 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_NOTICE "<5>"
+	++ #define KERN_NOTICE KERN_SOH "5"
+
+  sg_add:
+    drivers/scsi/sg.c:1503:1
+
+inode 	( diff_type: Mod type: struct file: include/linux/fs.h )
+	-- struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct list_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+	++ struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct hlist_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+
+  sg_open:
+    drivers/scsi/sg.c:260
+  sg_release:
+    drivers/scsi/sg.c:356
+  sg_proc_single_open_adio:
+    drivers/scsi/sg.c:2377
+  sg_proc_single_open_dressz:
+    drivers/scsi/sg.c:2398
+  sg_proc_single_open_version:
+    drivers/scsi/sg.c:2430
+  sg_proc_single_open_devhdr:
+    drivers/scsi/sg.c:2442
+  sg_proc_open_dev:
+    drivers/scsi/sg.c:2480
+  sg_proc_open_devstrs:
+    drivers/scsi/sg.c:2508
+  sg_proc_open_debug:
+    drivers/scsi/sg.c:2597
+
+vm_area_struct 	( diff_type: Mod type: struct file: include/linux/mm_types.h )
+	-- struct vm_area_struct { struct mm_struct * vm_mm; unsigned long vm_start; unsigned long vm_end; struct vm_area_struct *vm_next, *vm_prev; pgprot_t vm_page_prot; unsigned long vm_flags; struct rb_node vm_rb; struct list_head list; void *parent; struct vm_area_struct *head; } vm_set; struct raw_prio_tree_node prio_tree_node; } shared; struct list_head anon_vma_chain; struct anon_vma *anon_vma; const struct vm_operations_struct *vm_ops; unsigned long vm_pgoff; struct file * vm_file; void * vm_private_data; struct vm_region *vm_region; struct mempolicy *vm_policy; };
+	++ struct vm_area_struct { unsigned long vm_start; unsigned long vm_end; struct vm_area_struct *vm_next, *vm_prev; struct rb_node vm_rb; unsigned long rb_subtree_gap; struct mm_struct *vm_mm; pgprot_t vm_page_prot; unsigned long vm_flags; struct rb_node rb; unsigned long rb_subtree_last; } linear; struct list_head nonlinear; } shared; struct list_head anon_vma_chain; struct anon_vma *anon_vma; const struct vm_operations_struct *vm_ops; unsigned long vm_pgoff; struct file * vm_file; void * vm_private_data; struct vm_region *vm_region; struct mempolicy *vm_policy; };
+
+  sg_vma_fault:
+    drivers/scsi/sg.c:1194
+  sg_mmap:
+    drivers/scsi/sg.c:1233
+
+request 	( diff_type: Mod type: struct file: include/linux/blkdev.h )
+	-- struct request { struct list_head queuelist; struct call_single_data csd; struct request_queue *q; unsigned int cmd_flags; enum rq_cmd_type_bits cmd_type; unsigned long atomic_flags; int cpu; unsigned int __data_len; sector_t __sector; struct bio *bio; struct bio *biotail; struct hlist_node hash; struct rb_node rb_node; void *completion_data; }; struct io_cq *icq; void *priv[2]; } elv; struct { unsigned int seq; struct list_head list; rq_end_io_fn *saved_end_io; } flush; }; struct gendisk *rq_disk; struct hd_struct *part; unsigned long start_time; unsigned long long start_time_ns; unsigned long long io_start_time_ns; unsigned short nr_phys_segments; unsigned short nr_integrity_segments; unsigned short ioprio; int ref_count; void *special; char *buffer; int tag; int errors; unsigned char __cmd[BLK_MAX_CDB]; unsigned char *cmd; unsigned short cmd_len; unsigned int extra_len; unsigned int sense_len; unsigned int resid_len; void *sense; unsigned long deadline; struct list_head timeout_list; unsigned int timeout; int retries; rq_end_io_fn *end_io; void *end_io_data; struct request *next_rq; };
+	++ struct request { struct list_head queuelist; struct call_single_data csd; struct request_queue *q; unsigned int cmd_flags; enum rq_cmd_type_bits cmd_type; unsigned long atomic_flags; int cpu; unsigned int __data_len; sector_t __sector; struct bio *bio; struct bio *biotail; struct hlist_node hash; struct rb_node rb_node; void *completion_data; }; struct io_cq *icq; void *priv[2]; } elv; struct { unsigned int seq; struct list_head list; rq_end_io_fn *saved_end_io; } flush; }; struct gendisk *rq_disk; struct hd_struct *part; unsigned long start_time; struct request_list *rl; unsigned long long start_time_ns; unsigned long long io_start_time_ns; unsigned short nr_phys_segments; unsigned short nr_integrity_segments; unsigned short ioprio; int ref_count; void *special; char *buffer; int tag; int errors; unsigned char __cmd[BLK_MAX_CDB]; unsigned char *cmd; unsigned short cmd_len; unsigned int extra_len; unsigned int sense_len; unsigned int resid_len; void *sense; unsigned long deadline; struct list_head timeout_list; unsigned int timeout; int retries; rq_end_io_fn *end_io; void *end_io_data; struct request *next_rq; };
+
+  sg_rq_end_io:
+    drivers/scsi/sg.c:1279
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  sg_add:
+    drivers/scsi/sg.c:1445
+  sg_remove:
+    drivers/scsi/sg.c:1546
+
+seq_file 	( diff_type: Mod type: struct file: include/linux/seq_file.h )
+	-- struct seq_file { char *buf; size_t size; size_t from; size_t count; loff_t index; loff_t read_pos; u64 version; struct mutex lock; const struct seq_operations *op; int poll_event; };
+	++ struct seq_file { char *buf; size_t size; size_t from; size_t count; loff_t index; loff_t read_pos; u64 version; struct mutex lock; const struct seq_operations *op; int poll_event; struct user_namespace *user_ns; };
+
+  sg_proc_seq_show_int:
+    drivers/scsi/sg.c:2371
+  sg_proc_seq_show_version:
+    drivers/scsi/sg.c:2423
+  sg_proc_seq_show_devhdr:
+    drivers/scsi/sg.c:2435
+  dev_seq_start:
+    drivers/scsi/sg.c:2452
+  dev_seq_next:
+    drivers/scsi/sg.c:2467
+  dev_seq_stop:
+    drivers/scsi/sg.c:2475
+  sg_proc_seq_show_dev:
+    drivers/scsi/sg.c:2485
+  sg_proc_seq_show_devstrs:
+    drivers/scsi/sg.c:2513
+  sg_proc_debug_helper:
+    drivers/scsi/sg.c:2532
+  sg_proc_seq_show_debug:
+    drivers/scsi/sg.c:2602
+
+file_operations 	( diff_type: Mod type: struct file: include/linux/fs.h )
+	-- struct file_operations { struct module *owner; loff_t (*llseek) (struct file *, loff_t, int); ssize_t (*read) (struct file *, char __user *, size_t, loff_t *); ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *); ssize_t (*aio_read) (struct kiocb *, const struct iovec *, unsigned long, loff_t); ssize_t (*aio_write) (struct kiocb *, const struct iovec *, unsigned long, loff_t); int (*readdir) (struct file *, void *, filldir_t); unsigned int (*poll) (struct file *, struct poll_table_struct *); long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long); long (*compat_ioctl) (struct file *, unsigned int, unsigned long); int (*mmap) (struct file *, struct vm_area_struct *); int (*open) (struct inode *, struct file *); int (*flush) (struct file *, fl_owner_t id); int (*release) (struct inode *, struct file *); int (*fsync) (struct file *, loff_t, loff_t, int datasync); int (*aio_fsync) (struct kiocb *, int datasync); int (*fasync) (int, struct file *, int); int (*lock) (struct file *, int, struct file_lock *); ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int); unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long); int (*check_flags)(int); int (*flock) (struct file *, int, struct file_lock *); ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int); ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int); int (*setlease)(struct file *, long, struct file_lock **); long (*fallocate)(struct file *file, int mode, loff_t offset,loff_t len); };
+	++ struct file_operations { struct module *owner; loff_t (*llseek) (struct file *, loff_t, int); ssize_t (*read) (struct file *, char __user *, size_t, loff_t *); ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *); ssize_t (*aio_read) (struct kiocb *, const struct iovec *, unsigned long, loff_t); ssize_t (*aio_write) (struct kiocb *, const struct iovec *, unsigned long, loff_t); int (*readdir) (struct file *, void *, filldir_t); unsigned int (*poll) (struct file *, struct poll_table_struct *); long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long); long (*compat_ioctl) (struct file *, unsigned int, unsigned long); int (*mmap) (struct file *, struct vm_area_struct *); int (*open) (struct inode *, struct file *); int (*flush) (struct file *, fl_owner_t id); int (*release) (struct inode *, struct file *); int (*fsync) (struct file *, loff_t, loff_t, int datasync); int (*aio_fsync) (struct kiocb *, int datasync); int (*fasync) (int, struct file *, int); int (*lock) (struct file *, int, struct file_lock *); ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int); unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long); int (*check_flags)(int); int (*flock) (struct file *, int, struct file_lock *); ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int); ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int); int (*setlease)(struct file *, long, struct file_lock **); long (*fallocate)(struct file *file, int mode, loff_t offset,loff_t len); int (*show_fdinfo)(struct seq_file *m, struct file *f); };
+
+	sg.c: 1360:static const struct file_operations sg_fops = {
+	sg.c: 2232:static const struct file_operations adio_fops = {
+	sg.c: 2244:static const struct file_operations dressz_fops = {
+	sg.c: 2255:static const struct file_operations version_fops = {
+	sg.c: 2265:static const struct file_operations devhdr_fops = {
+	sg.c: 2278:static const struct file_operations dev_fops = {
+	sg.c: 2294:static const struct file_operations devstrs_fops = {
+	sg.c: 2310:static const struct file_operations debug_fops = {
+	sg.c: 2327:	const struct file_operations * fops;
+
+vm_operations_struct 	( diff_type: Mod type: struct file: include/linux/mm.h )
+	-- struct vm_operations_struct { void (*open)(struct vm_area_struct * area); void (*close)(struct vm_area_struct * area); int (*fault)(struct vm_area_struct *vma, struct vm_fault *vmf); int (*page_mkwrite)(struct vm_area_struct *vma, struct vm_fault *vmf); int (*access)(struct vm_area_struct *vma, unsigned long addr,void *buf, int len, int write); int (*set_policy)(struct vm_area_struct *vma, struct mempolicy *new); struct mempolicy *(*get_policy)(struct vm_area_struct *vma,unsigned long addr); int (*migrate)(struct vm_area_struct *vma, const nodemask_t *from,const nodemask_t *to, unsigned long flags); };
+	++ struct vm_operations_struct { void (*open)(struct vm_area_struct * area); void (*close)(struct vm_area_struct * area); int (*fault)(struct vm_area_struct *vma, struct vm_fault *vmf); int (*page_mkwrite)(struct vm_area_struct *vma, struct vm_fault *vmf); int (*access)(struct vm_area_struct *vma, unsigned long addr,void *buf, int len, int write); int (*set_policy)(struct vm_area_struct *vma, struct mempolicy *new); struct mempolicy *(*get_policy)(struct vm_area_struct *vma,unsigned long addr); int (*migrate)(struct vm_area_struct *vma, const nodemask_t *from,const nodemask_t *to, unsigned long flags); int (*remap_pages)(struct vm_area_struct *vma, unsigned long addr,unsigned long size, pgoff_t pgoff); };
+
+	sg.c: 1228:static const struct vm_operations_struct sg_mmap_vm_ops = {
+
+request_queue 	( diff_type: Mod type: struct file: include/linux/blkdev.h )
+	-- struct request_queue { struct list_head queue_head; struct request *last_merge; struct elevator_queue *elevator; struct request_list rq; request_fn_proc *request_fn; make_request_fn *make_request_fn; prep_rq_fn *prep_rq_fn; unprep_rq_fn *unprep_rq_fn; merge_bvec_fn *merge_bvec_fn; softirq_done_fn *softirq_done_fn; rq_timed_out_fn *rq_timed_out_fn; dma_drain_needed_fn *dma_drain_needed; lld_busy_fn *lld_busy_fn; sector_t end_sector; struct request *boundary_rq; struct delayed_work delay_work; struct backing_dev_info backing_dev_info; void *queuedata; unsigned long queue_flags; int id; gfp_t bounce_gfp; spinlock_t __queue_lock; spinlock_t *queue_lock; struct kobject kobj; unsigned long nr_requests; unsigned int nr_congestion_on; unsigned int nr_congestion_off; unsigned int nr_batching; unsigned int dma_drain_size; void *dma_drain_buffer; unsigned int dma_pad_mask; unsigned int dma_alignment; struct blk_queue_tag *queue_tags; struct list_head tag_busy_list; unsigned int nr_sorted; unsigned int in_flight[2]; unsigned int rq_timeout; struct timer_list timeout; struct list_head timeout_list; struct list_head icq_list; DECLARE_BITMAP (blkcg_pols, BLKCG_MAX_POLS); struct blkcg_gq *root_blkg; struct list_head blkg_list; struct queue_limits limits; unsigned int sg_timeout; unsigned int sg_reserved_size; int node; struct blk_trace *blk_trace; unsigned int flush_flags; unsigned int flush_not_queueable:1; unsigned int flush_queue_delayed:1; unsigned int flush_pending_idx:1; unsigned int flush_running_idx:1; unsigned long flush_pending_since; struct list_head flush_queue[2]; struct list_head flush_data_in_flight; struct request flush_rq; struct mutex sysfs_lock; int bypass_depth; bsg_job_fn *bsg_job_fn; int bsg_job_size; struct bsg_class_device bsg_dev; struct list_head all_q_node; struct throtl_data *td; };
+	++ struct request_queue { struct list_head queue_head; struct request *last_merge; struct elevator_queue *elevator; int nr_rqs[2]; int nr_rqs_elvpriv; struct request_list root_rl; request_fn_proc *request_fn; make_request_fn *make_request_fn; prep_rq_fn *prep_rq_fn; unprep_rq_fn *unprep_rq_fn; merge_bvec_fn *merge_bvec_fn; softirq_done_fn *softirq_done_fn; rq_timed_out_fn *rq_timed_out_fn; dma_drain_needed_fn *dma_drain_needed; lld_busy_fn *lld_busy_fn; sector_t end_sector; struct request *boundary_rq; struct delayed_work delay_work; struct backing_dev_info backing_dev_info; void *queuedata; unsigned long queue_flags; int id; gfp_t bounce_gfp; spinlock_t __queue_lock; spinlock_t *queue_lock; struct kobject kobj; unsigned long nr_requests; unsigned int nr_congestion_on; unsigned int nr_congestion_off; unsigned int nr_batching; unsigned int dma_drain_size; void *dma_drain_buffer; unsigned int dma_pad_mask; unsigned int dma_alignment; struct blk_queue_tag *queue_tags; struct list_head tag_busy_list; unsigned int nr_sorted; unsigned int in_flight[2]; unsigned int request_fn_active; unsigned int rq_timeout; struct timer_list timeout; struct list_head timeout_list; struct list_head icq_list; DECLARE_BITMAP (blkcg_pols, BLKCG_MAX_POLS); struct blkcg_gq *root_blkg; struct list_head blkg_list; struct queue_limits limits; unsigned int sg_timeout; unsigned int sg_reserved_size; int node; struct blk_trace *blk_trace; unsigned int flush_flags; unsigned int flush_not_queueable:1; unsigned int flush_queue_delayed:1; unsigned int flush_pending_idx:1; unsigned int flush_running_idx:1; unsigned long flush_pending_since; struct list_head flush_queue[2]; struct list_head flush_data_in_flight; struct request flush_rq; struct mutex sysfs_lock; int bypass_depth; bsg_job_fn *bsg_job_fn; int bsg_job_size; struct bsg_class_device bsg_dev; struct list_head all_q_node; struct throtl_data *td; };
+
+	sg.c: 264:	struct request_queue *q;
+	sg.c: 1382:	struct request_queue *q = scsidp->request_queue;
+	sg.c: 1653:	struct request_queue *q = sfp->parentdp->device->request_queue;
+
+
+===== C  level =====
+total count: 0

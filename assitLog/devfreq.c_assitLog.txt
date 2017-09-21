@@ -1,0 +1,99 @@
+filename to process: devfreq.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 2
+
+queue_delayed_work 	( diff_type: Mod type: prototype file: include/linux/workqueue.h )
+	-- extern int queue_delayed_work(struct workqueue_struct *wq,struct delayed_work *work, unsigned long delay);
+	++ extern bool queue_delayed_work(struct workqueue_struct *wq,struct delayed_work *work, unsigned long delay);
+
+  devfreq_monitor:
+    drivers/devfreq/devfreq.c:333:21
+  store_polling_interval:
+    drivers/devfreq/devfreq.c:507:21
+
+INIT_DELAYED_WORK_DEFERRABLE 	( diff_type: Del type: macro file: include/linux/workqueue.h )
+	-- #define INIT_DELAYED_WORK_DEFERRABLE(_work,_func) do { INIT_WORK(&(_work)->work, (_func)); init_timer_deferrable(&(_work)->timer); } while (0)
+
+  devfreq_start_polling:
+    drivers/devfreq/devfreq.c:610:
+
+
+===== B  level =====
+total count: 5
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  find_device_devfreq:
+    drivers/devfreq/devfreq.c:56
+  devfreq_dev_release:
+    drivers/devfreq/devfreq.c:210
+  devfreq_add_device:
+    drivers/devfreq/devfreq.c:347
+  show_governor:
+    drivers/devfreq/devfreq.c:463
+  show_freq:
+    drivers/devfreq/devfreq.c:469
+  show_polling_interval:
+    drivers/devfreq/devfreq.c:475
+  store_polling_interval:
+    drivers/devfreq/devfreq.c:481
+  show_central_polling:
+    drivers/devfreq/devfreq.c:515
+  store_min_freq:
+    drivers/devfreq/devfreq.c:522
+  show_min_freq:
+    drivers/devfreq/devfreq.c:550
+  store_max_freq:
+    drivers/devfreq/devfreq.c:556
+  show_max_freq:
+    drivers/devfreq/devfreq.c:584
+  devfreq_recommended_opp:
+    drivers/devfreq/devfreq.c:649
+  devfreq_register_opp_notifier:
+    drivers/devfreq/devfreq.c:680
+  devfreq_unregister_opp_notifier:
+    drivers/devfreq/devfreq.c:699
+
+devfreq 	( diff_type: Mod type: struct file: include/linux/devfreq.h )
+	-- struct devfreq { struct list_head node; struct mutex lock; struct device dev; struct devfreq_dev_profile *profile; const struct devfreq_governor *governor; struct notifier_block nb; unsigned long polling_jiffies; unsigned long previous_freq; unsigned int next_polling; void *data; bool being_removed; unsigned long min_freq; unsigned long max_freq; };
+	++ struct devfreq { struct list_head node; struct mutex lock; struct device dev; struct devfreq_dev_profile *profile; const struct devfreq_governor *governor; char governor_name[DEVFREQ_NAME_LEN]; struct notifier_block nb; struct delayed_work work; unsigned long previous_freq; void *data; unsigned long min_freq; unsigned long max_freq; bool stop_polling; unsigned int total_trans; unsigned int *trans_table; unsigned long *time_in_state; unsigned long last_stat_updated; };
+
+  update_devfreq:
+    drivers/devfreq/devfreq.c:82
+  _remove_devfreq:
+    drivers/devfreq/devfreq.c:165
+  devfreq_remove_device:
+    drivers/devfreq/devfreq.c:436
+  devfreq_register_opp_notifier:
+    drivers/devfreq/devfreq.c:680
+  devfreq_unregister_opp_notifier:
+    drivers/devfreq/devfreq.c:699
+
+devfreq_dev_profile 	( diff_type: Mod type: struct file: include/linux/devfreq.h )
+	-- struct devfreq_dev_profile { unsigned long initial_freq; unsigned int polling_ms; int (*target)(struct device *dev, unsigned long *freq, u32 flags); int (*get_dev_status)(struct device *dev,struct devfreq_dev_status *stat); void (*exit)(struct device *dev); };
+	++ struct devfreq_dev_profile { unsigned long initial_freq; unsigned int polling_ms; int (*target)(struct device *dev, unsigned long *freq, u32 flags); int (*get_dev_status)(struct device *dev,struct devfreq_dev_status *stat); int (*get_cur_freq)(struct device *dev, unsigned long *freq); void (*exit)(struct device *dev); unsigned int *freq_table; unsigned int max_state; };
+
+  devfreq_add_device:
+    drivers/devfreq/devfreq.c:348
+
+devfreq_governor 	( diff_type: Mod type: struct file: include/linux/devfreq.h )
+	-- struct devfreq_governor { const char name[DEVFREQ_NAME_LEN]; int (*get_target_freq)(struct devfreq *this, unsigned long *freq); int (*init)(struct devfreq *this); void (*exit)(struct devfreq *this); const bool no_central_polling; };
+	++ struct devfreq_governor { struct list_head node; const char name[DEVFREQ_NAME_LEN]; int (*get_target_freq)(struct devfreq *this, unsigned long *freq); int (*event_handler)(struct devfreq *devfreq,unsigned int event, void *data); };
+
+  devfreq_add_device:
+    drivers/devfreq/devfreq.c:349
+
+delayed_work 	( diff_type: Mod type: struct file: include/linux/workqueue.h )
+	-- struct delayed_work { struct work_struct work; struct timer_list timer; };
+	++ struct delayed_work { struct work_struct work; struct timer_list timer; int cpu; };
+
+	devfreq.c: 40:static struct delayed_work devfreq_work;
+
+
+===== C  level =====
+total count: 0

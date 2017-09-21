@@ -1,0 +1,11 @@
+--- linux-3.5.6/drivers/message/fusion/mptspi.c	2012-10-07 23:36:20.000000000 +0800
++++ linux-3.8.13/drivers/message/fusion/mptspi.c	2013-05-12 04:57:46.000000000 +0800
+@@ -1550,7 +1550,7 @@
+ 	.name		= "mptspi",
+ 	.id_table	= mptspi_pci_table,
+ 	.probe		= mptspi_probe,
+-	.remove		= __devexit_p(mptscsih_remove),
++	.remove		= mptscsih_remove,
+ 	.shutdown	= mptscsih_shutdown,
+ #ifdef CONFIG_PM
+ 	.suspend	= mptscsih_suspend,

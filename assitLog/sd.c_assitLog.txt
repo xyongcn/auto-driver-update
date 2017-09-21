@@ -1,0 +1,251 @@
+filename to process: sd.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 2
+
+async_schedule_domain 	( diff_type: Mod type: prototype file: include/linux/async.h )
+	-- extern async_cookie_t async_schedule_domain(async_func_ptr *ptr,void *data,struct list_head *list);
+	++ extern async_cookie_t async_schedule_domain(async_func_ptr *ptr,void *data,struct async_domain *domain);
+
+  sd_probe:
+    drivers/scsi/sd.c:2728:23
+
+async_synchronize_full_domain 	( diff_type: Mod type: prototype file: include/linux/async.h )
+	-- extern void async_synchronize_full_domain(struct list_head *list);
+	++ extern void async_synchronize_full_domain(struct async_domain *domain);
+
+  sd_remove:
+    drivers/scsi/sd.c:2762:31
+
+
+===== B  level =====
+total count: 9
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  sd_prep_fn:
+    drivers/scsi/sd.c:714:3
+    drivers/scsi/sd.c:722:3
+    drivers/scsi/sd.c:725:3
+    drivers/scsi/sd.c:756:3
+    drivers/scsi/sd.c:819:3
+  sd_open:
+    drivers/scsi/sd.c:966:3
+  sd_release:
+    drivers/scsi/sd.c:1042:3
+  sd_ioctl:
+    drivers/scsi/sd.c:1106:3
+  sd_check_events:
+    drivers/scsi/sd.c:1191:3
+  sd_done:
+    drivers/scsi/sd.c:1478:3
+  sd_read_capacity:
+    drivers/scsi/sd.c:1965:1
+  sd_revalidate_disk:
+    drivers/scsi/sd.c:2458:3
+  sd_probe:
+    drivers/scsi/sd.c:2670:3
+  sd_print_sense_hdr:
+    drivers/scsi/sd.c:2980:1
+    drivers/scsi/sd.c:2982:1
+  sd_print_result:
+    drivers/scsi/sd.c:2988:1
+
+KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_ERR "<3>"
+	++ #define KERN_ERR KERN_SOH "3"
+
+  sd_prep_fn:
+    drivers/scsi/sd.c:772:1
+    drivers/scsi/sd.c:782:1
+    drivers/scsi/sd.c:792:1
+    drivers/scsi/sd.c:815:1
+    drivers/scsi/sd.c:907:1
+  sd_eh_action:
+    drivers/scsi/sd.c:1391:1
+  sd_read_protection_type:
+    drivers/scsi/sd.c:1690:1
+  read_capacity_16:
+    drivers/scsi/sd.c:1800:1
+  read_capacity_10:
+    drivers/scsi/sd.c:1886:1
+  sd_read_cache_type:
+    drivers/scsi/sd.c:2160:1
+    drivers/scsi/sd.c:2196:1
+    drivers/scsi/sd.c:2211:1
+    drivers/scsi/sd.c:2219:1
+    drivers/scsi/sd.c:2223:1
+    drivers/scsi/sd.c:2261:1
+    drivers/scsi/sd.c:2264:1
+  sd_read_app_tag_own:
+    drivers/scsi/sd.c:2304:1
+  init_sd:
+    drivers/scsi/sd.c:2930:1
+    drivers/scsi/sd.c:2936:1
+
+KERN_NOTICE 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_NOTICE "<5>"
+	++ #define KERN_NOTICE KERN_SOH "5"
+
+  sd_spinup_disk:
+    drivers/scsi/sd.c:1595:1
+    drivers/scsi/sd.c:1618:1
+    drivers/scsi/sd.c:1654:1
+  sd_read_protection_type:
+    drivers/scsi/sd.c:1697:1
+    drivers/scsi/sd.c:1700:1
+  read_capacity_error:
+    drivers/scsi/sd.c:1712:1
+  read_capacity_16:
+    drivers/scsi/sd.c:1789:1
+    drivers/scsi/sd.c:1814:1
+  read_capacity_10:
+    drivers/scsi/sd.c:1868:1
+  sd_read_capacity:
+    drivers/scsi/sd.c:1940:1
+    drivers/scsi/sd.c:1944:1
+    drivers/scsi/sd.c:1974:1
+    drivers/scsi/sd.c:1983:1
+    drivers/scsi/sd.c:2012:1
+    drivers/scsi/sd.c:2018:1
+  sd_read_write_protect_flag:
+    drivers/scsi/sd.c:2064:1
+    drivers/scsi/sd.c:2102:1
+  sd_read_cache_type:
+    drivers/scsi/sd.c:2173:1
+    drivers/scsi/sd.c:2237:1
+    drivers/scsi/sd.c:2244:1
+    drivers/scsi/sd.c:2259:1
+  sd_shutdown:
+    drivers/scsi/sd.c:2846:1
+    drivers/scsi/sd.c:2851:1
+  sd_suspend:
+    drivers/scsi/sd.c:2868:1
+    drivers/scsi/sd.c:2875:1
+  sd_resume:
+    drivers/scsi/sd.c:2892:1
+
+KERN_WARNING 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_WARNING "<4>"
+	++ #define KERN_WARNING KERN_SOH "4"
+
+  sd_read_write_protect_flag:
+    drivers/scsi/sd.c:2096:1
+  sd_read_app_tag_own:
+    drivers/scsi/sd.c:2292:1
+  sd_revalidate_disk:
+    drivers/scsi/sd.c:2470:1
+  sd_probe:
+    drivers/scsi/sd.c:2692:1
+    drivers/scsi/sd.c:2698:1
+  sd_start_stop_device:
+    drivers/scsi/sd.c:2821:1
+
+KERN_DEBUG 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_DEBUG "<7>"
+	++ #define KERN_DEBUG KERN_SOH "7"
+
+  sd_read_write_protect_flag:
+    drivers/scsi/sd.c:2104:1
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  sd_store_cache_type:
+    drivers/scsi/sd.c:134
+  sd_store_manage_start_stop:
+    drivers/scsi/sd.c:186
+  sd_store_allow_restart:
+    drivers/scsi/sd.c:201
+  sd_show_cache_type:
+    drivers/scsi/sd.c:219
+  sd_show_fua:
+    drivers/scsi/sd.c:229
+  sd_show_manage_start_stop:
+    drivers/scsi/sd.c:237
+  sd_show_allow_restart:
+    drivers/scsi/sd.c:247
+  sd_show_protection_type:
+    drivers/scsi/sd.c:256
+  sd_show_protection_mode:
+    drivers/scsi/sd.c:265
+  sd_show_app_tag_own:
+    drivers/scsi/sd.c:287
+  sd_show_thin_provisioning:
+    drivers/scsi/sd.c:296
+  sd_show_provisioning_mode:
+    drivers/scsi/sd.c:314
+  sd_store_provisioning_mode:
+    drivers/scsi/sd.c:323
+  sd_show_max_medium_access_timeouts:
+    drivers/scsi/sd.c:352
+  sd_store_max_medium_access_timeouts:
+    drivers/scsi/sd.c:361
+  scsi_disk_get_from_dev:
+    drivers/scsi/sd.c:471
+  sd_rescan:
+    drivers/scsi/sd.c:1290
+  sd_probe:
+    drivers/scsi/sd.c:2658
+  sd_remove:
+    drivers/scsi/sd.c:2755
+  scsi_disk_release:
+    drivers/scsi/sd.c:2786
+  sd_shutdown:
+    drivers/scsi/sd.c:2835
+  sd_suspend:
+    drivers/scsi/sd.c:2859
+  sd_resume:
+    drivers/scsi/sd.c:2884
+
+scsi_device 	( diff_type: Mod type: struct file: include/scsi/scsi_device.h )
+	-- struct scsi_device { struct Scsi_Host *host; struct request_queue *request_queue; struct list_head siblings; struct list_head same_target_siblings; unsigned int device_busy; spinlock_t list_lock; struct list_head cmd_list; struct list_head starved_entry; struct scsi_cmnd *current_cmnd; unsigned short queue_depth; unsigned short max_queue_depth; unsigned short last_queue_full_depth; unsigned short last_queue_full_count; unsigned long last_queue_full_time; unsigned long queue_ramp_up_period; #define SCSI_DEFAULT_RAMP_UP_PERIOD (120 * HZ) unsigned long last_queue_ramp_up; unsigned int id, lun, channel; unsigned int manufacturer; unsigned sector_size; void *hostdata; char type; char scsi_level; char inq_periph_qual; unsigned char inquiry_len; unsigned char * inquiry; const char * vendor; const char * model; const char * rev; unsigned char current_tag; struct scsi_target *sdev_target; unsigned int sdev_bflags; unsigned writeable:1; unsigned removable:1; unsigned changed:1; unsigned busy:1; unsigned lockable:1; unsigned locked:1; unsigned borken:1; unsigned disconnect:1; unsigned soft_reset:1; unsigned sdtr:1; unsigned wdtr:1; unsigned ppr:1; unsigned tagged_supported:1; unsigned simple_tags:1; unsigned ordered_tags:1; unsigned was_reset:1; unsigned expecting_cc_ua:1; unsigned use_10_for_rw:1; unsigned use_10_for_ms:1; unsigned skip_ms_page_8:1; unsigned skip_ms_page_3f:1; unsigned skip_vpd_pages:1; unsigned use_192_bytes_for_3f:1; unsigned no_start_on_add:1; unsigned allow_restart:1; unsigned manage_start_stop:1; unsigned start_stop_pwr_cond:1; unsigned no_uld_attach:1; unsigned select_no_atn:1; unsigned fix_capacity:1; unsigned guess_capacity:1; unsigned retry_hwerror:1; unsigned last_sector_bug:1; unsigned no_read_disc_info:1; unsigned no_read_capacity_16:1; unsigned try_rc_10_first:1; unsigned is_visible:1; DECLARE_BITMAP(supported_events, SDEV_EVT_MAXBITS); struct list_head event_list; struct work_struct event_work; unsigned int device_blocked; unsigned int max_device_blocked; #define SCSI_DEFAULT_DEVICE_BLOCKED 3 atomic_t iorequest_cnt; atomic_t iodone_cnt; atomic_t ioerr_cnt; struct device sdev_gendev,sdev_dev; struct execute_work ew; struct work_struct requeue_work; struct scsi_dh_data *scsi_dh_data; enum scsi_device_state sdev_state; unsigned long sdev_data[0]; } __attribute__((aligned(sizeof(unsigned long))));
+	++ struct scsi_device { struct Scsi_Host *host; struct request_queue *request_queue; struct list_head siblings; struct list_head same_target_siblings; unsigned int device_busy; spinlock_t list_lock; struct list_head cmd_list; struct list_head starved_entry; struct scsi_cmnd *current_cmnd; unsigned short queue_depth; unsigned short max_queue_depth; unsigned short last_queue_full_depth; unsigned short last_queue_full_count; unsigned long last_queue_full_time; unsigned long queue_ramp_up_period; #define SCSI_DEFAULT_RAMP_UP_PERIOD (120 * HZ) unsigned long last_queue_ramp_up; unsigned int id, lun, channel; unsigned int manufacturer; unsigned sector_size; void *hostdata; char type; char scsi_level; char inq_periph_qual; unsigned char inquiry_len; unsigned char * inquiry; const char * vendor; const char * model; const char * rev; unsigned char current_tag; struct scsi_target *sdev_target; unsigned int sdev_bflags; unsigned writeable:1; unsigned removable:1; unsigned changed:1; unsigned busy:1; unsigned lockable:1; unsigned locked:1; unsigned borken:1; unsigned disconnect:1; unsigned soft_reset:1; unsigned sdtr:1; unsigned wdtr:1; unsigned ppr:1; unsigned tagged_supported:1; unsigned simple_tags:1; unsigned ordered_tags:1; unsigned was_reset:1; unsigned expecting_cc_ua:1; unsigned use_10_for_rw:1; unsigned use_10_for_ms:1; unsigned no_report_opcodes:1; unsigned no_write_same:1; unsigned use_16_for_rw:1; unsigned skip_ms_page_8:1; unsigned skip_ms_page_3f:1; unsigned skip_vpd_pages:1; unsigned use_192_bytes_for_3f:1; unsigned no_start_on_add:1; unsigned allow_restart:1; unsigned manage_start_stop:1; unsigned start_stop_pwr_cond:1; unsigned no_uld_attach:1; unsigned select_no_atn:1; unsigned fix_capacity:1; unsigned guess_capacity:1; unsigned retry_hwerror:1; unsigned last_sector_bug:1; unsigned no_read_disc_info:1; unsigned no_read_capacity_16:1; unsigned try_rc_10_first:1; unsigned is_visible:1; unsigned can_power_off:1; unsigned wce_default_on:1; unsigned no_dif:1; DECLARE_BITMAP(supported_events, SDEV_EVT_MAXBITS); struct list_head event_list; struct work_struct event_work; unsigned int device_blocked; unsigned int max_device_blocked; #define SCSI_DEFAULT_DEVICE_BLOCKED 3 atomic_t iorequest_cnt; atomic_t iodone_cnt; atomic_t ioerr_cnt; struct device sdev_gendev,sdev_dev; struct execute_work ew; struct work_struct requeue_work; struct scsi_dh_data *scsi_dh_data; enum scsi_device_state sdev_state; unsigned long sdev_data[0]; } __attribute__((aligned(sizeof(unsigned long))));
+
+  scsi_setup_discard_cmnd:
+    drivers/scsi/sd.c:570
+  scsi_setup_flush_cmnd:
+    drivers/scsi/sd.c:649
+  read_capacity_error:
+    drivers/scsi/sd.c:1704
+  read_capacity_16:
+    drivers/scsi/sd.c:1737
+  read_capacity_10:
+    drivers/scsi/sd.c:1830
+  sd_try_rc16_first:
+    drivers/scsi/sd.c:1898
+  sd_do_mode_sense:
+    drivers/scsi/sd.c:2041
+  sd_try_extended_inquiry:
+    drivers/scsi/sd.c:2434
+
+request 	( diff_type: Mod type: struct file: include/linux/blkdev.h )
+	-- struct request { struct list_head queuelist; struct call_single_data csd; struct request_queue *q; unsigned int cmd_flags; enum rq_cmd_type_bits cmd_type; unsigned long atomic_flags; int cpu; unsigned int __data_len; sector_t __sector; struct bio *bio; struct bio *biotail; struct hlist_node hash; struct rb_node rb_node; void *completion_data; }; struct io_cq *icq; void *priv[2]; } elv; struct { unsigned int seq; struct list_head list; rq_end_io_fn *saved_end_io; } flush; }; struct gendisk *rq_disk; struct hd_struct *part; unsigned long start_time; unsigned long long start_time_ns; unsigned long long io_start_time_ns; unsigned short nr_phys_segments; unsigned short nr_integrity_segments; unsigned short ioprio; int ref_count; void *special; char *buffer; int tag; int errors; unsigned char __cmd[BLK_MAX_CDB]; unsigned char *cmd; unsigned short cmd_len; unsigned int extra_len; unsigned int sense_len; unsigned int resid_len; void *sense; unsigned long deadline; struct list_head timeout_list; unsigned int timeout; int retries; rq_end_io_fn *end_io; void *end_io_data; struct request *next_rq; };
+	++ struct request { struct list_head queuelist; struct call_single_data csd; struct request_queue *q; unsigned int cmd_flags; enum rq_cmd_type_bits cmd_type; unsigned long atomic_flags; int cpu; unsigned int __data_len; sector_t __sector; struct bio *bio; struct bio *biotail; struct hlist_node hash; struct rb_node rb_node; void *completion_data; }; struct io_cq *icq; void *priv[2]; } elv; struct { unsigned int seq; struct list_head list; rq_end_io_fn *saved_end_io; } flush; }; struct gendisk *rq_disk; struct hd_struct *part; unsigned long start_time; struct request_list *rl; unsigned long long start_time_ns; unsigned long long io_start_time_ns; unsigned short nr_phys_segments; unsigned short nr_integrity_segments; unsigned short ioprio; int ref_count; void *special; char *buffer; int tag; int errors; unsigned char __cmd[BLK_MAX_CDB]; unsigned char *cmd; unsigned short cmd_len; unsigned int extra_len; unsigned int sense_len; unsigned int resid_len; void *sense; unsigned long deadline; struct list_head timeout_list; unsigned int timeout; int retries; rq_end_io_fn *end_io; void *end_io_data; struct request *next_rq; };
+
+  scsi_setup_discard_cmnd:
+    drivers/scsi/sd.c:570
+  scsi_setup_flush_cmnd:
+    drivers/scsi/sd.c:649
+  sd_unprep_fn:
+    drivers/scsi/sd.c:659
+  sd_prep_fn:
+    drivers/scsi/sd.c:675
+
+request_queue 	( diff_type: Mod type: struct file: include/linux/blkdev.h )
+	-- struct request_queue { struct list_head queue_head; struct request *last_merge; struct elevator_queue *elevator; struct request_list rq; request_fn_proc *request_fn; make_request_fn *make_request_fn; prep_rq_fn *prep_rq_fn; unprep_rq_fn *unprep_rq_fn; merge_bvec_fn *merge_bvec_fn; softirq_done_fn *softirq_done_fn; rq_timed_out_fn *rq_timed_out_fn; dma_drain_needed_fn *dma_drain_needed; lld_busy_fn *lld_busy_fn; sector_t end_sector; struct request *boundary_rq; struct delayed_work delay_work; struct backing_dev_info backing_dev_info; void *queuedata; unsigned long queue_flags; int id; gfp_t bounce_gfp; spinlock_t __queue_lock; spinlock_t *queue_lock; struct kobject kobj; unsigned long nr_requests; unsigned int nr_congestion_on; unsigned int nr_congestion_off; unsigned int nr_batching; unsigned int dma_drain_size; void *dma_drain_buffer; unsigned int dma_pad_mask; unsigned int dma_alignment; struct blk_queue_tag *queue_tags; struct list_head tag_busy_list; unsigned int nr_sorted; unsigned int in_flight[2]; unsigned int rq_timeout; struct timer_list timeout; struct list_head timeout_list; struct list_head icq_list; DECLARE_BITMAP (blkcg_pols, BLKCG_MAX_POLS); struct blkcg_gq *root_blkg; struct list_head blkg_list; struct queue_limits limits; unsigned int sg_timeout; unsigned int sg_reserved_size; int node; struct blk_trace *blk_trace; unsigned int flush_flags; unsigned int flush_not_queueable:1; unsigned int flush_queue_delayed:1; unsigned int flush_pending_idx:1; unsigned int flush_running_idx:1; unsigned long flush_pending_since; struct list_head flush_queue[2]; struct list_head flush_data_in_flight; struct request flush_rq; struct mutex sysfs_lock; int bypass_depth; bsg_job_fn *bsg_job_fn; int bsg_job_size; struct bsg_class_device bsg_dev; struct list_head all_q_node; struct throtl_data *td; };
+	++ struct request_queue { struct list_head queue_head; struct request *last_merge; struct elevator_queue *elevator; int nr_rqs[2]; int nr_rqs_elvpriv; struct request_list root_rl; request_fn_proc *request_fn; make_request_fn *make_request_fn; prep_rq_fn *prep_rq_fn; unprep_rq_fn *unprep_rq_fn; merge_bvec_fn *merge_bvec_fn; softirq_done_fn *softirq_done_fn; rq_timed_out_fn *rq_timed_out_fn; dma_drain_needed_fn *dma_drain_needed; lld_busy_fn *lld_busy_fn; sector_t end_sector; struct request *boundary_rq; struct delayed_work delay_work; struct backing_dev_info backing_dev_info; void *queuedata; unsigned long queue_flags; int id; gfp_t bounce_gfp; spinlock_t __queue_lock; spinlock_t *queue_lock; struct kobject kobj; unsigned long nr_requests; unsigned int nr_congestion_on; unsigned int nr_congestion_off; unsigned int nr_batching; unsigned int dma_drain_size; void *dma_drain_buffer; unsigned int dma_pad_mask; unsigned int dma_alignment; struct blk_queue_tag *queue_tags; struct list_head tag_busy_list; unsigned int nr_sorted; unsigned int in_flight[2]; unsigned int request_fn_active; unsigned int rq_timeout; struct timer_list timeout; struct list_head timeout_list; struct list_head icq_list; DECLARE_BITMAP (blkcg_pols, BLKCG_MAX_POLS); struct blkcg_gq *root_blkg; struct list_head blkg_list; struct queue_limits limits; unsigned int sg_timeout; unsigned int sg_reserved_size; int node; struct blk_trace *blk_trace; unsigned int flush_flags; unsigned int flush_not_queueable:1; unsigned int flush_queue_delayed:1; unsigned int flush_pending_idx:1; unsigned int flush_running_idx:1; unsigned long flush_pending_since; struct list_head flush_queue[2]; struct list_head flush_data_in_flight; struct request flush_rq; struct mutex sysfs_lock; int bypass_depth; bsg_job_fn *bsg_job_fn; int bsg_job_size; struct bsg_class_device bsg_dev; struct list_head all_q_node; struct throtl_data *td; };
+
+  sd_unprep_fn:
+    drivers/scsi/sd.c:659
+  sd_prep_fn:
+    drivers/scsi/sd.c:675
+
+
+===== C  level =====
+total count: 0

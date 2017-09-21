@@ -9,12 +9,12 @@ from collections import OrderedDict
 
 EXT0 = '.ind' # AST file
 EXT2 = '.int' #interface file
-SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.4/'
+SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.6/'
 SOURCE_PATH1 = os.environ['HOME']+'/SOURCE/linux-3.8.13/'
 TARGET_PATH = 'target/' #path to save target file
 FILE_TO_PROCESS = sys.argv[1]
 CTAGSFILE_EXT = '_ctags.txt'
-LOGERR = 'assitLog.txt'
+LOGERR = 'assitLog/'+os.path.basename(FILE_TO_PROCESS)+'_assitLog.txt'
 
 def printDictMethod(dictname,filename):
   with open(filename,'w') as out:
@@ -43,6 +43,7 @@ def printToFile(fnFile_dict,fnCall_dict,fcFile_dict):
 
 def printDataStruct(dataStructCall_dict):
   dataStructCallPath = TARGET_PATH + 'dataStructCall_dictTemp.txt'
+  count = 0
   with open(dataStructCallPath,'w') as out:
     for dataName,fnName_dict in dataStructCall_dict.items():
       print >> out,dataName
@@ -50,7 +51,8 @@ def printDataStruct(dataStructCall_dict):
         print >> out,'  '+fnName
         for dcLoc in dcLoc_list:
           print >> out, '    '+dcLoc
-
+          count +=1
+  print 'dataStructCall count-->',count
   print 'generated file:',dataStructCallPath
   
 def getDataStructCall(filename):
@@ -75,6 +77,7 @@ def getDataStructCall(filename):
       sline=fp.readline();    
   #print 'test--------------'
   printDataStruct(dataStructCall_dict)
+  print 'dataStructCall name count-->',len(dataStructCall_dict.keys())
   return dataStructCall_dict
 
 def getFuncAndFile():
@@ -114,6 +117,7 @@ def getFuncCallDict(filename):
 		      else:
 		        fnCall_dict[fcName][fnName].append(fcLoc)
       sline=fp.readline();
+  print 'functionCall name count-->',len(fnCall_dict.keys())
   return fnCall_dict
 
 def getHeadFileList():
@@ -186,7 +190,6 @@ def code_Diff():
   if len(v1ctags_dict)>0:  # add changed
     for k,vlist in v1ctags_dict.items():
       diffLog_dict[k] = ['Add'] + vlist 
-  
   #print test start--------------------------------
   filename = 'diffLog.txt'
   with open(filename,'w') as out:
@@ -202,7 +205,6 @@ def code_Diff():
   print filename,'file generated successful!'
   print 'print test end--------------------------\n'
   #print test end--------------------------------
-  
   return diffLog_dict
 
 def classDiffLog(diffLog_dict):
@@ -353,15 +355,15 @@ def getAssitInfo():
   for k,vlist in Alevel_dict.items():  #A level
     diff_type,_type,_file = vlist[0:3]
     if cmp(diff_type,'Del')==0 and _type in ('macro'):
-      if k not in fcDiffInfo_dict:
+      if k not in fcDiffInfo_dict:#
         _file = _file.split('include/')[1]
-        if _file in headfile_list:
-          cmd_string = "grep -nw '"+k+"' "+fileTopros
-          status,tstr=commands.getstatusoutput(cmd_string)
-          if status == 0:
-            loc_list = tstr.split('\n')
-            assitLoc_dict[k] = loc_list
-            assitInfoA_dict[k] = Alevel_dict[k]
+        #if _file in headfile_list:
+        cmd_string = "grep -nw '"+k+"' "+fileTopros
+        status,tstr=commands.getstatusoutput(cmd_string)
+        if status == 0:
+          loc_list = tstr.split('\n')
+          assitLoc_dict[k] = loc_list
+          assitInfoA_dict[k] = Alevel_dict[k]
     elif diff_type in ('Mod','All') and ('macro' in _type):
       if k not in fcDiffInfo_dict:
         _file = _file.split('-->')[0]
@@ -406,7 +408,7 @@ def getAssitInfo():
   with open(LOGERR,'w') as out:
     filename = os.path.basename(FILE_TO_PROCESS)
     print >> out,'filename to process:',filename
-    print >> out,'more info about this log description to read log_description.txt'
+    print >> out,'more info about this log description to read assitlog_description.txt'
   
     printAssitInfo(out,assitInfoA_dict,'A',assitLoc_dict)
     printAssitInfo(out,assitInfoB_dict,'B',assitLoc_dict)

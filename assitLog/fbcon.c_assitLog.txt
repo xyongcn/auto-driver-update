@@ -1,0 +1,86 @@
+filename to process: fbcon.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 3
+
+schedule_work 	( diff_type: Mod type: prototype file: include/linux/workqueue.h )
+	-- extern int schedule_work(struct work_struct *work);
+	++ extern bool schedule_work(struct work_struct *work);
+
+  cursor_timer_handler:
+    drivers/video/console/fbcon.c:407:15
+
+con_debug_enter 	( diff_type: Mod type: macro-->function file: include/linux/console.h )
+	-- #define con_debug_enter(vc) (0)
+	++ static inline int con_debug_enter(struct vc_data *vc)
+
+	fbcon.c: 3309:	.con_debug_enter	= fbcon_debug_enter,
+
+con_debug_leave 	( diff_type: Mod type: macro-->function file: include/linux/console.h )
+	-- #define con_debug_leave() (0)
+	++ static inline int con_debug_leave(void)
+
+	fbcon.c: 3310:	.con_debug_leave	= fbcon_debug_leave,
+
+
+===== B  level =====
+total count: 5
+
+KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_INFO "<6>"
+	++ #define KERN_INFO KERN_SOH "6"
+
+  fbcon_prepare_logo:
+    drivers/video/console/fbcon.c:644:1
+  fbcon_remap_all:
+    drivers/video/console/fbcon.c:3065:1
+  fbcon_select_primary:
+    drivers/video/console/fbcon.c:3079:1
+    drivers/video/console/fbcon.c:3087:1
+
+KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_ERR "<3>"
+	++ #define KERN_ERR KERN_SOH "3"
+
+  con2fb_release_oldinfo:
+    drivers/video/console/fbcon.c:767:1
+  con2fb_init_display:
+    drivers/video/console/fbcon.c:788:1
+  fbcon_init:
+    drivers/video/console/fbcon.c:1121:1
+  fbcon_switch:
+    drivers/video/console/fbcon.c:2210:1
+
+KERN_WARNING 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+	-- #define KERN_WARNING "<4>"
+	++ #define KERN_WARNING KERN_SOH "4"
+
+  fb_console_init:
+    drivers/video/console/fbcon.c:3565:1
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  store_rotate:
+    drivers/video/console/fbcon.c:3317
+  store_rotate_all:
+    drivers/video/console/fbcon.c:3342
+  show_rotate:
+    drivers/video/console/fbcon.c:3367
+  show_cursor_blink:
+    drivers/video/console/fbcon.c:3389
+  store_cursor_blink:
+    drivers/video/console/fbcon.c:3417
+
+module 	( diff_type: Mod type: struct file: include/linux/module.h )
+	-- struct module { enum module_state state; struct list_head list; char name[MODULE_NAME_LEN]; struct module_kobject mkobj; struct module_attribute *modinfo_attrs; const char *version; const char *srcversion; struct kobject *holders_dir; const struct kernel_symbol *syms; const unsigned long *crcs; unsigned int num_syms; struct kernel_param *kp; unsigned int num_kp; unsigned int num_gpl_syms; const struct kernel_symbol *gpl_syms; const unsigned long *gpl_crcs; const struct kernel_symbol *unused_syms; const unsigned long *unused_crcs; unsigned int num_unused_syms; unsigned int num_unused_gpl_syms; const struct kernel_symbol *unused_gpl_syms; const unsigned long *unused_gpl_crcs; const struct kernel_symbol *gpl_future_syms; const unsigned long *gpl_future_crcs; unsigned int num_gpl_future_syms; unsigned int num_exentries; struct exception_table_entry *extable; int (*init)(void); void *module_init; void *module_core; unsigned int init_size, core_size; unsigned int init_text_size, core_text_size; unsigned int init_ro_size, core_ro_size; struct mod_arch_specific arch; unsigned int taints; unsigned num_bugs; struct list_head bug_list; struct bug_entry *bug_table; Elf_Sym *symtab, *core_symtab; unsigned int num_symtab, core_num_syms; char *strtab, *core_strtab; struct module_sect_attrs *sect_attrs; struct module_notes_attrs *notes_attrs; char *args; void __percpu *percpu; unsigned int percpu_size; unsigned int num_tracepoints; struct tracepoint * const *tracepoints_ptrs; struct jump_entry *jump_entries; unsigned int num_jump_entries; unsigned int num_trace_bprintk_fmt; const char **trace_bprintk_fmt_start; struct ftrace_event_call **trace_events; unsigned int num_trace_events; unsigned int num_ftrace_callsites; unsigned long *ftrace_callsites; struct list_head source_list; struct list_head target_list; struct task_struct *waiter; void (*exit)(void); struct module_ref __percpu *refptr; ctor_fn_t *ctors; unsigned int num_ctors; };
+	++ struct module { enum module_state state; struct list_head list; char name[MODULE_NAME_LEN]; struct module_kobject mkobj; struct module_attribute *modinfo_attrs; const char *version; const char *srcversion; struct kobject *holders_dir; const struct kernel_symbol *syms; const unsigned long *crcs; unsigned int num_syms; struct kernel_param *kp; unsigned int num_kp; unsigned int num_gpl_syms; const struct kernel_symbol *gpl_syms; const unsigned long *gpl_crcs; const struct kernel_symbol *unused_syms; const unsigned long *unused_crcs; unsigned int num_unused_syms; unsigned int num_unused_gpl_syms; const struct kernel_symbol *unused_gpl_syms; const unsigned long *unused_gpl_crcs; bool sig_ok; const struct kernel_symbol *gpl_future_syms; const unsigned long *gpl_future_crcs; unsigned int num_gpl_future_syms; unsigned int num_exentries; struct exception_table_entry *extable; int (*init)(void); void *module_init; void *module_core; unsigned int init_size, core_size; unsigned int init_text_size, core_text_size; unsigned int init_ro_size, core_ro_size; struct mod_arch_specific arch; unsigned int taints; unsigned num_bugs; struct list_head bug_list; struct bug_entry *bug_table; Elf_Sym *symtab, *core_symtab; unsigned int num_symtab, core_num_syms; char *strtab, *core_strtab; struct module_sect_attrs *sect_attrs; struct module_notes_attrs *notes_attrs; char *args; void __percpu *percpu; unsigned int percpu_size; unsigned int num_tracepoints; struct tracepoint * const *tracepoints_ptrs; struct jump_entry *jump_entries; unsigned int num_jump_entries; unsigned int num_trace_bprintk_fmt; const char **trace_bprintk_fmt_start; struct ftrace_event_call **trace_events; unsigned int num_trace_events; unsigned int num_ftrace_callsites; unsigned long *ftrace_callsites; struct list_head source_list; struct list_head target_list; struct task_struct *waiter; void (*exit)(void); struct module_ref __percpu *refptr; ctor_fn_t *ctors; unsigned int num_ctors; };
+
+	fbcon.c: 927:	struct module *owner;
+
+
+===== C  level =====
+total count: 0

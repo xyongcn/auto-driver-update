@@ -1,0 +1,14 @@
+filename to process: scsi_trace.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 0
+
+
+===== B  level =====
+total count: 0
+
+
+===== C  level =====
+total count: 0

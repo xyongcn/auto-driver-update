@@ -1,0 +1,42 @@
+filename to process: power_supply_sysfs.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 0
+
+
+===== B  level =====
+total count: 2
+
+device 	( diff_type: Mod type: struct file: include/linux/device.h )
+	-- struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); };
+	++ struct device { struct device *parent; struct device_private *p; struct kobject kobj; const char *init_name; const struct device_type *type; struct mutex mutex; struct bus_type *bus; struct device_driver *driver; void *platform_data; struct dev_pm_info power; struct dev_pm_domain *pm_domain; int numa_node; u64 *dma_mask; u64 coherent_dma_mask; struct device_dma_parameters *dma_parms; struct list_head dma_pools; struct dma_coherent_mem *dma_mem; struct cma *cma_area; struct dev_archdata archdata; struct device_node *of_node; struct acpi_dev_node acpi_node; dev_t devt; u32 id; spinlock_t devres_lock; struct list_head devres_head; struct klist_node knode_class; const struct attribute_group **groups; void (*release)(struct device *dev); struct iommu_group *iommu_group; };
+
+  power_supply_show_property:
+    drivers/power/power_supply_sysfs.c:43
+  power_supply_store_property:
+    drivers/power/power_supply_sysfs.c:110
+  power_supply_uevent:
+    drivers/power/power_supply_sysfs.c:251
+
+power_supply 	( diff_type: Mod type: struct file: include/linux/power_supply.h )
+	-- struct power_supply { const char *name; enum power_supply_type type; enum power_supply_property *properties; size_t num_properties; char **supplied_to; size_t num_supplicants; int (*get_property)(struct power_supply *psy,enum power_supply_property psp,union power_supply_propval *val); int (*set_property)(struct power_supply *psy,enum power_supply_property psp,const union power_supply_propval *val); int (*property_is_writeable)(struct power_supply *psy,enum power_supply_property psp); void (*external_power_changed)(struct power_supply *psy); void (*set_charged)(struct power_supply *psy); int use_for_apm; struct device *dev; struct work_struct changed_work; struct led_trigger *charging_full_trig; char *charging_full_trig_name; struct led_trigger *charging_trig; char *charging_trig_name; struct led_trigger *full_trig; char *full_trig_name; struct led_trigger *online_trig; char *online_trig_name; struct led_trigger *charging_blink_full_solid_trig; char *charging_blink_full_solid_trig_name; };
+	++ struct power_supply { const char *name; enum power_supply_type type; enum power_supply_property *properties; size_t num_properties; char **supplied_to; size_t num_supplicants; int (*get_property)(struct power_supply *psy,enum power_supply_property psp,union power_supply_propval *val); int (*set_property)(struct power_supply *psy,enum power_supply_property psp,const union power_supply_propval *val); int (*property_is_writeable)(struct power_supply *psy,enum power_supply_property psp); void (*external_power_changed)(struct power_supply *psy); void (*set_charged)(struct power_supply *psy); int use_for_apm; struct device *dev; struct work_struct changed_work; struct thermal_zone_device *tzd; struct thermal_cooling_device *tcd; struct led_trigger *charging_full_trig; char *charging_full_trig_name; struct led_trigger *charging_trig; char *charging_trig_name; struct led_trigger *full_trig; char *full_trig_name; struct led_trigger *online_trig; char *online_trig_name; struct led_trigger *charging_blink_full_solid_trig; char *charging_blink_full_solid_trig_name; };
+
+	power_supply_sysfs.c: 71:	struct power_supply *psy = dev_get_drvdata(dev);
+	power_supply_sysfs.c: 114:	struct power_supply *psy = dev_get_drvdata(dev);
+	power_supply_sysfs.c: 192:	struct power_supply *psy = dev_get_drvdata(dev);
+	power_supply_sysfs.c: 253:	struct power_supply *psy = dev_get_drvdata(dev);
+
+
+===== C  level =====
+total count: 1
+
+add_uevent_var 	( diff_type: Mod type: function-->prototype file: include/linux/kobject.h )
+	-- int add_uevent_var(struct kobj_uevent_env *env,const char *format,...)
+	++ int add_uevent_var(struct kobj_uevent_env *env,const char *format,...);
+
+  power_supply_uevent:
+    drivers/power/power_supply_sysfs.c:267:22
+    drivers/power/power_supply_sysfs.c:304:23

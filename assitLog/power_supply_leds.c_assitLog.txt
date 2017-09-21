@@ -1,0 +1,37 @@
+filename to process: power_supply_leds.c
+more info about this log description to read assitlog_description.txt
+
+
+===== A  level =====
+total count: 0
+
+
+===== B  level =====
+total count: 1
+
+power_supply 	( diff_type: Mod type: struct file: include/linux/power_supply.h )
+	-- struct power_supply { const char *name; enum power_supply_type type; enum power_supply_property *properties; size_t num_properties; char **supplied_to; size_t num_supplicants; int (*get_property)(struct power_supply *psy,enum power_supply_property psp,union power_supply_propval *val); int (*set_property)(struct power_supply *psy,enum power_supply_property psp,const union power_supply_propval *val); int (*property_is_writeable)(struct power_supply *psy,enum power_supply_property psp); void (*external_power_changed)(struct power_supply *psy); void (*set_charged)(struct power_supply *psy); int use_for_apm; struct device *dev; struct work_struct changed_work; struct led_trigger *charging_full_trig; char *charging_full_trig_name; struct led_trigger *charging_trig; char *charging_trig_name; struct led_trigger *full_trig; char *full_trig_name; struct led_trigger *online_trig; char *online_trig_name; struct led_trigger *charging_blink_full_solid_trig; char *charging_blink_full_solid_trig_name; };
+	++ struct power_supply { const char *name; enum power_supply_type type; enum power_supply_property *properties; size_t num_properties; char **supplied_to; size_t num_supplicants; int (*get_property)(struct power_supply *psy,enum power_supply_property psp,union power_supply_propval *val); int (*set_property)(struct power_supply *psy,enum power_supply_property psp,const union power_supply_propval *val); int (*property_is_writeable)(struct power_supply *psy,enum power_supply_property psp); void (*external_power_changed)(struct power_supply *psy); void (*set_charged)(struct power_supply *psy); int use_for_apm; struct device *dev; struct work_struct changed_work; struct thermal_zone_device *tzd; struct thermal_cooling_device *tcd; struct led_trigger *charging_full_trig; char *charging_full_trig_name; struct led_trigger *charging_trig; char *charging_trig_name; struct led_trigger *full_trig; char *full_trig_name; struct led_trigger *online_trig; char *online_trig_name; struct led_trigger *charging_blink_full_solid_trig; char *charging_blink_full_solid_trig_name; };
+
+  power_supply_update_bat_leds:
+    drivers/power/power_supply_leds.c:22
+  power_supply_create_bat_triggers:
+    drivers/power/power_supply_leds.c:58
+  power_supply_remove_bat_triggers:
+    drivers/power/power_supply_leds.c:104
+  power_supply_update_gen_leds:
+    drivers/power/power_supply_leds.c:118
+  power_supply_create_gen_triggers:
+    drivers/power/power_supply_leds.c:133
+  power_supply_remove_gen_triggers:
+    drivers/power/power_supply_leds.c:151
+  power_supply_update_leds:
+    drivers/power/power_supply_leds.c:159
+  power_supply_create_triggers:
+    drivers/power/power_supply_leds.c:167
+  power_supply_remove_triggers:
+    drivers/power/power_supply_leds.c:174
+
+
+===== C  level =====
+total count: 0

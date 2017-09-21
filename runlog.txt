@@ -1,0 +1,2358 @@
+autorun.sh running....
+find file amd/amd8111e.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/amd/amd8111e.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/amd/amd8111e.c.ind
+source/amd/amd8111e.c.ind -->
+	total line 105284 
+	total function decl 55 
+	total function call 328
+collectInt():V0_MANIFEST--> target/amd8111e.c.int
+Done
+python code/prosInter.py source/amd/amd8111e.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->247
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->264
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file asm/intrinsics.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file asm/intrinsics.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: amd/amd8111e.c
+functionCall name count--> 106
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 57
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 13
+Done
+
+python code/prosDiff.py amd/amd8111e.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file amd/pcnet32.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/amd/pcnet32.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/amd/pcnet32.c.ind
+source/amd/pcnet32.c.ind -->
+	total line 112115 
+	total function decl 79 
+	total function call 509
+collectInt():V0_MANIFEST--> target/pcnet32.c.int
+Done
+python code/prosInter.py source/amd/pcnet32.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->303
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->317
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: amd/pcnet32.c
+functionCall name count--> 127
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 65
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 15
+Done
+
+python code/prosDiff.py amd/pcnet32.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file pci/pci-acpi.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/pci/pci-acpi.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/pci/pci-acpi.c.ind
+source/pci/pci-acpi.c.ind -->
+	total line 68717 
+	total function decl 19 
+	total function call 43
+collectInt():V0_MANIFEST--> target/pci-acpi.c.int
+Done
+python code/prosInter.py source/pci/pci-acpi.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->136
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->139
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file acpi/platform/acefi.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file acpi/platform/acwin.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file acpi/platform/acwin64.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file acpi/platform/acdos16.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file acpi/platform/acfreebsd.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file acpi/platform/acnetbsd.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file acpi/platform/acmodesto.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file acpi/platform/acnetware.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file acpi/platform/acsolaris.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file acpi/platform/acefi.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file acpi/platform/acwin.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file acpi/platform/acwin64.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file acpi/platform/acdos16.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file acpi/platform/acfreebsd.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file acpi/platform/acnetbsd.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file acpi/platform/acmodesto.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file acpi/platform/acnetware.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file acpi/platform/acsolaris.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: pci/pci-acpi.c
+functionCall name count--> 32
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 18
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 4
+Done
+
+python code/prosDiff.py pci/pci-acpi.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file pci/pci-sysfs.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/pci/pci-sysfs.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/pci/pci-sysfs.c.ind
+source/pci/pci-sysfs.c.ind -->
+	total line 71627 
+	total function decl 50 
+	total function call 133
+collectInt():V0_MANIFEST--> target/pci-sysfs.c.int
+Done
+python code/prosInter.py source/pci/pci-sysfs.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->240
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->252
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: pci/pci-sysfs.c
+functionCall name count--> 66
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 103
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 9
+Done
+
+python code/prosDiff.py pci/pci-sysfs.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file pci/pci-label.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/pci/pci-label.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/pci/pci-label.c.ind
+source/pci/pci-label.c.ind -->
+	total line 68167 
+	total function decl 16 
+	total function call 23
+collectInt():V0_MANIFEST--> target/pci-label.c.int
+Done
+python code/prosInter.py source/pci/pci-label.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->115
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->117
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: pci/pci-label.c
+functionCall name count--> 11
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 24
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 9
+Done
+
+python code/prosDiff.py pci/pci-label.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file input/joydev.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/input/joydev.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/input/joydev.c.ind
+source/input/joydev.c.ind -->
+	total line 69722 
+	total function decl 33 
+	total function call 169
+collectInt():V0_MANIFEST--> target/joydev.c.int
+Done
+python code/prosInter.py source/input/joydev.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+cannot open header file ：/home/ryyan/SOURCE/linux-3.5.6/arch/x86/include/uapi/
+cannot open header file ：/home/ryyan/SOURCE/linux-3.5.6/arch/x86/include/uapi/
+cannot open header file ：/home/ryyan/SOURCE/linux-3.5.6/arch/x86/include/uapi/
+target/v0_headfile.txt total header file-->251
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/major.h
+target/v1_headfile.txt total header file-->261
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file sys/time.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file sys/ioctl.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file sys/types.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file sys/time.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file sys/ioctl.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file sys/types.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: input/joydev.c
+functionCall name count--> 73
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 42
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 12
+Done
+
+python code/prosDiff.py input/joydev.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file input/mousedev.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/input/mousedev.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/input/mousedev.c.ind
+source/input/mousedev.c.ind -->
+	total line 56052 
+	total function decl 39 
+	total function call 146
+collectInt():V0_MANIFEST--> target/mousedev.c.int
+Done
+python code/prosInter.py source/input/mousedev.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+cannot open header file ：/home/ryyan/SOURCE/linux-3.5.6/arch/x86/include/uapi/
+cannot open header file ：/home/ryyan/SOURCE/linux-3.5.6/arch/x86/include/uapi/
+cannot open header file ：/home/ryyan/SOURCE/linux-3.5.6/arch/x86/include/uapi/
+target/v0_headfile.txt total header file-->225
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/major.h
+target/v1_headfile.txt total header file-->234
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file sys/time.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file sys/ioctl.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file sys/types.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file sys/time.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file sys/ioctl.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file sys/types.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: input/mousedev.c
+functionCall name count--> 78
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 42
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 11
+Done
+
+python code/prosDiff.py input/mousedev.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file devfreq/devfreq.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/devfreq/devfreq.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/devfreq/devfreq.c.ind
+source/devfreq/devfreq.c.ind -->
+	total line 46890 
+	total function decl 23 
+	total function call 117
+collectInt():V0_MANIFEST--> target/devfreq.c.int
+Done
+python code/prosInter.py source/devfreq/devfreq.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->195
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->200
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: devfreq/devfreq.c
+functionCall name count--> 43
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 33
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 7
+Done
+
+python code/prosDiff.py devfreq/devfreq.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file video/console/fbcon.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/video/console/fbcon.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/video/console/fbcon.c.ind
+source/video/console/fbcon.c.ind -->
+	total line 92137 
+	total function decl 91 
+	total function call 276
+collectInt():V0_MANIFEST--> target/fbcon.c.int
+Done
+python code/prosInter.py source/video/console/fbcon.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->207
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->220
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: video/console/fbcon.c
+functionCall name count--> 83
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 107
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 11
+Done
+
+python code/prosDiff.py video/console/fbcon.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file video/imsttfb.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/video/imsttfb.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/video/imsttfb.c.ind
+source/video/imsttfb.c.ind -->
+	total line 82572 
+	total function decl 27 
+	total function call 54
+collectInt():V0_MANIFEST--> target/imsttfb.c.int
+Done
+python code/prosInter.py source/video/imsttfb.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+cannot open header file ：/home/ryyan/SOURCE/linux-3.5.6/arch/x86/include/uapi/asm/pci-bridge.h
+target/v0_headfile.txt total header file-->236
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/asm/pci-bridge.h
+target/v1_headfile.txt total header file-->244
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file asm/pci-bridge.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file asm/pci-bridge.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: video/imsttfb.c
+functionCall name count--> 31
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 28
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 7
+Done
+
+python code/prosDiff.py video/imsttfb.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file video/vesafb.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/video/vesafb.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/video/vesafb.c.ind
+source/video/vesafb.c.ind -->
+	total line 73931 
+	total function decl 7 
+	total function call 81
+collectInt():V0_MANIFEST--> target/vesafb.c.int
+Done
+python code/prosInter.py source/video/vesafb.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->203
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->206
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: video/vesafb.c
+functionCall name count--> 36
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 5
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 3
+Done
+
+python code/prosDiff.py video/vesafb.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file video/vga16fb.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/video/vga16fb.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/video/vga16fb.c.ind
+source/video/vga16fb.c.ind -->
+	total line 79027 
+	total function decl 38 
+	total function call 159
+collectInt():V0_MANIFEST--> target/vga16fb.c.int
+Done
+python code/prosInter.py source/video/vga16fb.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->192
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->194
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: video/vga16fb.c
+functionCall name count--> 52
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 35
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 7
+Done
+
+python code/prosDiff.py video/vga16fb.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file video/asiliantfb.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/video/asiliantfb.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/video/asiliantfb.c.ind
+source/video/asiliantfb.c.ind -->
+	total line 78471 
+	total function decl 17 
+	total function call 125
+collectInt():V0_MANIFEST--> target/asiliantfb.c.int
+Done
+python code/prosInter.py source/video/asiliantfb.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->224
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->228
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: video/asiliantfb.c
+functionCall name count--> 37
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 16
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 4
+Done
+
+python code/prosDiff.py video/asiliantfb.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file video/fbcvt.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/video/fbcvt.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/video/fbcvt.c.ind
+source/video/fbcvt.c.ind -->
+	total line 55704 
+	total function decl 11 
+	total function call 23
+collectInt():V0_MANIFEST--> target/fbcvt.c.int
+Done
+python code/prosInter.py source/video/fbcvt.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->78
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->75
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: video/fbcvt.c
+functionCall name count--> 7
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 12
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 2
+Done
+
+python code/prosDiff.py video/fbcvt.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file tty/tty_audit.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/tty/tty_audit.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/tty/tty_audit.c.ind
+source/tty/tty_audit.c.ind -->
+	total line 52134 
+	total function decl 13 
+	total function call 120
+collectInt():V0_MANIFEST--> target/tty_audit.c.int
+Done
+python code/prosInter.py source/tty/tty_audit.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->105
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->108
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: tty/tty_audit.c
+functionCall name count--> 33
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 12
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 4
+Done
+
+python code/prosDiff.py tty/tty_audit.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file tty/pty.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/tty/pty.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/tty/pty.c.ind
+source/tty/pty.c.ind -->
+	total line 71859 
+	total function decl 26 
+	total function call 147
+collectInt():V0_MANIFEST--> target/pty.c.int
+Done
+python code/prosInter.py source/tty/pty.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->263
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/major.h
+target/v1_headfile.txt total header file-->270
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: tty/pty.c
+functionCall name count--> 63
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 33
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 6
+Done
+
+python code/prosDiff.py tty/pty.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file power/power_supply_sysfs.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/power/power_supply_sysfs.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/power/power_supply_sysfs.c.ind
+source/power/power_supply_sysfs.c.ind -->
+	total line 33292 
+	total function decl 6 
+	total function call 37
+collectInt():V0_MANIFEST--> target/power_supply_sysfs.c.int
+Done
+python code/prosInter.py source/power/power_supply_sysfs.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->67
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->69
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: power/power_supply_sysfs.c
+functionCall name count--> 16
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 9
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 6
+Done
+
+python code/prosDiff.py power/power_supply_sysfs.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file power/power_supply_leds.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/power/power_supply_leds.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/power/power_supply_leds.c.ind
+source/power/power_supply_leds.c.ind -->
+	total line 32316 
+	total function decl 9 
+	total function call 43
+collectInt():V0_MANIFEST--> target/power_supply_leds.c.int
+Done
+python code/prosInter.py source/power/power_supply_leds.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->71
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->74
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: power/power_supply_leds.c
+functionCall name count--> 9
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 9
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 1
+Done
+
+python code/prosDiff.py power/power_supply_leds.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file parport/daisy.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/parport/daisy.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/parport/daisy.c.ind
+source/parport/daisy.c.ind -->
+	total line 51172 
+	total function decl 14 
+	total function call 226
+collectInt():V0_MANIFEST--> target/daisy.c.int
+Done
+python code/prosInter.py source/parport/daisy.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->189
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->196
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: parport/daisy.c
+functionCall name count--> 31
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 13
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 2
+Done
+
+python code/prosDiff.py parport/daisy.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file parport/procfs.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/parport/procfs.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/parport/procfs.c.ind
+source/parport/procfs.c.ind -->
+	total line 44978 
+	total function decl 14 
+	total function call 46
+collectInt():V0_MANIFEST--> target/procfs.c.int
+Done
+python code/prosInter.py source/parport/procfs.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->128
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->140
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: parport/procfs.c
+functionCall name count--> 11
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 10
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 3
+Done
+
+python code/prosDiff.py parport/procfs.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file parport/probe.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/parport/probe.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/parport/probe.c.ind
+source/parport/probe.c.ind -->
+	total line 44426 
+	total function decl 4 
+	total function call 62
+collectInt():V0_MANIFEST--> target/probe.c.int
+Done
+python code/prosInter.py source/parport/probe.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->110
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->120
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: parport/probe.c
+functionCall name count--> 21
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 3
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 1
+Done
+
+python code/prosDiff.py parport/probe.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file block/brd.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/block/brd.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/block/brd.c.ind
+source/block/brd.c.ind -->
+	total line 81804 
+	total function decl 23 
+	total function call 125
+collectInt():V0_MANIFEST--> target/brd.c.int
+Done
+python code/prosInter.py source/block/brd.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->205
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/major.h
+target/v1_headfile.txt total header file-->219
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: block/brd.c
+functionCall name count--> 60
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 16
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 5
+Done
+
+python code/prosDiff.py block/brd.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file block/floppy.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/block/floppy.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/block/floppy.c.ind
+source/block/floppy.c.ind -->
+	total line 107722 
+	total function decl 126 
+	total function call 875
+collectInt():V0_MANIFEST--> target/floppy.c.int
+Done
+python code/prosInter.py source/block/floppy.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->299
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/fdreg.h
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/hdreg.h
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/blkpg.h
+target/v1_headfile.txt total header file-->319
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: block/floppy.c
+functionCall name count--> 180
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 27
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 13
+Done
+
+python code/prosDiff.py block/floppy.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file message/fusion/mptsas.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/message/fusion/mptsas.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/message/fusion/mptsas.c.ind
+source/message/fusion/mptsas.c.ind -->
+	total line 122611 
+	total function decl 103 
+	total function call 1023
+collectInt():V0_MANIFEST--> target/mptsas.c.int
+Done
+python code/prosInter.py source/message/fusion/mptsas.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->147
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->152
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: message/fusion/mptsas.c
+functionCall name count--> 141
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 143
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 32
+Done
+
+python code/prosDiff.py message/fusion/mptsas.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file message/fusion/mptspi.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/message/fusion/mptspi.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/message/fusion/mptspi.c.ind
+source/message/fusion/mptspi.c.ind -->
+	total line 96692 
+	total function decl 44 
+	total function call 284
+collectInt():V0_MANIFEST--> target/mptspi.c.int
+Done
+python code/prosInter.py source/message/fusion/mptspi.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->199
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->210
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: message/fusion/mptspi.c
+functionCall name count--> 111
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 52
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 14
+Done
+
+python code/prosDiff.py message/fusion/mptspi.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file message/fusion/mptfc.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/message/fusion/mptfc.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/message/fusion/mptfc.c.ind
+source/message/fusion/mptfc.c.ind -->
+	total line 104880 
+	total function decl 35 
+	total function call 211
+collectInt():V0_MANIFEST--> target/mptfc.c.int
+Done
+python code/prosInter.py source/message/fusion/mptfc.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->195
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->206
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: message/fusion/mptfc.c
+functionCall name count--> 87
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 41
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 14
+Done
+
+python code/prosDiff.py message/fusion/mptfc.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file char/ppdev.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/char/ppdev.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/char/ppdev.c.ind
+source/char/ppdev.c.ind -->
+	total line 54186 
+	total function decl 17 
+	total function call 163
+collectInt():V0_MANIFEST--> target/ppdev.c.int
+Done
+python code/prosInter.py source/char/ppdev.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->224
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/ioctl.h
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/major.h
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/ppdev.h
+target/v1_headfile.txt total header file-->230
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: char/ppdev.c
+functionCall name count--> 72
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 14
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 5
+Done
+
+python code/prosDiff.py char/ppdev.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file char/ttyprintk.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/char/ttyprintk.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/char/ttyprintk.c.ind
+source/char/ttyprintk.c.ind -->
+	total line 40884 
+	total function decl 7 
+	total function call 29
+collectInt():V0_MANIFEST--> target/ttyprintk.c.int
+Done
+python code/prosInter.py source/char/ttyprintk.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->84
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->85
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: char/ttyprintk.c
+functionCall name count--> 18
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 7
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 2
+Done
+
+python code/prosDiff.py char/ttyprintk.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file char/hpet.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/char/hpet.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/char/hpet.c.ind
+source/char/hpet.c.ind -->
+	total line 76464 
+	total function decl 23 
+	total function call 148
+collectInt():V0_MANIFEST--> target/hpet.c.int
+Done
+python code/prosInter.py source/char/hpet.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->279
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/major.h
+target/v1_headfile.txt total header file-->288
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: char/hpet.c
+functionCall name count--> 72
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 23
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 10
+Done
+
+python code/prosDiff.py char/hpet.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file char/virtio_console.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/char/virtio_console.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/char/virtio_console.c.ind
+source/char/virtio_console.c.ind -->
+	total line 75792 
+	total function decl 57 
+	total function call 278
+collectInt():V0_MANIFEST--> target/virtio_console.c.int
+Done
+python code/prosInter.py source/char/virtio_console.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->239
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->250
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: char/virtio_console.c
+functionCall name count--> 103
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 57
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 14
+Done
+
+python code/prosDiff.py char/virtio_console.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file virtio/virtio_balloon.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/virtio/virtio_balloon.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/virtio/virtio_balloon.c.ind
+source/virtio/virtio_balloon.c.ind -->
+	total line 60139 
+	total function decl 24 
+	total function call 83
+collectInt():V0_MANIFEST--> target/virtio_balloon.c.int
+Done
+python code/prosInter.py source/virtio/virtio_balloon.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->156
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/virtio_balloon.h
+target/v1_headfile.txt total header file-->159
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: virtio/virtio_balloon.c
+functionCall name count--> 51
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 20
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 4
+Done
+
+python code/prosDiff.py virtio/virtio_balloon.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/scsi_proc.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/scsi_proc.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/scsi_proc.c.ind
+source/scsi/scsi_proc.c.ind -->
+	total line 82858 
+	total function decl 19 
+	total function call 66
+collectInt():V0_MANIFEST--> target/scsi_proc.c.int
+Done
+python code/prosInter.py source/scsi/scsi_proc.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->230
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->239
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/scsi_proc.c
+functionCall name count--> 29
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 15
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 6
+Done
+
+python code/prosDiff.py scsi/scsi_proc.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/sr.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/sr.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/sr.c.ind
+source/scsi/sr.c.ind -->
+	total line 89544 
+	total function decl 22 
+	total function call 133
+collectInt():V0_MANIFEST--> target/sr.c.int
+Done
+python code/prosInter.py source/scsi/sr.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->269
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->286
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/sr.c
+functionCall name count--> 78
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 22
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 11
+Done
+
+python code/prosDiff.py scsi/sr.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/ch.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/ch.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/ch.c.ind
+source/scsi/ch.c.ind -->
+	total line 91028 
+	total function decl 31 
+	total function call 216
+collectInt():V0_MANIFEST--> target/ch.c.int
+Done
+python code/prosInter.py source/scsi/ch.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->276
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/major.h
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/chio.h
+target/v1_headfile.txt total header file-->288
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/ch.c
+functionCall name count--> 61
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 20
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 6
+Done
+
+python code/prosDiff.py scsi/ch.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/scsi_trace.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/scsi_trace.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/scsi_trace.c.ind
+source/scsi/scsi_trace.c.ind -->
+	total line 85381 
+	total function decl 10 
+	total function call 25
+collectInt():V0_MANIFEST--> target/scsi_trace.c.int
+Done
+python code/prosInter.py source/scsi/scsi_trace.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->76
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->79
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/scsi_trace.c
+functionCall name count--> 4
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 10
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 1
+Done
+
+python code/prosDiff.py scsi/scsi_trace.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/scsi_sysctl.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/scsi_sysctl.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/scsi_sysctl.c.ind
+source/scsi/scsi_sysctl.c.ind -->
+	total line 24148 
+	total function decl 2 
+	total function call 2
+collectInt():V0_MANIFEST--> target/scsi_sysctl.c.int
+Done
+python code/prosInter.py source/scsi/scsi_sysctl.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->45
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->49
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/scsi_sysctl.c
+functionCall name count--> 2
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 0
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 0
+Done
+
+python code/prosDiff.py scsi/scsi_sysctl.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/scsi_wait_scan.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/scsi_wait_scan.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/scsi_wait_scan.c.ind
+source/scsi/scsi_wait_scan.c.ind -->
+	total line 33516 
+	total function decl 4 
+	total function call 3
+collectInt():V0_MANIFEST--> target/scsi_wait_scan.c.int
+Done
+python code/prosInter.py source/scsi/scsi_wait_scan.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->68
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->68
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/scsi_wait_scan.c
+functionCall name count--> 3
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 0
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 0
+Done
+
+python code/prosDiff.py scsi/scsi_wait_scan.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/sg.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/sg.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/sg.c.ind
+source/scsi/sg.c.ind -->
+	total line 111156 
+	total function decl 70 
+	total function call 634
+collectInt():V0_MANIFEST--> target/sg.c.int
+Done
+python code/prosInter.py source/scsi/sg.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->285
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/mtio.h
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/ioctl.h
+target/v1_headfile.txt total header file-->301
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/sg.c
+functionCall name count--> 176
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 85
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 18
+Done
+
+python code/prosDiff.py scsi/sg.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/sd_dif.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/sd_dif.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/sd_dif.c.ind
+source/scsi/sd_dif.c.ind -->
+	total line 86969 
+	total function decl 21 
+	total function call 94
+collectInt():V0_MANIFEST--> target/sd_dif.c.int
+Done
+python code/prosInter.py source/scsi/sd_dif.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->144
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->148
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/sd_dif.c
+functionCall name count--> 30
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 15
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 4
+Done
+
+python code/prosDiff.py scsi/sd_dif.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/sd.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/sd.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/sd.c.ind
+source/scsi/sd.c.ind -->
+	total line 105214 
+	total function decl 68 
+	total function call 527
+collectInt():V0_MANIFEST--> target/sd.c.int
+Done
+python code/prosInter.py source/scsi/sd.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->283
+Removed temp file target/tmphfile.txt.
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/hdreg.h
+cannot open header file ：/home/ryyan/SOURCE/linux-3.8.13/arch/x86/include/uapi/linux/blkpg.h
+target/v1_headfile.txt total header file-->299
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file generated/bounds.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/sd.c
+functionCall name count--> 161
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 92
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 13
+Done
+
+python code/prosDiff.py scsi/sd.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/scsi_pm.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/scsi_pm.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/scsi_pm.c.ind
+source/scsi/scsi_pm.c.ind -->
+	total line 78847 
+	total function decl 8 
+	total function call 28
+collectInt():V0_MANIFEST--> target/scsi_pm.c.int
+Done
+python code/prosInter.py source/scsi/scsi_pm.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->79
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->79
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/scsi_pm.c
+functionCall name count--> 20
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 10
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 2
+Done
+
+python code/prosDiff.py scsi/scsi_pm.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file scsi/vmw_pvscsi.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/scsi/vmw_pvscsi.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/scsi/vmw_pvscsi.c.ind
+source/scsi/vmw_pvscsi.c.ind -->
+	total line 94914 
+	total function decl 63 
+	total function call 275
+collectInt():V0_MANIFEST--> target/vmw_pvscsi.c.int
+Done
+python code/prosInter.py source/scsi/vmw_pvscsi.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->159
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->165
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: scsi/vmw_pvscsi.c
+functionCall name count--> 101
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 68
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 11
+Done
+
+python code/prosDiff.py scsi/vmw_pvscsi.c runnning successful.
+
+autorun.sh running Done.
