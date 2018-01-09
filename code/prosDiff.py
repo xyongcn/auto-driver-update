@@ -7,6 +7,8 @@ import commands
 from subprocess import check_output
 from collections import OrderedDict
 
+from display import * #show result
+
 EXT0 = '.ind' # AST file
 EXT2 = '.int' #interface file
 SOURCE_PATH0 = os.environ['HOME']+'/SOURCE/linux-3.5.6/'
@@ -268,7 +270,7 @@ def prosFuncTargetFile():
         fcFile_dict[fnName] =['macfun'] + tlist[:-1] + [tstr]
       else:
         fcFile_dict[fnName] =['function'] + tlist[:-1] + [tstr]
-    else:  # if not found,may self-decl-macro or kenerl-decl macro of func
+    else: # if not found,may self-decl-macro or kenerl-decl macro of func
       pass #  fcFile_dict[fnName] = []
   #print To File
   printToFile(fnFile_dict,fnCall_dict,fcFile_dict)
@@ -305,15 +307,15 @@ def printAssitInfo(out,assitInfo_dict,level,assitLoc_dict):
   print >> out,'total count:',len(assitInfo_dict)
   for k,vlist in assitInfo_dict.items():  
     diff_type,_type,_file = vlist[0:3]
-    print >> out,'\n',k,'\t( diff_type: '+diff_type,'type: '+_type,'file: '+_file,')'
-    print >> out,'\t--',vlist[3]
+    print >> out,'\n',k,'  ( diff_type: '+diff_type,'type: '+_type,'file: '+_file,')'
+    print >> out,'  --',vlist[3]
     if cmp(diff_type,'Del')!=0:
-      print >> out,'\t++',vlist[4]
+      print >> out,'  ++',vlist[4]
     print >> out,""
     # print call loction
     if isinstance(assitLoc_dict[k],list) == True:
       for loc in assitLoc_dict[k]:
-        print >> out,'\t',filename+':',loc
+        print >> out,'  ',filename+':',loc
     else:
       for fcName,fcLoc_list in assitLoc_dict[k].items():
 		    print >> out,'  '+fcName
@@ -357,13 +359,13 @@ def getAssitInfo():
     if cmp(diff_type,'Del')==0 and _type in ('macro'):
       if k not in fcDiffInfo_dict:#
         _file = _file.split('include/')[1]
-        #if _file in headfile_list:
-        cmd_string = "grep -nw '"+k+"' "+fileTopros
-        status,tstr=commands.getstatusoutput(cmd_string)
-        if status == 0:
-          loc_list = tstr.split('\n')
-          assitLoc_dict[k] = loc_list
-          assitInfoA_dict[k] = Alevel_dict[k]
+        if _file in headfile_list:
+          cmd_string = "grep -nw '"+k+"' "+fileTopros
+          status,tstr=commands.getstatusoutput(cmd_string)
+          if status == 0:
+            loc_list = tstr.split('\n')
+            assitLoc_dict[k] = loc_list
+            assitInfoA_dict[k] = Alevel_dict[k]
     elif diff_type in ('Mod','All') and ('macro' in _type):
       if k not in fcDiffInfo_dict:
         _file = _file.split('-->')[0]
@@ -414,6 +416,7 @@ def getAssitInfo():
     printAssitInfo(out,assitInfoB_dict,'B',assitLoc_dict)
     printAssitInfo(out,assitInfoC_dict,'C',assitLoc_dict)  
     
+	
 def main():
     print '\npython file:',sys.argv[0],'running...'
     print 'input file:',sys.argv[1]

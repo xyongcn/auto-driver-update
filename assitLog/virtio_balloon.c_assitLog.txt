@@ -5,22 +5,22 @@ more info about this log description to read assitlog_description.txt
 ===== A  level =====
 total count: 3
 
-KERN_INFO 	( diff_type: Del type: macro file: include/linux/printk.h )
-	-- #define KERN_INFO "<6>"
+KERN_INFO   ( diff_type: Del type: macro file: include/linux/printk.h )
+  -- #define KERN_INFO "<6>"
 
   fill_balloon:
     drivers/virtio/virtio_balloon.c:134:1
 
-kthread_should_stop 	( diff_type: Mod type: prototype file: include/linux/kthread.h )
-	-- int kthread_should_stop(void);
-	++ bool kthread_should_stop(void);
+kthread_should_stop   ( diff_type: Mod type: prototype file: include/linux/kthread.h )
+  -- int kthread_should_stop(void);
+  ++ bool kthread_should_stop(void);
 
   balloon:
     drivers/virtio/virtio_balloon.c:294:29
     drivers/virtio/virtio_balloon.c:287:29
 
-virtio_has_feature 	( diff_type: Del type: function file: include/linux/virtio_config.h )
-	-- static inline bool virtio_has_feature(const struct virtio_device *vdev,unsigned int fbit)
+virtio_has_feature   ( diff_type: Del type: function file: include/linux/virtio_config.h )
+  -- static inline bool virtio_has_feature(const struct virtio_device *vdev,unsigned int fbit)
 
   init_vqs:
     drivers/virtio/virtio_balloon.c:318:27
@@ -30,18 +30,18 @@ virtio_has_feature 	( diff_type: Del type: function file: include/linux/virtio_c
 ===== B  level =====
 total count: 3
 
-page 	( diff_type: Mod type: struct file: include/linux/mm_types.h )
-	-- struct page { unsigned long flags; struct address_space *mapping; pgoff_t index; void *freelist; }; unsigned long counters; atomic_t _mapcount; struct { unsigned inuse:16; unsigned objects:15; unsigned frozen:1; }; atomic_t _count; }; struct list_head lru; struct page *next; int pages; int pobjects; short int pages; short int pobjects; spinlock_t ptl; struct kmem_cache *slab; struct page *first_page; }; unsigned long debug_flags; void *shadow; }
-	++ struct page { unsigned long flags; struct address_space *mapping; pgoff_t index; void *freelist; bool pfmemalloc; unsigned long counters; atomic_t _mapcount; struct { unsigned inuse:16; unsigned objects:15; unsigned frozen:1; }; int units; }; atomic_t _count; }; struct list_head lru; struct page *next; int pages; int pobjects; short int pages; short int pobjects; struct list_head list; struct slab *slab_page; }; spinlock_t ptl; struct kmem_cache *slab_cache; struct page *first_page; }; unsigned long debug_flags; void *shadow; int _last_nid; }
+page   ( diff_type: Mod type: struct file: include/linux/mm_types.h )
+  -- struct page { unsigned long flags; struct address_space *mapping; pgoff_t index; void *freelist; }; unsigned long counters; atomic_t _mapcount; struct { unsigned inuse:16; unsigned objects:15; unsigned frozen:1; }; atomic_t _count; }; struct list_head lru; struct page *next; int pages; int pobjects; short int pages; short int pobjects; spinlock_t ptl; struct kmem_cache *slab; struct page *first_page; }; unsigned long debug_flags; void *shadow; }
+  ++ struct page { unsigned long flags; struct address_space *mapping; pgoff_t index; void *freelist; bool pfmemalloc; unsigned long counters; atomic_t _mapcount; struct { unsigned inuse:16; unsigned objects:15; unsigned frozen:1; }; int units; }; atomic_t _count; }; struct list_head lru; struct page *next; int pages; int pobjects; short int pages; short int pobjects; struct list_head list; struct slab *slab_page; }; spinlock_t ptl; struct kmem_cache *slab_cache; struct page *first_page; }; unsigned long debug_flags; void *shadow; int _last_nid; }
 
   page_to_balloon_pfn:
     drivers/virtio/virtio_balloon.c:75
   set_page_pfns:
     drivers/virtio/virtio_balloon.c:113
 
-virtqueue 	( diff_type: Mod type: struct file: include/linux/virtio.h )
-	-- struct virtqueue { struct list_head list; void (*callback)(struct virtqueue *vq); const char *name; struct virtio_device *vdev; void *priv; };
-	++ struct virtqueue { struct list_head list; void (*callback)(struct virtqueue *vq); const char *name; struct virtio_device *vdev; unsigned int index; unsigned int num_free; void *priv; };
+virtqueue   ( diff_type: Mod type: struct file: include/linux/virtio.h )
+  -- struct virtqueue { struct list_head list; void (*callback)(struct virtqueue *vq); const char *name; struct virtio_device *vdev; void *priv; };
+  ++ struct virtqueue { struct list_head list; void (*callback)(struct virtqueue *vq); const char *name; struct virtio_device *vdev; unsigned int index; unsigned int num_free; void *priv; };
 
   balloon_ack:
     drivers/virtio/virtio_balloon.c:90
@@ -50,11 +50,11 @@ virtqueue 	( diff_type: Mod type: struct file: include/linux/virtio.h )
   stats_request:
     drivers/virtio/virtio_balloon.c:228
 
-virtio_driver 	( diff_type: Mod type: struct file: include/linux/virtio.h )
-	-- struct virtio_driver { struct device_driver driver; const struct virtio_device_id *id_table; const unsigned int *feature_table; unsigned int feature_table_size; int (*probe)(struct virtio_device *dev); void (*remove)(struct virtio_device *dev); void (*config_changed)(struct virtio_device *dev); int (*freeze)(struct virtio_device *dev); int (*restore)(struct virtio_device *dev); };
-	++ struct virtio_driver { struct device_driver driver; const struct virtio_device_id *id_table; const unsigned int *feature_table; unsigned int feature_table_size; int (*probe)(struct virtio_device *dev); void (*scan)(struct virtio_device *dev); void (*remove)(struct virtio_device *dev); void (*config_changed)(struct virtio_device *dev); int (*freeze)(struct virtio_device *dev); int (*restore)(struct virtio_device *dev); };
+virtio_driver   ( diff_type: Mod type: struct file: include/linux/virtio.h )
+  -- struct virtio_driver { struct device_driver driver; const struct virtio_device_id *id_table; const unsigned int *feature_table; unsigned int feature_table_size; int (*probe)(struct virtio_device *dev); void (*remove)(struct virtio_device *dev); void (*config_changed)(struct virtio_device *dev); int (*freeze)(struct virtio_device *dev); int (*restore)(struct virtio_device *dev); };
+  ++ struct virtio_driver { struct device_driver driver; const struct virtio_device_id *id_table; const unsigned int *feature_table; unsigned int feature_table_size; int (*probe)(struct virtio_device *dev); void (*scan)(struct virtio_device *dev); void (*remove)(struct virtio_device *dev); void (*config_changed)(struct virtio_device *dev); int (*freeze)(struct virtio_device *dev); int (*restore)(struct virtio_device *dev); };
 
-	virtio_balloon.c: 436:static struct virtio_driver virtio_balloon_driver = {
+   virtio_balloon.c: 436:static struct virtio_driver virtio_balloon_driver = {
 
 
 ===== C  level =====

@@ -9,69 +9,69 @@ total count: 0
 ===== B  level =====
 total count: 9
 
-put_user 	( diff_type: Mod type: macro file: arch/x86/include/asm/uaccess.h )
-	-- #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr))__pus_tmp = x; __ret_pu = 0; if (unlikely(__copy_to_user_ll(ptr, &__pus_tmp, sizeof(*(ptr))) != 0)) __ret_pu = -EFAULT; __ret_pu; })
-	++ #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr)) __pu_val; __chk_user_ptr(ptr); might_fault(); __pu_val = x; switch (sizeof(*(ptr))) { case 1: __put_user_x(1, __pu_val, ptr, __ret_pu); break; case 2: __put_user_x(2, __pu_val, ptr, __ret_pu); break; case 4: __put_user_x(4, __pu_val, ptr, __ret_pu); break; case 8: __put_user_x8(__pu_val, ptr, __ret_pu); break; default: __put_user_x(X, __pu_val, ptr, __ret_pu); break; } __ret_pu; })
+put_user   ( diff_type: Mod type: macro file: arch/x86/include/asm/uaccess.h )
+  -- #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr))__pus_tmp = x; __ret_pu = 0; if (unlikely(__copy_to_user_ll(ptr, &__pus_tmp, sizeof(*(ptr))) != 0)) __ret_pu = -EFAULT; __ret_pu; })
+  ++ #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr)) __pu_val; __chk_user_ptr(ptr); might_fault(); __pu_val = x; switch (sizeof(*(ptr))) { case 1: __put_user_x(1, __pu_val, ptr, __ret_pu); break; case 2: __put_user_x(2, __pu_val, ptr, __ret_pu); break; case 4: __put_user_x(4, __pu_val, ptr, __ret_pu); break; case 8: __put_user_x8(__pu_val, ptr, __ret_pu); break; default: __put_user_x(X, __pu_val, ptr, __ret_pu); break; } __ret_pu; })
 
   hpet_read:
     drivers/char/hpet.c:338:1
 
-KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
-	-- #define KERN_ERR "<3>"
-	++ #define KERN_ERR KERN_SOH "3"
+KERN_ERR   ( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+  -- #define KERN_ERR "<3>"
+  ++ #define KERN_ERR KERN_SOH "3"
 
   hpet_mmap:
     drivers/char/hpet.c:390:1
 
-KERN_DEBUG 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
-	-- #define KERN_DEBUG "<7>"
-	++ #define KERN_DEBUG KERN_SOH "7"
+KERN_DEBUG   ( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+  -- #define KERN_DEBUG "<7>"
+  ++ #define KERN_DEBUG KERN_SOH "7"
 
   hpet_alloc:
     drivers/char/hpet.c:856:1
 
-KERN_WARNING 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
-	-- #define KERN_WARNING "<4>"
-	++ #define KERN_WARNING KERN_SOH "4"
+KERN_WARNING   ( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+  -- #define KERN_WARNING "<4>"
+  ++ #define KERN_WARNING KERN_SOH "4"
 
   hpet_alloc:
     drivers/char/hpet.c:885:1
 
-KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
-	-- #define KERN_INFO "<6>"
-	++ #define KERN_INFO KERN_SOH "6"
+KERN_INFO   ( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+  -- #define KERN_INFO "<6>"
+  ++ #define KERN_INFO KERN_SOH "6"
 
   hpet_alloc:
     drivers/char/hpet.c:905:
     drivers/char/hpet.c:914:
 
-KERN_CONT 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
-	-- #define KERN_CONT "<c>"
-	++ #define KERN_CONT ""
+KERN_CONT   ( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+  -- #define KERN_CONT "<c>"
+  ++ #define KERN_CONT ""
 
   hpet_alloc:
     drivers/char/hpet.c:909:1
     drivers/char/hpet.c:910:
 
-inode 	( diff_type: Mod type: struct file: include/linux/fs.h )
-	-- struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct list_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
-	++ struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct hlist_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+inode   ( diff_type: Mod type: struct file: include/linux/fs.h )
+  -- struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct list_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+  ++ struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct hlist_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
 
   hpet_open:
     drivers/char/hpet.c:263
   hpet_release:
     drivers/char/hpet.c:413
 
-vm_area_struct 	( diff_type: Mod type: struct file: include/linux/mm_types.h )
-	-- struct vm_area_struct { struct mm_struct * vm_mm; unsigned long vm_start; unsigned long vm_end; struct vm_area_struct *vm_next, *vm_prev; pgprot_t vm_page_prot; unsigned long vm_flags; struct rb_node vm_rb; struct list_head list; void *parent; struct vm_area_struct *head; } vm_set; struct raw_prio_tree_node prio_tree_node; } shared; struct list_head anon_vma_chain; struct anon_vma *anon_vma; const struct vm_operations_struct *vm_ops; unsigned long vm_pgoff; struct file * vm_file; void * vm_private_data; struct vm_region *vm_region; struct mempolicy *vm_policy; };
-	++ struct vm_area_struct { unsigned long vm_start; unsigned long vm_end; struct vm_area_struct *vm_next, *vm_prev; struct rb_node vm_rb; unsigned long rb_subtree_gap; struct mm_struct *vm_mm; pgprot_t vm_page_prot; unsigned long vm_flags; struct rb_node rb; unsigned long rb_subtree_last; } linear; struct list_head nonlinear; } shared; struct list_head anon_vma_chain; struct anon_vma *anon_vma; const struct vm_operations_struct *vm_ops; unsigned long vm_pgoff; struct file * vm_file; void * vm_private_data; struct vm_region *vm_region; struct mempolicy *vm_policy; };
+vm_area_struct   ( diff_type: Mod type: struct file: include/linux/mm_types.h )
+  -- struct vm_area_struct { struct mm_struct * vm_mm; unsigned long vm_start; unsigned long vm_end; struct vm_area_struct *vm_next, *vm_prev; pgprot_t vm_page_prot; unsigned long vm_flags; struct rb_node vm_rb; struct list_head list; void *parent; struct vm_area_struct *head; } vm_set; struct raw_prio_tree_node prio_tree_node; } shared; struct list_head anon_vma_chain; struct anon_vma *anon_vma; const struct vm_operations_struct *vm_ops; unsigned long vm_pgoff; struct file * vm_file; void * vm_private_data; struct vm_region *vm_region; struct mempolicy *vm_policy; };
+  ++ struct vm_area_struct { unsigned long vm_start; unsigned long vm_end; struct vm_area_struct *vm_next, *vm_prev; struct rb_node vm_rb; unsigned long rb_subtree_gap; struct mm_struct *vm_mm; pgprot_t vm_page_prot; unsigned long vm_flags; struct rb_node rb; unsigned long rb_subtree_last; } linear; struct list_head nonlinear; } shared; struct list_head anon_vma_chain; struct anon_vma *anon_vma; const struct vm_operations_struct *vm_ops; unsigned long vm_pgoff; struct file * vm_file; void * vm_private_data; struct vm_region *vm_region; struct mempolicy *vm_policy; };
 
   hpet_mmap:
     drivers/char/hpet.c:370
 
-acpi_device 	( diff_type: Mod type: struct file: include/acpi/acpi_bus.h )
-	-- struct acpi_device { int device_type; acpi_handle handle; struct acpi_device *parent; struct list_head children; struct list_head node; struct list_head wakeup_list; struct acpi_device_status status; struct acpi_device_flags flags; struct acpi_device_pnp pnp; struct acpi_device_power power; struct acpi_device_wakeup wakeup; struct acpi_device_perf performance; struct acpi_device_dir dir; struct acpi_device_ops ops; struct acpi_driver *driver; void *driver_data; struct device dev; struct acpi_bus_ops bus_ops; enum acpi_bus_removal_type removal_type; };
-	++ struct acpi_device { int device_type; acpi_handle handle; struct acpi_device *parent; struct list_head children; struct list_head node; struct list_head wakeup_list; struct acpi_device_status status; struct acpi_device_flags flags; struct acpi_device_pnp pnp; struct acpi_device_power power; struct acpi_device_wakeup wakeup; struct acpi_device_perf performance; struct acpi_device_dir dir; struct acpi_device_ops ops; struct acpi_driver *driver; void *driver_data; struct device dev; struct acpi_bus_ops bus_ops; enum acpi_bus_removal_type removal_type; u8 physical_node_count; struct list_head physical_node_list; struct mutex physical_node_lock; DECLARE_BITMAP(physical_node_id_bitmap, ACPI_MAX_PHYSICAL_NODE); };
+acpi_device   ( diff_type: Mod type: struct file: include/acpi/acpi_bus.h )
+  -- struct acpi_device { int device_type; acpi_handle handle; struct acpi_device *parent; struct list_head children; struct list_head node; struct list_head wakeup_list; struct acpi_device_status status; struct acpi_device_flags flags; struct acpi_device_pnp pnp; struct acpi_device_power power; struct acpi_device_wakeup wakeup; struct acpi_device_perf performance; struct acpi_device_dir dir; struct acpi_device_ops ops; struct acpi_driver *driver; void *driver_data; struct device dev; struct acpi_bus_ops bus_ops; enum acpi_bus_removal_type removal_type; };
+  ++ struct acpi_device { int device_type; acpi_handle handle; struct acpi_device *parent; struct list_head children; struct list_head node; struct list_head wakeup_list; struct acpi_device_status status; struct acpi_device_flags flags; struct acpi_device_pnp pnp; struct acpi_device_power power; struct acpi_device_wakeup wakeup; struct acpi_device_perf performance; struct acpi_device_dir dir; struct acpi_device_ops ops; struct acpi_driver *driver; void *driver_data; struct device dev; struct acpi_bus_ops bus_ops; enum acpi_bus_removal_type removal_type; u8 physical_node_count; struct list_head physical_node_list; struct mutex physical_node_lock; DECLARE_BITMAP(physical_node_id_bitmap, ACPI_MAX_PHYSICAL_NODE); };
 
   hpet_acpi_add:
     drivers/char/hpet.c:1017

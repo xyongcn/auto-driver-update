@@ -5,41 +5,41 @@ more info about this log description to read assitlog_description.txt
 ===== A  level =====
 total count: 4
 
-__devinit 	( diff_type: Del type: macro file: include/linux/init.h )
-	-- #define __devinit __section(.devinit.text) __cold notrace
+__devinit   ( diff_type: Del type: macro file: include/linux/init.h )
+  -- #define __devinit __section(.devinit.text) __cold notrace
 
-	vga16fb.c: 1306:static int __devinit vga16fb_probe(struct platform_device *dev)
+   vga16fb.c: 1306:static int __devinit vga16fb_probe(struct platform_device *dev)
 
-__devinitdata 	( diff_type: Del type: macro file: include/linux/init.h )
-	-- #define __devinitdata __section(.devinit.data)
+__devinitdata   ( diff_type: Del type: macro file: include/linux/init.h )
+  -- #define __devinitdata __section(.devinit.data)
 
-	vga16fb.c: 68:static struct fb_var_screeninfo vga16fb_defined __devinitdata = {
-	vga16fb.c: 88:static struct fb_fix_screeninfo vga16fb_fix __devinitdata = {
+   vga16fb.c: 68:static struct fb_var_screeninfo vga16fb_defined __devinitdata = {
+   vga16fb.c: 88:static struct fb_fix_screeninfo vga16fb_fix __devinitdata = {
 
-__devexit 	( diff_type: Del type: macro file: include/linux/init.h )
-	-- #define __devexit __section(.devexit.text) __exitused __cold notrace
+__devexit   ( diff_type: Del type: macro file: include/linux/init.h )
+  -- #define __devexit __section(.devexit.text) __exitused __cold notrace
 
-	vga16fb.c: 1398:static int __devexit vga16fb_remove(struct platform_device *dev)
+   vga16fb.c: 1398:static int __devexit vga16fb_remove(struct platform_device *dev)
 
-__devexit_p 	( diff_type: Del type: macro file: include/linux/init.h )
-	-- #define __devexit_p(x) NULL
+__devexit_p   ( diff_type: Del type: macro file: include/linux/init.h )
+  -- #define __devexit_p(x) NULL
 
-	vga16fb.c: 1410:	.remove = __devexit_p(vga16fb_remove),
+   vga16fb.c: 1410:	.remove = __devexit_p(vga16fb_remove),
 
 
 ===== B  level =====
 total count: 4
 
-KERN_DEBUG 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
-	-- #define KERN_DEBUG "<7>"
-	++ #define KERN_DEBUG KERN_SOH "7"
+KERN_DEBUG   ( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+  -- #define KERN_DEBUG "<7>"
+  ++ #define KERN_DEBUG KERN_SOH "7"
 
   vga16fb_probe:
     drivers/video/vga16fb.c:1313:
 
-KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
-	-- #define KERN_ERR "<3>"
-	++ #define KERN_ERR KERN_SOH "3"
+KERN_ERR   ( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+  -- #define KERN_ERR "<3>"
+  ++ #define KERN_ERR KERN_SOH "3"
 
   vga16fb_probe:
     drivers/video/vga16fb.c:1330:1
@@ -47,17 +47,17 @@ KERN_ERR 	( diff_type: All type: macro file: include/linux/printk.h-->include/li
     drivers/video/vga16fb.c:1366:1
     drivers/video/vga16fb.c:1377:1
 
-KERN_INFO 	( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
-	-- #define KERN_INFO "<6>"
-	++ #define KERN_INFO KERN_SOH "6"
+KERN_INFO   ( diff_type: All type: macro file: include/linux/printk.h-->include/linux/kern_levels.h )
+  -- #define KERN_INFO "<6>"
+  ++ #define KERN_INFO KERN_SOH "6"
 
   vga16fb_probe:
     drivers/video/vga16fb.c:1335:
     drivers/video/vga16fb.c:1382:
 
-platform_device 	( diff_type: Mod type: struct file: include/linux/platform_device.h )
-	-- struct platform_device { const char * name; int id; struct device dev; u32 num_resources; struct resource * resource; const struct platform_device_id *id_entry; struct mfd_cell *mfd_cell; struct pdev_archdata archdata; };
-	++ struct platform_device { const char * name; int id; bool id_auto; struct device dev; u32 num_resources; struct resource * resource; const struct platform_device_id *id_entry; struct mfd_cell *mfd_cell; struct pdev_archdata archdata; };
+platform_device   ( diff_type: Mod type: struct file: include/linux/platform_device.h )
+  -- struct platform_device { const char * name; int id; struct device dev; u32 num_resources; struct resource * resource; const struct platform_device_id *id_entry; struct mfd_cell *mfd_cell; struct pdev_archdata archdata; };
+  ++ struct platform_device { const char * name; int id; bool id_auto; struct device dev; u32 num_resources; struct resource * resource; const struct platform_device_id *id_entry; struct mfd_cell *mfd_cell; struct pdev_archdata archdata; };
 
   vga16fb_probe:
     drivers/video/vga16fb.c:1306

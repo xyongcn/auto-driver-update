@@ -4,7 +4,7 @@ echo "autorun.sh running...."
 
 rootDir=~/myProjects
 sourceDir=source
-filename=amd/pcnet32.c
+filename=net/ethernet/amd/pcnet32.c
 
 if [ $# -ne 1 ];then
   echo "process default filename $sourceDir/$filename"

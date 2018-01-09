@@ -5,16 +5,16 @@ more info about this log description to read assitlog_description.txt
 ===== A  level =====
 total count: 5
 
-devpts_pty_kill 	( diff_type: Mod type: function file: include/linux/devpts_fs.h )
-	-- static inline void devpts_pty_kill(struct tty_struct *tty) { }
-	++ static inline void devpts_pty_kill(struct inode *inode) { }
+devpts_pty_kill   ( diff_type: Mod type: function file: include/linux/devpts_fs.h )
+  -- static inline void devpts_pty_kill(struct tty_struct *tty) { }
+  ++ static inline void devpts_pty_kill(struct inode *inode) { }
 
   pty_close:
     drivers/tty/pty.c:61:19
 
-alloc_tty_driver 	( diff_type: Mod type: macro-->function file: include/linux/tty_driver.h )
-	-- #define alloc_tty_driver(lines) __alloc_tty_driver(lines,THIS_MODULE)
-	++ static inline struct tty_driver *alloc_tty_driver(unsigned int lines)
+alloc_tty_driver   ( diff_type: Mod type: macro-->function file: include/linux/tty_driver.h )
+  -- #define alloc_tty_driver(lines) __alloc_tty_driver(lines,THIS_MODULE)
+  ++ static inline struct tty_driver *alloc_tty_driver(unsigned int lines)
 
   legacy_pty_init:
     drivers/tty/pty.c:392:1
@@ -23,8 +23,8 @@ alloc_tty_driver 	( diff_type: Mod type: macro-->function file: include/linux/tt
     drivers/tty/pty.c:675:1
     drivers/tty/pty.c:678:1
 
-__alloc_tty_driver 	( diff_type: Del type: prototype file: include/linux/tty_driver.h )
-	-- extern struct tty_driver *__alloc_tty_driver(int lines,struct module *owner);
+__alloc_tty_driver   ( diff_type: Del type: prototype file: include/linux/tty_driver.h )
+  -- extern struct tty_driver *__alloc_tty_driver(int lines,struct module *owner);
 
   legacy_pty_init:
     drivers/tty/pty.c:392:15
@@ -33,15 +33,15 @@ __alloc_tty_driver 	( diff_type: Del type: prototype file: include/linux/tty_dri
     drivers/tty/pty.c:675:15
     drivers/tty/pty.c:678:15
 
-devpts_get_tty 	( diff_type: Del type: function file: include/linux/devpts_fs.h )
-	-- static inline struct tty_struct *devpts_get_tty(struct inode *pts_inode,int number)
+devpts_get_tty   ( diff_type: Del type: function file: include/linux/devpts_fs.h )
+  -- static inline struct tty_struct *devpts_get_tty(struct inode *pts_inode,int number)
 
   pts_unix98_lookup:
     drivers/tty/pty.c:492:22
 
-devpts_pty_new 	( diff_type: Mod type: function file: include/linux/devpts_fs.h )
-	-- static inline int devpts_pty_new(struct inode *ptmx_inode,struct tty_struct *tty)
-	++ static inline struct inode *devpts_pty_new(struct inode *ptmx_inode,dev_t device, int index, void *priv)
+devpts_pty_new   ( diff_type: Mod type: function file: include/linux/devpts_fs.h )
+  -- static inline int devpts_pty_new(struct inode *ptmx_inode,struct tty_struct *tty)
+  ++ static inline struct inode *devpts_pty_new(struct inode *ptmx_inode,dev_t device, int index, void *priv)
 
   ptmx_open:
     drivers/tty/pty.c:649:25
@@ -50,16 +50,16 @@ devpts_pty_new 	( diff_type: Mod type: function file: include/linux/devpts_fs.h 
 ===== B  level =====
 total count: 4
 
-put_user 	( diff_type: Mod type: macro file: arch/x86/include/asm/uaccess.h )
-	-- #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr))__pus_tmp = x; __ret_pu = 0; if (unlikely(__copy_to_user_ll(ptr, &__pus_tmp, sizeof(*(ptr))) != 0)) __ret_pu = -EFAULT; __ret_pu; })
-	++ #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr)) __pu_val; __chk_user_ptr(ptr); might_fault(); __pu_val = x; switch (sizeof(*(ptr))) { case 1: __put_user_x(1, __pu_val, ptr, __ret_pu); break; case 2: __put_user_x(2, __pu_val, ptr, __ret_pu); break; case 4: __put_user_x(4, __pu_val, ptr, __ret_pu); break; case 8: __put_user_x8(__pu_val, ptr, __ret_pu); break; default: __put_user_x(X, __pu_val, ptr, __ret_pu); break; } __ret_pu; })
+put_user   ( diff_type: Mod type: macro file: arch/x86/include/asm/uaccess.h )
+  -- #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr))__pus_tmp = x; __ret_pu = 0; if (unlikely(__copy_to_user_ll(ptr, &__pus_tmp, sizeof(*(ptr))) != 0)) __ret_pu = -EFAULT; __ret_pu; })
+  ++ #define put_user(x,ptr) ({ int __ret_pu; __typeof__(*(ptr)) __pu_val; __chk_user_ptr(ptr); might_fault(); __pu_val = x; switch (sizeof(*(ptr))) { case 1: __put_user_x(1, __pu_val, ptr, __ret_pu); break; case 2: __put_user_x(2, __pu_val, ptr, __ret_pu); break; case 4: __put_user_x(4, __pu_val, ptr, __ret_pu); break; case 8: __put_user_x8(__pu_val, ptr, __ret_pu); break; default: __put_user_x(X, __pu_val, ptr, __ret_pu); break; } __ret_pu; })
 
   pty_unix98_ioctl:
     drivers/tty/pty.c:453:1
 
-tty_struct 	( diff_type: Mod type: struct file: include/linux/tty.h )
-	-- struct tty_struct { int magic; struct kref kref; struct device *dev; struct tty_driver *driver; const struct tty_operations *ops; int index; struct mutex ldisc_mutex; struct tty_ldisc *ldisc; struct mutex termios_mutex; spinlock_t ctrl_lock; struct ktermios *termios, *termios_locked; struct termiox *termiox; char name[64]; struct pid *pgrp; struct pid *session; unsigned long flags; int count; struct winsize winsize; unsigned char stopped:1, hw_stopped:1, flow_stopped:1, packet:1; unsigned char low_latency:1, warned:1; unsigned char ctrl_status; unsigned int receive_room; struct tty_struct *link; struct fasync_struct *fasync; struct tty_bufhead buf; int alt_speed; wait_queue_head_t write_wait; wait_queue_head_t read_wait; struct work_struct hangup_work; void *disc_data; void *driver_data; struct list_head tty_files; #define N_TTY_BUF_SIZE 4096 unsigned int column; unsigned char lnext:1, erasing:1, raw:1, real_raw:1, icanon:1; unsigned char closing:1; unsigned char echo_overrun:1; unsigned short minimum_to_wake; unsigned long overrun_time; int num_overrun; unsigned long process_char_map[256/(8*sizeof(unsigned long))]; char *read_buf; int read_head; int read_tail; int read_cnt; unsigned long read_flags[N_TTY_BUF_SIZE/(8*sizeof(unsigned long))]; unsigned char *echo_buf; unsigned int echo_pos; unsigned int echo_cnt; int canon_data; unsigned long canon_head; unsigned int canon_column; struct mutex atomic_read_lock; struct mutex atomic_write_lock; struct mutex output_lock; struct mutex echo_lock; unsigned char *write_buf; int write_cnt; spinlock_t read_lock; struct work_struct SAK_work; struct tty_port *port; };
-	++ struct tty_struct { int magic; struct kref kref; struct device *dev; struct tty_driver *driver; const struct tty_operations *ops; int index; struct mutex ldisc_mutex; struct tty_ldisc *ldisc; struct mutex atomic_write_lock; struct mutex legacy_mutex; struct mutex termios_mutex; spinlock_t ctrl_lock; struct ktermios termios, termios_locked; struct termiox *termiox; char name[64]; struct pid *pgrp; struct pid *session; unsigned long flags; int count; struct winsize winsize; unsigned char stopped:1, hw_stopped:1, flow_stopped:1, packet:1; unsigned char low_latency:1, warned:1; unsigned char ctrl_status; unsigned int receive_room; struct tty_struct *link; struct fasync_struct *fasync; int alt_speed; wait_queue_head_t write_wait; wait_queue_head_t read_wait; struct work_struct hangup_work; void *disc_data; void *driver_data; struct list_head tty_files; #define N_TTY_BUF_SIZE 4096 unsigned char closing:1; unsigned short minimum_to_wake; unsigned char *write_buf; int write_cnt; struct work_struct SAK_work; struct tty_port *port; };
+tty_struct   ( diff_type: Mod type: struct file: include/linux/tty.h )
+  -- struct tty_struct { int magic; struct kref kref; struct device *dev; struct tty_driver *driver; const struct tty_operations *ops; int index; struct mutex ldisc_mutex; struct tty_ldisc *ldisc; struct mutex termios_mutex; spinlock_t ctrl_lock; struct ktermios *termios, *termios_locked; struct termiox *termiox; char name[64]; struct pid *pgrp; struct pid *session; unsigned long flags; int count; struct winsize winsize; unsigned char stopped:1, hw_stopped:1, flow_stopped:1, packet:1; unsigned char low_latency:1, warned:1; unsigned char ctrl_status; unsigned int receive_room; struct tty_struct *link; struct fasync_struct *fasync; struct tty_bufhead buf; int alt_speed; wait_queue_head_t write_wait; wait_queue_head_t read_wait; struct work_struct hangup_work; void *disc_data; void *driver_data; struct list_head tty_files; #define N_TTY_BUF_SIZE 4096 unsigned int column; unsigned char lnext:1, erasing:1, raw:1, real_raw:1, icanon:1; unsigned char closing:1; unsigned char echo_overrun:1; unsigned short minimum_to_wake; unsigned long overrun_time; int num_overrun; unsigned long process_char_map[256/(8*sizeof(unsigned long))]; char *read_buf; int read_head; int read_tail; int read_cnt; unsigned long read_flags[N_TTY_BUF_SIZE/(8*sizeof(unsigned long))]; unsigned char *echo_buf; unsigned int echo_pos; unsigned int echo_cnt; int canon_data; unsigned long canon_head; unsigned int canon_column; struct mutex atomic_read_lock; struct mutex atomic_write_lock; struct mutex output_lock; struct mutex echo_lock; unsigned char *write_buf; int write_cnt; spinlock_t read_lock; struct work_struct SAK_work; struct tty_port *port; };
+  ++ struct tty_struct { int magic; struct kref kref; struct device *dev; struct tty_driver *driver; const struct tty_operations *ops; int index; struct mutex ldisc_mutex; struct tty_ldisc *ldisc; struct mutex atomic_write_lock; struct mutex legacy_mutex; struct mutex termios_mutex; spinlock_t ctrl_lock; struct ktermios termios, termios_locked; struct termiox *termiox; char name[64]; struct pid *pgrp; struct pid *session; unsigned long flags; int count; struct winsize winsize; unsigned char stopped:1, hw_stopped:1, flow_stopped:1, packet:1; unsigned char low_latency:1, warned:1; unsigned char ctrl_status; unsigned int receive_room; struct tty_struct *link; struct fasync_struct *fasync; int alt_speed; wait_queue_head_t write_wait; wait_queue_head_t read_wait; struct work_struct hangup_work; void *disc_data; void *driver_data; struct list_head tty_files; #define N_TTY_BUF_SIZE 4096 unsigned char closing:1; unsigned short minimum_to_wake; unsigned char *write_buf; int write_cnt; struct work_struct SAK_work; struct tty_port *port; };
 
   pty_close:
     drivers/tty/pty.c:38
@@ -100,9 +100,9 @@ tty_struct 	( diff_type: Mod type: struct file: include/linux/tty.h )
   pts_unix98_remove:
     drivers/tty/pty.c:564
 
-tty_driver 	( diff_type: Mod type: struct file: include/linux/tty_driver.h )
-	-- struct tty_driver { int magic; struct kref kref; struct cdev cdev; struct module *owner; const char *driver_name; const char *name; int name_base; int major; int minor_start; int num; short type; short subtype; struct ktermios init_termios; int flags; struct proc_dir_entry *proc_entry; struct tty_driver *other; struct tty_struct **ttys; struct ktermios **termios; void *driver_state; const struct tty_operations *ops; struct list_head tty_drivers; };
-	++ struct tty_driver { int magic; struct kref kref; struct cdev *cdevs; struct module *owner; const char *driver_name; const char *name; int name_base; int major; int minor_start; unsigned int num; short type; short subtype; struct ktermios init_termios; unsigned long flags; struct proc_dir_entry *proc_entry; struct tty_driver *other; struct tty_struct **ttys; struct tty_port **ports; struct ktermios **termios; void *driver_state; const struct tty_operations *ops; struct list_head tty_drivers; };
+tty_driver   ( diff_type: Mod type: struct file: include/linux/tty_driver.h )
+  -- struct tty_driver { int magic; struct kref kref; struct cdev cdev; struct module *owner; const char *driver_name; const char *name; int name_base; int major; int minor_start; int num; short type; short subtype; struct ktermios init_termios; int flags; struct proc_dir_entry *proc_entry; struct tty_driver *other; struct tty_struct **ttys; struct ktermios **termios; void *driver_state; const struct tty_operations *ops; struct list_head tty_drivers; };
+  ++ struct tty_driver { int magic; struct kref kref; struct cdev *cdevs; struct module *owner; const char *driver_name; const char *name; int name_base; int major; int minor_start; unsigned int num; short type; short subtype; struct ktermios init_termios; unsigned long flags; struct proc_dir_entry *proc_entry; struct tty_driver *other; struct tty_struct **ttys; struct tty_port **ports; struct ktermios **termios; void *driver_state; const struct tty_operations *ops; struct list_head tty_drivers; };
 
   pty_install:
     drivers/tty/pty.c:288
@@ -117,9 +117,9 @@ tty_driver 	( diff_type: Mod type: struct file: include/linux/tty_driver.h )
   pts_unix98_remove:
     drivers/tty/pty.c:564
 
-inode 	( diff_type: Mod type: struct file: include/linux/fs.h )
-	-- struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct list_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
-	++ struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct hlist_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+inode   ( diff_type: Mod type: struct file: include/linux/fs.h )
+  -- struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct list_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+  ++ struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct hlist_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
 
   ptm_unix98_lookup:
     drivers/tty/pty.c:471

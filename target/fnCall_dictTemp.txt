@@ -1,573 +1,975 @@
-module_param_named
-  __check_ring_pages:
-    drivers/scsi/vmw_pvscsi.c:114:
-  __check_msg_ring_pages:
-    drivers/scsi/vmw_pvscsi.c:118:
-  __check_cmd_per_lun:
-    drivers/scsi/vmw_pvscsi.c:122:
-  __check_disable_msi:
-    drivers/scsi/vmw_pvscsi.c:126:
-  __check_disable_msix:
-    drivers/scsi/vmw_pvscsi.c:129:
-  __check_use_msg:
-    drivers/scsi/vmw_pvscsi.c:132:
-list_empty
-  pvscsi_acquire_context:
-    drivers/scsi/vmw_pvscsi.c:166:16
-list_first_entry
-  pvscsi_acquire_context:
-    drivers/scsi/vmw_pvscsi.c:169:
-list_del
-  pvscsi_acquire_context:
-    drivers/scsi/vmw_pvscsi.c:171:10
-list_add
-  pvscsi_release_context:
-    drivers/scsi/vmw_pvscsi.c:180:10
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1354:11
-writel
-  pvscsi_reg_write:
-    drivers/scsi/vmw_pvscsi.c:203:8
-readl
-  pvscsi_reg_read:
-    drivers/scsi/vmw_pvscsi.c:208:14
-dev_dbg
-  ll_adapter_reset:
-    drivers/scsi/vmw_pvscsi.c:291:
-  ll_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:298:
-  ll_device_reset:
-    drivers/scsi/vmw_pvscsi.c:307:
-  pvscsi_complete_request:
-    drivers/scsi/vmw_pvscsi.c:574:
-  pvscsi_queue_lck:
-    drivers/scsi/vmw_pvscsi.c:712:
-__builtin_expect
-  ll_adapter_reset:
-    drivers/scsi/vmw_pvscsi.c:291:2
-  ll_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:298:2
-  ll_device_reset:
-    drivers/scsi/vmw_pvscsi.c:307:2
-  pvscsi_create_sg:
-    drivers/scsi/vmw_pvscsi.c:321:2
-  pvscsi_allocate_rings:
-    drivers/scsi/vmw_pvscsi.c:425:2
-    drivers/scsi/vmw_pvscsi.c:426:2
-    drivers/scsi/vmw_pvscsi.c:427:2
-    drivers/scsi/vmw_pvscsi.c:439:2
-  pvscsi_complete_request:
-    drivers/scsi/vmw_pvscsi.c:574:2
-  pvscsi_queue_lck:
-    drivers/scsi/vmw_pvscsi.c:712:2
-  pvscsi_allocate_sg:
-    drivers/scsi/vmw_pvscsi.c:1167:3
-  pvscsi_get_max_targets:
-    drivers/scsi/vmw_pvscsi.c:1202:2
-__dynamic_dev_dbg
-  ll_adapter_reset:
-    drivers/scsi/vmw_pvscsi.c:291:2
-  ll_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:298:2
-  ll_device_reset:
-    drivers/scsi/vmw_pvscsi.c:307:2
-  pvscsi_complete_request:
-    drivers/scsi/vmw_pvscsi.c:574:2
-  pvscsi_queue_lck:
-    drivers/scsi/vmw_pvscsi.c:712:2
-BUG_ON
-  pvscsi_create_sg:
-    drivers/scsi/vmw_pvscsi.c:321:
-  pvscsi_allocate_rings:
-    drivers/scsi/vmw_pvscsi.c:425:
-    drivers/scsi/vmw_pvscsi.c:426:
-    drivers/scsi/vmw_pvscsi.c:427:
-    drivers/scsi/vmw_pvscsi.c:439:
-  pvscsi_allocate_sg:
-    drivers/scsi/vmw_pvscsi.c:1167:
-  pvscsi_get_max_targets:
-    drivers/scsi/vmw_pvscsi.c:1202:
-__builtin_unreachable
-  pvscsi_create_sg:
-    drivers/scsi/vmw_pvscsi.c:321:2
-  pvscsi_allocate_rings:
-    drivers/scsi/vmw_pvscsi.c:425:2
-    drivers/scsi/vmw_pvscsi.c:426:2
-    drivers/scsi/vmw_pvscsi.c:427:2
-    drivers/scsi/vmw_pvscsi.c:439:2
-  pvscsi_allocate_sg:
-    drivers/scsi/vmw_pvscsi.c:1167:3
-  pvscsi_get_max_targets:
-    drivers/scsi/vmw_pvscsi.c:1202:2
-sg_dma_address
-  pvscsi_create_sg:
-    drivers/scsi/vmw_pvscsi.c:325:1
-  pvscsi_map_buffers:
-    drivers/scsi/vmw_pvscsi.c:360:1
-sg_dma_len
-  pvscsi_create_sg:
-    drivers/scsi/vmw_pvscsi.c:326:1
-scsi_sglist
-  pvscsi_map_buffers:
-    drivers/scsi/vmw_pvscsi.c:348:18
-scsi_sg_count
-  pvscsi_map_buffers:
-    drivers/scsi/vmw_pvscsi.c:349:23
-pci_map_single
-  pvscsi_map_buffers:
-    drivers/scsi/vmw_pvscsi.c:356:31
-    drivers/scsi/vmw_pvscsi.c:366:31
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:654:32
-scsi_bufflen
-  pvscsi_unmap_buffers:
-    drivers/scsi/vmw_pvscsi.c:379:24
-  pvscsi_complete_request:
-    drivers/scsi/vmw_pvscsi.c:527:36
-scsi_dma_unmap
-  pvscsi_unmap_buffers:
-    drivers/scsi/vmw_pvscsi.c:385:18
-pci_unmap_single
-  pvscsi_unmap_buffers:
-    drivers/scsi/vmw_pvscsi.c:387:21
-    drivers/scsi/vmw_pvscsi.c:392:20
-    drivers/scsi/vmw_pvscsi.c:396:19
+outw
+  pcnet32_wio_read_csr:
+    drivers/net/ethernet/amd/pcnet32.c:339:6
+  pcnet32_wio_write_csr:
+    drivers/net/ethernet/amd/pcnet32.c:345:6
+    drivers/net/ethernet/amd/pcnet32.c:346:6
+  pcnet32_wio_read_bcr:
+    drivers/net/ethernet/amd/pcnet32.c:351:6
+  pcnet32_wio_write_bcr:
+    drivers/net/ethernet/amd/pcnet32.c:357:6
+    drivers/net/ethernet/amd/pcnet32.c:358:6
+  pcnet32_wio_write_rap:
+    drivers/net/ethernet/amd/pcnet32.c:368:6
+  pcnet32_wio_check:
+    drivers/net/ethernet/amd/pcnet32.c:378:6
+inw
+  pcnet32_wio_read_csr:
+    drivers/net/ethernet/amd/pcnet32.c:340:12
+  pcnet32_wio_read_bcr:
+    drivers/net/ethernet/amd/pcnet32.c:352:12
+  pcnet32_wio_read_rap:
+    drivers/net/ethernet/amd/pcnet32.c:363:12
+  pcnet32_wio_reset:
+    drivers/net/ethernet/amd/pcnet32.c:373:5
+  pcnet32_wio_check:
+    drivers/net/ethernet/amd/pcnet32.c:379:12
+  pcnet32_get_regs:
+    drivers/net/ethernet/amd/pcnet32.c:1382:16
+outl
+  pcnet32_dwio_read_csr:
+    drivers/net/ethernet/amd/pcnet32.c:394:6
+  pcnet32_dwio_write_csr:
+    drivers/net/ethernet/amd/pcnet32.c:400:6
+    drivers/net/ethernet/amd/pcnet32.c:401:6
+  pcnet32_dwio_read_bcr:
+    drivers/net/ethernet/amd/pcnet32.c:406:6
+  pcnet32_dwio_write_bcr:
+    drivers/net/ethernet/amd/pcnet32.c:412:6
+    drivers/net/ethernet/amd/pcnet32.c:413:6
+  pcnet32_dwio_write_rap:
+    drivers/net/ethernet/amd/pcnet32.c:423:6
+  pcnet32_dwio_check:
+    drivers/net/ethernet/amd/pcnet32.c:433:6
+inl
+  pcnet32_dwio_read_csr:
+    drivers/net/ethernet/amd/pcnet32.c:395:12
+  pcnet32_dwio_read_bcr:
+    drivers/net/ethernet/amd/pcnet32.c:407:12
+  pcnet32_dwio_read_rap:
+    drivers/net/ethernet/amd/pcnet32.c:418:12
+  pcnet32_dwio_reset:
+    drivers/net/ethernet/amd/pcnet32.c:428:5
+  pcnet32_dwio_check:
+    drivers/net/ethernet/amd/pcnet32.c:434:13
+napi_disable
+  pcnet32_netif_stop:
+    drivers/net/ethernet/amd/pcnet32.c:452:14
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2519:14
+netif_tx_disable
+  pcnet32_netif_stop:
+    drivers/net/ethernet/amd/pcnet32.c:453:18
+netif_wake_queue
+  pcnet32_netif_start:
+    drivers/net/ethernet/amd/pcnet32.c:462:18
+  pcnet32_tx:
+    drivers/net/ethernet/amd/pcnet32.c:1308:19
+  pcnet32_poll:
+    drivers/net/ethernet/amd/pcnet32.c:1332:19
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2382:18
+  pcnet32_set_multicast_list:
+    drivers/net/ethernet/amd/pcnet32.c:2635:19
+napi_enable
+  pcnet32_netif_start:
+    drivers/net/ethernet/amd/pcnet32.c:466:13
 pci_alloc_consistent
-  pvscsi_allocate_rings:
-    drivers/scsi/vmw_pvscsi.c:402:45
-    drivers/scsi/vmw_pvscsi.c:411:42
-    drivers/scsi/vmw_pvscsi.c:419:42
-    drivers/scsi/vmw_pvscsi.c:434:42
-  pvscsi_get_max_targets:
-    drivers/scsi/vmw_pvscsi.c:1196:36
-min
-  pvscsi_allocate_rings:
-    drivers/scsi/vmw_pvscsi.c:407:2
-    drivers/scsi/vmw_pvscsi.c:417:2
-    drivers/scsi/vmw_pvscsi.c:432:2
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1263:
-    drivers/scsi/vmw_pvscsi.c:1266:
-IS_ALIGNED
-  pvscsi_allocate_rings:
-    drivers/scsi/vmw_pvscsi.c:425:1
-    drivers/scsi/vmw_pvscsi.c:426:1
-    drivers/scsi/vmw_pvscsi.c:427:1
-    drivers/scsi/vmw_pvscsi.c:439:1
-  pvscsi_allocate_sg:
-    drivers/scsi/vmw_pvscsi.c:1167:1
+  pcnet32_realloc_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:487:36
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:557:36
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1741:39
+  pcnet32_alloc_ring:
+    drivers/net/ethernet/amd/pcnet32.c:1917:36
+    drivers/net/ethernet/amd/pcnet32.c:1926:36
+netif_err
+  pcnet32_realloc_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:492:
+    drivers/net/ethernet/amd/pcnet32.c:500:
+    drivers/net/ethernet/amd/pcnet32.c:507:
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:562:
+    drivers/net/ethernet/amd/pcnet32.c:570:
+    drivers/net/ethernet/amd/pcnet32.c:577:
+    drivers/net/ethernet/amd/pcnet32.c:595:
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:969:
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1141:
+    drivers/net/ethernet/amd/pcnet32.c:1147:
+    drivers/net/ethernet/amd/pcnet32.c:1178:
+  pcnet32_tx:
+    drivers/net/ethernet/amd/pcnet32.c:1248:
+    drivers/net/ethernet/amd/pcnet32.c:1262:
+    drivers/net/ethernet/amd/pcnet32.c:1297:
+  pcnet32_alloc_ring:
+    drivers/net/ethernet/amd/pcnet32.c:1922:
+    drivers/net/ethernet/amd/pcnet32.c:1931:
+    drivers/net/ethernet/amd/pcnet32.c:1938:
+    drivers/net/ethernet/amd/pcnet32.c:1945:
+    drivers/net/ethernet/amd/pcnet32.c:1952:
+    drivers/net/ethernet/amd/pcnet32.c:1959:
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2278:
+  pcnet32_restart:
+    drivers/net/ethernet/amd/pcnet32.c:2330:
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2484:
+netdev_err
+  pcnet32_realloc_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:492:3
+    drivers/net/ethernet/amd/pcnet32.c:500:3
+    drivers/net/ethernet/amd/pcnet32.c:507:3
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:562:3
+    drivers/net/ethernet/amd/pcnet32.c:570:3
+    drivers/net/ethernet/amd/pcnet32.c:577:3
+    drivers/net/ethernet/amd/pcnet32.c:595:4
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:969:4
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1141:3
+    drivers/net/ethernet/amd/pcnet32.c:1147:3
+    drivers/net/ethernet/amd/pcnet32.c:1178:3
+  pcnet32_tx:
+    drivers/net/ethernet/amd/pcnet32.c:1248:4
+    drivers/net/ethernet/amd/pcnet32.c:1262:5
+    drivers/net/ethernet/amd/pcnet32.c:1297:3
+  pcnet32_alloc_ring:
+    drivers/net/ethernet/amd/pcnet32.c:1922:3
+    drivers/net/ethernet/amd/pcnet32.c:1931:3
+    drivers/net/ethernet/amd/pcnet32.c:1938:3
+    drivers/net/ethernet/amd/pcnet32.c:1945:3
+    drivers/net/ethernet/amd/pcnet32.c:1952:3
+    drivers/net/ethernet/amd/pcnet32.c:1959:3
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2278:5
+  pcnet32_restart:
+    drivers/net/ethernet/amd/pcnet32.c:2330:3
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2484:4
 memset
-  pvscsi_setup_all_rings:
-    drivers/scsi/vmw_pvscsi.c:466:
-    drivers/scsi/vmw_pvscsi.c:467:
-    drivers/scsi/vmw_pvscsi.c:468:
-    drivers/scsi/vmw_pvscsi.c:483:
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:650:
-  pvscsi_get_max_targets:
-    drivers/scsi/vmw_pvscsi.c:1216:
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1274:
+  pcnet32_realloc_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:495:
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:565:
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1695:
 __builtin_memset
-  pvscsi_setup_all_rings:
-    drivers/scsi/vmw_pvscsi.c:466:2
-    drivers/scsi/vmw_pvscsi.c:467:2
-    drivers/scsi/vmw_pvscsi.c:468:2
-    drivers/scsi/vmw_pvscsi.c:483:3
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:650:2
-  pvscsi_get_max_targets:
-    drivers/scsi/vmw_pvscsi.c:1216:2
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1274:2
-scsi_set_resid
-  pvscsi_complete_request:
-    drivers/scsi/vmw_pvscsi.c:527:18
-dev_printk
-  pvscsi_complete_request:
-    drivers/scsi/vmw_pvscsi.c:569:4
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:640:3
-  pvscsi_abort:
-    drivers/scsi/vmw_pvscsi.c:730:2
-    drivers/scsi/vmw_pvscsi.c:747:3
-  pvscsi_reset_all:
-    drivers/scsi/vmw_pvscsi.c:774:4
-  pvscsi_host_reset:
-    drivers/scsi/vmw_pvscsi.c:791:2
-  pvscsi_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:844:2
-  pvscsi_device_reset:
-    drivers/scsi/vmw_pvscsi.c:869:2
-scmd_printk
-  pvscsi_complete_request:
-    drivers/scsi/vmw_pvscsi.c:569:
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:640:
-  pvscsi_abort:
-    drivers/scsi/vmw_pvscsi.c:730:
-    drivers/scsi/vmw_pvscsi.c:747:
-  pvscsi_reset_all:
-    drivers/scsi/vmw_pvscsi.c:774:
-  pvscsi_host_reset:
-    drivers/scsi/vmw_pvscsi.c:791:
-  pvscsi_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:844:
-  pvscsi_device_reset:
-    drivers/scsi/vmw_pvscsi.c:869:
-KERN_DEBUG
-  pvscsi_complete_request:
-    drivers/scsi/vmw_pvscsi.c:569:1
-  pvscsi_abort:
-    drivers/scsi/vmw_pvscsi.c:730:1
-    drivers/scsi/vmw_pvscsi.c:747:1
-barrier
-  pvscsi_process_completion_ring:
-    drivers/scsi/vmw_pvscsi.c:603:
-    drivers/scsi/vmw_pvscsi.c:611:
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:686:
-  pvscsi_process_msg_ring:
-    drivers/scsi/vmw_pvscsi.c:995:
-    drivers/scsi/vmw_pvscsi.c:997:
-KERN_ERR
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:640:1
-  pvscsi_reset_all:
-    drivers/scsi/vmw_pvscsi.c:774:1
-  pvscsi_setup_msg_workqueue:
-    drivers/scsi/vmw_pvscsi.c:1029:1
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1258:1
-    drivers/scsi/vmw_pvscsi.c:1269:1
-    drivers/scsi/vmw_pvscsi.c:1288:1
-    drivers/scsi/vmw_pvscsi.c:1303:1
-    drivers/scsi/vmw_pvscsi.c:1311:1
-    drivers/scsi/vmw_pvscsi.c:1326:1
-    drivers/scsi/vmw_pvscsi.c:1346:1
-    drivers/scsi/vmw_pvscsi.c:1359:1
-MASK
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:646:4
-smp_processor_id
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:664:1
-__bad_percpu_size
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:664:16
-__bad_size_call_parameter
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:664:16
-memcpy
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:665:
-__builtin_memcpy
-  pvscsi_queue_ring:
-    drivers/scsi/vmw_pvscsi.c:665:2
-_raw_spin_lock_irqsave
-  pvscsi_queue_lck:
-    drivers/scsi/vmw_pvscsi.c:700:2
-  pvscsi_queue:
-    drivers/scsi/vmw_pvscsi.c:722:8
-  pvscsi_abort:
-    drivers/scsi/vmw_pvscsi.c:733:2
-  pvscsi_host_reset:
-    drivers/scsi/vmw_pvscsi.c:793:2
-    drivers/scsi/vmw_pvscsi.c:806:3
-  pvscsi_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:852:2
-  pvscsi_device_reset:
-    drivers/scsi/vmw_pvscsi.c:877:2
-  pvscsi_isr:
-    drivers/scsi/vmw_pvscsi.c:1054:3
-spinlock_check
-  pvscsi_queue_lck:
-    drivers/scsi/vmw_pvscsi.c:700:2
-  pvscsi_queue:
-    drivers/scsi/vmw_pvscsi.c:722:8
-  pvscsi_abort:
-    drivers/scsi/vmw_pvscsi.c:733:2
-  pvscsi_host_reset:
-    drivers/scsi/vmw_pvscsi.c:793:2
-    drivers/scsi/vmw_pvscsi.c:806:3
-  pvscsi_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:852:2
-  pvscsi_device_reset:
-    drivers/scsi/vmw_pvscsi.c:877:2
-  pvscsi_isr:
-    drivers/scsi/vmw_pvscsi.c:1054:3
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1278:2
-spin_unlock_irqrestore
-  pvscsi_queue_lck:
-    drivers/scsi/vmw_pvscsi.c:706:25
-    drivers/scsi/vmw_pvscsi.c:715:24
-  pvscsi_queue:
-    drivers/scsi/vmw_pvscsi.c:722:8
-  pvscsi_abort:
-    drivers/scsi/vmw_pvscsi.c:756:24
-  pvscsi_host_reset:
-    drivers/scsi/vmw_pvscsi.c:799:25
-    drivers/scsi/vmw_pvscsi.c:833:24
-  pvscsi_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:858:24
-  pvscsi_device_reset:
-    drivers/scsi/vmw_pvscsi.c:883:24
-  pvscsi_isr:
-    drivers/scsi/vmw_pvscsi.c:1060:25
-spin_lock_irqsave
-  pvscsi_queue_lck:
-    drivers/scsi/vmw_pvscsi.c:700:
-  pvscsi_abort:
-    drivers/scsi/vmw_pvscsi.c:733:
-  pvscsi_host_reset:
-    drivers/scsi/vmw_pvscsi.c:793:
-    drivers/scsi/vmw_pvscsi.c:806:
-  pvscsi_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:852:
-  pvscsi_device_reset:
-    drivers/scsi/vmw_pvscsi.c:877:
-  pvscsi_isr:
-    drivers/scsi/vmw_pvscsi.c:1054:
-DEF_SCSI_QCMD
-  pvscsi_queue:
-    drivers/scsi/vmw_pvscsi.c:722:
-scsi_cmd_get_serial
-  pvscsi_queue:
-    drivers/scsi/vmw_pvscsi.c:722:8
-KERN_INFO
-  pvscsi_host_reset:
-    drivers/scsi/vmw_pvscsi.c:791:1
-  pvscsi_bus_reset:
-    drivers/scsi/vmw_pvscsi.c:844:1
-  pvscsi_device_reset:
-    drivers/scsi/vmw_pvscsi.c:869:1
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:927:
-    drivers/scsi/vmw_pvscsi.c:936:1
-    drivers/scsi/vmw_pvscsi.c:946:1
-    drivers/scsi/vmw_pvscsi.c:957:1
-    drivers/scsi/vmw_pvscsi.c:970:1
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1253:1
-    drivers/scsi/vmw_pvscsi.c:1256:1
-    drivers/scsi/vmw_pvscsi.c:1365:1
-    drivers/scsi/vmw_pvscsi.c:1368:1
-    drivers/scsi/vmw_pvscsi.c:1372:1
-flush_workqueue
-  pvscsi_host_reset:
-    drivers/scsi/vmw_pvscsi.c:805:18
-  __pvscsi_shutdown:
-    drivers/scsi/vmw_pvscsi.c:1420:18
-sprintf
-  pvscsi_info:
-    drivers/scsi/vmw_pvscsi.c:895:9
-printk
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:927:8
-    drivers/scsi/vmw_pvscsi.c:936:9
-    drivers/scsi/vmw_pvscsi.c:946:10
-    drivers/scsi/vmw_pvscsi.c:957:9
-    drivers/scsi/vmw_pvscsi.c:970:10
-  pvscsi_setup_msg_workqueue:
-    drivers/scsi/vmw_pvscsi.c:1029:9
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1253:9
-    drivers/scsi/vmw_pvscsi.c:1256:9
-    drivers/scsi/vmw_pvscsi.c:1258:9
-    drivers/scsi/vmw_pvscsi.c:1269:9
-    drivers/scsi/vmw_pvscsi.c:1288:9
-    drivers/scsi/vmw_pvscsi.c:1303:9
-    drivers/scsi/vmw_pvscsi.c:1311:9
-    drivers/scsi/vmw_pvscsi.c:1326:9
-    drivers/scsi/vmw_pvscsi.c:1346:9
-    drivers/scsi/vmw_pvscsi.c:1359:9
-    drivers/scsi/vmw_pvscsi.c:1365:9
-    drivers/scsi/vmw_pvscsi.c:1368:9
-    drivers/scsi/vmw_pvscsi.c:1372:9
-  pvscsi_init:
-    drivers/scsi/vmw_pvscsi.c:1463:2
-BUILD_BUG_ON
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:930:
-  pvscsi_allocate_sg:
-    drivers/scsi/vmw_pvscsi.c:1161:
-scsi_host_get
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:940:21
-    drivers/scsi/vmw_pvscsi.c:961:21
-scsi_device_lookup
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:943:28
-    drivers/scsi/vmw_pvscsi.c:964:28
-scsi_device_put
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:947:19
-    drivers/scsi/vmw_pvscsi.c:968:19
-scsi_add_device
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:949:19
-scsi_host_put
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:952:16
-    drivers/scsi/vmw_pvscsi.c:974:16
-  pvscsi_remove:
-    drivers/scsi/vmw_pvscsi.c:1447:15
-scsi_remove_device
-  pvscsi_process_msg:
-    drivers/scsi/vmw_pvscsi.c:967:22
-container_of
-  pvscsi_msg_workqueue_handler:
-    drivers/scsi/vmw_pvscsi.c:1006:1
-snprintf
-  pvscsi_setup_msg_workqueue:
-    drivers/scsi/vmw_pvscsi.c:1024:10
-create_singlethread_workqueue
-  pvscsi_setup_msg_workqueue:
-    drivers/scsi/vmw_pvscsi.c:1027:2
-__alloc_workqueue_key
-  pvscsi_setup_msg_workqueue:
-    drivers/scsi/vmw_pvscsi.c:1027:23
-INIT_WORK
-  pvscsi_setup_msg_workqueue:
-    drivers/scsi/vmw_pvscsi.c:1032:
-__init_work
-  pvscsi_setup_msg_workqueue:
-    drivers/scsi/vmw_pvscsi.c:1032:2
-INIT_LIST_HEAD
-  pvscsi_setup_msg_workqueue:
-    drivers/scsi/vmw_pvscsi.c:1032:2
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1351:16
-queue_work
-  pvscsi_isr:
-    drivers/scsi/vmw_pvscsi.c:1058:14
-IRQ_RETVAL
-  pvscsi_isr:
-    drivers/scsi/vmw_pvscsi.c:1063:
-free_pages
-  pvscsi_free_sgls:
-    drivers/scsi/vmw_pvscsi.c:1072:13
-  pvscsi_allocate_sg:
-    drivers/scsi/vmw_pvscsi.c:1170:15
-pci_enable_msix
-  pvscsi_setup_msix:
-    drivers/scsi/vmw_pvscsi.c:1081:23
-free_irq
-  pvscsi_shutdown_intr:
-    drivers/scsi/vmw_pvscsi.c:1093:11
-pci_disable_msi
-  pvscsi_shutdown_intr:
-    drivers/scsi/vmw_pvscsi.c:1097:18
-pci_disable_msix
-  pvscsi_shutdown_intr:
-    drivers/scsi/vmw_pvscsi.c:1100:19
-destroy_workqueue
-  pvscsi_release_resources:
-    drivers/scsi/vmw_pvscsi.c:1110:20
-pci_iounmap
-  pvscsi_release_resources:
-    drivers/scsi/vmw_pvscsi.c:1113:14
-pci_release_regions
-  pvscsi_release_resources:
-    drivers/scsi/vmw_pvscsi.c:1115:21
-kfree
-  pvscsi_release_resources:
-    drivers/scsi/vmw_pvscsi.c:1119:8
-pci_free_consistent
-  pvscsi_release_resources:
-    drivers/scsi/vmw_pvscsi.c:1123:22
-    drivers/scsi/vmw_pvscsi.c:1127:22
-    drivers/scsi/vmw_pvscsi.c:1132:22
-    drivers/scsi/vmw_pvscsi.c:1137:22
-  pvscsi_get_max_targets:
-    drivers/scsi/vmw_pvscsi.c:1231:21
-__get_free_pages
-  pvscsi_allocate_sg:
-    drivers/scsi/vmw_pvscsi.c:1164:38
-dev_warn
-  pvscsi_get_max_targets:
-    drivers/scsi/vmw_pvscsi.c:1199:11
-    drivers/scsi/vmw_pvscsi.c:1229:11
-pci_enable_device
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1248:23
-pci_set_dma_mask
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1251:22
-    drivers/scsi/vmw_pvscsi.c:1254:29
-pci_set_consistent_dma_mask
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1252:33
-    drivers/scsi/vmw_pvscsi.c:1255:33
-scsi_host_alloc
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1267:24
-shost_priv
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1273:22
-spin_lock_init
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1278:
-pci_request_regions
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1287:25
-pci_resource_flags
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1293:
-pci_resource_len
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1296:
-pci_iomap
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1308:31
-pci_set_master
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1317:16
-pci_set_drvdata
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1318:17
-  pvscsi_remove:
-    drivers/scsi/vmw_pvscsi.c:1449:17
-dev_info
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1335:
-_dev_info
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1335:2
+  pcnet32_realloc_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:495:2
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:565:2
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1695:3
 kcalloc
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1343:28
-pci_enable_msi
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1367:3
-pci_enable_msi_block
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1367:36
-request_irq
-  pvscsi_probe:
-    drivers/scsi/vmw_pvscsi.c:1377:21
-scsi_remove_host
-  pvscsi_remove:
-    drivers/scsi/vmw_pvscsi.c:1442:18
+  pcnet32_realloc_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:497:29
+    drivers/net/ethernet/amd/pcnet32.c:504:24
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:567:29
+    drivers/net/ethernet/amd/pcnet32.c:574:24
+  pcnet32_alloc_ring:
+    drivers/net/ethernet/amd/pcnet32.c:1935:27
+    drivers/net/ethernet/amd/pcnet32.c:1942:27
+    drivers/net/ethernet/amd/pcnet32.c:1949:25
+    drivers/net/ethernet/amd/pcnet32.c:1956:25
+kfree
+  pcnet32_realloc_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:511:7
+    drivers/net/ethernet/amd/pcnet32.c:512:7
+    drivers/net/ethernet/amd/pcnet32.c:528:7
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:617:7
+    drivers/net/ethernet/amd/pcnet32.c:618:7
+    drivers/net/ethernet/amd/pcnet32.c:641:7
+    drivers/net/ethernet/amd/pcnet32.c:643:7
+  pcnet32_free_ring:
+    drivers/net/ethernet/amd/pcnet32.c:1970:7
+    drivers/net/ethernet/amd/pcnet32.c:1973:7
+    drivers/net/ethernet/amd/pcnet32.c:1976:7
+    drivers/net/ethernet/amd/pcnet32.c:1979:7
+pci_free_consistent
+  pcnet32_realloc_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:513:21
+    drivers/net/ethernet/amd/pcnet32.c:530:21
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:619:21
+    drivers/net/ethernet/amd/pcnet32.c:645:21
+  pcnet32_free_ring:
+    drivers/net/ethernet/amd/pcnet32.c:1983:22
+    drivers/net/ethernet/amd/pcnet32.c:1991:22
+  pcnet32_remove_one:
+    drivers/net/ethernet/amd/pcnet32.c:2836:22
+  pcnet32_cleanup_module:
+    drivers/net/ethernet/amd/pcnet32.c:2919:22
+min
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:582:1
+  pcnet32_set_ringparam:
+    drivers/net/ethernet/amd/pcnet32.c:799:
+    drivers/net/ethernet/amd/pcnet32.c:811:
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:895:1
+netdev_alloc_skb
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:591:39
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:912:25
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1155:28
+    drivers/net/ethernet/amd/pcnet32.c:1175:25
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2274:39
+skb_reserve
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:599:14
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1157:15
+    drivers/net/ethernet/amd/pcnet32.c:1183:14
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2282:15
+pci_map_single
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:602:22
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:940:18
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1166:24
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2288:22
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2421:20
+cpu_to_le32
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:604:2
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:942:2
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1170:1
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2290:2
+    drivers/net/ethernet/amd/pcnet32.c:2308:2
+    drivers/net/ethernet/amd/pcnet32.c:2309:2
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2422:2
+pci_unmap_single
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:611:20
+    drivers/net/ethernet/amd/pcnet32.c:636:20
+  pcnet32_purge_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:662:20
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1159:20
+  pcnet32_tx:
+    drivers/net/ethernet/amd/pcnet32.c:1284:20
+  pcnet32_purge_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2251:20
+dev_kfree_skb
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:613:
+    drivers/net/ethernet/amd/pcnet32.c:638:
+consume_skb
+  pcnet32_realloc_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:613:4
+    drivers/net/ethernet/amd/pcnet32.c:638:4
+wmb
+  pcnet32_purge_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:660:
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:943:
+    drivers/net/ethernet/amd/pcnet32.c:975:
+  pcnet32_rx:
+    drivers/net/ethernet/amd/pcnet32.c:1219:
+  pcnet32_purge_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2249:
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2292:
+    drivers/net/ethernet/amd/pcnet32.c:2299:
+    drivers/net/ethernet/amd/pcnet32.c:2310:
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2423:
+dev_kfree_skb_any
+  pcnet32_purge_rx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:664:21
+  pcnet32_tx:
+    drivers/net/ethernet/amd/pcnet32.c:1288:21
+  pcnet32_purge_tx_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2254:21
+spin_lock_irqsave
+  pcnet32_get_settings:
+    drivers/net/ethernet/amd/pcnet32.c:687:
+  pcnet32_set_settings:
+    drivers/net/ethernet/amd/pcnet32.c:702:
+  pcnet32_get_link:
+    drivers/net/ethernet/amd/pcnet32.c:730:
+  pcnet32_nway_reset:
+    drivers/net/ethernet/amd/pcnet32.c:763:
+  pcnet32_set_ringparam:
+    drivers/net/ethernet/amd/pcnet32.c:796:
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:892:
+    drivers/net/ethernet/amd/pcnet32.c:964:
+  pcnet32_set_phys_id:
+    drivers/net/ethernet/amd/pcnet32.c:1039:
+    drivers/net/ethernet/amd/pcnet32.c:1048:
+    drivers/net/ethernet/amd/pcnet32.c:1056:
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1092:
+  pcnet32_poll:
+    drivers/net/ethernet/amd/pcnet32.c:1326:
+    drivers/net/ethernet/amd/pcnet32.c:1337:
+  pcnet32_get_regs:
+    drivers/net/ethernet/amd/pcnet32.c:1374:
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2352:
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2396:
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2521:
+    drivers/net/ethernet/amd/pcnet32.c:2542:
+  pcnet32_get_stats:
+    drivers/net/ethernet/amd/pcnet32.c:2558:
+  pcnet32_set_multicast_list:
+    drivers/net/ethernet/amd/pcnet32.c:2610:
+  pcnet32_ioctl:
+    drivers/net/ethernet/amd/pcnet32.c:2678:
+  pcnet32_watchdog:
+    drivers/net/ethernet/amd/pcnet32.c:2792:
+_raw_spin_lock_irqsave
+  pcnet32_get_settings:
+    drivers/net/ethernet/amd/pcnet32.c:687:3
+  pcnet32_set_settings:
+    drivers/net/ethernet/amd/pcnet32.c:702:3
+  pcnet32_get_link:
+    drivers/net/ethernet/amd/pcnet32.c:730:2
+  pcnet32_nway_reset:
+    drivers/net/ethernet/amd/pcnet32.c:763:3
+  pcnet32_set_ringparam:
+    drivers/net/ethernet/amd/pcnet32.c:796:2
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:892:2
+    drivers/net/ethernet/amd/pcnet32.c:964:4
+  pcnet32_set_phys_id:
+    drivers/net/ethernet/amd/pcnet32.c:1039:3
+    drivers/net/ethernet/amd/pcnet32.c:1048:3
+    drivers/net/ethernet/amd/pcnet32.c:1056:3
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1092:3
+  pcnet32_poll:
+    drivers/net/ethernet/amd/pcnet32.c:1326:2
+    drivers/net/ethernet/amd/pcnet32.c:1337:3
+  pcnet32_get_regs:
+    drivers/net/ethernet/amd/pcnet32.c:1374:2
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2352:2
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2396:2
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2521:2
+    drivers/net/ethernet/amd/pcnet32.c:2542:2
+  pcnet32_get_stats:
+    drivers/net/ethernet/amd/pcnet32.c:2558:2
+  pcnet32_set_multicast_list:
+    drivers/net/ethernet/amd/pcnet32.c:2610:2
+  pcnet32_ioctl:
+    drivers/net/ethernet/amd/pcnet32.c:2678:3
+  pcnet32_watchdog:
+    drivers/net/ethernet/amd/pcnet32.c:2792:2
+spinlock_check
+  pcnet32_get_settings:
+    drivers/net/ethernet/amd/pcnet32.c:687:3
+  pcnet32_set_settings:
+    drivers/net/ethernet/amd/pcnet32.c:702:3
+  pcnet32_get_link:
+    drivers/net/ethernet/amd/pcnet32.c:730:2
+  pcnet32_nway_reset:
+    drivers/net/ethernet/amd/pcnet32.c:763:3
+  pcnet32_set_ringparam:
+    drivers/net/ethernet/amd/pcnet32.c:796:2
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:892:2
+    drivers/net/ethernet/amd/pcnet32.c:964:4
+  pcnet32_set_phys_id:
+    drivers/net/ethernet/amd/pcnet32.c:1039:3
+    drivers/net/ethernet/amd/pcnet32.c:1048:3
+    drivers/net/ethernet/amd/pcnet32.c:1056:3
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1092:3
+  pcnet32_poll:
+    drivers/net/ethernet/amd/pcnet32.c:1326:2
+    drivers/net/ethernet/amd/pcnet32.c:1337:3
+  pcnet32_get_regs:
+    drivers/net/ethernet/amd/pcnet32.c:1374:2
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1753:2
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2352:2
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2396:2
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2521:2
+    drivers/net/ethernet/amd/pcnet32.c:2542:2
+  pcnet32_get_stats:
+    drivers/net/ethernet/amd/pcnet32.c:2558:2
+  pcnet32_set_multicast_list:
+    drivers/net/ethernet/amd/pcnet32.c:2610:2
+  pcnet32_ioctl:
+    drivers/net/ethernet/amd/pcnet32.c:2678:3
+  pcnet32_watchdog:
+    drivers/net/ethernet/amd/pcnet32.c:2792:2
+mii_ethtool_gset
+  pcnet32_get_settings:
+    drivers/net/ethernet/amd/pcnet32.c:688:19
+  pcnet32_check_media:
+    drivers/net/ethernet/amd/pcnet32.c:2761:21
+spin_unlock_irqrestore
+  pcnet32_get_settings:
+    drivers/net/ethernet/amd/pcnet32.c:689:25
+  pcnet32_set_settings:
+    drivers/net/ethernet/amd/pcnet32.c:704:25
+  pcnet32_get_link:
+    drivers/net/ethernet/amd/pcnet32.c:739:24
+  pcnet32_nway_reset:
+    drivers/net/ethernet/amd/pcnet32.c:765:25
+  pcnet32_set_ringparam:
+    drivers/net/ethernet/amd/pcnet32.c:826:24
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:962:26
+    drivers/net/ethernet/amd/pcnet32.c:1022:24
+  pcnet32_set_phys_id:
+    drivers/net/ethernet/amd/pcnet32.c:1042:25
+    drivers/net/ethernet/amd/pcnet32.c:1051:25
+    drivers/net/ethernet/amd/pcnet32.c:1059:25
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1087:25
+  pcnet32_poll:
+    drivers/net/ethernet/amd/pcnet32.c:1334:24
+    drivers/net/ethernet/amd/pcnet32.c:1349:25
+  pcnet32_get_regs:
+    drivers/net/ethernet/amd/pcnet32.c:1422:24
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2384:24
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2436:24
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2538:24
+    drivers/net/ethernet/amd/pcnet32.c:2547:24
+  pcnet32_get_stats:
+    drivers/net/ethernet/amd/pcnet32.c:2560:24
+  pcnet32_set_multicast_list:
+    drivers/net/ethernet/amd/pcnet32.c:2638:24
+  pcnet32_ioctl:
+    drivers/net/ethernet/amd/pcnet32.c:2680:25
+  pcnet32_watchdog:
+    drivers/net/ethernet/amd/pcnet32.c:2794:24
+mii_ethtool_sset
+  pcnet32_set_settings:
+    drivers/net/ethernet/amd/pcnet32.c:703:23
+DRV_NAME
+  pcnet32_get_drvinfo:
+    drivers/net/ethernet/amd/pcnet32.c:714:2
+strlcpy
+  pcnet32_get_drvinfo:
+    drivers/net/ethernet/amd/pcnet32.c:714:9
+    drivers/net/ethernet/amd/pcnet32.c:715:9
+    drivers/net/ethernet/amd/pcnet32.c:717:10
+DRV_VERSION
+  pcnet32_get_drvinfo:
+    drivers/net/ethernet/amd/pcnet32.c:715:2
+pci_name
+  pcnet32_get_drvinfo:
+    drivers/net/ethernet/amd/pcnet32.c:717:35
+snprintf
+  pcnet32_get_drvinfo:
+    drivers/net/ethernet/amd/pcnet32.c:720:11
+mii_link_ok
+  pcnet32_get_link:
+    drivers/net/ethernet/amd/pcnet32.c:732:18
+  pcnet32_check_otherphy:
+    drivers/net/ethernet/amd/pcnet32.c:2700:19
+  pcnet32_check_media:
+    drivers/net/ethernet/amd/pcnet32.c:2741:26
+mii_nway_restart
+  pcnet32_nway_reset:
+    drivers/net/ethernet/amd/pcnet32.c:764:23
+netif_running
+  pcnet32_set_ringparam:
+    drivers/net/ethernet/amd/pcnet32.c:793:19
+    drivers/net/ethernet/amd/pcnet32.c:821:19
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:889:19
+    drivers/net/ethernet/amd/pcnet32.c:1015:19
+  pcnet32_pm_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:2803:19
+  pcnet32_pm_resume:
+    drivers/net/ethernet/amd/pcnet32.c:2819:19
+netif_info
+  pcnet32_set_ringparam:
+    drivers/net/ethernet/amd/pcnet32.c:828:
+  pcnet32_set_multicast_list:
+    drivers/net/ethernet/amd/pcnet32.c:2615:
+  pcnet32_check_otherphy:
+    drivers/net/ethernet/amd/pcnet32.c:2702:
+  pcnet32_check_media:
+    drivers/net/ethernet/amd/pcnet32.c:2749:
+    drivers/net/ethernet/amd/pcnet32.c:2776:
+netdev_info
+  pcnet32_set_ringparam:
+    drivers/net/ethernet/amd/pcnet32.c:828:2
+  pcnet32_set_multicast_list:
+    drivers/net/ethernet/amd/pcnet32.c:2615:3
+  pcnet32_check_otherphy:
+    drivers/net/ethernet/amd/pcnet32.c:2702:5
+  pcnet32_check_media:
+    drivers/net/ethernet/amd/pcnet32.c:2749:4
+    drivers/net/ethernet/amd/pcnet32.c:2762:16
+    drivers/net/ethernet/amd/pcnet32.c:2776:4
+memcpy
+  pcnet32_get_strings:
+    drivers/net/ethernet/amd/pcnet32.c:837:
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1688:
+    drivers/net/ethernet/amd/pcnet32.c:1691:
+netif_printk
+  pcnet32_ethtool_test:
+    drivers/net/ethernet/amd/pcnet32.c:859:
+    drivers/net/ethernet/amd/pcnet32.c:863:
+    drivers/net/ethernet/amd/pcnet32.c:866:
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:914:
+    drivers/net/ethernet/amd/pcnet32.c:995:
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1095:
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2398:
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2462:
+    drivers/net/ethernet/amd/pcnet32.c:2501:
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2525:
+KERN_DEBUG
+  pcnet32_ethtool_test:
+    drivers/net/ethernet/amd/pcnet32.c:859:2
+    drivers/net/ethernet/amd/pcnet32.c:863:2
+    drivers/net/ethernet/amd/pcnet32.c:866:2
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:914:2
+    drivers/net/ethernet/amd/pcnet32.c:977:1
+    drivers/net/ethernet/amd/pcnet32.c:980:1
+    drivers/net/ethernet/amd/pcnet32.c:995:2
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1095:2
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1614:1
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2361:1
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2398:3
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2462:2
+    drivers/net/ethernet/amd/pcnet32.c:2501:2
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2525:2
+netdev_printk
+  pcnet32_ethtool_test:
+    drivers/net/ethernet/amd/pcnet32.c:859:4
+    drivers/net/ethernet/amd/pcnet32.c:863:4
+    drivers/net/ethernet/amd/pcnet32.c:866:3
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:914:4
+    drivers/net/ethernet/amd/pcnet32.c:977:16
+    drivers/net/ethernet/amd/pcnet32.c:980:17
+    drivers/net/ethernet/amd/pcnet32.c:995:5
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1095:4
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2398:2
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2462:3
+skb_put
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:920:10
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1163:11
+    drivers/net/ethernet/amd/pcnet32.c:1184:10
+cpu_to_le16
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:922:2
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2305:
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2415:3
+  pcnet32_load_multicast:
+    drivers/net/ethernet/amd/pcnet32.c:2594:2
+  pcnet32_set_multicast_list:
+    drivers/net/ethernet/amd/pcnet32.c:2617:
+    drivers/net/ethernet/amd/pcnet32.c:2622:
+rmb
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:960:
+    drivers/net/ethernet/amd/pcnet32.c:965:
+  pcnet32_init_ring:
+    drivers/net/ethernet/amd/pcnet32.c:2285:
+msleep
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:963:10
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1089:10
+netif_msg_hw
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:976:
+pr_cont
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:983:
+    drivers/net/ethernet/amd/pcnet32.c:984:
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1685:
+    drivers/net/ethernet/amd/pcnet32.c:1698:
+    drivers/net/ethernet/amd/pcnet32.c:1706:
+    drivers/net/ethernet/amd/pcnet32.c:1709:
+    drivers/net/ethernet/amd/pcnet32.c:1712:
+    drivers/net/ethernet/amd/pcnet32.c:1715:
+    drivers/net/ethernet/amd/pcnet32.c:1719:
+    drivers/net/ethernet/amd/pcnet32.c:1721:
+    drivers/net/ethernet/amd/pcnet32.c:1723:
+    drivers/net/ethernet/amd/pcnet32.c:1725:
+    drivers/net/ethernet/amd/pcnet32.c:1727:
+    drivers/net/ethernet/amd/pcnet32.c:1731:
+    drivers/net/ethernet/amd/pcnet32.c:1734:
+printk
+  pcnet32_loopback_test:
+    drivers/net/ethernet/amd/pcnet32.c:983:5
+    drivers/net/ethernet/amd/pcnet32.c:984:4
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1474:4
+    drivers/net/ethernet/amd/pcnet32.c:1482:4
+    drivers/net/ethernet/amd/pcnet32.c:1488:4
+    drivers/net/ethernet/amd/pcnet32.c:1493:4
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1550:5
+    drivers/net/ethernet/amd/pcnet32.c:1558:3
+    drivers/net/ethernet/amd/pcnet32.c:1561:4
+    drivers/net/ethernet/amd/pcnet32.c:1614:10
+    drivers/net/ethernet/amd/pcnet32.c:1630:4
+    drivers/net/ethernet/amd/pcnet32.c:1660:3
+    drivers/net/ethernet/amd/pcnet32.c:1685:5
+    drivers/net/ethernet/amd/pcnet32.c:1686:5
+    drivers/net/ethernet/amd/pcnet32.c:1698:3
+    drivers/net/ethernet/amd/pcnet32.c:1703:4
+    drivers/net/ethernet/amd/pcnet32.c:1706:5
+    drivers/net/ethernet/amd/pcnet32.c:1709:5
+    drivers/net/ethernet/amd/pcnet32.c:1712:5
+    drivers/net/ethernet/amd/pcnet32.c:1715:5
+    drivers/net/ethernet/amd/pcnet32.c:1719:4
+    drivers/net/ethernet/amd/pcnet32.c:1721:5
+    drivers/net/ethernet/amd/pcnet32.c:1723:5
+    drivers/net/ethernet/amd/pcnet32.c:1725:5
+    drivers/net/ethernet/amd/pcnet32.c:1727:5
+    drivers/net/ethernet/amd/pcnet32.c:1729:4
+    drivers/net/ethernet/amd/pcnet32.c:1731:4
+    drivers/net/ethernet/amd/pcnet32.c:1734:5
+    drivers/net/ethernet/amd/pcnet32.c:1745:4
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2355:3
+    drivers/net/ethernet/amd/pcnet32.c:2361:9
+    drivers/net/ethernet/amd/pcnet32.c:2366:10
+    drivers/net/ethernet/amd/pcnet32.c:2372:10
+    drivers/net/ethernet/amd/pcnet32.c:2377:9
+  pcnet32_init_module:
+    drivers/net/ethernet/amd/pcnet32.c:2888:2
+    drivers/net/ethernet/amd/pcnet32.c:2904:3
+mdelay
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1091:
+__bad_udelay
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1091:4
+__const_udelay
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1091:4
+__udelay
+  pcnet32_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:1091:4
+le32_to_cpu
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1137:1
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2367:1
+    drivers/net/ethernet/amd/pcnet32.c:2369:1
+    drivers/net/ethernet/amd/pcnet32.c:2373:1
+    drivers/net/ethernet/amd/pcnet32.c:2375:1
+unlikely
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1140:
+__builtin_expect
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1140:6
+pci_dma_sync_single_for_cpu
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1185:30
+skb_copy_to_linear_data
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1189:26
+pci_dma_sync_single_for_device
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1192:33
+eth_type_trans
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1198:32
+netif_receive_skb
+  pcnet32_rx_entry:
+    drivers/net/ethernet/amd/pcnet32.c:1199:19
+le16_to_cpu
+  pcnet32_rx:
+    drivers/net/ethernet/amd/pcnet32.c:1211:3
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2368:1
+    drivers/net/ethernet/amd/pcnet32.c:2370:1
+    drivers/net/ethernet/amd/pcnet32.c:2374:1
+    drivers/net/ethernet/amd/pcnet32.c:2376:1
+  pcnet32_load_multicast:
+    drivers/net/ethernet/amd/pcnet32.c:2598:
+netif_queue_stopped
+  pcnet32_tx:
+    drivers/net/ethernet/amd/pcnet32.c:1304:25
+__napi_complete
+  pcnet32_poll:
+    drivers/net/ethernet/amd/pcnet32.c:1339:18
+request_region
+  pcnet32_probe_vlbus:
+    drivers/net/ethernet/amd/pcnet32.c:1452:
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1491:
+__request_region
+  pcnet32_probe_vlbus:
+    drivers/net/ethernet/amd/pcnet32.c:1452:7
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1491:7
+inb
+  pcnet32_probe_vlbus:
+    drivers/net/ethernet/amd/pcnet32.c:1455:12
+    drivers/net/ethernet/amd/pcnet32.c:1456:12
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1679:20
+release_region
+  pcnet32_probe_vlbus:
+    drivers/net/ethernet/amd/pcnet32.c:1459:
+  pcnet32_remove_one:
+    drivers/net/ethernet/amd/pcnet32.c:2835:
+  pcnet32_cleanup_module:
+    drivers/net/ethernet/amd/pcnet32.c:2918:
+__release_region
+  pcnet32_probe_vlbus:
+    drivers/net/ethernet/amd/pcnet32.c:1459:5
+  pcnet32_remove_one:
+    drivers/net/ethernet/amd/pcnet32.c:2835:3
+  pcnet32_cleanup_module:
+    drivers/net/ethernet/amd/pcnet32.c:2918:3
+pci_enable_device
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1471:25
+pr_err
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1474:
+    drivers/net/ethernet/amd/pcnet32.c:1482:
+    drivers/net/ethernet/amd/pcnet32.c:1488:
+    drivers/net/ethernet/amd/pcnet32.c:1493:
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1550:
+    drivers/net/ethernet/amd/pcnet32.c:1745:
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2355:
+pci_set_master
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1477:16
+pci_resource_start
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1479:1
+pci_dma_supported
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1486:24
 pci_disable_device
-  pvscsi_remove:
-    drivers/scsi/vmw_pvscsi.c:1450:20
+  pcnet32_probe_pci:
+    drivers/net/ethernet/amd/pcnet32.c:1499:21
+  pcnet32_remove_one:
+    drivers/net/ethernet/amd/pcnet32.c:2839:21
 pr_info
-  pvscsi_init:
-    drivers/scsi/vmw_pvscsi.c:1463:
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1558:
+    drivers/net/ethernet/amd/pcnet32.c:1561:
+    drivers/net/ethernet/amd/pcnet32.c:1630:
+    drivers/net/ethernet/amd/pcnet32.c:1660:
+    drivers/net/ethernet/amd/pcnet32.c:1686:
+    drivers/net/ethernet/amd/pcnet32.c:1703:
+    drivers/net/ethernet/amd/pcnet32.c:1729:
+  pcnet32_init_module:
+    drivers/net/ethernet/amd/pcnet32.c:2888:
+    drivers/net/ethernet/amd/pcnet32.c:2904:
+alloc_etherdev
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1650:
+alloc_etherdev_mqs
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1650:8
+SET_NETDEV_DEV
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1657:
+memcmp
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1681:
+__builtin_memcmp
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1681:12
+is_valid_ether_addr
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1682:26
+    drivers/net/ethernet/amd/pcnet32.c:1683:26
+    drivers/net/ethernet/amd/pcnet32.c:1694:26
+__builtin_memcpy
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1691:2
+netdev_priv
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1739:18
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2451:18
+spin_lock_init
+  pcnet32_probe1:
+    drivers/net/ethernet/amd/pcnet32.c:1753:
+request_irq
+  pcnet32_open:
+    drivers/net/ethernet/amd/pcnet32.c:2009:17
+netif_msg_tx_err
+  pcnet32_tx_timeout:
+    drivers/net/ethernet/amd/pcnet32.c:2359:
+netif_stop_queue
+  pcnet32_start_xmit:
+    drivers/net/ethernet/amd/pcnet32.c:2434:19
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2518:18
+spin_lock
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2453:11
+napi_schedule_prep
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2488:25
+__napi_schedule
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2495:19
+spin_unlock
+  pcnet32_interrupt:
+    drivers/net/ethernet/amd/pcnet32.c:2505:13
+del_timer_sync
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2516:16
+free_irq
+  pcnet32_close:
+    drivers/net/ethernet/amd/pcnet32.c:2540:10
+netdev_for_each_mc_addr
+  pcnet32_load_multicast:
+    drivers/net/ethernet/amd/pcnet32.c:2591:
+ether_crc_le
+  pcnet32_load_multicast:
+    drivers/net/ethernet/amd/pcnet32.c:2592:
+crc32_le
+  pcnet32_load_multicast:
+    drivers/net/ethernet/amd/pcnet32.c:2592:9
+generic_mii_ioctl
+  pcnet32_ioctl:
+    drivers/net/ethernet/amd/pcnet32.c:2679:25
+if_mii
+  pcnet32_ioctl:
+    drivers/net/ethernet/amd/pcnet32.c:2679:45
+netif_carrier_off
+  pcnet32_check_media:
+    drivers/net/ethernet/amd/pcnet32.c:2748:21
+netif_carrier_on
+  pcnet32_check_media:
+    drivers/net/ethernet/amd/pcnet32.c:2756:19
+netif_msg_link
+  pcnet32_check_media:
+    drivers/net/ethernet/amd/pcnet32.c:2758:
+ethtool_cmd_speed
+  pcnet32_check_media:
+    drivers/net/ethernet/amd/pcnet32.c:2763:27
+mod_timer
+  pcnet32_watchdog:
+    drivers/net/ethernet/amd/pcnet32.c:2796:11
+PCNET32_WATCHDOG_TIMEOUT
+  pcnet32_watchdog:
+    drivers/net/ethernet/amd/pcnet32.c:2796:4
+round_jiffies
+  pcnet32_watchdog:
+    drivers/net/ethernet/amd/pcnet32.c:2796:46
+netif_device_detach
+  pcnet32_pm_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:2804:22
+pci_save_state
+  pcnet32_pm_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:2807:16
+pci_set_power_state
+  pcnet32_pm_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:2808:21
+  pcnet32_pm_resume:
+    drivers/net/ethernet/amd/pcnet32.c:2816:21
+pci_choose_state
+  pcnet32_pm_suspend:
+    drivers/net/ethernet/amd/pcnet32.c:2808:44
+pci_restore_state
+  pcnet32_pm_resume:
+    drivers/net/ethernet/amd/pcnet32.c:2817:19
+netif_device_attach
+  pcnet32_pm_resume:
+    drivers/net/ethernet/amd/pcnet32.c:2821:22
+unregister_netdev
+  pcnet32_remove_one:
+    drivers/net/ethernet/amd/pcnet32.c:2833:20
+  pcnet32_cleanup_module:
+    drivers/net/ethernet/amd/pcnet32.c:2916:20
+free_netdev
+  pcnet32_remove_one:
+    drivers/net/ethernet/amd/pcnet32.c:2838:14
+  pcnet32_cleanup_module:
+    drivers/net/ethernet/amd/pcnet32.c:2921:14
+pci_set_drvdata
+  pcnet32_remove_one:
+    drivers/net/ethernet/amd/pcnet32.c:2840:18
+module_param
+  __check_debug:
+    drivers/net/ethernet/amd/pcnet32.c:2858:
+  __check_max_interrupt_work:
+    drivers/net/ethernet/amd/pcnet32.c:2860:
+  __check_rx_copybreak:
+    drivers/net/ethernet/amd/pcnet32.c:2863:
+  __check_tx_start_pt:
+    drivers/net/ethernet/amd/pcnet32.c:2866:
+  __check_pcnet32vlb:
+    drivers/net/ethernet/amd/pcnet32.c:2868:
+module_param_array
+  __check_options:
+    drivers/net/ethernet/amd/pcnet32.c:2870:
+  __check_full_duplex:
+    drivers/net/ethernet/amd/pcnet32.c:2872:
+  __check_homepna:
+    drivers/net/ethernet/amd/pcnet32.c:2875:
+netif_msg_init
+  pcnet32_init_module:
+    drivers/net/ethernet/amd/pcnet32.c:2890:32
 pci_register_driver
-  pvscsi_init:
-    drivers/scsi/vmw_pvscsi.c:1465:
+  pcnet32_init_module:
+    drivers/net/ethernet/amd/pcnet32.c:2896:
 __pci_register_driver
-  pvscsi_init:
-    drivers/scsi/vmw_pvscsi.c:1465:9
+  pcnet32_init_module:
+    drivers/net/ethernet/amd/pcnet32.c:2896:7
 pci_unregister_driver
-  pvscsi_exit:
-    drivers/scsi/vmw_pvscsi.c:1470:23
+  pcnet32_cleanup_module:
+    drivers/net/ethernet/amd/pcnet32.c:2926:24
 module_init
   __inittest:
-    drivers/scsi/vmw_pvscsi.c:1473:
+    drivers/net/ethernet/amd/pcnet32.c:2929:
 module_exit
   __exittest:
-    drivers/scsi/vmw_pvscsi.c:1474:
+    drivers/net/ethernet/amd/pcnet32.c:2930:

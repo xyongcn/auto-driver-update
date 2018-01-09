@@ -5,8 +5,8 @@ more info about this log description to read assitlog_description.txt
 ===== A  level =====
 total count: 2
 
-KERN_WARNING 	( diff_type: Del type: macro file: include/linux/printk.h )
-	-- #define KERN_WARNING "<4>"
+KERN_WARNING   ( diff_type: Del type: macro file: include/linux/printk.h )
+  -- #define KERN_WARNING "<4>"
 
   register_device:
     drivers/char/ppdev.c:297:1
@@ -14,8 +14,8 @@ KERN_WARNING 	( diff_type: Del type: macro file: include/linux/printk.h )
     drivers/char/ppdev.c:777:1
     drivers/char/ppdev.c:787:1
 
-KERN_INFO 	( diff_type: Del type: macro file: include/linux/printk.h )
-	-- #define KERN_INFO "<6>"
+KERN_INFO   ( diff_type: Del type: macro file: include/linux/printk.h )
+  -- #define KERN_INFO "<6>"
 
   ppdev_init:
     drivers/char/ppdev.c:791:1
@@ -24,18 +24,18 @@ KERN_INFO 	( diff_type: Del type: macro file: include/linux/printk.h )
 ===== B  level =====
 total count: 2
 
-MKDEV 	( diff_type: Mod type: macro file: include/linux/kdev_t.h )
-	-- #define MKDEV(ma,mi) ((ma)<<8 | (mi))
-	++ #define MKDEV(ma,mi) (((ma) << MINORBITS) | (mi))
+MKDEV   ( diff_type: Mod type: macro file: include/linux/kdev_t.h )
+  -- #define MKDEV(ma,mi) ((ma)<<8 | (mi))
+  ++ #define MKDEV(ma,mi) (((ma) << MINORBITS) | (mi))
 
   pp_attach:
     drivers/char/ppdev.c:757:4
   pp_detach:
     drivers/char/ppdev.c:763:3
 
-inode 	( diff_type: Mod type: struct file: include/linux/fs.h )
-	-- struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct list_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
-	++ struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct hlist_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+inode   ( diff_type: Mod type: struct file: include/linux/fs.h )
+  -- struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct list_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
+  ++ struct inode { umode_t i_mode; unsigned short i_opflags; kuid_t i_uid; kgid_t i_gid; unsigned int i_flags; struct posix_acl *i_acl; struct posix_acl *i_default_acl; const struct inode_operations *i_op; struct super_block *i_sb; struct address_space *i_mapping; void *i_security; unsigned long i_ino; const unsigned int i_nlink; unsigned int __i_nlink; }; dev_t i_rdev; loff_t i_size; struct timespec i_atime; struct timespec i_mtime; struct timespec i_ctime; spinlock_t i_lock; unsigned short i_bytes; unsigned int i_blkbits; blkcnt_t i_blocks; seqcount_t i_size_seqcount; unsigned long i_state; struct mutex i_mutex; unsigned long dirtied_when; struct hlist_node i_hash; struct list_head i_wb_list; struct list_head i_lru; struct list_head i_sb_list; union { struct hlist_head i_dentry; struct rcu_head i_rcu; }; u64 i_version; atomic_t i_count; atomic_t i_dio_count; atomic_t i_writecount; const struct file_operations *i_fop; struct file_lock *i_flock; struct address_space i_data; struct dquot *i_dquot[MAXQUOTAS]; struct list_head i_devices; union { struct pipe_inode_info *i_pipe; struct block_device *i_bdev; struct cdev *i_cdev; }; __u32 i_generation; __u32 i_fsnotify_mask; struct hlist_head i_fsnotify_marks; atomic_t i_readcount; void *i_private; };
 
   pp_open:
     drivers/char/ppdev.c:642
