@@ -1,114 +1,4 @@
 autorun.sh running....
-find file amd/amd8111e.c
-clean target file in path target/
-
-python file: code/prosInter.py running...
-input file: source/amd/amd8111e.c.ind
-target path to save info--> /home/ryyan/myProjects/target/
-collect interface info from file--> /home/ryyan/myProjects/source/amd/amd8111e.c.ind
-source/amd/amd8111e.c.ind -->
-	total line 105284 
-	total function decl 55 
-	total function call 328
-collectInt():V0_MANIFEST--> target/amd8111e.c.int
-Done
-python code/prosInter.py source/amd/amd8111e.c.ind runnning successful.
-
-program getHeaderFile running ....
-getHeaderFile running successful.
-program get2ndHdFile running ....
-target/v0_headfile.txt total header file-->247
-Removed temp file target/tmphfile.txt.
-target/v1_headfile.txt total header file-->264
-Removed temp file target/tmphfile.txt.
-get2ndHdFile running successful.
-generated file target/v0_headfile.txt.
-generated file target/v1_headfile.txt.
-main_get runnning successful.
-
-python file: code/prosHdfile.py running...
-header file asm/intrinsics.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
-target/v0_ctags.txt file is generated successful!
-header file asm/intrinsics.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
-target/v1_ctags.txt file is generated successful!
-target/v0_ctags.txt file is reviseding ...
-target/v0_ctags.txt file is revised successful!
-target/v1_ctags.txt file is reviseding ...
-target/v1_ctags.txt file is revised successful!
-Done
-
-python code/prosHdfile.py runnning successful.
-
-
-python file: code/prosDiff.py running...
-input file: amd/amd8111e.c
-functionCall name count--> 106
-generated file: target/fnFile_dictTemp.txt
-generated file: target/fnCall_dictTemp.txt
-generated file: target/fcFile_dictTemp.txt
-dataStructCall count--> 57
-generated file: target/dataStructCall_dictTemp.txt
-dataStructCall name count--> 13
-Done
-
-python code/prosDiff.py amd/amd8111e.c runnning successful.
-
-autorun.sh running Done.
-autorun.sh running....
-find file amd/pcnet32.c
-clean target file in path target/
-
-python file: code/prosInter.py running...
-input file: source/amd/pcnet32.c.ind
-target path to save info--> /home/ryyan/myProjects/target/
-collect interface info from file--> /home/ryyan/myProjects/source/amd/pcnet32.c.ind
-source/amd/pcnet32.c.ind -->
-	total line 112115 
-	total function decl 79 
-	total function call 509
-collectInt():V0_MANIFEST--> target/pcnet32.c.int
-Done
-python code/prosInter.py source/amd/pcnet32.c.ind runnning successful.
-
-program getHeaderFile running ....
-getHeaderFile running successful.
-program get2ndHdFile running ....
-target/v0_headfile.txt total header file-->303
-Removed temp file target/tmphfile.txt.
-target/v1_headfile.txt total header file-->317
-Removed temp file target/tmphfile.txt.
-get2ndHdFile running successful.
-generated file target/v0_headfile.txt.
-generated file target/v1_headfile.txt.
-main_get runnning successful.
-
-python file: code/prosHdfile.py running...
-target/v0_ctags.txt file is generated successful!
-target/v1_ctags.txt file is generated successful!
-target/v0_ctags.txt file is reviseding ...
-target/v0_ctags.txt file is revised successful!
-target/v1_ctags.txt file is reviseding ...
-target/v1_ctags.txt file is revised successful!
-Done
-
-python code/prosHdfile.py runnning successful.
-
-
-python file: code/prosDiff.py running...
-input file: amd/pcnet32.c
-functionCall name count--> 127
-generated file: target/fnFile_dictTemp.txt
-generated file: target/fnCall_dictTemp.txt
-generated file: target/fcFile_dictTemp.txt
-dataStructCall count--> 65
-generated file: target/dataStructCall_dictTemp.txt
-dataStructCall name count--> 15
-Done
-
-python code/prosDiff.py amd/pcnet32.c runnning successful.
-
-autorun.sh running Done.
-autorun.sh running....
 find file pci/pci-acpi.c
 clean target file in path target/
 
@@ -168,6 +58,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: pci/pci-acpi.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 32
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -224,6 +119,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: pci/pci-sysfs.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 66
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -278,6 +178,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: pci/pci-label.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 11
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -344,6 +249,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: input/joydev.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 73
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -408,6 +318,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: input/mousedev.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 78
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -462,6 +377,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: devfreq/devfreq.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 43
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -516,6 +436,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: video/console/fbcon.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 83
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -576,6 +501,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: video/imsttfb.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 31
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -632,6 +562,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: video/vesafb.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 36
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -688,6 +623,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: video/vga16fb.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 52
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -744,6 +684,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: video/asiliantfb.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 37
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -798,6 +743,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: video/fbcvt.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 7
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -852,6 +802,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: tty/tty_audit.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 33
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -909,6 +864,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: tty/pty.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 63
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -963,6 +923,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: power/power_supply_sysfs.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 16
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1017,6 +982,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: power/power_supply_leds.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 9
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1027,6 +997,126 @@ dataStructCall name count--> 1
 Done
 
 python code/prosDiff.py power/power_supply_leds.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file net/ethernet/amd/amd8111e.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/net/ethernet/amd/amd8111e.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/net/ethernet/amd/amd8111e.c.ind
+source/net/ethernet/amd/amd8111e.c.ind -->
+	total line 105284 
+	total function decl 55 
+	total function call 328
+collectInt():V0_MANIFEST--> target/amd8111e.c.int
+Done
+python code/prosInter.py source/net/ethernet/amd/amd8111e.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->247
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->264
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+header file asm/intrinsics.h in /home/ryyan/SOURCE/linux-3.5.6/  not found!
+target/v0_ctags.txt file is generated successful!
+header file asm/intrinsics.h in /home/ryyan/SOURCE/linux-3.8.13/  not found!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: net/ethernet/amd/amd8111e.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
+functionCall name count--> 106
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 57
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 13
+Done
+
+python code/prosDiff.py net/ethernet/amd/amd8111e.c runnning successful.
+
+autorun.sh running Done.
+autorun.sh running....
+find file net/ethernet/amd/pcnet32.c
+clean target file in path target/
+
+python file: code/prosInter.py running...
+input file: source/net/ethernet/amd/pcnet32.c.ind
+target path to save info--> /home/ryyan/myProjects/target/
+collect interface info from file--> /home/ryyan/myProjects/source/net/ethernet/amd/pcnet32.c.ind
+source/net/ethernet/amd/pcnet32.c.ind -->
+	total line 112115 
+	total function decl 79 
+	total function call 509
+collectInt():V0_MANIFEST--> target/pcnet32.c.int
+Done
+python code/prosInter.py source/net/ethernet/amd/pcnet32.c.ind runnning successful.
+
+program getHeaderFile running ....
+getHeaderFile running successful.
+program get2ndHdFile running ....
+target/v0_headfile.txt total header file-->303
+Removed temp file target/tmphfile.txt.
+target/v1_headfile.txt total header file-->317
+Removed temp file target/tmphfile.txt.
+get2ndHdFile running successful.
+generated file target/v0_headfile.txt.
+generated file target/v1_headfile.txt.
+main_get runnning successful.
+
+python file: code/prosHdfile.py running...
+target/v0_ctags.txt file is generated successful!
+target/v1_ctags.txt file is generated successful!
+target/v0_ctags.txt file is reviseding ...
+target/v0_ctags.txt file is revised successful!
+target/v1_ctags.txt file is reviseding ...
+target/v1_ctags.txt file is revised successful!
+Done
+
+python code/prosHdfile.py runnning successful.
+
+
+python file: code/prosDiff.py running...
+input file: net/ethernet/amd/pcnet32.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
+functionCall name count--> 127
+generated file: target/fnFile_dictTemp.txt
+generated file: target/fnCall_dictTemp.txt
+generated file: target/fcFile_dictTemp.txt
+dataStructCall count--> 65
+generated file: target/dataStructCall_dictTemp.txt
+dataStructCall name count--> 15
+Done
+
+python code/prosDiff.py net/ethernet/amd/pcnet32.c runnning successful.
 
 autorun.sh running Done.
 autorun.sh running....
@@ -1071,6 +1161,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: parport/daisy.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 31
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1125,6 +1220,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: parport/procfs.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 11
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1179,6 +1279,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: parport/probe.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 21
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1234,6 +1339,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: block/brd.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 60
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1293,6 +1403,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: block/floppy.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 180
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1347,6 +1462,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: message/fusion/mptsas.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 141
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1401,6 +1521,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: message/fusion/mptspi.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 111
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1455,6 +1580,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: message/fusion/mptfc.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 87
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1512,6 +1642,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: char/ppdev.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 72
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1566,6 +1701,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: char/ttyprintk.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 18
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1623,6 +1763,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: char/hpet.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 72
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1677,6 +1822,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: char/virtio_console.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 103
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1734,6 +1884,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: virtio/virtio_balloon.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 51
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1790,6 +1945,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/scsi_proc.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 29
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1846,6 +2006,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/sr.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 78
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1904,6 +2069,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/ch.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 61
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -1958,6 +2128,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/scsi_trace.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 4
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -2012,6 +2187,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/scsi_sysctl.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 2
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -2066,6 +2246,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/scsi_wait_scan.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 3
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -2124,6 +2309,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/sg.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 176
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -2178,6 +2368,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/sd_dif.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 30
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -2236,6 +2431,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/sd.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 161
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -2290,6 +2490,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/scsi_pm.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 20
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
@@ -2344,6 +2549,11 @@ python code/prosHdfile.py runnning successful.
 
 python file: code/prosDiff.py running...
 input file: scsi/vmw_pvscsi.c
+
+print test start--------------------------
+diffLog.txt file generated successful!
+print test end--------------------------
+
 functionCall name count--> 101
 generated file: target/fnFile_dictTemp.txt
 generated file: target/fnCall_dictTemp.txt
